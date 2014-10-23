@@ -22,18 +22,30 @@ OVERVIEW OF PROJECT
     ii. High-level architecture
         
         The system consists of the following high-level elements:
-        
         1. Android mobile application (RPSRrec)
-        
-            The application fulfils the following roles:
+		
+			The application fulfils the following roles:
 
-                -   Collect information about a visit from the user
-                -   Allow the user to edit and delete local (not yet uploaded) recordings
-                    and the species data within them.
-                -   Obtain location data from the GPS unit within the mobile device to include
-                    in the recording
-                -   Upload the collected recordings to the remote database server whenever 
-                    a network connection becomes available
+		-   Collect information about a new visit from the user
+		-   Allow the user to record a new visit each time they complete one
+		-   Collect time and date data from the phone for the recordings
+		-   Allow the user to select a species to use from the database
+		-   Take a photo using the Android device by capturing a new photo or selecting
+                    from the device's library
+		-   Allow the user to enter data for each species
+			-   Typical location
+			-   Abundance using "DAFOR" scale
+			-   Free text comment
+			-   Photo of the general scene at the typical location
+			-   Photo of the specimen
+		-   Allow the user to enter a name of a new species if not currently available
+				
+		-   Allow the user to edit and delete local (not yet uploaded) recordings
+		    and the species data within them.
+		-   Obtain location data from the GPS unit within the mobile device to include
+				    in the recording
+		-   Upload the collected recordings to the remote database server whenever 
+		    a network connection becomes available
                 
         2. Website (RPSRview)
             
