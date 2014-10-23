@@ -1,0 +1,53 @@
+OVERVIEW OF PROJECT
+
+    Our proposed system is a computer-based, plant recording and tracking
+    information lookup service designed to aid botany enthusiasts.
+    
+    i. Platforms and technologies
+        
+        We intend to use the following technologies and platforms in the implementation
+        of the system:
+        
+        - Android:  Client requirement
+                    Most diverse and most used mobile OS
+                    
+        - PHP:      Works best with university servers
+                    Good support for MySQL connectivity
+                    Help available within the university in case problems arise
+                    
+        - MySQL:    Works best with university servers
+                    Free and widely used, with great support
+                    Higher-performance alternative is unnecessary in our use case
+        
+    ii. High-level architecture
+        
+        The system consists of the following high-level elements:
+        
+        1. Android mobile application (RPSRrec)
+        
+            The application fulfils the following roles:
+
+                -   Collect information about a visit from the user
+                -   Allow the user to edit and delete local (not yet uploaded) recordings
+                    and the species data within them.
+                -   Obtain location data from the GPS unit within the mobile device to include
+                    in the recording
+                -   Upload the collected recordings to the remote database server whenever 
+                    a network connection becomes available
+                
+        2. Website (RPSRview)
+            
+            The website fulfils the following roles:
+            
+                -     Browse and search uploaded recordings
+                -     Provide detailed view of individual recordings
+                -     Enable maintenance of recordings database
+                
+        3. Server (RPSRsrv)
+        
+            The server fulfils the following roles:
+            
+                -     Provide a public Web API to be used by the website and the mobile application,
+                      enabling safe HTTP access to stored recordings
+                -     Provide a MySQL database for the Web API to use as a data store
+                -     Ensure data integrity and security
