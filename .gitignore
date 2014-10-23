@@ -18,5 +18,5 @@ build/
 *.pdf
 *.synctex.gz
 
-!docs/*.pdf
+!docs/minutes/*.pdf
 
