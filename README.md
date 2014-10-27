@@ -10,7 +10,7 @@ Blackboard page: [here](https://blackboard.aber.ac.uk/webapps/blackboard/content
 | Name             | Mail  |
 |------------------|-------|
 | William Aldridge | wia3  |
-| Max Atkins       | mat2  |
+| Max Atkins       | mta2  |
 | Alexander Barnes | acb12 |
 | Nicholas Dart    | nid21 |
 | Max Harizanov    | msh4  |
