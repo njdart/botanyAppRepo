@@ -21,3 +21,5 @@ build/
 ## minutes 
 !docs/minutes/*.pdf
 
+## No pesky word backups
+~$*
