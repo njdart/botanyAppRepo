@@ -17,9 +17,12 @@ build/
 *.log
 *.pdf
 *.synctex.gz
+*.toc
 
 ## minutes 
 !docs/minutes/*.pdf
 
 ## No pesky word backups
 ~$*
+## or vim swp files
+*.swp
