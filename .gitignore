@@ -26,3 +26,6 @@ build/
 ~$*
 ## or vim swp files
 *.swp
+##or virtualbox lock files
+.directory
+.directory.lock
