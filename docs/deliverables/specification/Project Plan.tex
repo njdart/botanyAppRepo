@@ -11,6 +11,7 @@
 \usepackage{textcomp}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+\usepackage{titlesec}
 
 \title{ \huge CS221 Group Project \\ \Large Project Plan}
 \author{
@@ -20,8 +21,8 @@
 						& nid21, msh4, jao14, mip34, \\
 	 					& set12, daw54, anw46 \\
 						& \\
-		Version			& 1.0 \\
-		Status			& Release \\
+		Version			& 0.4 \\
+		Status			& Pre-Release \\
 		Date Published  & \today \\
 		Reference 		& SE\_NO2\_MAN\_01 \\
 		Department		& Computer Science \\
@@ -32,46 +33,43 @@
 	\end{tabular} \\
 	Copyright \textcopyright Aberystwyth University 2014
 }
-\date{}
 
 \pagestyle{fancy}
 \fancyhf{}
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\lfoot{Aberystwyth University - Computer Science}
 
-\usepackage{fancyhdr}
-\usepackage{lastpage}
 \begin{document}
+	\setcounter{page}{1}
 	\maketitle
 	\clearpage
 	\tableofcontents
+	\newcommand{\sectionbreak}{\clearpage} 	%% Allways start a section on a new page
 	\clearpage
 	\section{Introduction}
 		\subsection{Purpose of this Document}
-			This document has been commissioned to show our current understanding of the client's 					requirement specification of Reserve Plant Species Recording ("RPSR"), a project 						encompassing Android Application Framework and modern Web Technologies which will provide 				a monitoring system for definable Areas of Interest, into a series of basic objectives and 			milestones. RPSR has three main component parts, an Android Application, a Website and a 				Database.
+			This document has been commissioned to show our current understanding of the client's requirement specification of Reserve Plant Species Recording ("RPSR"). The project encompassing the Android Application Framework and modern Web Technologies which will provide a monitoring system for definable Areas of Interest, into a series of basic objectives and milestones. RPSR has three main component parts, an Android Application, a Website and a Database.
 			
-			The document will give a high level overview of the time line for developing and testing 				RPSR, an estimate of the final User Interlace design, a probabilistic risk assessment, and 			a use case breakdown.
-		\subsection{Scope}
-			The document comprises the high level design and development plan for RPSR, it should not be refereed to for final software design structure. This will document will follow in the design specification.
-			
-			This document provides an overview of the system we have interpreted for the client, including our choice of platform (where applicable), high-level architecture.
-			
-			Also included is a section dedicated to the target audience of the application.
-			
-			A use case diagram and corresponding table will show how the actors of the system are expected to interact with elements of the system. The User Interface will be discussed here. 
-			The document will finish with a probabilistic risk assessment for the project in full.
-			The document will not show workable UI designs at this moment.\\
+			The document will give a high level overview of the time line for developing and testing RPSR, an estimate of the final User Interface design, a probabilistic risk assessment, and a use case breakdown.
+
 			The client is to read this document and confirm that their requirements have been understood and correctly interpreted by the team.
+		\subsection{Scope}
+			The document comprises the high level design and development plan for RPSR, it should not be referred to for final software design structure. This document will follow the design specification.
+			
+			This document provides an overview of the system we have interpreted for the client, including our choice of platform (where applicable), high-level architecture and will also included a section dedicated out understanding of the target audience of the application.
+			
+			A use case diagram and corresponding table will show how the actors of the system are expected to interact with elements of the system. The document will also contain a probabilistic risk assessment for the project in full.
+			This document will provide a first draft of the UI designs and are subject to alterations at a later date.\\
 		\subsection{Objectives}
-		The objective of this document is to show our initial plan for development of RPSR, from initial UI designs and user interaction plans, through a break down of deliverable dates on a Gantt chart and the expected issues that could arise during development. This is as follows;\\ \\
-			\begin{tabular}{r l}
-			1.3.1 & Provide a high level overview of system design and interaction, \\
-			1.3.2 & Define the technologies used for the system, \\
-			1.3.3 & Display the initial web UI, \\
-			1.3.4 & Display the initial Android UI, \\
-			1.3.5 & Breakdown the project into milestones \\
-			1.3.6 & Define a limited scope risk assessment for the project and the plans to mitigate the risks. \\
-			\end{tabular}
-			\clearpage
+			The objective of this document is to show our initial plan for development of RPSR, from initial UI designs and user interaction plans, through a breakdown of deliverable dates on a Gantt chart and the expected issues that could arise during development. This is as follows:
+			\begin{enumerate}
+			\item Provide a high level overview of system design and interaction
+			\item Define the technologies used for the system
+			\item Display the initial web UI
+			\item Display the initial Android UI
+			\item Breakdown the project into milestones
+			\item Define a limited scope risk assessment for the project and the plans to mitigate the risks
+			\end{enumerate}
 	\section{Overview}
 		\subsection{Platforms}
 			\subsubsection{Android}
@@ -133,7 +131,6 @@
 			The client stated:\\ \\ \indent \textit{The system will be used by naturalists who are familiar with standard computer interfaces. They are concerned 
 with accuracy of recording and they may have to operate in difficult weather conditions and in remote locations.}\\ \\
 From this we understood the users will be competent in the basic interaction with Android and Web User Interfaces. We have designed the application to have large areas for input to aid in quick input when outdoors and reduce unused space on a minimal screen real estate. We have designed the application to work in the first case without Internet connectivity, and when it becomes available, then offer to upload the work produced offline.
-%\clearpage
 
 
 	\section{Use Cases}
@@ -302,6 +299,7 @@ Client requirements change&2&2&4&"Keep regular contact with the client\\ \hline
 		0.1 & Initial Version & October 21 2014 \\
 		0.2 & Document First Draft & October 27 2014 \\
 		0.3 & Client first release & October 28 2014 \\
+		0.4 & Spellchecking and Document standardization & October 29 2014 \\
 		
 		\end{tabular}
 \end{document}
