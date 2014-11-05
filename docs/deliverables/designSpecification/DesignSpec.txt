@@ -1,12 +1,12 @@
-Decomposition Description
+2) Decomposition Description
 
-1) Subsystems
+2.1) Subsystems
 The Botanist Tools application is composed of 3 subsystems:
 - Android Application
 - Website
 - Server
 
-Android Application
+2.1.1) Android Application
 
 The android application provides the interface that users will use to record 
 plant data when out on a visit. It implements requirements (FR1), (FR2), (FR3), 
@@ -25,20 +25,64 @@ such as sending recordings and performing user authentication (?). The
 application does NOT communicate directly with the website and the database. It 
 uses a web API which is core to the server.
 
-Server 
+2.1.2) Server 
 
 The server will consist of two parts: 
 - A database
 - A web API
 
-Database:
+2.1.2.1) Database:
 The database will be the central datastore for the entire system. It will 
 communicate exclusively with the web API and serve as its back-end. 
 
-Web API:
+2.1.2.2) Web API:
 The web API is central to the system; it provides a uniform way of accessing the 
 database for all subsystems to use. It maintains the integrity of the datastore 
 by acting as the "middle-man" so that the other subsystems do not damage the 
 contents. It exposes a public interface to allow a set of actions to be 
 performed by the users of the API; actions include user authentication and 
-recordings management. 
+recordings management. The web API will implement the requirement (FR7) and 
+must also conform to the requirement (PR2).
+
+2.1.3) Website
+
+The website will consist of a set of web-pages which implement all the required 
+functionalities for the user (FR8) and (FR9). It must also conform to the 
+requirements (EIR1), (PR1) and (PR2). The website will communicate with the Web 
+API via HTTP to receive from and send data to the database. The website will 
+have no communication with the Android application. It will also not directly 
+communicate with the database, but will go through the web API. 
+
+
+2.2) Significant Classes (Android)
+
+2.2.1) Significant UI classes 
+
+HomeActivity: This class will hold the code to allow a user to move on to the 
+NewRecordingActivity via a startNewRecordingButton. 
+
+NewRecordingActivity: This class will hold the code to allow a user to enter basic
+information such as Name, Phone Number, E-Mail, and Site Location. It will also
+allow the application to receive date and time information from the Android 
+device. The nextButton will then move the user to the AddNewSpeciesActivty.
+
+AddNewSpeciesActivity: This class will hold the code to allow a user to enter 
+all the required information about a species entry in the current recording. It 
+allows you to choose the name of a species from a locally saved list, and 
+also allows the user to add a new species name, if not found. This activity 
+must have the functionality to use the device's GPS capabilities to record 
+location information of the species. It allows the user to select abundance 
+in accordance with the DAFOR scale. The user should be able to add a 
+scene/specimen picture through the device's camera or the gallery application.
+The user can also add a note if they wish. There is then a confirmButton which
+adds the species to the current recording and moves the user on to the 
+MaintainRecordingActivity. 
+
+MaintainRecordingActivity: This class will hold the code to allow a user to 
+maintain the current recording. It will contain the functionality to edit 
+any entered species from the collection in the recording. It will also allow 
+the user to delete the current recording, removing all stored species data. The 
+user will be able to save the recording, sending the current recording to the 
+server at the first opportunity. 
+
+To come: Species class, recording class
