@@ -1,0 +1,44 @@
+TABLES:
+
+Users
+ - name
+ - phone_number
+ - email
+
+Species
+ - name
+ - latin_name
+ - id
+
+Recordings
+ - link to user
+ - time/date
+
+SpeciesDetails
+ - link to recording
+ - link to species
+ - link to abundance
+ - comment
+ - link to photo of scene
+ - link to photo of specimen
+
+Abundance
+ - name
+ - id
+
+Photos 
+ - id
+ - filename/url
+
+
+THINGS TO ASK:
+
+ Do trips have history?
+ Do scenes contain multiple specimens?
+ Can a species details contain more than one photo of a specimen?
+
+
+SPECIES DATABASE:
+
+ bsbi.org.uk/resources.html
+

@@ -1,0 +1,86 @@
+\subsection{Platforms}
+	\subsubsection{Android}
+		The client placed a specific request for the application to run on Android devices. As yet no response has been received for a minimum version, so in keeping with more up to date releases, we will use Android API 15 (Android 4.0.3 which encompasses the vast majority of new smart phones)
+
+	\subsubsection{LAMP Server}
+		We will be using a LAMP Server (Linux, Apache2, MySQL, and PHP) ready server. This will provide us with the tools ready to develop the website, and interact with the database. PHP was chosen to handle the server side processing of received data due to it being free and wide availability. The language is also covered in other modules during the project time line, meaning it will be fresh in the minds of the web team. MySQL is the most commonly used database software on web servers and is availble on the university servers. 
+
+\newpage
+\subsection{High Level Architecture}
+	The system consists of the following high-level elements:
+
+	\subsubsection{Android Application (RPSRrec)}
+
+	The application fulfils the following roles:\\
+	\begin{tabular}{r | p{15cm}}
+		FR1 & Startup of software \\
+		FR1 & Allow the user to record a new visit each time they complete one \\
+		FR2 & Collect information about a new visit from the user \\
+		FR2 & Collect time and date information from the phone for the recordings \\
+		FR3 & Allow the user to select a species from the database \\
+		FR3 & Add a species to a recording \\
+		FR4 & Take a photo using an Android device by capturing a new photo or selecting one from the device's library \\
+		FR4 & Obtain location data from the GPS unit within and Android device to include in the recording \\
+		FR4 & Allow the user to enter data for each species
+		\begin{itemize}
+			\item Typical location
+			\item Abundance using ``DAFOR'' scale
+			\item Free text comment
+			\item Photo of a general scene at a typical location
+			\item Photo's of the specimen
+			\item Allow the user to enter a name of a new species if not currently available
+		\end{itemize} \\
+		FR5 & Allow the user to edit and delete local (not yet uploaded) recordings and the species data within them \\
+		FR6 & Upload the collected recordings to the remote database server whenever a network connection becomes available \\
+    \end{tabular}
+    
+\subsubsection{Website (RPSRview)}
+    The website fulfills the following roles:\\    
+    	\begin{tabular}{r | p{15cm}}
+        	FR8 & Provide a detailed view of individual recordings \\
+        	FR8 & Enable maintenance of the recordings database \\
+    		FR9 & Browse and search uploaded recordings \\
+        \end{tabular}
+        
+\subsubsection{Server (RPSRsrv)}
+    The server fulfills the following roles:\\
+    \begin{tabular}{r | p{15cm}}
+        FR7 & Provide a public Web API to be used by the website and the mobile application, enabling safe HTTP access to stored recordings \\
+        FR7 & Provide a MySQL database for the Web API to use as a data store \\
+        FR7 & Ensure data integrity and security \\
+	\end{tabular}
+
+\subsubsection{External Interface Requirements}
+	\begin{tabular}{r | p{15cm}}
+		EIR1 & The program should be intuitive to regular computer users \\
+	\end{tabular}
+
+\subsubsection{Performance Requirements}
+	Reasonable expectations of the relevant software parts of the product: \\
+	\begin{tabular}{r | p{15cm}}
+		PR1 & User input should be reflected on screen within one second \\
+		PR2 & Software products should run appropriately on their respective platforms:
+		\begin{itemize}
+			\item The app on android devices
+			\item Apache and php on the web server
+		\end{itemize}
+	\end{tabular}
+
+\subsubsection{Design Constraints}
+	Features and limitations set forth by the user or implied by reasonable implementation: \\
+	\begin{tabular}{r | p{15cm}}
+		DC1 & Java must be used for all Android development by corporate policy. All Java will be built in the Android Studio IDE \\
+		DC2 & The API will be developed in php and will be server-side only \\
+		DC3 & Functionality of software must be shown by exploration of at least 2 reserves, with at least 2 recording visits with overlapping species recordings \\
+	\end{tabular}
+
+\subsubsection{Miscellaneous Requirements}
+	\begin{tabular}{r | p{15cm}}
+		MSC1 & Project will be developed in line with Group Project QA guidelines \\
+	\end{tabular}
+
+\subsection{Target Audience}
+	The client stated: \\ \\
+		\indent \textit{The system will be used by naturalists who are familiar with standard computer interfaces. They are concerned with accuracy of recording and they may have to operate in difficult weather conditions and in remote locations.}\\ \\
+
+	From this we understood the users will be competent in the basic interaction with Android and Web User Interfaces. We have designed the application to have large input areas to aid in data entry when outdoors but also recognize that devices used have limited screen real estate so user interfaces should be simple and uncluttered. We have also understood the user may be entering data in areas where a real time connection to the server (RPSRsrv) is not possible so data collected should be stored until a connection can be established.

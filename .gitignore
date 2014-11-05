@@ -1,0 +1,31 @@
+
+## java
+*.class
+
+## intellij
+out/
+build/
+.idea/
+
+## gradle build scripts
+.gradle/
+
+## latex
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.pdf
+*.synctex.gz
+*.toc
+
+## minutes 
+!docs/minutes/*.pdf
+
+## No pesky word backups
+~$*
+## or vim swp files
+*.swp
+##or virtualbox lock files
+.directory
+.directory.lock

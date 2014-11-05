@@ -1,0 +1,44 @@
+Decomposition Description
+
+1) Subsystems
+The Botanist Tools application is composed of 3 subsystems:
+- Android Application
+- Website
+- Server
+
+Android Application
+
+The android application provides the interface that users will use to record 
+plant data when out on a visit. It implements requirements (FR1), (FR2), (FR3), 
+(FR4), (FR5), (FR6). It must also conform with the requirements (EIR1), (PR1), 
+(PR2), (DC1) and (DC2).
+
+The application will have a form-based activity which can be used to add and 
+edit new and currently saved recordings. Currently saved recordings will be 
+stored locally in a collection, which will be awaiting dispatch to the server. 
+The user will be able to view this list and select recordings to perform actions 
+on (Eg. edit and delete). The application will not show recordings that are 
+saved on the server. 
+
+The Android application will communicate with the server to perform functions 
+such as sending recordings and performing user authentication (?). The 
+application does NOT communicate directly with the website and the database. It 
+uses a web API which is core to the server.
+
+Server 
+
+The server will consist of two parts: 
+- A database
+- A web API
+
+Database:
+The database will be the central datastore for the entire system. It will 
+communicate exclusively with the web API and serve as its back-end. 
+
+Web API:
+The web API is central to the system; it provides a uniform way of accessing the 
+database for all subsystems to use. It maintains the integrity of the datastore 
+by acting as the "middle-man" so that the other subsystems do not damage the 
+contents. It exposes a public interface to allow a set of actions to be 
+performed by the users of the API; actions include user authentication and 
+recordings management. 
