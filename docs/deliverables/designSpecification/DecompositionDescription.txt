@@ -54,7 +54,7 @@ have no communication with the Android application. It will also not directly
 communicate with the database, but will go through the web API. 
 
 
-2.2) Significant Classes (Android)
+2.2) Significant classes (Android)
 
 2.2.1) Significant UI classes 
 
@@ -97,7 +97,7 @@ a recording object will hold. Fields to hold this data will be: usersName,
 usersPhoneNumber, usersEmail, usersAddress, dateTime. This class will 
 contain getters and setters for the mentioned fields.
 
-2.3) Significant Website Components
+2.3) Significant website components
 
 Navigation: A set of buttons at the top of each webpage that 
 will allow the user to move around the site. When clicking on the desired
@@ -124,3 +124,47 @@ is not listed.
 
 Map Overlay: This component will be a pop-up map that will show the locations
 of the chosen species. This location will be taken from the database. 
+
+2.4) Significant web API methods
+
+AddRecord: Add a record received via a HTTP POST request in JSON format, checking it for validity,
+and return an appropriate status message as follows:
+200 OK: The record has been saved to the database successfully; Data: the record ID.
+400 Bad Request: The method has been provided with malformed data.
+500 Internal Server Error: The database is inaccessible or 
+an error has occurred in the method itself.
+
+RemoveRecord: Remove a record the database by an ID specified in a HTTP POST request, together with 
+an Authorization header as specified in the HTTP protocol, carrying administrator credentials, 
+and return an appropriate status message as follows:
+200 OK: The record has been deleted from the database successfully.
+400 Bad Request: Bad record ID specified.
+401 Unauthorized: The method has been provided no or wrong authorization header.
+500 Internal Server Error: The database is inaccessible 
+or an error has occurred in the method itself.
+
+ModifyRecord: Modify a record in database by an ID specified in a HTTP POST request, together with
+an Authorization header carrying administrator credentials as specified in the HTTP protocol, 
+and the record data in a JSON format, returning an appropriate status message as follows:
+200 OK: The record has been modified successfully.
+400 Bad Request: Bad record ID or bad record data specified.
+401 Unauthorized: The method has been provided no or wrong authorization header.
+500 Internal Server Error: The database is inaccessible 
+or an error has occurred in the method itself.
+
+GetRecord: Retrieve a record from database by an ID specified in a HTTP POST request. 
+and return an appropriate status message as follows:
+200 OK: The record has been retrieved from the database successfully; 
+Data: the requested record in JSON.
+400 Bad Request: Bad record ID specified.
+500 Internal Server Error: The database is inaccessible 
+or an error has occurred in the method itself.
+
+GetRecords: Retrieve a number of records from database. Optional arguments such as the number/range 
+of desired results, and filtering based on record properties can be specified in the POST request.
+Return an appropriate status message as follows:
+200 OK: The records has been retrieved from the database successfully; 
+Data: the list of records in JSON format. An empty list is a possibility.
+400 Bad Request: Bad arguments specified.
+500 Internal Server Error: The database is inaccessible 
+or an error has occurred in the method itself.
