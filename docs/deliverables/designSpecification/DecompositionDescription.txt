@@ -85,21 +85,21 @@ the user to delete the current recording, removing all stored species data. The
 user will be able to save the recording, sending the current recording to the 
 server at the first opportunity. 
 
-SpeciesClass: This class will hold the code to define all the information a 
-species object can hold. Variables to hold this data will be: speciesName, 
+2.2.2) Significant other classes 
+
+Specimen: This class will hold the code to define all the information a 
+specimen object can hold. Fields to hold this data will be: speciesName, 
 gpsLocation, abundance, scenePicture, specimenPicture, notes. This class 
-will contain methods to display information to the AddNewSpeciesActivity and 
-methods to set new values to the variables.
+will also provide getter and setter methods for the mentioned fields.
 
-RecordingClass: This class will hold the code to define all the information 
-a recording object will hold. Variables to hold this data will be: usersName,
-usersPhoneNumber, usersEMail, usersAddress, time and date. This class will 
-contain methods to display information to the MaintainRecordingActivity
-and method to set new values to the variables. 
+Recording: This class will hold the code to define all the information 
+a recording object will hold. Fields to hold this data will be: usersName,
+usersPhoneNumber, usersEmail, usersAddress, dateTime. This class will 
+contain getters and setters for the mentioned fields.
 
-2.2.2) Significant Website Components
+2.3) Significant Website Components
 
-Navigation: This will be a set of buttons at the top of each webpage that 
+Navigation: A set of buttons at the top of each webpage that 
 will allow the user to move around the site. When clicking on the desired
 button, they will be taken to the designated page.
 
