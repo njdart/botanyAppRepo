@@ -61,7 +61,7 @@ communicate with the database, but will go through the web API.
 HomeActivity: This class will hold the code to allow a user to move on to the 
 NewRecordingActivity via a startNewRecordingButton. 
 
-NewRecordingActivity: This class will hold the code to allow a user to enter basic
+NewRecordingActivity: This class will hold the code to allow a user to enter 
 information such as Name, Phone Number, E-Mail, and Site Location. It will also
 allow the application to receive date and time information from the Android 
 device. The nextButton will then move the user to the AddNewSpeciesActivty.
@@ -85,4 +85,42 @@ the user to delete the current recording, removing all stored species data. The
 user will be able to save the recording, sending the current recording to the 
 server at the first opportunity. 
 
-To come: Species class, recording class
+SpeciesClass: This class will hold the code to define all the information a 
+species object can hold. Variables to hold this data will be: speciesName, 
+gpsLocation, abundance, scenePicture, specimenPicture, notes. This class 
+will contain methods to display information to the AddNewSpeciesActivity and 
+methods to set new values to the variables.
+
+RecordingClass: This class will hold the code to define all the information 
+a recording object will hold. Variables to hold this data will be: usersName,
+usersPhoneNumber, usersEMail, usersAddress, time and date. This class will 
+contain methods to display information to the MaintainRecordingActivity
+and method to set new values to the variables. 
+
+2.2.2) Significant Website Components
+
+Navigation: This will be a set of buttons at the top of each webpage that 
+will allow the user to move around the site. When clicking on the desired
+button, they will be taken to the designated page.
+
+Homepage: This landing page will provide all the general information a user
+needs to know about the service. It also contains a search bar which will 
+allow the user to filter through the plant database to find what they are 
+looking for. 
+
+View Species Page: This page will display every species in the database for
+the user to view and select. If the user selects a species, they will be
+taken to the View Chosen Species Page, which provides more species information. 
+This page will also allow the user to add a new species, taking them to the 
+Add Species Page.
+
+View Chosen Species Page: This page will display all information about the 
+specific species chosen by the user. 
+
+Add Species Page: This page will provide all the forms necessary to input
+all data for a chosen species (name, location, abundance, scene picture, 
+specimen pictures and notes), or allow a user to add a new species that
+is not listed. 
+
+Map Overlay: This component will be a pop-up map that will show the locations
+of the chosen species. This location will be taken from the database. 
