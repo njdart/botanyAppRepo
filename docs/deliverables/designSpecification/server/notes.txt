@@ -1,0 +1,6 @@
+The free version of Creately does not allow the user to export editable files.
+The component diagram can be edited online at: https://creately.com/diagram/i2b91abw/7PsurQxhSCBgvpvhKldwCeNULwY%3D
+
+Compilation and inheritance dependencies are unnecessary in the context of a separate web application. Therefore, the Dependency Description of the server is to contain only the supplied component diagram.
+
+Maxim Harizanov (msh4)
