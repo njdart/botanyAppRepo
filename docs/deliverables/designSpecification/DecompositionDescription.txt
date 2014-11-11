@@ -127,15 +127,17 @@ of the chosen species. This location will be taken from the database.
 
 2.4) Significant web API methods
 
-AddRecord: Add a record received via a HTTP POST request in JSON format, checking it for validity,
-and return an appropriate status message as follows:
-200 OK: The record has been saved to the database successfully; Data: the record ID.
+AddRecord: Add a record received via a HTTP POST request in JSON format, 
+checking it for validity, and return an appropriate status message as follows:
+200 OK: The record has been saved to the database successfully; 
+Content: the record ID.
 400 Bad Request: The method has been provided with malformed data.
 500 Internal Server Error: The database is inaccessible or 
 an error has occurred in the method itself.
 
-RemoveRecord: Remove a record the database by an ID specified in a HTTP POST request, together with 
-an Authorization header as specified in the HTTP protocol, carrying administrator credentials, 
+RemoveRecord: Remove a record the database by an ID specified in a HTTP POST 
+request, together with  an Authorization header as specified in the 
+HTTP protocol, carrying administrator credentials, 
 and return an appropriate status message as follows:
 200 OK: The record has been deleted from the database successfully.
 400 Bad Request: Bad record ID specified.
@@ -143,28 +145,49 @@ and return an appropriate status message as follows:
 500 Internal Server Error: The database is inaccessible 
 or an error has occurred in the method itself.
 
-ModifyRecord: Modify a record in database by an ID specified in a HTTP POST request, together with
-an Authorization header carrying administrator credentials as specified in the HTTP protocol, 
-and the record data in a JSON format, returning an appropriate status message as follows:
+ModifyRecord: Modify a record in database by an ID specified in a HTTP POST
+request, together with an Authorization header carrying administrator
+credentials as specified in the HTTP protocol,  and the record data in a 
+JSON format, returning an appropriate status message as follows:
 200 OK: The record has been modified successfully.
 400 Bad Request: Bad record ID or bad record data specified.
 401 Unauthorized: The method has been provided no or wrong authorization header.
 500 Internal Server Error: The database is inaccessible 
 or an error has occurred in the method itself.
 
-GetRecord: Retrieve a record from database by an ID specified in a HTTP POST request. 
-and return an appropriate status message as follows:
+GetRecord: Retrieve a record from database by an ID specified in a 
+HTTP POST request.  and return an appropriate status message as follows:
 200 OK: The record has been retrieved from the database successfully; 
-Data: the requested record in JSON.
+Content: the requested record in JSON.
 400 Bad Request: Bad record ID specified.
 500 Internal Server Error: The database is inaccessible 
 or an error has occurred in the method itself.
 
-GetRecords: Retrieve a number of records from database. Optional arguments such as the number/range 
-of desired results, and filtering based on record properties can be specified in the POST request.
+GetRecords: Retrieve a number of records from database.
+Optional arguments such as the number/range 
+of desired results, and filtering based on record properties 
+can be specified in the POST request.
 Return an appropriate status message as follows:
 200 OK: The records has been retrieved from the database successfully; 
-Data: the list of records in JSON format. An empty list is a possibility.
+Content: the list of records in JSON format. An empty list is a possibility.
 400 Bad Request: Bad arguments specified.
 500 Internal Server Error: The database is inaccessible 
 or an error has occurred in the method itself.
+
+AddResource: Uploads a file resource to the server via POST, 
+checking it for validity. Content-Type is to be multipart/form-data.
+Return an appropriate status message as follows:
+200 OK: The resource has been saved successfully; 
+Content: the resource ID.
+400 Bad Request: The method has been provided with malformed data.
+500 Internal Server Error: The resource is inaccessible or 
+an error has occurred in the method itself.
+
+GetResource: Downloads a file resource from the server via POST, by specifying
+a resource ID.
+Return an appropriate status message as follows:
+200 OK: The resource has been found; 
+Content: the resource, with Content-Type: application/octet-stream.
+400 Bad Request: The method has been provided with a bad ID.
+500 Internal Server Error: The resource is inaccessible or 
+an error has occurred in the method itself.
