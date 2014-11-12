@@ -13,6 +13,7 @@
 \usepackage{lastpage}
 \usepackage{titlesec}
 \usepackage{lscape}
+\usepackage{longtable}
 
 %%%%%%
 %% Variables for version and release status
@@ -20,7 +21,7 @@
 %%%%%%
 \newcommand\version{0.1}
 \newcommand\release{Pre-Release}
-\newcommand\titleText{Change Me}
+\newcommand\titleText{Design Specification}
 \newcommand\reference{SE\_NO2\_MAN\_01}
 
 %%%%%%
@@ -64,20 +65,24 @@
 
 	\tableofcontents
 
+	\section{Decomposition Description}
+		\input{decomposition/decompositionDescription.tex}
+
 	\section{Android Application Design}
-		\input{android/android}
+		\input{android/android.tex}
 
-	\begin{landscape}
+	%%\begin{landscape}
 
-		\section{Bar}
+		%%\section{Bar}
 			%%\input{far/foo.tex}
 
-	\end{landscape}
+	%%\end{landscape}
 
 	\section{Document History}
 		\begin{tabular}{l || p{10cm} | l | r}
 			Version & Edit & Date & Persons \\ \hline 
-			0.1 & Initial Version & January 1 1970 & anon00 \\
+			0.1 & Initial Version & November 5 2014 & nid21 \\ \hline
+			0.2 & Updated with decomposition description & nid21 \\
 		\end{tabular}
 
 \end{document}

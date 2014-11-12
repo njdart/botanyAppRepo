@@ -1,193 +1,130 @@
-2) Decomposition Description
+\subsection{Subsystems}
+	The Botanist Tools application is composed of 3 subsystems:
+	\begin{itemize}
+		\item Android Application
+		\item Website
+		\item Server
+	\end{itemize}
 
-2.1) Subsystems
-The Botanist Tools application is composed of 3 subsystems:
-- Android Application
-- Website
-- Server
+	\subsubsection{Android Application}
+		The android application provides the interface that users will use to record  plant data when out on a visit. It implements requirements (FR1), (FR2), (FR3), (FR4), (FR5), (FR6). It must also conform with the requirements (EIR1), (PR1),  (PR2), (DC1) and (DC2).
 
-2.1.1) Android Application
+		The application will have a form-based activity which can be used to add and edit new and currently saved recordings. Currently saved recordings will be stored locally in a collection, which will be awaiting dispatch to the server. The user will be able to view this list and select recordings to perform actions on (Eg. edit and delete). The application will not show recordings that are saved on the server. 
 
-The android application provides the interface that users will use to record 
-plant data when out on a visit. It implements requirements (FR1), (FR2), (FR3), 
-(FR4), (FR5), (FR6). It must also conform with the requirements (EIR1), (PR1), 
-(PR2), (DC1) and (DC2).
+		The Android application will communicate with the server to perform functions such as sending recordings and performing user authentication (?). The application does NOT communicate directly with the website and the database. It uses a web API which is core to the server.
 
-The application will have a form-based activity which can be used to add and 
-edit new and currently saved recordings. Currently saved recordings will be 
-stored locally in a collection, which will be awaiting dispatch to the server. 
-The user will be able to view this list and select recordings to perform actions 
-on (Eg. edit and delete). The application will not show recordings that are 
-saved on the server. 
+	\subsubsection{Server}
 
-The Android application will communicate with the server to perform functions 
-such as sending recordings and performing user authentication (?). The 
-application does NOT communicate directly with the website and the database. It 
-uses a web API which is core to the server.
+		The server will consist of two parts: 
+		\begin{itemize}
+			\item A database
+			\item A web API
+		\end{itemize}
 
-2.1.2) Server 
+	\subsubsection{Database}
+		The database will be the central datastore for the entire system. It will communicate exclusively with the web API and serve as its back-end. 
 
-The server will consist of two parts: 
-- A database
-- A web API
+	\subsubsection{Web API}
+		The web API is central to the system; it provides a uniform way of accessing the database for all subsystems to use. It maintains the integrity of the datastore by acting as the ``middle-man'' so that the other subsystems do not damage the contents. It exposes a public interface to allow a set of actions to be performed by the users of the API; actions include user authentication and recordings management. The web API will implement the requirement (FR7) and must also conform to the requirement (PR2).
 
-2.1.2.1) Database:
-The database will be the central datastore for the entire system. It will 
-communicate exclusively with the web API and serve as its back-end. 
-
-2.1.2.2) Web API:
-The web API is central to the system; it provides a uniform way of accessing the 
-database for all subsystems to use. It maintains the integrity of the datastore 
-by acting as the "middle-man" so that the other subsystems do not damage the 
-contents. It exposes a public interface to allow a set of actions to be 
-performed by the users of the API; actions include user authentication and 
-recordings management. The web API will implement the requirement (FR7) and 
-must also conform to the requirement (PR2).
-
-2.1.3) Website
-
-The website will consist of a set of web-pages which implement all the required 
-functionalities for the user (FR8) and (FR9). It must also conform to the 
-requirements (EIR1), (PR1) and (PR2). The website will communicate with the Web 
-API via HTTP to receive from and send data to the database. The website will 
-have no communication with the Android application. It will also not directly 
-communicate with the database, but will go through the web API. 
+	\subsubsection{Website}
+		The website will consist of a set of web-pages which implement all the required functionalities for the user (FR8) and (FR9). It must also conform to the requirements (EIR1), (PR1) and (PR2). The website will communicate with the Web API via HTTP to receive from and send data to the database. The website will have no communication with the Android application. It will also not directly communicate with the database, but will go through the web API. 
 
 
-2.2) Significant classes (Android)
+\subsection{Significant Abdroid Components}
 
-2.2.1) Significant UI classes 
+	\subsubsection{Significant UI classes}
+		\begin{tabular}{r p{10cm}}
+		HomeActivity & This class will hold the code to allow a user to move on to the NewRecordingActivity via a startNewRecordingButton. \\
 
-HomeActivity: This class will hold the code to allow a user to move on to the 
-NewRecordingActivity via a startNewRecordingButton. 
+		NewRecordingActivity & This class will hold the code to allow a user to enter information such as Name, Phone Number, E-Mail, and Site Location. It will also allow the application to receive date and time information from the Android device. The nextButton will then move the user to the AddNewSpeciesActivty. \\
 
-NewRecordingActivity: This class will hold the code to allow a user to enter 
-information such as Name, Phone Number, E-Mail, and Site Location. It will also
-allow the application to receive date and time information from the Android 
-device. The nextButton will then move the user to the AddNewSpeciesActivty.
+		AddNewSpeciesActivity & This class will hold the code to allow a user to enter all the required information about a species entry in the current recording. It allows you to choose the name of a species from a locally saved list, and also allows the user to add a new species name, if not found. This activity must have the functionality to use the device's GPS capabilities to record location information of the species. It allows the user to select abundance in accordance with the DAFOR scale. The user should be able to add a scene/specimen picture through the device's camera or the gallery application. The user can also add a note if they wish. There is then a confirmButton which adds the species to the current recording and moves the user on to the MaintainRecordingActivity. \\
 
-AddNewSpeciesActivity: This class will hold the code to allow a user to enter 
-all the required information about a species entry in the current recording. It 
-allows you to choose the name of a species from a locally saved list, and 
-also allows the user to add a new species name, if not found. This activity 
-must have the functionality to use the device's GPS capabilities to record 
-location information of the species. It allows the user to select abundance 
-in accordance with the DAFOR scale. The user should be able to add a 
-scene/specimen picture through the device's camera or the gallery application.
-The user can also add a note if they wish. There is then a confirmButton which
-adds the species to the current recording and moves the user on to the 
-MaintainRecordingActivity. 
+		MaintainRecordingActivity & This class will hold the code to allow a user to maintain the current recording. It will contain the functionality to edit any entered species from the collection in the recording. It will also allow the user to delete the current recording, removing all stored species data. The user will be able to save the recording, sending the current recording to the server at the first opportunity. \\
+		\end{tabular}
 
-MaintainRecordingActivity: This class will hold the code to allow a user to 
-maintain the current recording. It will contain the functionality to edit 
-any entered species from the collection in the recording. It will also allow 
-the user to delete the current recording, removing all stored species data. The 
-user will be able to save the recording, sending the current recording to the 
-server at the first opportunity. 
+	\subsection{Significant other classes}
+		\begin{tabular}{r p{13cm}}
+		Specimen & This class will hold the code to define all the information a specimen object can hold. Fields to hold this data will be: speciesName, gpsLocation, abundance, scenePicture, specimenPicture, notes. This class will also provide getter and setter methods for the mentioned fields.\\
 
-2.2.2) Significant other classes 
+		Recording & This class will hold the code to define all the information a recording object will hold. Fields to hold this data will be: usersName, usersPhoneNumber, usersEmail, usersAddress, dateTime. This class will contain getters and setters for the mentioned fields.\\
+		\end{tabular}
 
-Specimen: This class will hold the code to define all the information a 
-specimen object can hold. Fields to hold this data will be: speciesName, 
-gpsLocation, abundance, scenePicture, specimenPicture, notes. This class 
-will also provide getter and setter methods for the mentioned fields.
+\subsection{Significant Website Components}
+	\begin{tabular}{r p{10cm}}
+	Navigation & A set of buttons at the top of each webpage that will allow the user to move around the site. When clicking on the desired button, they will be taken to the designated page.\\
 
-Recording: This class will hold the code to define all the information 
-a recording object will hold. Fields to hold this data will be: usersName,
-usersPhoneNumber, usersEmail, usersAddress, dateTime. This class will 
-contain getters and setters for the mentioned fields.
+	Homepage & This landing page will provide all the general information a user needs to know about the service. It also contains a search bar which will allow the user to filter through the plant database to find what they are looking for. \\
 
-2.3) Significant website components
+	View Species Page & This page will display every species in the database for the user to view and select. If the user selects a species, they will be taken to the View Chosen Species Page, which provides more species information. This page will also allow the user to add a new species, taking them to the Add Species Page. \\
 
-Navigation: A set of buttons at the top of each webpage that 
-will allow the user to move around the site. When clicking on the desired
-button, they will be taken to the designated page.
+	View Chosen Species Page & This page will display all information about the specific species chosen by the user. \\
 
-Homepage: This landing page will provide all the general information a user
-needs to know about the service. It also contains a search bar which will 
-allow the user to filter through the plant database to find what they are 
-looking for. 
+	Add Species Page & This page will provide all the forms necessary to input all data for a chosen species (name, location, abundance, scene picture, specimen pictures and notes), or allow a user to add a new species that is not listed. \\
 
-View Species Page: This page will display every species in the database for
-the user to view and select. If the user selects a species, they will be
-taken to the View Chosen Species Page, which provides more species information. 
-This page will also allow the user to add a new species, taking them to the 
-Add Species Page.
+	Map Overlay & This component will be a pop-up map that will show the locations of the chosen species. This location will be taken from the database.\\
+	\end{tabular}
 
-View Chosen Species Page: This page will display all information about the 
-specific species chosen by the user. 
-
-Add Species Page: This page will provide all the forms necessary to input
-all data for a chosen species (name, location, abundance, scene picture, 
-specimen pictures and notes), or allow a user to add a new species that
-is not listed. 
-
-Map Overlay: This component will be a pop-up map that will show the locations
-of the chosen species. This location will be taken from the database. 
-
-2.4) Significant web API methods
-
-AddRecord: Add a record received via a HTTP POST request in JSON format, 
-checking it for validity, and return an appropriate status message as follows:
-200 OK: The record has been saved to the database successfully; 
-Content: the record ID.
-400 Bad Request: The method has been provided with malformed data.
-500 Internal Server Error: The database is inaccessible or 
-an error has occurred in the method itself.
-
-RemoveRecord: Remove a record the database by an ID specified in a HTTP POST 
-request, together with  an Authorization header as specified in the 
-HTTP protocol, carrying administrator credentials, 
-and return an appropriate status message as follows:
-200 OK: The record has been deleted from the database successfully.
-400 Bad Request: Bad record ID specified.
-401 Unauthorized: The method has been provided no or wrong authorization header.
-500 Internal Server Error: The database is inaccessible 
-or an error has occurred in the method itself.
-
-ModifyRecord: Modify a record in database by an ID specified in a HTTP POST
-request, together with an Authorization header carrying administrator
-credentials as specified in the HTTP protocol,  and the record data in a 
-JSON format, returning an appropriate status message as follows:
-200 OK: The record has been modified successfully.
-400 Bad Request: Bad record ID or bad record data specified.
-401 Unauthorized: The method has been provided no or wrong authorization header.
-500 Internal Server Error: The database is inaccessible 
-or an error has occurred in the method itself.
-
-GetRecord: Retrieve a record from database by an ID specified in a 
-HTTP POST request.  and return an appropriate status message as follows:
-200 OK: The record has been retrieved from the database successfully; 
-Content: the requested record in JSON.
-400 Bad Request: Bad record ID specified.
-500 Internal Server Error: The database is inaccessible 
-or an error has occurred in the method itself.
-
-GetRecords: Retrieve a number of records from database.
-Optional arguments such as the number/range 
-of desired results, and filtering based on record properties 
-can be specified in the POST request.
-Return an appropriate status message as follows:
-200 OK: The records has been retrieved from the database successfully; 
-Content: the list of records in JSON format. An empty list is a possibility.
-400 Bad Request: Bad arguments specified.
-500 Internal Server Error: The database is inaccessible 
-or an error has occurred in the method itself.
-
-AddResource: Uploads a file resource to the server via POST, 
-checking it for validity. Content-Type is to be multipart/form-data.
-Return an appropriate status message as follows:
-200 OK: The resource has been saved successfully; 
-Content: the resource ID.
-400 Bad Request: The method has been provided with malformed data.
-500 Internal Server Error: The resource is inaccessible or 
-an error has occurred in the method itself.
-
-GetResource: Downloads a file resource from the server via POST, by specifying
-a resource ID.
-Return an appropriate status message as follows:
-200 OK: The resource has been found; 
-Content: the resource, with Content-Type: application/octet-stream.
-400 Bad Request: The method has been provided with a bad ID.
-500 Internal Server Error: The resource is inaccessible or 
-an error has occurred in the method itself.
+\subsection{Significant Web API Components}
+	\begin{longtable}{r p{10cm}}
+	AddRecord & Add a record received via a HTTP POST request in JSON format, checking it for validity, and return an appropriate status message as follows:
+	\begin{itemize}
+		\item 200 OK: The record has been saved to the database successfully; 
+		\begin{itemize}
+			\item Contains the record ID.
+		\end{itemize}
+		\item 400 Bad Request: The method has been provided with malformed data.
+		\item 500 Internal Server Error: The database is inaccessible or an error has occurred in the method itself.
+	\end{itemize}\\
+	RemoveRecord & Remove a record the database by an ID specified in a HTTP POST request, together with  an Authorization header as specified in the HTTP protocol, carrying administrator credentials, and return an appropriate status message as follows:
+	\begin{itemize}
+		\item 200 OK: The record has been deleted from the database successfully.
+		\item 400 Bad Request: Bad record ID specified.
+		\item 401 Unauthorized: The method has been provided no or wrong authorization header.
+		\item 500 Internal Server Error: The database is inaccessible or an error has occurred in the method itself.
+	\end{itemize}\\
+	ModifyRecord & Modify a record in database by an ID specified in a HTTP POST request, together with an Authorization header carrying administrator credentials as specified in the HTTP protocol,  and the record data in a JSON format, returning an appropriate status message as follows:
+	\begin{itemize}
+		\item 200 OK: The record has been modified successfully.
+		\item 400 Bad Request: Bad record ID or bad record data specified.
+		\item 401 Unauthorized: The method has been provided no or wrong authorization header.
+		\item 500 Internal Server Error: The database is inaccessible or an error has occurred in the method itself.
+	\end{itemize}\\
+	GetRecord & Retrieve a record from database by an ID specified in a HTTP POST request.  and return an appropriate status message as follows:
+	\begin{itemize}
+		\item 200 OK: The record has been retrieved from the database successfully; 
+		\begin{itemize}
+			\item Contains the requested record in JSON.
+		\end{itemize}
+		\item 400 Bad Request: Bad record ID specified.
+		\item 500 Internal Server Error: The database is inaccessible or an error has occurred in the method itself.
+	\end{itemize}\\
+	GetRecords & Retrieve a number of records from database. Optional arguments such as the number/range of desired results, and filtering based on record properties can be specified in the POST request. Return an appropriate status message as follows:
+	\begin{itemize}
+		\item 200 OK: The records has been retrieved from the database successfully; 
+		\begin{itemize}
+			\item Contains the list of records in JSON format. An empty list is a possibility.
+		\end{itemize}
+		\item 400 Bad Request: Bad arguments specified.
+		\item 500 Internal Server Error: The database is inaccessible or an error has occurred in the method itself.
+	\end{itemize}\\
+	AddResource & Uploads a file resource to the server via POST, checking it for validity. Content-Type is to be multipart/form-data. Return an appropriate status message as follows:
+	\begin{itemize}
+		\item 200 OK: The resource has been saved successfully; 
+		\begin{itemize}
+			\item Contains the resource ID.
+		\end{itemize}
+		\item 400 Bad Request: The method has been provided with malformed data.
+		\item 500 Internal Server Error: The resource is inaccessible or an error has occurred in the method itself.
+	\end{itemize}\\
+	GetResource & Downloads a file resource from the server via POST, by specifying a resource ID. Return an appropriate status message as follows:
+	\begin{itemize}
+		\item 200 OK The resource has been found; 
+		\begin{itemize}
+			\item Contains the resource, with Content-Type: application/octet-stream.
+		\end{itemize}
+		\item 400 Bad Request: The method has been provided with a bad ID.
+		\item 500 Internal Server Error: The resource is inaccessible or an error has occurred in the method itself.
+	\end{itemize}\\
+	\end{longtable}
