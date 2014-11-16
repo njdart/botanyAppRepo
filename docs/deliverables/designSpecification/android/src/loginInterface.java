@@ -43,7 +43,7 @@ public interface LoginPage extends Activity implements LoaderCallbacks<Cursor> {
 
     }
 
-		/**
+	/**
      * AutoFill
      */
     private void populateAutoComplete() {
@@ -67,7 +67,7 @@ public interface LoginPage extends Activity implements LoaderCallbacks<Cursor> {
         
     }
 
-		/**
+	/**
      * Check password
      */
     private boolean isPasswordValid(String password) {
@@ -83,14 +83,14 @@ public interface LoginPage extends Activity implements LoaderCallbacks<Cursor> {
     }
 
 	
-     	/**
+     /**
      * Called when building page for the GUI ;
      */
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
        
     }
 
-     	/**
+     /**
      * Called when building page for the GUI is finished;
      */
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
@@ -134,6 +134,3 @@ public interface LoginPage extends Activity implements LoaderCallbacks<Cursor> {
         }
     }
 }
-
-
-
