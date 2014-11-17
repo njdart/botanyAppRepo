@@ -1,0 +1,22 @@
+1 Introduction
+1.1	Purpose of this Document
+The purpose of this document is to illustrate the architecture and system design for the Reserve Plan Species Recording project (“RSPSR”). Team members are to read this document and confirm that the design specification is understood.
+1.2	Scope
+This document will include the descriptions required for the development of the Botany App. Firstly, a decomposition description will record the division of software into programs and modules, used to describe the function of each program and significant module and uses table mapping to identify functional requirements to classes. Also, a dependency description specifying relationships and dependencies between modules to describe the general architecture of the system using component diagrams. Additionally, an interface description is required to outline the specification for each class or interface in the system. Lastly, detailed designs of the system including sequence diagrams, significant algorithms and significant data structures.
+1.3	Objectives
+The objectives of this document are:
+•	To describe each of the programs, and the relationship between the programs
+•	To provide descriptions of the purpose of each significant class
+•	To produce a table mapping functional requirements onto the classes 
+•	To illustrate the relationships and dependencies between modules using component diagrams for each program to show the method links between modules
+
+•	To produce interface descriptions which are to include:
+
+o	Name and type of the class or interface
+o	Classes or interfaces which it extends
+o	Public methods implemented by the class or interface. The parameter names and types for each method and a short summary of the purpose of the method
+
+•	To produce sequence diagrams documenting how the classes work together for the major operations of the programs
+•	To provide textual description of significant algorithms
+•	To produce class diagrams showing the entity relationships between classes along with object diagrams showing how the static relationships in class diagrams work out
+•	Each requirement is to be traceable to one or more design entities
