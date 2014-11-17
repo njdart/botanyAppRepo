@@ -1,0 +1,30 @@
+config.php
+config will open a link to the mysql database at the start of each new session, all changes to records and searches are reliant on this script.
+$conn = mysql_connect("host=<localhost> 
+port=3306 dbname=<nameofdatabase> 
+user=<uid> password=<password>");
+
+
+plant_sorting.php
+The plant data can be sorted in multiple different ways there will be a default sort using SORT_REGULAR however the options of SORT_STRING and SORT_NUMERIC will also be available as required.
+
+simple_search.php
+The simple search script will search the database for a string matching the users input. It will require a connection to the database from config.php.
+
+advanced_search.php
+The script for advanced search will allow for searches by string, data type, location and user. 
+
+edit_plant_record.php
+
+
+delete_plant_record.php
+
+
+save_record.php
+
+
+upload_image.php
+
+
+regex validation
+validation will be done on the client side using javascript and regular expressions. Doing this allows us to use an onchange method when the user is inputting data with fixed parameters, such as what characters can be used, without putting extra load on the server.
