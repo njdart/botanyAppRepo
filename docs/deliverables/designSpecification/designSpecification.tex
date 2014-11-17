@@ -14,13 +14,46 @@
 \usepackage{titlesec}
 \usepackage{lscape}
 \usepackage{longtable}
+\usepackage{color}
 \usepackage{listings}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ % Syntax highliughting for java
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+    basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=b,                    % sets the caption-position to bottom
+    commentstyle=\color{mygreen},    % comment style
+    deletekeywords={...},            % if you want to delete keywords from the given language
+    escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    frame=none,                    % adds a frame around the code
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    language=Octave,                 % the language of the code
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=5,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    stringstyle=\color{mymauve},     % string literal style
+    tabsize=4,                       % sets default tabsize to 2 spaces
+    title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 
 %%%%%%
 %% Variables for version and release status
 %% useage: \version
 %%%%%%
-\newcommand\version{0.1}
+\newcommand\version{0.3}
 \newcommand\release{Pre-Release}
 \newcommand\titleText{Design Specification}
 \newcommand\reference{SE\_NO2\_MAN\_01}
@@ -28,29 +61,29 @@
 %%%%%%
 %% Alias
 %%%%%%
-\newcommand{\sectionbreak}{\clearpage} 	%% Allways start a section on a new page
+\newcommand{\sectionbreak}{\clearpage}  %% Allways start a section on a new page
 
 \title{ \huge CS221 Group Project \\ \Large \titleText}
 \author{
-	\vspace{100pt}
-	\begin{tabular}{ r || l }
-		Project Team 	& jcm14, acb12, mta2, wia3, \\
-						& nid21, msh4, jao14, mip34, \\
-	 					& set12, daw54, anw46 \\
-						& \\
-		Version			& \version \\
-		Status			& \release \\
-		Date Published  & \today \\
-		Reference 		& \reference \\
-		Department		& Computer Science \\
-		Address			& Aberystwyth University \\
-						& Penglais Campas \\
-						& Ceredigion \\
-						& SY23 3DB \\
-	\end{tabular} \\
-	Copyright \textcopyright Aberystwyth University 2014
-	%get rid of the date on the titlepage
-	\date{}
+    \vspace{100pt}
+    \begin{tabular}{ r || l }
+        Project Team    & jcm14, acb12, mta2, wia3, \\
+                        & nid21, msh4, jao14, mip34, \\
+                        & set12, daw54, anw46 \\
+                        & \\
+        Version         & \version \\
+        Status          & \release \\
+        Date Published  & \today \\
+        Reference       & \reference \\
+        Department      & Computer Science \\
+        Address         & Aberystwyth University \\
+                        & Penglais Campas \\
+                        & Ceredigion \\
+                        & SY23 3DB \\
+    \end{tabular} \\
+    Copyright \textcopyright Aberystwyth University 2014
+    %get rid of the date on the titlepage
+    \date{}
 }
 
 \pagestyle{fancy}
@@ -60,30 +93,31 @@
 \lfoot{Aberystwyth University - Computer Science}
 
 \begin{document}
-	\setcounter{page}{1}
+    \setcounter{page}{1}
 
-	\maketitle
+    \maketitle
 
-	\tableofcontents
+    \tableofcontents
 
-	\section{Decomposition Description}
-		\input{decomposition/decompositionDescription.tex}
+    \section{Decomposition Description}
+        \input{decomposition/decompositionDescription.tex}
 
-	\section{Android Application Design}
-		\input{android/android.tex}
+    \section{Android Application Design}
+        \input{android/android.tex}
 
-	%%\begin{landscape}
+    %%\begin{landscape}
 
-		%%\section{Bar}
-			%%\input{far/foo.tex}
+        %%\section{Bar}
+            %%\input{far/foo.tex}
 
-	%%\end{landscape}
+    %%\end{landscape}
 
-	\section{Document History}
-		\begin{tabular}{l || p{10cm} | l | r}
-			Version & Edit & Date & Persons \\ \hline 
-			0.1 & Initial Version & November 5 2014 & nid21 \\ \hline
-			0.2 & Updated with decomposition description & nid21 \\
-		\end{tabular}
+    \section{Document History}
+        \begin{tabular}{l || p{10cm} | l | r}
+            Version & Edit & Date & Persons \\ \hline 
+            0.1 & Initial Version & November 5 2014 & nid21 \\ \hline
+            0.2 & Updated with decomposition description & November 12 2014 & nid21 \\
+            0.3 & Updated with Android interfaces & November 17 2014 & nid21 \\
+        \end{tabular}
 
 \end{document}

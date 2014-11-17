@@ -35,20 +35,16 @@ import java.util.List;
  */
 public interface LoginPage extends Activity implements LoaderCallbacks<Cursor> {
 
-	/**
+    /**
      * Called when building page for the GUI interface;
      */
      
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState);
 
-    }
-
-	/**
+    /**
      * AutoFill
      */
-    private void populateAutoComplete() {
-
-    }
+    private void populateAutoComplete();
 
 
     /**
@@ -56,81 +52,53 @@ public interface LoginPage extends Activity implements LoaderCallbacks<Cursor> {
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    public void attemptLogin() {
-        
-    }
-	
-	/**
+    public void attemptLogin();
+    
+    /**
      * Check email
      */
-    private boolean isEmailValid(String email) {
-        
-    }
+    private boolean isEmailValid(String email);
 
-	/**
+    /**
      * Check password
      */
-    private boolean isPasswordValid(String password) {
-        
-    }
+    private boolean isPasswordValid(String password);
 
     /**
      * Shows the progress UI and hides the login form.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    public void showProgress(final boolean show) {
-        
-    }
+    public void showProgress(final boolean show);
 
-	
-     /**
+    
+    /**
      * Called when building page for the GUI ;
      */
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-       
-    }
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle);
 
-     /**
+    /**
      * Called when building page for the GUI is finished;
      */
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-       
-    }
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor);
 
      
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+    public void onLoaderReset(Loader<Cursor> cursorLoader);
 
-    }
-
-	/**
+    /**
      * Called when building page for the GUI interface;
      */
-    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-       
-    }
+    private void addEmailsToAutoComplete(List<String> emailAddressCollection);
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
     public interface UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-       
-
          
-        protected Boolean doInBackground(Void... params) {
+        protected Boolean doInBackground(Void... params);
 
-        }
-
+        protected void onPostExecute(final Boolean success);
          
-        protected void onPostExecute(final Boolean success) {
-         
-        }
-
-         
-        protected void onCancelled() {
-           
-        }
+        protected void onCancelled();
     }
 }
