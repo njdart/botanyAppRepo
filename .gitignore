@@ -24,6 +24,7 @@ build/
 
 ## No pesky word backups
 ~$*
+*.tmp
 ## or vim swp files
 *.swp
 ##or virtualbox lock files

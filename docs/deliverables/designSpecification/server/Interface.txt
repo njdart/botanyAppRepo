@@ -1,0 +1,86 @@
+AddRecord
+Headers required: 
+
+POST arguments:
+
+Statuses:
+	200 OK:
+		records: array of Record (JSON)
+	400 Bad Request
+	500 Internal Server Error
+
+
+RemoveRecord
+Headers required: 
+	Authorization
+POST Arguments:
+	id : int
+	record : Record
+Statuses:
+	200 OK : no data
+	400 Bad Request
+	401 Unauthorized
+	500 Internal Server Error
+
+
+ModifyRecord
+Headers required:
+	Authoization
+POST Arguments:
+	id : int
+	record : Record
+Statuses:
+	200 OK : 
+		records: array of Record (JSON)
+	400 Bad Request
+	401 Unauthorized
+	500 Internal Server Error
+
+
+GetRecord
+Headers required: 
+
+POST Arguments:
+	id : int
+	record : Record
+Statuses:
+	200 OK : no data
+	400 Bad Request
+	401 Unauthorized
+	500 Internal Server Error
+
+
+GetRecords
+Headers Required:
+	
+POST Arguments:
+	id : int
+	record : Record
+Statuses: 
+	200 OK : no data
+	400 Bad Request
+	401 Unauthorized
+	500 Internal Server Error
+
+AddResource
+Headers required: 
+	ID (?)
+POST Arguements:
+	resource : Resource
+Statuses:
+	200 OK :
+		resource : array of resources
+	400 Bad Request
+	500 Internal Server Error
+
+
+GetResource
+Headers required:
+
+POST Arguments:
+	id : int
+Statuses:
+	200 OK : 
+
+	400 Bad Request
+	500 Internal Server Error

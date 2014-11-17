@@ -3,4 +3,6 @@ The component diagram can be edited online at: https://creately.com/diagram/i2b9
 
 Compilation and inheritance dependencies are unnecessary in the context of a separate web application. Therefore, the Dependency Description of the server is to contain only the supplied component diagram.
 
+I have used StarUML for the creation of the sequence diagram(s). A MDJ file, which StarUML should be able to open, has also been included in case we need to change the diagram at a later time.
+
 Maxim Harizanov (msh4)

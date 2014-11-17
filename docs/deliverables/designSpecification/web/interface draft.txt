@@ -1,0 +1,108 @@
+Constants	
+Header
+	session_start();
+	Doctype
+	meta tags
+		description
+		Keywords
+		authir
+		content type
+		CSS links
+		Font link
+		validation.js
+		$title
+	Header/Div
+		Logo
+	/div
+
+Nav
+	Nav
+	include'breadcrumbs';
+	
+Footer 
+	Site map link 
+	Icon
+	
+	
+config.php
+	$host = "";
+	$port = "";
+	$user = "";
+	$password = "";
+	$dbname = "";
+	mysql = new mysql($...)
+	die statements
+
+	
+Index
+	$title
+	include 'header.php';
+	include 'nav.php';
+	text
+	include 'simple_search.php';
+	text
+		app link
+	include 'FOOTER';
+	
+plants
+	include 'config.php';
+	$title
+	include 'header.php';
+	include 'nav.php';
+	add_plant_record link
+	include 'advanced_search.php';
+	include 'plant_db_declare.php';
+	include 'plant_sorting.php';
+	include 'footer.php';
+
+add_plants_record
+	include 'config.php';
+	$title
+	include 'header.php';
+	include 'nav.php';
+	form(input)  INSERT(SQL - add the form input into db)
+	if no image uploaded, default image else uploaded image
+	include 'upload_image.php';
+	include 'save_record.php';
+	a href "plants.php" cancel
+	include 'footer.php';
+
+
+plants_record
+	include 'config.php';
+	$title
+	include 'header.php';
+	include 'nav.php';
+	$specific record details
+	a href "edit_plant_record.php" edit
+	a href "delete_plant_record.php" remove
+		delete prompt js
+	individual record photo or default image
+	a href "plants.php" where to find
+		(plant_map.js)
+	include 'footer.php';
+	
+	
+	
+	
+edit_record
+	include 'config.php';
+	$title
+	include 'header.php';
+	include 'nav.php';
+	include 'breadcrumbs.php';
+	$individual record
+	a href "edit_plant_record.php" edit
+	a href "delete_plant_record.php" remove
+	$individual record photo
+	a href "plants.php" where to find
+		(plant_map.js)
+	include 'footer.php';
+	
+
+
+	
+	
+	
+
+
