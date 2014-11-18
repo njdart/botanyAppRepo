@@ -1,0 +1,91 @@
+Detailed Design
+Sequence Diagram
+
+Significant Algorithms 
+In this section, psuedocode outlines algorithms to be used in the Android system. 
+
+Algorithm 1 – Login 
+Classes used : 
+IsEmailValid 
+isPasswordValid
+
+onCreate do 
+show login page
+if user presses “Login” and IsEmailValid then
+               if isPasswordValid = true then
+		showprogress
+		addEmailsToAutoComplete
+		proceed to app page
+	else
+		show error message stating that the user has to provide a valid password
+else 
+ 	show error message stating that the user has to provide a valid email.
+
+
+Algorithm 2 – Check connection to server
+
+While App is open do
+	if User can connect to server then
+		return true
+	if User cannot connect to server then
+		return false
+
+
+
+
+
+Algorithm 3 – Grab information from server
+While App is open do
+	if checkConnection = True
+		Get Plant Name, Image, Details and abundance from server 
+	else
+		show error message stating that the user cannot access the server
+
+Algorithm 4 – Send information to server
+
+While App is open and userLogin=True do
+	if User is in add plant mode and checkConnection = True then
+		Take current GPS location
+		Display option for Plant Name                             
+		Display option for Plant Image
+		Display option for Plant Details
+ 		Display option for Plant abundance
+  		if Plant Name/Image/Detail/Abundance is invalid then
+			show message stating error
+		Else 
+			send information to database
+Else 
+ 	Take current GPS location
+		Display option for Plant Name                             
+		Display option for Plant Image
+		Display option for Plant Details
+ 		Display option for Plant abundance
+  		if Plant Name/Image/Detail/Abundance is invalid then
+			show message stating error
+Else 
+ 		store information locally 
+
+Significant Data Structures
+Specimen Class
+An object of the Specimen class will hold variables which contain data about the specimen, such as :
+Name – The name of the plant
+Abundance (Dominat, Abundant, Frequent, Occasional, Rare) – the abundance of the plant
+Scene Photo –Photo of the scene of the plant
+Specimen Photo – Photo of the Specimen
+Latitude – Approximate latitude of specimen 
+Longitude – Approximate longitude of specimen 
+
+User Class
+An object of the User class will hold variables which contain data about the user such as : 
+
+User Forename – First name of the user
+User Lastname – Last name of the user
+User Phone Number – Phone number of user, formatted accordingly (eg 07…)
+User Email – Email of the user
+
+Visit Class
+An object of the Visit class will hold variable which contain data about the visit such as:
+
+Visit Date – Date the user logged in
+Visit time – Time the user logged in
+Specimen – List of all specimens entered so far
