@@ -1,3 +1,73 @@
+%%% Document Author: J Moss
+%%% Parts in LaTeX: Nicholas Dart
+%%% Other Content: See authors list
+%%% Document Last edit: 28.10.2014
+
+\documentclass[11pt, article]{article}
+\usepackage{a4wide}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{tabu}
+\usepackage{textcomp}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{listings} 
+
+%%%%%%
+%% Variables for version and release status
+%% useage: \version
+%%%%%%
+\newcommand\version{0.1}
+\newcommand\release{Pre-Release}
+\newcommand\titleText{Change Me}
+\newcommand\reference{SE\_NO2\_MAN\_01}
+
+%%%%%%
+%% Alias
+%%%%%%
+\newcommand{\sectionbreak}{\clearpage} 	%% Allways start a section on a new page
+
+\title{ \huge CS221 Group Project \\ \Large \titleText}
+\author{
+	\vspace{100pt}
+	\begin{tabular}{ r || l }
+		Project Team 	& jcm14, acb12, mta2, wia3, \\
+						& nid21, msh4, jao14, mip34, \\
+	 					& set12, daw54, anw46 \\
+						& \\
+		Version			& \version \\
+		Status			& \release \\
+		Date Published  & \today \\
+		Reference 		& \reference \\
+		Department		& Computer Science \\
+		Address			& Aberystwyth University \\
+						& Penglais Campas \\
+						& Ceredigion \\
+						& SY23 3DB \\
+	\end{tabular} \\
+	Copyright \textcopyright Aberystwyth University 2014
+	%get rid of the date on the titlepage
+	\date{}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Version \version (\release)}
+\rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\lfoot{Aberystwyth University - Computer Science}
+
+\begin{document}
+	\setcounter{page}{1}
+
+	\maketitle
+
+	\tableofcontents
+
+	\section{Foo}
+		%%\input{foo/bar.tex}
 AddRecord
 Headers required: 
 
@@ -84,3 +154,11 @@ Statuses:
 
 	400 Bad Request
 	500 Internal Server Error
+
+	\section{Document History}
+		\begin{tabular}{l || p{10cm} | l | r}
+			Version & Edit & Date & Persons \\ \hline 
+			0.1 & Initial Version & January 1 1970 & anon00 \\
+		\end{tabular}
+
+\end{document}
