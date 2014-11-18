@@ -70,12 +70,12 @@
 		%%\input{foo/bar.tex}
 AddRecord
 Headers required: 
-
+    none
 POST arguments:
-
+    record : Record
 Statuses:
 	200 OK:
-		records: array of Record (JSON)
+		record ID : Integer
 	400 Bad Request
 	500 Internal Server Error
 
@@ -84,8 +84,7 @@ RemoveRecord
 Headers required: 
 	Authorization
 POST Arguments:
-	id : int
-	record : Record
+	record ID : Integer
 Statuses:
 	200 OK : no data
 	400 Bad Request
@@ -95,13 +94,12 @@ Statuses:
 
 ModifyRecord
 Headers required:
-	Authoization
+	Authorization
 POST Arguments:
-	id : int
+	record ID : Integer
 	record : Record
 Statuses:
-	200 OK : 
-		records: array of Record (JSON)
+	200 OK : no data
 	400 Bad Request
 	401 Unauthorized
 	500 Internal Server Error
@@ -109,49 +107,53 @@ Statuses:
 
 GetRecord
 Headers required: 
-
+    none
 POST Arguments:
-	id : int
-	record : Record
+	record ID : Integer
 Statuses:
-	200 OK : no data
+	200 OK :
+        record : Record
 	400 Bad Request
-	401 Unauthorized
 	500 Internal Server Error
 
 
 GetRecords
 Headers Required:
-	
+	none
 POST Arguments:
-	id : int
-	record : Record
+    maxResultCount : Integer
+    resultStartOffset : Integer?
+	speciesFilter : String?
+    authorFilter : String?
+    commentFilter : String?
+    locationNameFilter : String?
+    locationLatitudeProximityFilter : Float?
+    locationLongitudeProximityFilter : Float?
 Statuses: 
-	200 OK : no data
+	200 OK : array of Record
 	400 Bad Request
-	401 Unauthorized
 	500 Internal Server Error
 
 AddResource
 Headers required: 
-	ID (?)
-POST Arguements:
-	resource : Resource
+    none
+POST Arguments:
+	resource : OctetStream
 Statuses:
 	200 OK :
-		resource : array of resources
+		resource ID : Integer
 	400 Bad Request
 	500 Internal Server Error
 
 
 GetResource
 Headers required:
-
+    none
 POST Arguments:
-	id : int
+	resourceID : Integer
 Statuses:
 	200 OK : 
-
+        resource data : OctetStream
 	400 Bad Request
 	500 Internal Server Error
 
