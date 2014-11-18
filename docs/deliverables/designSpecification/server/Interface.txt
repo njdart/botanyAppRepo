@@ -84,7 +84,7 @@ RemoveRecord
 Headers required: 
 	Authorization
 POST Arguments:
-	record ID : Integer
+	recordID : Integer
 Statuses:
 	200 OK : no data
 	400 Bad Request
@@ -96,7 +96,7 @@ ModifyRecord
 Headers required:
 	Authorization
 POST Arguments:
-	record ID : Integer
+	recordID : Integer
 	record : Record
 Statuses:
 	200 OK : no data
@@ -109,7 +109,7 @@ GetRecord
 Headers required: 
     none
 POST Arguments:
-	record ID : Integer
+	recordID : Integer
 Statuses:
 	200 OK :
         record : Record
