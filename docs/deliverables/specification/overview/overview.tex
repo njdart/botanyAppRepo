@@ -3,13 +3,13 @@
 		The client placed a specific request for the application to run on Android devices. As yet no response has been received for a minimum version, so in keeping with more up to date releases, we will use Android API 15 (Android 4.0.3 which encompasses the vast majority of new smart phones)
 
 	\subsubsection{LAMP Server}
-		We will be using a LAMP Server (Linux, Apache2, MySQL, and PHP) ready server. This will provide us with the tools ready to develop the website, and interact with the database. PHP was chosen to handle the server side processing of received data due to it being free and wide availability. The language is also covered in other modules during the project time line, meaning it will be fresh in the minds of the web team. MySQL is the most commonly used database software on web servers and is availble on the university servers. 
+		We will be using a LAMP (Linux, Apache2, MySQL, and PHP) ready server. This will provide us with the tools ready to develop the website, and interact with the database. PHP was chosen to handle the server side processing of received data due to it being free and wide availability. The language is also covered in other modules during the project time line, meaning it will be fresh in the minds of the web team. MySQL is the most commonly used database software on web servers and is available on the university servers. 
 
 \newpage
 \subsection{High Level Architecture}
 	The system consists of the following high-level elements:
 
-	\subsubsection{Android Application (RPSRrec)}
+\subsubsection{Android Application (RPSRrec)}
 
 	The application fulfils the following roles:\\
 	\begin{tabular}{r | p{15cm}}
@@ -34,6 +34,8 @@
 		FR6 & Upload the collected recordings to the remote database server whenever a network connection becomes available \\
     \end{tabular}
     
+    The underlying platform of execution for this subsystem is the Android operating system.
+    
 \subsubsection{Website (RPSRview)}
     The website fulfills the following roles:\\    
     	\begin{tabular}{r | p{15cm}}
@@ -41,14 +43,19 @@
         	FR8 & Enable maintenance of the recordings database \\
     		FR9 & Browse and search uploaded recordings \\
         \end{tabular}
+    The platform of execution of this subsystem will be the LAMP stack, making use of PHP as a scripting language and Apache2 as a HTTP server.
         
 \subsubsection{Server (RPSRsrv)}
+    The server plays an essential middle-man role in the system, providing persistent storage for RPSRview and RPSRrec,
+    and allows for exchange of data (recordings) between the two. 
+
     The server fulfills the following roles:\\
     \begin{tabular}{r | p{15cm}}
         FR7 & Provide a public Web API to be used by the website and the mobile application, enabling safe HTTP access to stored recordings \\
         FR7 & Provide a MySQL database for the Web API to use as a data store \\
         FR7 & Ensure data integrity and security \\
 	\end{tabular}
+    The platform of execution of this subsystem will be the LAMP stack. PHP, the language, and Apache2, the HTTP server, will support the Web API, while MySQL will provide the database back-end.
 
 \subsubsection{External Interface Requirements}
 	\begin{tabular}{r | p{15cm}}
