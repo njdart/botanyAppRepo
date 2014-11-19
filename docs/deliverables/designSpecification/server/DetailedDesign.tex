@@ -1,6 +1,6 @@
 \subsection{Interface}
 These are the commands that the web API will be using to maintain the database and receive commands.
-
+\begin {verbatim}
 AddRecord
 Headers required: 
     none
@@ -57,11 +57,14 @@ POST Arguments:
     maxResultCount : Integer
     resultStartOffset : Integer?
 	speciesFilter : String?
-    authorFilter : String?
+    abundanceFilter : Integer?
+    userNameFilter : String?
+    fullNameFilter : String?
     commentFilter : String?
     locationNameFilter : String?
     locationLatitudeProximityFilter : Float?
     locationLongitudeProximityFilter : Float?
+    locationProximityRadius : Float?
 Statuses: 
 	200 OK : array of Record
 	400 Bad Request
@@ -89,6 +92,7 @@ Statuses:
         resource data : OctetStream
 	400 Bad Request
 	500 Internal Server Error
+\end {verbatim}
 
 \subsection{Detailed design}
 \subsubsection{Diagrams}
