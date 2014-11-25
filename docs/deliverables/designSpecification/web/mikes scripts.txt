@@ -1,0 +1,22 @@
+Index.php:
+The index script will be the home page for the web site, allowing users to read about the Botany Project, navigate the web site, search for a plant and download the app. There will be a header at the top of the page containing the Botany Group Project title and an image of the logo. The banner will be customised using CSS. Underneath there will be a navigation bar using the nav.php script. Below this there will be two text boxes which will be achieved using the echo function and will be customised to have a white background using CSS. Between the texts there will be a search bar controlled by simple_search.php. At the bottom the footer.php will be included. A background image will be used for the homepage.
+
+Header.php:
+The header will be responsible for creating a session for the user. The header script will be responsible used to declare the doctype and meta tags such as description, keywords, content type, CSS and font links, validation.js and title. 
+
+footer.php:
+The footer will contain the site map link allowing users to access all the pages of the website. There will also be an image of the logo in the centre of footer.
+
+nav.php:
+The navigation bar provides an easy reference for the contents of the web site and enables the user to navigate the web site conveniently. This will be achieved by attaching a div class to the navigation text with a href attribute, linking it to the corresponding pages. CSS will be used to style the navigation bar and links accordingly with the Web user interface design. Underneath there will be breadcrumbs included using the breadcrumbs script.
+
+Edit/ add record:
+Upon selecting an individual plant from the database, the plant along with its attributes and an image will be displayed by pulling it from the database using SQL. The user can find where to locate the plant by clicking the ‘Where to find’ button which will run the plant_map.js script, loading Google maps javascript API. The user can then edit the plant’s information by clicking the edit button supplied, running the edit_plant_record.php script, loading the Edit Record page. This page will use the config.php script to form a database connection that will insert a table, ready to retrieve and print the selected fields of the plant chosen by the user. This will be achieved using pg_query; selecting the required fields and echoing a table. A while loop will be used to read and  pull data from the database. Users can then edit plant information by filling in the form with the attributes assigned to a plant. The form is to be validated using javascript, identifying the required fields. If a required field is left blank, an alert will pop up requesting the user to fill the field in. The image can also be updated by clicking the supplied ‘Upload Image’ submit button, running the upload_image.php script. Once the form has been edited by the user, they can then save the record using the Save button linked to the save_record.php script. This will update the database with the new edited record. Users will also be given the option to add new plant records to the database. This page will be the same as the Edit Record page but with a blank form for the user to fill in.
+
+delete record:
+Users are given the option to delete a specific plant record. A ‘remove’ button linked to the delete_plant_record.php script will be supplied to do this.
+
+delete confirmation pop up:
+If a user clicks the remove button, a javascript alert pop up will be displayed confirming the deletion of a record. This has been included to avoid accidental deletions.
+
+
