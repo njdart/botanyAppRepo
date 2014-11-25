@@ -1,0 +1,147 @@
+@@ -1,3 +1,95 @@
+\subsection{Interface}
+These are the server side scripts that will be used across the website.
+
+Constants	
+Header
+	session_start();
+	Doctype
+	meta tags
+		description
+		Keywords
+		authir
+		content type
+		CSS links
+		Font link
+		validation.js
+		\$title
+	Header/Div
+		Logo
+	/div
+
+Nav
+	Nav
+	include'breadcrumbs';
+	
+Footer 
+	Site map link 
+	Icon
+	
+	
+config.php
+	\$host = \"\";
+	\$port \= \"\";
+	\$user \= \"\";
+	\$password \= \"\";
+	\$dbname \= "";
+	mysql \= new mysql(\$...)
+	die statements
+
+	
+Index
+	\$title
+	include 'header.php';
+	include 'nav.php';
+	text
+	include 'simple_search.php';
+	text
+		app link
+	include 'FOOTER';
+	
+plants
+	include 'config.php';
+	\$title
+	include 'header.php';
+	include 'nav.php';
+	add_plant_record link
+	include 'advanced_search.php';
+	include 'plant_db_declare.php';
+	include 'plant_sorting.php';
+	include 'footer.php';
+
+add_plants_record
+	include 'config.php';
+	\$title
+	include 'header.php';
+	include 'nav.php';
+	form(input)  INSERT(SQL - add the form input into db)
+	if no image uploaded, default image else uploaded image
+	include 'upload_image.php';
+	include 'save_record.php';
+	a href "plants.php" cancel
+	include 'footer.php';
+
+
+plants_record
+	include 'config.php';
+	\$title
+	include 'header.php';
+	include 'nav.php';
+	\$specific record details
+	a href "edit_plant_record.php" edit
+	a href "delete_plant_record.php" remove
+		delete prompt js
+	individual record photo or default image
+	a href "plants.php" where to find
+		(plant_map.js)
+	include 'footer.php';
+	
+	
+	
+	
+edit_record
+	include 'config.php';
+	\$title
+	include 'header.php';
+	include 'nav.php';
+	include 'breadcrumbs.php';
+	\$individual record
+	a href "edit_plant_record.php" edit
+	a href "delete_plant_record.php" remove
+	\$individual record photo
+	a href "plants.php" where to find
+		(plant_map.js)
+	include 'footer.php';
+	
+\subsection{Detailed design}
+
+timeout.php
+Time out is essentially a script that will unset a specific session when no activity has taken place, display and alert message, which once confirmed will send the user back to the plant list page. This will mainly be included when adding or editing records, as if the computer is left alone, then anyone could distort the record information.
+
+plants.php
+The plants page is where the list of plants are going to be displayed. The page will require the connection to the database through the config file, and it must include the html pages header.php, nav.php and the footer.php files.  The page will also have its own heading that will be created by a variable, will be declared above the header.php include, where the header will have $title so it can be adjusted easily. The main content area below the navigation, which is then split into two. The first section is where the user will be able to sort the database records to their specific criteria. This sorting script will be placed in a separate file. The other half, is the main part of the page. In this section, the user can select a link that will allow them to create a new plant record and store it in the database. Under that, there is an advanced search, which will display records that comes under the criteria of their search input. This will also be in a separate script. This search will allow the user to not have to scroll through the long list of records. The plants are split into their scientific name and their common name. Once they are clicked, then they are taken to the plants individual record. The database itself is going to be called and declared from a separate script, where it will then place them into a table, which will present the plant lists.
+
+db_declare.php
+This script is basically where and how the plant list will be created and how it will be represented. Firstly, the table will have to be created, which will have a div attached to it. Then the scientific and common headings will be created. Once this has been created, an SQL statement will be used, making a handle onto the database connection, where it will select all the fields by using.  We can then use the handle from the SQL statement to write out the database, using "while($row = pg_fetch_array ($res))" and then defining the cells by calling them by $row['dbcolumn'] inside of td tags.  Each of these rows will be links to the page that has their information on. The table is then closed. The script does require config.php, but this is already included in plants.php
+
+Plant location
+When showing the specific location of the plant, we will be using the google maps JavaScript API. To use this we will have to gain an API key from google;once we have access, we must activate the Google Maps API v3. To get the API key, we must give it some information about the website, such as the web address. Because we will be testing it on another server, we will register it to that site first, which we can change to the server we will be using it on later on at the final part of the project.
+Implementing the code must start with giving the script source, included into the HTML head, where the API key must be inserted.  Then a new JavaScript script will be created, stating an initialize function. This will be made up of a variable mapProp, where it will specify all of the options for the map, such as where to center the map, how close are we going to zoom in on the location and what type of map is it going to be, such as Roadmap and Terrain, which we will be using HYBRID, as it allows to see a combination of the roads and the scenery, which may be useful to a botanist trying to find the specific plant. In these options however, is the lat/lang input, which will locate where the plant is. Because this depends on the location of the plant that will be displayed, we will have to use a variable that will get the latitude and longitude from the record and place it in the variable so it can there be used to display its location. After these options have been defined, the mapProp variable is closed, and the map is then created through creating a new map variable, which will assign itself to a div depending on its ID. The script must then be closed. To display this, in the body, there must be a div with the same ID stated in the script. 
+
+config.php
+config will open a link to the mysql database at the start of each new session, all changes to records and searches are reliant on this script.
+$conn = mysql_connect("host=<localhost> 
+port=3306 dbname=<nameofdatabase> 
+user=<uid> password=<password>");
+The script will also include a few lines closing the link to the database at the end of the session as not to produce more connections to the database than needed.
+
+plant_sorting.php
+The plant data can be sorted in multiple different ways there will be a default sort using SORT_REGULAR however the options of SORT_STRING and SORT_NUMERIC will also be available as required. The script will provide the user with an option of how they wish to sort the data.
+
+simple_search.php
+The simple search script will search the database for a string matching the users input, all entries in the database containing that string will be returned. It will require a connection to the database from config.php, if there is no connection then the script will return an error message to notify the user of a problem with the connection to the database.
+
+advanced_search.php
+The script for advanced search will allow for searches by string, ID, data type, location and user. The user should select their search type before inputting, the results shall be returned unless no result is found or there is an issue with the connection to the database in which case an error message shall be returned to the user. 
+
+edit_plant_record.php
+This script will take data input from the client side to form an update in an object oriented way. The update will set the field to be updated to the new data. The script will query if the connection to the server is valid before committing the changes, it will also return a confirmation to the user that the record has been updated or that there was a problem connecting to the server (they have timed out) so they can try again.
+
+delete_plant_record.php
+The script for deleting a record will be very straight forward, using an object oriented approach the script will request for the record to be deleted by using its ID. Much like the edit this script will return a confirmation to the user that the record has successfully been deleted or that there was a problem with the connection to the server.
+
+upload_image.php
+This script should prompt the user to choose an image file to upload first, when an image file has been selected an upload function will collect the data about the file where it can be validated to check it matches the requirements we have set (eg: file type and size). The image file, if compatible, will be uploaded and the script will return a success message, otherwise a message will be returned to the user explaining which parameter is incorrect or if there is an issue with the connection to the server.
+
+regex validation
+validation will be done on the client side using javascript and regular expressions. Doing this allows us to use an onchange method when the user is inputting data with fixed parameters, such as what characters can be used, without putting extra load on the server.
