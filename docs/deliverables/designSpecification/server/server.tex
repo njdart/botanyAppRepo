@@ -1,164 +1,158 @@
 \subsection{Interface}
-These are the commands that the web API will be using to maintain the database and receive commands.
-\begin {verbatim}
-AddRecord
-Headers required: 
-    none
-POST arguments:
-    record : Record
-Statuses:
-	200 OK:
-		record ID : Integer
-	400 Bad Request
-	500 Internal Server Error
+    These are the commands that the web API will be using to maintain the database and receive commands.
+    \begin{verbatim}
+        AddRecord
+        Headers required: 
+            none
+        POST arguments:
+            record : Record
+        Statuses:
+        	200 OK:
+        		record ID : Integer
+        	400 Bad Request
+        	500 Internal Server Error
 
 
-RemoveRecord
-Headers required: 
-	Authorization
-POST Arguments:
-	recordID : Integer
-Statuses:
-	200 OK : no data
-	400 Bad Request
-	401 Unauthorized
-	500 Internal Server Error
+        RemoveRecord
+        Headers required: 
+        	Authorization
+        POST Arguments:
+        	recordID : Integer
+        Statuses:
+        	200 OK : no data
+        	400 Bad Request
+        	401 Unauthorized
+        	500 Internal Server Error
 
 
-ModifyRecord
-Headers required:
-	Authorization
-POST Arguments:
-	recordID : Integer
-	record : Record
-Statuses:
-	200 OK : no data
-	400 Bad Request
-	401 Unauthorized
-	500 Internal Server Error
+        ModifyRecord
+        Headers required:
+        	Authorization
+        POST Arguments:
+        	recordID : Integer
+        	record : Record
+        Statuses:
+        	200 OK : no data
+        	400 Bad Request
+        	401 Unauthorized
+        	500 Internal Server Error
 
 
-GetRecord
-Headers required: 
-    none
-POST Arguments:
-	recordID : Integer
-Statuses:
-	200 OK :
-        record : Record
-	400 Bad Request
-	500 Internal Server Error
+        GetRecord
+        Headers required: 
+            none
+        POST Arguments:
+        	recordID : Integer
+        Statuses:
+        	200 OK :
+                record : Record
+        	400 Bad Request
+        	500 Internal Server Error
 
 
-GetRecords
-Headers Required:
-	none
-POST Arguments:
-    maxResultCount : Integer
-    resultStartOffset : Integer?
-	speciesFilter : String?
-    abundanceFilter : Integer?
-    userNameFilter : String?
-    fullNameFilter : String?
-    commentFilter : String?
-    locationNameFilter : String?
-    locationLatitudeProximityFilter : Float?
-    locationLongitudeProximityFilter : Float?
-    locationProximityRadius : Float?
-Statuses: 
-	200 OK : array of Record
-	400 Bad Request
-	500 Internal Server Error
+        GetRecords
+        Headers Required:
+        	none
+        POST Arguments:
+            maxResultCount : Integer
+            resultStartOffset : Integer?
+        	speciesFilter : String?
+            abundanceFilter : Integer?
+            userNameFilter : String?
+            fullNameFilter : String?
+            commentFilter : String?
+            locationNameFilter : String?
+            locationLatitudeProximityFilter : Float?
+            locationLongitudeProximityFilter : Float?
+            locationProximityRadius : Float?
+        Statuses: 
+        	200 OK : array of Record
+        	400 Bad Request
+        	500 Internal Server Error
 
-AddResource
-Headers required: 
-    none
-POST Arguments:
-	resource : OctetStream
-Statuses:
-	200 OK :
-		resource ID : Integer
-	400 Bad Request
-	500 Internal Server Error
+        AddResource
+        Headers required: 
+            none
+        POST Arguments:
+        	resource : OctetStream
+        Statuses:
+        	200 OK :
+        		resource ID : Integer
+        	400 Bad Request
+        	500 Internal Server Error
 
 
-GetResource
-Headers required:
-    none
-POST Arguments:
-	resourceID : Integer
-Statuses:
-	200 OK : 
-        resource data : OctetStream
-	400 Bad Request
-	500 Internal Server Error
-\end {verbatim}
+        GetResource
+        Headers required:
+            none
+        POST Arguments:
+        	resourceID : Integer
+        Statuses:
+        	200 OK : 
+                resource data : OctetStream
+        	400 Bad Request
+        	500 Internal Server Error
+    \end{verbatim}
 
 \subsection{Detailed design}
-\subsubsection{Diagrams}
-\begin{figure}
-\centering
-\includegraphics[scale=0.75]{server/SequenceDiagram-AddRecord.svg}
-\caption{Sequence diagram: adding a record through the web API}
-\label{fig:addRecordSequenceDiagram}
-\end{figure}
+    \subsubsection{Diagrams}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.75]{server/working/SequenceDiagram-AddRecord.png}
+            \caption{Sequence diagram: adding a record through the web API}
+            \label{fig:addRecordSequenceDiagram}
+        \end{figure}
 
+    \subsubsection{Significant data structures}
 
+        The web API is going to make use of the Record and Specimen data structures, which will be exchanged between the server and its clients (the Android application and the website). They will be represented in a JSON format, which is readily available for use in PHP, JavaScript, and Android. Data types, where specified, are JSON data types. 
 
-\subsubsection{Significant data structures}
+        The structure of a Record is as follows:
+        \begin{verbatim}
+        Record : Object
+            UserName : String
+            UserPhone : String
+            LocationName : String 
+            Specimens : Array of Specimen
+        \end{verbatim}
 
-The web API is going to make use of the Record and Specimen data structures,
-which will be exchanged between the server and its clients (the Android
-application and the website). They will be represented in a JSON format, which 
-is readily available for use in PHP, JavaScript, and Android. Data types, where
-specified, are JSON data types.
+        The structure of a Specimen is as follows:
+        \begin{verbatim}
+        Specimen : Object
+            SpeciesName : String
+            LocationLatitude : Number
+            LocationLongtitude : Number
+            Abundance : Number
+            Comment : String
+            ScenePhoto : String (ID of a resource on the server)
+            SpecimenPhoto : String (ID of a resource on the server)
+        \end{verbatim}
 
-The structure of a Record is as follows:
-\begin {verbatim}
-Record : Object
-    UserName : String
-    UserPhone : String
-    LocationName : String 
-    Specimens : Array of Specimen
-\end {verbatim}
+        The web API is going to use a relational database as a data store.
+        The database tables are as follows:
 
-The structure of a Specimen is as follows:
-\begin {verbatim}
-Specimen : Object
-    SpeciesName : String
-    LocationLatitude : Number
-    LocationLongtitude : Number
-    Abundance : Number
-    Comment : String
-    ScenePhoto : String (ID of a resource on the server)
-    SpecimenPhoto : String (ID of a resource on the server)
-\end {verbatim}
-
-The web API is going to use a relational database as a data store.
-The database tables are as follows:
-
-\begin {verbatim}
-Users
-    UserId : INT auto-increment PK
-    UserName : VARCHAR(20) not-null
-    UserFullName : VARCHAR(50)
-    UserPhone : VARCHAR(20)
-    UserEmail : VARCHAR(50)
-    UserPassword : BINARY(20)
-    
-Records
-    RecordId : INT auto-increment PK
-    UserId : INT not-null
-    LocationName : VARCHAR(50)
-    
-Specimens
-    SpecimenId : INT auto-increment PK
-    RecordId : INT not-null
-    SpeciesName : VARCHAR(255) not-null
-    Latitude : FLOAT(10,6)
-    Longitude : FLOAT(10,6)
-    Abundance : INT
-    Comment : TEXT
-    ScenePhoto : INT
-    SpecimenPhoto : INT   
-\end {verbatim}
+        \begin{verbatim}
+        Users
+            UserId : INT auto-increment PK
+            UserName : VARCHAR(20) not-null
+            UserFullName : VARCHAR(50)
+            UserPhone : VARCHAR(20)
+            UserEmail : VARCHAR(50)
+            UserPassword : BINARY(20)
+            
+        Records
+            RecordId : INT auto-increment PK
+            UserId : INT not-null
+            LocationName : VARCHAR(50)
+            
+        Specimens
+            SpecimenId : INT auto-increment PK
+            RecordId : INT not-null
+            SpeciesName : VARCHAR(255) not-null
+            Latitude : FLOAT(10,6)
+            Longitude : FLOAT(10,6)
+            Abundance : INT
+            Comment : TEXT
+            ScenePhoto : INT
+            SpecimenPhoto : INT   
+        \end{verbatim}
