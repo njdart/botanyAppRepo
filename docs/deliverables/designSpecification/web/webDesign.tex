@@ -1,116 +1,141 @@
 \subsection{Interface}
 These are the server side scripts that will be used across the website.
 
-Constants	
-Header
-	session\_start();
-	Doctype
-	meta tags
-		description
-		Keywords
-		authir
-		content type
-		CSS links
-		Font link
-		validation.js
-		\$title
-	Header/Div
-		Logo
-	/div
+\begin{itemize}
+	\item Constants	
+	\item Header
+	\begin{itemize}
+		\item session\_start();
+		\item Doctype
+		\item meta tags
+		\begin{itemize}
+			\item description
+			\item Keywords
+			\item authir
+			\item content type
+			\item CSS links
+			\item Font link
+			\item validation.js
+			\item \$title
+		\end{itemize}
+		\item Header/Div
+		\begin{itemize}
+			\item Logo
+		\end{itemize}
+	\end{itemize}
 
-Nav
-	Nav
-	include`breadcrumbs';
-	
-Footer 
-	Site map link 
-	Icon
-	
-	
-config.php
-	\$host = `';
-	\$port = `';
-	\$user = `';
-	\$password = `';
-	\$dbname = `';
-	mysql = new mysql(\$...)
-	die statements
+	\item Nav
+	\begin{itemize}
+		\item Nav
+		\item include`breadcrumbs';
+	\end{itemize}
+	\item Footer 
+	\begin{itemize}
+		\item Site map link 
+		\item Icon
+	\end{itemize}
+		
+	\item config.php
+	\begin{itemize}
+		%%\$host = \"\";
+		%%\$port \= \"\";
+		%%\$user \= \"\";
+		%%\$password \= \"\";
+		%%\$dbname \= "";
+		%%mysql \= new mysql(\$...)
+		%%die statements
+		\item ADDRESS OF SERVER
+		\item ADMIN PASS???
+	\end{itemize}
 
-	
-Index
-	\$title
-	include `header.php';
-	include `nav.php';
-	text
-	include `simple\_search.php';
-	text
-		app link
-	include `FOOTER';
-	
-plants
-	include `config.php';
-	\$title
-	include `header.php';
-	include `nav.php';
-	add\_plant\_record link
-	include `advanced\_search.php';
-	include `plant\_db\_declare.php';
-	include `plant\_sorting.php';
-	include `footer.php';
+	\item Index
+	\begin{itemize}
+		\item \$title
+		\item include `header.php';
+		\item include `nav.php';
+		\item text
+		\item include `simple\_search.php';
+		\item text
+		\begin{itemize}
+			\item app link
+		\end{itemize}
+		\item include `FOOTER';
+	\end{itemize}	
 
-add\_plants\_record
-	include `config.php';
-	\$title
-	include `header.php';
-	include `nav.php';
-	form(input)  INSERT(SQL - add the form input into db)
-	if no image uploaded, default image else uploaded image
-	include `upload\_image.php';
-	include `save\_record.php';
-	a href `plants.php' cancel
-	include `footer.php';
+	\item plants
+	\begin{itemize}
+		\item include `config.php';
+		\item \$title
+		\item include `header.php';
+		\item include `nav.php';
+		\item add\_plant\_record link
+		\item include `advanced\_search.php';
+		\item include `plant\_db\_declare.php';
+		\item include `plant\_sorting.php';
+		\item include `footer.php';
+	\end{itemize}
+	\item add\_plants\_record
+	\begin{itemize}
+		\item include `config.php';
+		\item \$title
+		\item include `header.php';
+		\item include `nav.php';
+		\item form(input)  INSERT(SQL - add the form input into db)
+		\item if no image uploaded, default image else uploaded image
+		\item include `upload\_image.php';
+		\item include `save\_record.php';
+		\item a href `plants.php' cancel
+		\item include `footer.php';
+	\end{itemize}
+	
+	\item plants\_record
+	\begin{itemize}
+		\item include `config.php';
+		\item \$title
+		\item include `header.php';
+		\item include `nav.php';
+		\item \$specific record details
+		\item a href `edit\_plant\_record.php' edit
+		\item a href `delete\_plant\_record.php' remove
+		\begin{itemize}
+			\item delete prompt js
+		\end{itemize}
+		\item individual record photo or default image
+		\item a href `plants.php' where to find
+		\begin{itemize}
+			\item (plant\_map.js)
+		\end{itemize}
+		\item include `footer.php';
+	\end{itemize}
 
-
-plants\_record
-	include `config.php';
-	\$title
-	include `header.php';
-	include `nav.php';
-	\$specific record details
-	a href `edit\_plant\_record.php' edit
-	a href `delete\_plant\_record.php' remove
-		delete prompt js
-	individual record photo or default image
-	a href `plants.php' where to find
-		(plant\_map.js)
-	include `footer.php';
-	
-	
-	
-	
-edit\_record
-	include `config.php';
-	\$title
-	include `header.php';
-	include `nav.php';
-	include `breadcrumbs.php';
-	\$individual record
-	a href `edit\_plant\_record.php' edit
-	a href `delete\_plant\_record.php' remove
-	\$individual record photo
-	a href `plants.php' where to find
-		(plant\_map.js)
-	include `footer.php';
-	
+	\item edit\_record
+	\begin{itemize}
+		\item include `config.php';
+		\item \$title
+		\item include `header.php';
+		\item include `nav.php';
+		\item include `breadcrumbs.php';
+		\item \$individual record
+		\item a href `edit\_plant\_record.php' edit
+		\item a href `delete\_plant\_record.php' remove
+		\item \$individual record photo
+		\item a href `plants.php' where to find
+		\begin{itemize}
+			\item (plant\_map.js)
+		\end{itemize}
+		\item include `footer.php';
+	\end{itemize}
+\end{itemize}
+		
 \subsection{Detailed design}
 
-timeout.php
-Time out is essentially a script that will unset a specific session when no activity has taken place, display and alert message, which once confirmed will send the user back to the plant list page. This will mainly be included when adding or editing records, as if the computer is left alone, then anyone could distort the record information.
+	\subsubsection{timeout.php}
+		Time out is essentially a script that will unset a specific session when no activity has taken place, display and alert message, which once confirmed will send the user back to the plant list page. This will mainly be included when adding or editing records, as if the computer is left alone, then anyone could distort the record information.
 
-plants.php
-The plants page is where the list of plants are going to be displayed. The page will require the connection to the database through the config file, and it must include the html pages header.php, nav.php and the footer.php files.  The page will also have its own heading that will be created by a variable, will be declared above the header.php include, where the header will have \$title so it can be adjusted easily. The main content area below the navigation, which is then split into two. The first section is where the user will be able to sort the database records to their specific criteria. This sorting script will be placed in a separate file. The other half, is the main part of the page. In this section, the user can select a link that will allow them to create a new plant record and store it in the database. Under that, there is an advanced search, which will display records that comes under the criteria of their search input. This will also be in a separate script. This search will allow the user to not have to scroll through the long list of records. The plants are split into their scientific name and their common name. Once they are clicked, then they are taken to the plants individual record. The database itself is going to be called and declared from a separate script, where it will then place them into a table, which will present the plant lists.
+	\subsubsection{plants.php}
+		The plants page is where the list of plants are going to be displayed. The page will require the connection to the database through the config file, and it must include the html pages header.php, nav.php and the footer.php files.  The page will also have its own heading that will be created by a variable, will be declared above the header.php include, where the header will have \$title so it can be adjusted easily. The main content area below the navigation, which is then split into two. The first section is where the user will be able to sort the database records to their specific criteria. This sorting script will be placed in a separate file. The other half, is the main part of the page. In this section, the user can select a link that will allow them to create a new plant record and store it in the database. Under that, there is an advanced search, which will display records that comes under the criteria of their search input. This will also be in a separate script. This search will allow the user to not have to scroll through the long list of records. The plants are split into their scientific name and their common name. Once they are clicked, then they are taken to the plants individual record. The database itself is going to be called and declared from a separate script, where it will then place them into a table, which will present the plant lists.
 
-db\_declare.php
+\subsubsection{db\_declare.php}
 This script is basically where and how the plant list will be created and how it will be represented. Firstly, the table will have to be created, which will have a div attached to it. Then the scientific and common headings will be created. Once this has been created, an SQL statement will be used, making a handle onto the database connection, where it will select all the fields by using.  We can then use the handle from the SQL statement to write out the database, using `while(\$row = pg\_fetch\_array (\$res))' and then defining the cells by calling them by \$row[`dbcolumn'] inside of td tags.  Each of these rows will be links to the page that has their information on. The table is then closed. The script does require config.php, but this is already included in plants.php
 
 Plant location
