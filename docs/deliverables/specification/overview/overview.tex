@@ -3,8 +3,13 @@
 		The client placed a specific request for the application to run on Android devices. As yet no response has been received for a minimum version, so in keeping with more up to date releases, we will use Android API 15 (Android 4.0.3 which encompasses the vast majority of new smart phones)
 
 	\subsubsection{LAMP Server}
-		We will be using a LAMP (Linux, Apache2, MySQL, and PHP) ready server. This will provide us with the tools ready to develop the website, and interact with the database. PHP was chosen to handle the server side processing of received data due to it being free and wide availability. The language is also covered in other modules during the project time line, meaning it will be fresh in the minds of the web team. MySQL is the most commonly used database software on web servers and is available on the university servers. 
+		We will be using a LAMP (Linux, Apache2, MySQL, and PHP) ready server. Linux will be version Gentoo 3.12, MySQL will be version 14.14, PHP will be version 5.5.18. This will provide us with the tools ready to develop the website, and interact with the database. PHP was chosen to handle the server side processing of received data due to it being free and wide availability. The language is also covered in other modules during the project time line, meaning it will be fresh in the minds of the web team. MySQL is the most commonly used database software on web servers and is available on the university servers. 
 
+References for Version: 
+Linux: https://www.gentoo.org/
+Apache2: http://httpd.apache.org/
+MySQL: http://www.mysql.com/
+PHP: http://php.net/
 \newpage
 \subsection{High Level Architecture}
 	The system consists of the following high-level elements:
@@ -22,6 +27,7 @@
 		FR4 & Take a photo using an Android device by capturing a new photo or selecting one from the device's library \\
 		FR4 & Obtain location data from the GPS unit within and Android device to include in the recording \\
 		FR4 & Allow the user to enter data for each species
+		RESTATEMENT OF FUNCTIONAL REQUIREMENTS ???
 		\begin{itemize}
 			\item Typical location
 			\item Abundance using ``DAFOR'' scale
@@ -31,6 +37,7 @@
 			\item Allow the user to enter a name of a new species if not currently available
 		\end{itemize} \\
 		FR5 & Allow the user to edit and delete local (not yet uploaded) recordings and the species data within them \\
+		FR5 & These local recordings will be stored on the device storage with SQLite until they are ready to be sent to the server. \\
 		FR6 & Upload the collected recordings to the remote database server whenever a network connection becomes available \\
     \end{tabular}
     
@@ -56,6 +63,9 @@
         FR7 & Ensure data integrity and security \\
 	\end{tabular}
     The platform of execution of this subsystem will be the LAMP stack. PHP, the language, and Apache2, the HTTP server, will support the Web API, while MySQL will provide the database back-end.
+
+\subsubsection{Interaction of Components}
+    
 
 \subsubsection{External Interface Requirements}
 	\begin{tabular}{r | p{15cm}}
@@ -90,4 +100,8 @@
 	The client stated: \\ \\
 		\indent \textit{The system will be used by naturalists who are familiar with standard computer interfaces. They are concerned with accuracy of recording and they may have to operate in difficult weather conditions and in remote locations.}\\ \\
 
-	From this we understood the users will be competent in the basic interaction with Android and Web User Interfaces. We have designed the application to have large input areas to aid in data entry when outdoors but also recognize that devices used have limited screen real estate so user interfaces should be simple and uncluttered. We have also understood the user may be entering data in areas where a real time connection to the server (RPSRsrv) is not possible so data collected should be stored until a connection can be established.
+	From this we understood the users will be competent in the basic interaction with Android and Web User Interfaces. We have designed the application to have large input areas to aid in data entry when outdoors but also recognize that devices used have limited screen real estate so user interfaces should be simple and uncluttered. We have also understood the user may be entering data in areas where a real time connection to the server (RPSRsrv) is not possible so data collected should be stored until a connection can be established.\\
+
+	The system may also be used for education purposes within a school environment and so we will also target teachers and young students. From this we understood that these users will also benefit from the above requirements since this kind of app would be used on school trips.\\
+	
+	We also believe the app could be beneficial in research and so the app must also look professional and efficient. \\
