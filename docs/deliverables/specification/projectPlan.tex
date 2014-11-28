@@ -18,31 +18,33 @@
 %% Variables for version and release status
 %% useage: \version
 %%%%%%
-\newcommand\version{0.4}
+\newcommand\version{0.1}
 \newcommand\release{Pre-Release}
+\newcommand\titleText{Project Plan}
+\newcommand\reference{SE\_O2\_PM\_00}
 
 %%%%%%
 %% Alias
 %%%%%%
 \newcommand{\sectionbreak}{\clearpage} 	%% Allways start a section on a new page
 
-\title{ \huge CS221 Group Project \\ \Large Project Plan}
+\title{ \huge CS221 Group Project \\ \Large \titleText}
 \author{
 	\vspace{100pt}
 	\begin{tabular}{ r || l }
 		Project Team 	& 
 			\begin{tabular}{r l}
-				Nicholas Dart & Xander Barnes \\
-				Max Atkins & Maksim Harizanov \\
-				William Aldridge & Andrew Wilmot \\
-				Sebastian Tuff & James O'Hare \\
-				et al & \\
+				Aldridge, William & Atkins, Max \\
+				Barnes, Xander    & Dart, Nicholas \\
+				Harizanov, Maksim & O'Hare, James \\
+				Pocock, Michael   & Tuff, Sebastian \\
+				Wilcock, Daniel   & Wilmot, Andrew \\
 			\end{tabular} \\
 						& \\
 		Version			& \version \\
 		Status			& \release \\
 		Date Published  & \today \\
-		Reference 		& SE\_NO2\_MAN\_01 \\
+		Reference 		& \reference \\
 		Department		& Computer Science \\
 		Address			& Aberystwyth University \\
 						& Penglais Campus \\
@@ -61,10 +63,12 @@
 \lfoot{Aberystwyth University - Computer Science}
 
 \begin{document}
+	\clearpage
 	\setcounter{page}{1}
 
 	\maketitle
-
+	\thispagestyle{empty}
+	
 	\tableofcontents
 
 	\section{Introduction}
@@ -92,12 +96,13 @@
 		\input{references/references.tex}
 
 	\section{Document History}
-		\begin{tabular}{l || p{10cm} | l | r}
+		\begin{tabular}{l || p{8cm} | l | r}
 			Version & Edit & Date & Persons \\ \hline 
 			0.1 & Initial Version & October 21 2014 & jsm14 \\
 			0.2 & Document First Draft & October 27 2014 & jsm14 \\
 			0.3 & Client first release & October 28 2014 & jsm14 \\
 			0.4 & Spellchecking and Document standardization & October 29 2014 & nid21 \\
+			0.5 & Document review & November 28 2014 & nid21
 		\end{tabular}
 
 \end{document}
