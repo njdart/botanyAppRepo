@@ -46,23 +46,10 @@ public interface LoginPage extends Activity implements LoaderCallbacks<Cursor> {
      */
     private void populateAutoComplete();
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    public void attemptLogin();
-    
     /**
      * Check email
      */
     private boolean isEmailValid(String email);
-
-    /**
-     * Check password
-     */
-    private boolean isPasswordValid(String password);
 
     /**
      * Shows the progress UI and hides the login form.

@@ -53,8 +53,8 @@
 %% Variables for version and release status
 %% useage: \version
 %%%%%%
-\newcommand\version{0.5}
-\newcommand\release{Pre-Release}
+\newcommand\version{1.0}
+\newcommand\release{Release}
 \newcommand\titleText{Design Specification}
 \newcommand\reference{SE\_O2\_DS\_00}
 
@@ -67,10 +67,10 @@
 \author{
     \vspace{100pt}
     \begin{tabular}{ r || l }
-        Project Team    & 
-            \begin{tabular}{r l}
+        Project Team    &
+            \begin{tabular}{l l}
                 Aldridge, William & Atkins, Max \\
-                Barnes, Xander    & Dart, Nicholas \\
+                Barnes, Alexander    & Dart, Nicholas \\
                 Harizanov, Maksim & O'Hare, James \\
                 Pocock, Michael   & Tuff, Sebastian \\
                 Wilcock, Daniel   & Wilmot, Andrew \\
@@ -92,7 +92,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{Version \version (\release)}
+\rhead{Version \version~(\release)}
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 \lfoot{Aberystwyth University - Computer Science}
 
@@ -109,16 +109,15 @@
     \section{Android Application Design}
         \input{android/android.tex}
 
-    \section{Web Design}
+    \section{Web Design 6}
         \input{web/webDesign.tex}
 
     \section{Server Design}
         \input{server/server.tex}
 
-        %%\section{Bar}
-            %%\input{far/foo.tex}
-
-    %%\end{landscape}
+    \begin{thebibliography}{9}
+        \bibitem{refSpec} Requirements Specification Document.
+    \end{thebibliography}
 
     \section{Document History}
         \begin{tabular}{l || p{8cm} | l | r}
@@ -126,8 +125,9 @@
             0.1 & Initial Version & November 5 2014 & nid21 \\ \hline
             0.2 & Updated with decomposition description & November 12 2014 & nid21 \\
             0.3 & Updated with Android interfaces & November 17 2014 & nid21 \\
-            0.4 & Inluded web and server sections & November 27 2014 & nid21 \\
+            0.4 & Included web and server sections & November 27 2014 & nid21 \\
             0.5 & Document review & November 28 2014 & nid21 \\
+            0.6 & More document reviewing and preparing for release & December 02 2014 & nid21 \\
         \end{tabular}
 
 \end{document}

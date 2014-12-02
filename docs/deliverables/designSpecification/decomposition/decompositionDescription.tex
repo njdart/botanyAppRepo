@@ -7,11 +7,11 @@
 	\end{itemize}
 
 	\subsubsection{Android Application}
-		The android application provides the interface that users will use to record  plant data when out on a visit. It implements requirements (FR1), (FR2), (FR3), (FR4), (FR5), (FR6). It must also conform with the requirements (EIR1), (PR1),  (PR2), (DC1) and (DC2).
+		The android application provides the interface that users will use to record  plant data when out on a visit. It implements requirements (FR1), (FR2), (FR3), (FR4), (FR5), (FR6). It must also conform with the requirements (EIR1), (PR1),  (PR2), (DC1) and (DC2)~\cite{refSpec}.
 
 		The application will have a form-based activity which can be used to add and edit new and currently saved recordings. Currently saved recordings will be stored locally in a collection, which will be awaiting dispatch to the server. The user will be able to view this list and select recordings to perform actions on (Eg. edit and delete). The application will not show recordings that are saved on the server. 
 
-		The Android application will communicate with the server to perform functions such as sending recordings and performing user authentication (?). The application does NOT communicate directly with the website and the database. It uses a web API which is core to the server.
+		The Android application will communicate with the server to perform functions such as sending recordings and performing user authentication. The application does NOT communicate directly with the website and the database. It uses a web API which is core to the server.
 
 	\subsubsection{Server}
 
@@ -31,7 +31,7 @@
 		The website will consist of a set of web-pages which implement all the required functionalities for the user (FR8) and (FR9). It must also conform to the requirements (EIR1), (PR1) and (PR2). The website will communicate with the Web API via HTTP to receive from and send data to the database. The website will have no communication with the Android application. It will also not directly communicate with the database, but will go through the web API. 
 
 
-\subsection{Significant Abdroid Components}
+\subsection{Significant Android Components}
 
 	\subsubsection{Significant UI classes}
 		\begin{tabular}{r p{10cm}}
@@ -66,6 +66,7 @@
 	Map Overlay & This component will be a pop-up map that will show the locations of the chosen species. This location will be taken from the database.\\
 	\end{tabular}
 
+\clearpage
 \subsection{Significant Web API Components}
 	\begin{longtable}{r p{10cm}}
 	AddRecord & Add a record received via a HTTP POST request in JSON format, checking it for validity, and return an appropriate status message as follows:
@@ -127,4 +128,4 @@
 		\item 400 Bad Request: The method has been provided with a bad ID.
 		\item 500 Internal Server Error: The resource is inaccessible or an error has occurred in the method itself.
 	\end{itemize}\\
-	\end{longtable}
+\end{longtable}
