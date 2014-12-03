@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="site_location">Site Location</string>
+    <string name="create_new_site_visit_button">New Visit</string>
+</resources>
