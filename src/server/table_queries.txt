@@ -4,7 +4,7 @@ password: password
 
 table creation queries:
 
- create table botany_users (
+create table botany_users (
     user_id INT AUTO_INCREMENT,
     user_name VARCHAR(20) NOT NULL,
     user_fullname VARCHAR(50),
@@ -12,5 +12,26 @@ table creation queries:
     user_email VARCHAR(20),
     user_password BINARY(20),
     PRIMARY KEY (user_id));
-
-... more to follow ...
+    
+create table botany_records ( 
+    record_id INT AUTO_INCREMENT , 
+    user_id INT NOT NULL, 
+    location_name VARCHAR(50), 
+    PRIMARY KEY (record_id));
+    
+create table botany_specimens ( 
+    specimen_id INT AUTO_INCREMENT, 
+    record_id INT NOT NULL, 
+    species_name VARCHAR(255) NOT NULL, 
+    latitude FLOAT(10,6), 
+    longitude FLOAT(10,6), 
+    abundance INT, 
+    comment TEXT, 
+    scene_photo INT, 
+    specimen_photo INT, 
+    PRIMARY KEY (specimen_id));
+    
+alter table botany_specimens
+    add foreign key (record_id)
+    references botany_records(record_id)
+    on delete cascade on update cascade;
