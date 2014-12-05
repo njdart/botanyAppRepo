@@ -35,3 +35,8 @@ alter table botany_specimens
     add foreign key (record_id)
     references botany_records(record_id)
     on delete cascade on update cascade;
+
+alter table botany_records
+    add foreign key (user_id)  
+    references botany_users(user_id)  
+    on delete cascade on update cascade;
