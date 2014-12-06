@@ -14,41 +14,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="@string/name"
             android:ems="10"
-            android:id="@+id/editText"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/editName"
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick"
+            android:hint="@string/name"
+            android:nextFocusDown="@+id/editPhoneNumber"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/editPhoneNumber"
             android:layout_gravity="center_horizontal"
-            android:text="@string/phone_number" />
+            android:hint="@string/phone_number" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/editText3"
+            android:id="@+id/editEmail"
             android:layout_gravity="center_horizontal"
-            android:text="@string/email" />
+            android:hint="@string/email" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText4"
+            android:id="@+id/editSiteLocation"
             android:layout_gravity="center_horizontal"
-            android:text="@string/site_location" />
+            android:hint="@string/site_location" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/create_new_site_visit_button"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/newVisitButton"
+            android:layout_gravity="center_horizontal"
+            android:nestedScrollingEnabled="false" />
     </LinearLayout>
 </FrameLayout>

@@ -21,6 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="uk.ac.aber.cs221.group2.SpeciesAdder"
+            android:label="@string/title_activity_species_adder" >
+        </activity>
     </application>
 
 </manifest>
