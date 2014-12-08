@@ -1,0 +1,253 @@
+body{
+	background-image: url("http://shareyourwallpapers.com/upload/wallpaper/nature/plants/plants_b6aaa76d.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-color: #000;
+	margin: 0%;
+	padding-top: 0%;
+	padding-right: 0%;
+	padding-left: 0%;
+	padding-bottom: 0%;
+}
+
+.logo{
+	max-width: 50%;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+header{
+margin:0px;
+padding:0px;
+}
+.header-bar{
+	opacity: 0.9;
+	background-color: #107010;
+	height: auto;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	width: 70%;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+
+}
+#container{
+	background-color: rgba(83, 119, 83, 0.56);
+	height: auto;
+	width: 70%;
+	padding-top: 50px;
+	margin-right: auto;
+	margin-left: auto;
+	
+}
+nav{
+	margin-left: 5%;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+nav ul{
+	list-style-type: none;
+	padding: 0px;
+}
+nav li{
+	text-align: center;
+	}
+
+nav a{
+	width: 20%;
+	display: inline;
+	float: left;
+	text-align: center;
+	margin-top: -50px;
+	background-color: rgb(22, 115, 15);
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-bottom: 2%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-decoration: none;
+	color: white;
+	}
+	
+
+#content-boxes{
+	height: auto;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 0px;
+	margin-bottom: 0%;
+	width: 80%;
+	background-color: #ffffff;
+	padding:0px 15px 15px 15px;
+}	
+	
+#footer-bar{
+opacity: 0.9;
+background-color:#107010;
+height: auto;
+margin-right: auto;
+margin-left: auto;
+margin-top: 0%;
+margin-bottom: 0%;
+width: 70%;
+}	
+h1{
+margin:0px;
+padding:0px;
+color:rgb(22, 115, 15);
+}
+.indent{
+margin-left:58px;
+}
+
+.twocolumns{
+-webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+	text-align: justify;
+}
+
+.simple-search {
+text-align: center;
+margin: 20px auto 0px auto;
+width: 50%;
+display: flex;
+}
+.simpletext{
+margin:0px;
+padding-top: 11px;
+padding-bottom: 11px;
+padding-left: 10px;
+}
+.searchbutton {
+max-width: 58px;
+margin: 0px;
+/* float: right; */
+max-height: 41px;
+}
+
+.bottom-index{
+margin-top:20px;
+}
+#footer-bar{
+margin-top:20px;
+width:100%;
+}
+.footer-left{
+float:left;
+margin-top:17px;
+text-decoration:none;
+color:white;
+padding-left: 10px;
+}
+.footer-left:hover{
+text-decoration:underline;
+}
+.footer-center{
+max-width:43px;
+display:block;
+margin-right:auto;
+margin-left:auto;
+}
+.download{
+float: right;
+margin-right: 75px;
+margin-top: -39px;
+background-color: rgb(22, 115, 15);
+padding:10px;	
+text-decoration: none;
+color: white;
+}
+
+#left-section{
+width:60%;
+}
+#right-section{
+width:40%;
+float:right;
+text-align:center;
+margin: 0px auto 0px auto;
+}
+#right-section a{
+background-color: rgb(22, 115, 15);
+padding:10px;	
+text-decoration: none;
+color: white;
+}
+.image{
+max-width:80%;
+margin-bottom:20px;
+}
+#filtering{
+height: auto;
+	color:#ffffff;
+	margin-top: 0px;
+	margin-bottom: 0%;
+	
+	width: 12%;
+	background-color: rgb(22, 115, 15);
+	padding:25px 15px 15px 15px;
+	position:fixed;
+	
+	}
+
+#content-boxes-dblist {
+height: auto;
+margin-left: 25%;
+margin-top: 0px;
+margin-right: 8%;
+/* width: 80%; */
+background-color: #ffffff;
+padding: 0px 15px 15px 15px;
+/* float: ; */
+}
+.centered{
+text-align:center;
+}
+.advancedsearchbutton{
+max-width: 60px;
+margin: 0px;
+max-height: 41px;
+padding: 0px;
+padding-left: 10px;
+}
+.advanced-search {
+text-align: center;
+
+position: inline;
+display: flex;
+margin-left: 13px;
+}
+#filtering a{
+background-color: white;
+padding:10px;	
+text-decoration: none;
+color: rgb(22, 115, 15);
+margin-left: 23px;
+}
+
+#mapPopUp{top: 0; 
+left: 0; 
+position: fixed; 
+width: 100%; 
+height: 120%;
+background-color: rgba(0,0,0,0.7); 
+display: none;
+}
+
+.popupBoxWrapper{
+width: 550px; 
+margin: 50px auto; 
+text-align: left;
+}
+.popupBoxContent{
+background-color: #FFF; 
+padding: 15px;
+}
+
