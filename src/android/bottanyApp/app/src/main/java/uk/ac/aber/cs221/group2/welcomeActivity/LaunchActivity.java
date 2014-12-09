@@ -1,12 +1,14 @@
 package uk.ac.aber.cs221.group2.welcomeActivity;
 
 import android.app.Activity;
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import uk.ac.aber.cs221.group2.R;
 import uk.ac.aber.cs221.group2.SpeciesAdder;
@@ -19,11 +21,6 @@ public class LaunchActivity extends Activity  {
         setContentView(R.layout.activity_launch);
         if (savedInstanceState == null) {
             //Add fragments here
-        }
-
-        if(savedInstanceState != null){
-            Button gpsButton = new Button(this);
-            gpsButton.setText("USE GPS");
         }
     }
 
@@ -50,13 +47,21 @@ public class LaunchActivity extends Activity  {
         return super.onOptionsItemSelected(item);
     }
 
-    public class NewVisitActionListener implements View.OnClickListener {
+    public class NewSpeciesActionListener implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
-            int editNameLength = 10; // = ((Button)v.findViewById(R.id.editName)).getText().length();
-            if(editNameLength > 3){
-                setIntent(new Intent(LaunchActivity.this, SpeciesAdder.class));
+            EditText name = (EditText)v.findViewById(R.id.editName);
+
+            if(name.getText().length() > 3){
+                Intent i = new Intent(LaunchActivity.this, SpeciesAdder.class);
+                i.putExtra("NAME", name.getText());   //Pass in the details we need
+                setIntent(i);
+                System.out.println("Moving to species adder activity");
+
+            } else {
+                //AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
             }
         }
     }
