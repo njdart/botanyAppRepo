@@ -1,101 +1,99 @@
 Constants	
-Header
+header.php
 	session_start();
-	Doctype
+	doctype
 	meta tags
 		description
-		Keywords
-		authir
+		keywords
+		author
 		content type
 		CSS links
 		Font link
 		validation.js
 		$title
 	Header/Div
-		Logo
+		<img src= "main_logo.png">
 	/div
 
-Nav
-	Nav
-	include'breadcrumbs';
+nav.php
+	"Navigation list"
+	include 'breadcrumbs.php';
 	
-Footer 
-	Site map link 
-	Icon
-	
+footer.php
+	<a href = "sitemap.php"> 
+	<img src= "footer-logo.png">
 	
 config.php
-	$host = "";
-	$port = "";
-	$user = "";
-	$password = "";
-	$dbname = "";
-	mysql = new mysql($...)
-	die statements
+	$host = '';
+	$port = '';
+	$user = '';
+	$password = '';
+	$dbname = '';
+	mysql = new mysql($...);
+	"error checking statements"
 
 	
-Index
+index.php
 	$title
 	include 'header.php';
 	include 'nav.php';
-	text
+	"text"
 	include 'simple_search.php';
-	text
-		app link
-	include 'FOOTER';
+	"text"
+		<a href = "application.php">
+	include 'footer.php';
 	
-plants
+plants.php
 	include 'config.php';
 	$title
 	include 'header.php';
 	include 'nav.php';
-	add_plant_record link
+	<a href = "add_plant_record.php">
 	include 'advanced_search.php';
 	include 'plant_db_declare.php';
 	include 'plant_sorting.php';
 	include 'footer.php';
 
-add_plants_record
+add_plant_record.php
 	include 'config.php';
 	$title
 	include 'header.php';
 	include 'nav.php';
-	form(input)  INSERT(SQL - add the form input into db)
-	if no image uploaded, default image else uploaded image
+	form INSERT(SQL - add the form input into database)
+		"if no image uploaded, default image else uploaded image"
 	include 'upload_image.php';
 	include 'save_record.php';
-	a href "plants.php" cancel
+	<a href = "plants.php">Cancel</a>
 	include 'footer.php';
 
 
-plants_record
+plants_record.php
 	include 'config.php';
 	$title
 	include 'header.php';
 	include 'nav.php';
-	$specific record details
-	a href "edit_plant_record.php" edit
-	a href "delete_plant_record.php" remove
-		delete prompt js
-	individual record photo or default image
-	a href "plants.php" where to find
+	$individual_record details
+	<a href = "edit_plant_record.php">Edit</a>
+	<a href = "delete_plant_record.php">Remove</a>
+		"delete prompt (JavaSript)"
+	$individual_record image/default image
+	<a href = "plants.php">Where to find</a>
 		(plant_map.js)
 	include 'footer.php';
 	
 	
 	
-	
-edit_record
+edit_record.php
 	include 'config.php';
 	$title
 	include 'header.php';
 	include 'nav.php';
 	include 'breadcrumbs.php';
-	$individual record
-	a href "edit_plant_record.php" edit
-	a href "delete_plant_record.php" remove
-	$individual record photo
-	a href "plants.php" where to find
+	$individual_record
+	<a href = "edit_plant_record.php">Edit</a>
+	<a href "delete_plant_record.php">Remove</a>
+	$individual_record image
+	<a href = "plants.php">Where to find</a>
 		(plant_map.js)
 	include 'footer.php';
 	
