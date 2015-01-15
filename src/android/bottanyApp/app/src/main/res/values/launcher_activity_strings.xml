@@ -3,6 +3,6 @@
     <string name="name">Name</string>
     <string name="phone_number">Phone Number</string>
     <string name="email">Email</string>
-    <string name="site_location">Site Location</string>
-    <string name="create_new_site_visit_button">New Visit</string>
+    <string name="site_location">Site Location Description</string>
+    <string name="create_new_site_visit_button">Start Visit</string>
 </resources>

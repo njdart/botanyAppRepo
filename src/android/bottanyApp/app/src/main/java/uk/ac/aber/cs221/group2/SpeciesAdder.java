@@ -18,9 +18,6 @@ public class SpeciesAdder extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_species_adder);
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new Fragment_MainSpeciesAdder())
-                    .commit();
         }
     }
 
@@ -45,21 +42,5 @@ public class SpeciesAdder extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class Fragment_MainSpeciesAdder extends Fragment {
-
-        public Fragment_MainSpeciesAdder() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_species_adder, container, false);
-            return rootView;
-        }
     }
 }

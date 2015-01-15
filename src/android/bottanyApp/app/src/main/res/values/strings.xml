@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BottanyApp</string>
-    <string name="title_activity_launch">LaunchActivity</string>
+    <string name="app_name">Botany App</string>
+    <string name="title_activity_launch">Botany App</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_species_adder">SpeciesAdder</string>
+    <string name="title_activity_species_adder">Species Adder</string>
 
 </resources>
