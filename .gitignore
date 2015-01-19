@@ -30,3 +30,5 @@ build/
 ##or virtualbox lock files
 .directory
 .directory.lock
+
+src/android/production/*

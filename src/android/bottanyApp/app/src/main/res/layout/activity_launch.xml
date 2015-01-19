@@ -56,7 +56,6 @@
             android:text="@string/create_new_site_visit_button"
             android:id="@+id/newVisitButton"
             android:layout_gravity="center_horizontal"
-            android:nestedScrollingEnabled="false"
             android:singleLine="false"
             android:onClick="newVisitOnClick" />
 
