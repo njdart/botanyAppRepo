@@ -17,10 +17,10 @@ Available Commands:
 
 addRecord.php
 addResource.php
+getRecord.php
 
 To do:
 
-getRecord.php
 getRecords.php
 modifyRecord.php
 getResource.php
