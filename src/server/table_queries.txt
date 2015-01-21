@@ -17,6 +17,7 @@ create table botany_records (
     record_id INT AUTO_INCREMENT , 
     user_id INT NOT NULL, 
     location_name VARCHAR(50), 
+	time_stamp INT,
     PRIMARY KEY (record_id));
     
 create table botany_specimens ( 
@@ -31,8 +32,6 @@ create table botany_specimens (
     specimen_photo INT, 
     PRIMARY KEY (specimen_id));
     
-
-
 alter table botany_specimens
     add foreign key (record_id)
     references botany_records(record_id)
