@@ -1,30 +1,45 @@
 package uk.ac.aber.cs221.group2;
 
 import android.app.Activity;
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class SiteChooser extends Activity {
-    //LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    //LocationListener locationListener = new MyLocationListener();
-    //EditText locationLat;
-    //EditText locationLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_site_chooser);
-        Toast t = Toast.makeText(getApplicationContext(), "Hello World! I'm Toast!", Toast.LENGTH_LONG);
-        t.show();
+        //Toast.makeText(getApplicationContext(), "Hello World! I'm Toast!", Toast.LENGTH_LONG).show();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, autoCompleteEntries);
+        AutoCompleteTextView textView = (AutoCompleteTextView)
+                findViewById(R.id.siteNameAutoComplete);
+        textView.setAdapter(adapter);
     }
+
+    public static ArrayList<String> autoCompleteEntries = new ArrayList<String>() {{
+        add("Foo");
+        add("Bar");
+        add("FooBar");
+        add("BarFoo");
+        add("Faz");
+        add("Baz");
+    }};
+
 
 
     @Override
@@ -49,28 +64,43 @@ public class SiteChooser extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class MyLocationListener implements LocationListener {
+    public void onUseSiteClick(View view){
+        String compareTo = ((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete))
+                .getText().toString();
+        if(!autoCompleteEntries.contains(compareTo)) {
+            autoCompleteEntries.add(compareTo);
+            System.out.println("Adding entry " + compareTo);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_dropdown_item_1line, autoCompleteEntries);
+            AutoCompleteTextView textView = (AutoCompleteTextView)
+                    findViewById(R.id.siteNameAutoComplete);
+            textView.setAdapter(adapter);
 
-        @Override
-        public void onLocationChanged(Location location) {
-            //locationLat.setText("");
-            //locationLng.setText("");
-            //Toast.makeText();
+            new AlertDialog.Builder(this)
+                    .setTitle("New Site")
+                    .setMessage("No site was previously found by this name, Are you sure?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Intent i = new Intent(SiteChooser.this, SpeciesAdder.class);
+                            startActivity(i);
+                        }})
+                    .setNegativeButton(android.R.string.no, null).show();
+        } else {
+            Intent i = new Intent(SiteChooser.this, SpeciesAdder.class);
+            startActivity(i);
         }
+    }
 
+    public class ArrayListCaseInsensitive extends ArrayList<String> {
         @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
+        public boolean contains(Object o) {
+            String paramStr = (String)o;
+            for (String s : this) {
+                if (paramStr.equalsIgnoreCase(s)) return true;
+            }
+            return false;
         }
     }
 }

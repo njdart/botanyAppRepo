@@ -28,8 +28,8 @@
         </activity>
         <activity
             android:name=".SiteChooser"
-            android:label="@string/title_activity_site_chooser"
-            android:parentActivityName=".LaunchActivity" >
+            android:label="@string/title_activity_site_chooser" >
+            <!--android:parentActivityName=".LaunchActivity" >-->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.ac.aber.cs221.group2.LaunchActivity" />

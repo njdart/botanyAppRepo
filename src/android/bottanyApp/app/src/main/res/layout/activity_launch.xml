@@ -39,17 +39,6 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/email" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="top"
-            android:id="@+id/editText"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.99"
-            android:hint="@string/site_location"
-            android:singleLine="false"
-            android:autoText="true" />
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

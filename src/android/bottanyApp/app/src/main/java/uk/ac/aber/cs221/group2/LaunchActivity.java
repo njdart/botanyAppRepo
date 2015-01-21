@@ -27,8 +27,7 @@ public class LaunchActivity extends Activity  {
         EditText name = (EditText) findViewById(R.id.editName);
         EditText phone = (EditText) findViewById(R.id.editPhoneNumber);
         EditText email = (EditText) findViewById(R.id.editEmail);
-        EditText locDescription = (EditText) findViewById(R.id.editText);
-        System.out.println("NAME: " + name.getText() + " PHONE: " + phone.getText() + " EMAIL: " + email.getText() + " SITE_DESC: " + locDescription);
+        System.out.println("NAME: " + name.getText() + " PHONE: " + phone.getText() + " EMAIL: " + email.getText());
 
         //Validate the name field
         if(name.length() < 3 || name.length() > 25){
@@ -55,7 +54,7 @@ public class LaunchActivity extends Activity  {
             //More rigorous validation
             Pattern emailRegex = Pattern.compile("^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,4}$"); //regex taken from http://www.regular-expressions.info/email.html
             Matcher matcher = emailRegex.matcher(email.getText());
-            if(!matcher.matches()){
+            if(!matcher.matches()) {
                 email.setError("This doesn't look like an email address");
                 errors = true;
             } else {
@@ -69,10 +68,6 @@ public class LaunchActivity extends Activity  {
         else {
             //we're good to move on!
             Intent intent = new Intent(this, SiteChooser.class);
-            intent.putExtra("NAME", name.getText());
-            intent.putExtra("EMAIL", email.getText());
-            intent.putExtra("PHONE", phone.getText());
-            intent.putExtra("LOC", locDescription.getText());
             startActivity(intent);
         }
     }
