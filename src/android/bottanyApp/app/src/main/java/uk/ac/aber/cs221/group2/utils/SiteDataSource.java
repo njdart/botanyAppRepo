@@ -14,7 +14,7 @@ public class SiteDataSource {
     SQLiteOpenHelper dbhelper;
     SQLiteDatabase database;
     public SiteDataSource( Context context){
-        dbhelper = new ToursDBOpenHelper(context);
+        dbhelper = new DatabaseUtils(context);
         database = dbhelper.getWritableDatabase();
     }
 

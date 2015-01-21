@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import uk.ac.aber.cs221.group2.utils.SiteDataSource;
+
 
 public class SiteChooser extends Activity {
 
@@ -62,6 +64,16 @@ public class SiteChooser extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onButtonClick(View view){
+        SiteDataSource source = new SiteDataSource(this);
+
+        source.open();
+
+        source.create(((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete)).getText().toString());
+
+        System.out.println("");
     }
 
     public void onUseSiteClick(View view){

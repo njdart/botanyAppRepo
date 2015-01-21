@@ -27,6 +27,13 @@
             android:id="@+id/newSiteAcceptButton"
             android:layout_gravity="center_horizontal"
             android:onClick="onUseSiteClick" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:onClick="onButtonClick" />
     </LinearLayout>
 
 </RelativeLayout>
