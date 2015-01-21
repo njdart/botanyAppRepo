@@ -48,7 +48,7 @@
 	
 	//Query to insert JSON record data into Database
 	$insertRecord = "INSERT INTO botany_records (user_id, location_name, time_stamp)
-	VALUES ($userID, '$LocationName', $time_stamp)";
+	VALUES ($userID, '$LocationName', $RecordTime)";
 	
 	//Runs the record query
 	$conn->query($insertRecord);
