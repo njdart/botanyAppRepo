@@ -1,5 +1,5 @@
 body{
-	background-image: url("http://shareyourwallpapers.com/upload/wallpaper/nature/plants/plants_b6aaa76d.jpg");
+	background-image: url("http://www.wallyear.com/wp-content/uploads/2014/06/flower-background-images-184.jpg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
@@ -24,12 +24,12 @@ padding:0px;
 }
 .header-bar{
 	opacity: 0.9;
-	background-color: #107010;
-	height: auto;
+	background-color: #629330;
+	height: 0%;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 0%;
-	margin-bottom: 0%;
+	margin-top: auto;
+	margin-bottom: auto;
 	width: 70%;
 	padding-top: 0px;
 	padding-right: 0px;
@@ -37,6 +37,8 @@ padding:0px;
 	padding-left: 0px;
 
 }
+
+
 #container{
 	background-color: rgba(83, 119, 83, 0.56);
 	height: auto;
@@ -44,16 +46,21 @@ padding:0px;
 	padding-top: 50px;
 	margin-right: auto;
 	margin-left: auto;
+
 	
 }
 nav{
 	margin-left: 5%;
 	margin-bottom: 0px;
 	margin-top: 0px;
+	
+	
 }
 nav ul{
 	list-style-type: none;
 	padding: 0px;
+	
+	
 }
 nav li{
 	text-align: center;
@@ -65,14 +72,15 @@ nav a{
 	float: left;
 	text-align: center;
 	margin-top: -50px;
-	background-color: rgb(22, 115, 15);
+	background-color: #D7EFA5;
 	margin-left: 2%;
 	margin-right: 2%;
 	margin-bottom: 2%;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	text-decoration: none;
-	color: white;
+	color: #3B5803;
+	border-radius:10px 10px 10px 10px;
 	}
 	
 
@@ -86,24 +94,33 @@ nav a{
 	background-color: #ffffff;
 	padding:0px 15px 15px 15px;
 }	
+
 	
 #footer-bar{
 opacity: 0.9;
-background-color:#107010;
+background-color: #629330;
 height: auto;
 margin-right: auto;
 margin-left: auto;
-margin-top: 0%;
 margin-bottom: 0%;
 width: 70%;
+margin-top:20px;
+width:100%;
 }	
 h1{
 margin:0px;
 padding:0px;
-color:rgb(22, 115, 15);
+color:#3B5803;
 }
 .indent{
 margin-left:58px;
+}
+
+.onecolumn{
+-webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+	text-align: justify;
 }
 
 .twocolumns{
@@ -136,15 +153,15 @@ max-height: 41px;
 margin-top:20px;
 }
 #footer-bar{
-margin-top:20px;
-width:100%;
+
 }
 .footer-left{
 float:left;
 margin-top:17px;
 text-decoration:none;
-color:white;
+color:#FCF4ED;
 padding-left: 10px;
+
 }
 .footer-left:hover{
 text-decoration:underline;
@@ -152,14 +169,25 @@ text-decoration:underline;
 .footer-center{
 max-width:43px;
 display:block;
-margin-right:auto;
+margin-right:50%;
 margin-left:auto;
 }
 .download{
 float: right;
-margin-right: 75px;
-margin-top: -39px;
-background-color: rgb(22, 115, 15);
+margin-right: 17px;
+
+margin-top:-41px;
+background-color: #FCF4ED;
+padding:10px;	
+text-decoration: none;
+color: #107010;
+}
+
+.download:hover{
+float: right;
+margin-right: 17px;
+margin-top: -41px;
+background-color: rgb(0, 0, 0);
 padding:10px;	
 text-decoration: none;
 color: white;
@@ -186,14 +214,15 @@ margin-bottom:20px;
 }
 #filtering{
 height: auto;
-	color:#ffffff;
+	color:#3B5803;
 	margin-top: 0px;
 	margin-bottom: 0%;
-	
+	border-radius: 5px 5px 5px 5px;
 	width: 12%;
-	background-color: rgb(22, 115, 15);
+	background-color: #D7EFA5;
 	padding:25px 15px 15px 15px;
 	position:fixed;
+	margin-left:1%;
 	
 	}
 
@@ -218,18 +247,19 @@ padding: 0px;
 padding-left: 10px;
 }
 .advanced-search {
+margin-top:5%;
 text-align: center;
-
 position: inline;
 display: flex;
 margin-left: 13px;
+margin-bottom: 30px;
 }
 #filtering a{
-background-color: white;
-padding:10px;	
+background-color: #FCF4ED;
+padding:5%;	
 text-decoration: none;
 color: rgb(22, 115, 15);
-margin-left: 23px;
+margin-left: 25%
 }
 
 #mapPopUp{top: 0; 
@@ -251,3 +281,41 @@ background-color: #FFF;
 padding: 15px;
 }
 
+#content-boxes-dblist table{
+margin-top:0%;
+border-collapse:collapse;
+width:100%;
+border: 1px;
+padding-bottom:1.5%;
+white-space: wrap;
+font-size:100%;
+
+}
+
+#content-boxes-dblist th{
+height: 50px;
+text-align:center;
+background-color:#48577D;
+color:white;
+border:none;
+
+}
+#content-boxes-dblist tr{
+border:solid;
+border-width:1px;
+}
+#content-boxes-dblist td{
+padding: 15px;
+text-align: left;
+border-left: none;
+border-right:none;
+}
+
+/* input images */
+input[type=submit] {
+    background: url("images/search.png");
+    max-width: 58px;
+margin: 0px;
+/* float: right; */
+max-height: 41px;
+}
