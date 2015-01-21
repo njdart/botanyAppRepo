@@ -168,8 +168,9 @@
             \begin{itemize}
                 \item UserName : String
                 \item UserPhone : String
-								\item UserEmail : String
+                \item UserEmail : String
                 \item LocationName : String 
+                \item Timestamp : Number 
                 \item Specimens : Array of Specimen
             \end{itemize}
         \end{itemize}
@@ -207,8 +208,14 @@
                 \item RecordId : INT auto-increment PK
                 \item UserId : INT not-null
                 \item LocationName : VARCHAR(50)
+                \item Timestamp : INT
             \end{itemize}
                 
+            \item Resources
+            \begin{itemize}
+                \item ResourceId : INT auto-increment PK
+            \end{itemize}
+
             \item Specimens
             \begin{itemize}
                 \item SpecimenId : INT auto-increment PK
