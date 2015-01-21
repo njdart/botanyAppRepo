@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 
@@ -72,8 +74,11 @@ public class SiteChooser extends Activity {
         source.open();
 
         source.create(((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete)).getText().toString());
+        List<String> list = source.findAll();
 
-        System.out.println("");
+        System.out.println(list.toString());
+        System.out.println(list.get(0));
+
     }
 
     public void onUseSiteClick(View view){
