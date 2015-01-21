@@ -29,6 +29,7 @@
 	$UserPhone = $record->UserPhone;
 	$UserEmail = $record->UserEmail;
 	$LocationName = $record->LocationName;
+	$RecordTime = $record->Timestamp;
 	$Specimens = $record->Specimens;
 	
 	//Selects the Database
@@ -46,8 +47,8 @@
 	$userID = $conn->insert_id;
 	
 	//Query to insert JSON record data into Database
-	$insertRecord = "INSERT INTO botany_records (user_id, location_name)
-	VALUES ($userID, '$LocationName')";
+	$insertRecord = "INSERT INTO botany_records (user_id, location_name, time_stamp)
+	VALUES ($userID, '$LocationName', $time_stamp)";
 	
 	//Runs the record query
 	$conn->query($insertRecord);
