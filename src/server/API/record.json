@@ -1,37 +1,60 @@
 {
 
 	"UserName":
-		"Max", 
+		"Harry", 
 		
 	"UserPhone":
-		"07949028660", 
+		"07949021123", 
 	
 	"UserEmail":
-		"max.atkins@live.com",
+		"harry.potter@hogwarts.com",
 	
 	"LocationName":
-		"Aberystwyth", 
+		"Hogwarts", 
 		
 	"Specimens":
 		[
 			{
-				"SpeciesName":"Rose",
-				"LocationLatitude":123.321,
-				"LocationLongitude":24.42,
-				"Abundance":2,
+				"SpeciesName":"Potato",
+				"LocationLatitude":654.123,
+				"LocationLongitude":71.01,
+				"Abundance":3,
 				"Comment":"This plant sucks",
 				"ScenePhoto":"1",
 				"SpecimenPhoto":"2"
 			},
 			{
-				"SpeciesName":"Pumpkin",
-				"LocationLatitude":987.789,
-				"LocationLongitude":54.45,
-				"Abundance":4,
+				"SpeciesName":"Carrot",
+				"LocationLatitude":798.890,
+				"LocationLongitude":76.23,
+				"Abundance":2,
 				"Comment":"This plant rulez",
 				"ScenePhoto":"3",
 				"SpecimenPhoto":"4"
+			},
+			
+			{
+				"SpeciesName":"Carrot",
+				"LocationLatitude":100.211,
+				"LocationLongitude":22.33,
+				"Abundance":2,
+				"Comment":"This plant is strange",
+				"ScenePhoto":"5",
+				"SpecimenPhoto":"6"
+			},
+			
+			{
+				"SpeciesName":"Human",
+				"LocationLatitude":443.334,
+				"LocationLongitude":55.44,
+				"Abundance":1,
+				"Comment":"This plant makes me sick",
+				"ScenePhoto":"7",
+				"SpecimenPhoto":"8"
 			}
-		]
+		],
+		
+	"Timestamp":
+		54
 		
 }
