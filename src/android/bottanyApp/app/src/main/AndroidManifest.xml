@@ -3,9 +3,10 @@
     package="uk.ac.aber.cs221.group2" >
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
+    <!--<uses-permission android:name="android.permission.READ_PROFILE" />-->
+    <!--<uses-permission android:name="android.permission.READ_CONTACTS" />-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="false"
@@ -22,8 +23,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="uk.ac.aber.cs221.group2.SpeciesAdder"
+            android:name=".SpeciesAdder"
             android:label="@string/title_activity_species_adder" >
+        </activity>
+        <activity
+            android:name=".SiteChooser"
+            android:label="@string/title_activity_site_chooser"
+            android:parentActivityName=".LaunchActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.ac.aber.cs221.group2.LaunchActivity" />
         </activity>
     </application>
 

@@ -68,7 +68,7 @@ public class LaunchActivity extends Activity  {
         }
         else {
             //we're good to move on!
-            Intent intent = new Intent(this, SpeciesAdder.class);
+            Intent intent = new Intent(this, SiteChooser.class);
             intent.putExtra("NAME", name.getText());
             intent.putExtra("EMAIL", email.getText());
             intent.putExtra("PHONE", phone.getText());
