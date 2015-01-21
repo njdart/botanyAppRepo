@@ -104,7 +104,8 @@
 		$valid = property_exists($LocalRecord, 'UserName')
 			&& property_exists($LocalRecord, 'UserPhone')
 			&& property_exists($LocalRecord, 'LocationName') 
-			&& property_exists($LocalRecord, 'Specimens');
+			&& property_exists($LocalRecord, 'Specimens')
+			&& property_exists($LocalRecord, 'Timestamp');
 			
 		foreach($LocalRecord->Specimens as $specimen)
 		{
