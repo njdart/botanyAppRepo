@@ -1,0 +1,37 @@
+{
+
+	"UserName":
+		"Max", 
+		
+	"UserPhone":
+		"07949028660", 
+	
+	"UserEmail":
+		"max.atkins@live.com",
+	
+	"LocationName":
+		"Aberystwyth", 
+		
+	"Specimens":
+		[
+			{
+				"SpeciesName":"Rose",
+				"LocationLatitude":123.321,
+				"LocationLongitude":24.42,
+				"Abundance":2,
+				"Comment":"This plant sucks",
+				"ScenePhoto":"1",
+				"SpecimenPhoto":"2"
+			},
+			{
+				"SpeciesName":"Pumpkin",
+				"LocationLatitude":987.789,
+				"LocationLongitude":54.45,
+				"Abundance":4,
+				"Comment":"This plant rulez",
+				"ScenePhoto":"3",
+				"SpecimenPhoto":"4"
+			}
+		]
+		
+}
