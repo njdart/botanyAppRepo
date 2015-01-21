@@ -1,0 +1,321 @@
+body{
+	background-image: url("http://www.wallyear.com/wp-content/uploads/2014/06/flower-background-images-184.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-color: #000;
+	margin: 0%;
+	padding-top: 0%;
+	padding-right: 0%;
+	padding-left: 0%;
+	padding-bottom: 0%;
+}
+
+.logo{
+	max-width: 50%;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+header{
+margin:0px;
+padding:0px;
+}
+.header-bar{
+	opacity: 0.9;
+	background-color: #629330;
+	height: 0%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 70%;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+
+}
+
+
+#container{
+	background-color: rgba(83, 119, 83, 0.56);
+	height: auto;
+	width: 70%;
+	padding-top: 50px;
+	margin-right: auto;
+	margin-left: auto;
+
+	
+}
+nav{
+	margin-left: 5%;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	
+	
+}
+nav ul{
+	list-style-type: none;
+	padding: 0px;
+	
+	
+}
+nav li{
+	text-align: center;
+	}
+
+nav a{
+	width: 20%;
+	display: inline;
+	float: left;
+	text-align: center;
+	margin-top: -50px;
+	background-color: #D7EFA5;
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-bottom: 2%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-decoration: none;
+	color: #3B5803;
+	border-radius:10px 10px 10px 10px;
+	}
+	
+
+#content-boxes{
+	height: auto;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 0px;
+	margin-bottom: 0%;
+	width: 80%;
+	background-color: #ffffff;
+	padding:0px 15px 15px 15px;
+}	
+
+	
+#footer-bar{
+opacity: 0.9;
+background-color: #629330;
+height: auto;
+margin-right: auto;
+margin-left: auto;
+margin-bottom: 0%;
+width: 70%;
+margin-top:20px;
+width:100%;
+}	
+h1{
+margin:0px;
+padding:0px;
+color:#3B5803;
+}
+.indent{
+margin-left:58px;
+}
+
+.onecolumn{
+-webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+	text-align: justify;
+}
+
+.twocolumns{
+-webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+	text-align: justify;
+}
+
+.simple-search {
+text-align: center;
+margin: 20px auto 0px auto;
+width: 50%;
+display: flex;
+}
+.simpletext{
+margin:0px;
+padding-top: 11px;
+padding-bottom: 11px;
+padding-left: 10px;
+}
+.searchbutton {
+max-width: 58px;
+margin: 0px;
+/* float: right; */
+max-height: 41px;
+}
+
+.bottom-index{
+margin-top:20px;
+}
+#footer-bar{
+
+}
+.footer-left{
+float:left;
+margin-top:17px;
+text-decoration:none;
+color:#FCF4ED;
+padding-left: 10px;
+
+}
+.footer-left:hover{
+text-decoration:underline;
+}
+.footer-center{
+max-width:43px;
+display:block;
+margin-right:50%;
+margin-left:auto;
+}
+.download{
+float: right;
+margin-right: 17px;
+
+margin-top:-41px;
+background-color: #FCF4ED;
+padding:10px;	
+text-decoration: none;
+color: #107010;
+}
+
+.download:hover{
+float: right;
+margin-right: 17px;
+margin-top: -41px;
+background-color: rgb(0, 0, 0);
+padding:10px;	
+text-decoration: none;
+color: white;
+}
+
+#left-section{
+width:60%;
+}
+#right-section{
+width:40%;
+float:right;
+text-align:center;
+margin: 0px auto 0px auto;
+}
+#right-section a{
+background-color: rgb(22, 115, 15);
+padding:10px;	
+text-decoration: none;
+color: white;
+}
+.image{
+max-width:80%;
+margin-bottom:20px;
+}
+#filtering{
+height: auto;
+	color:#3B5803;
+	margin-top: 0px;
+	margin-bottom: 0%;
+	border-radius: 5px 5px 5px 5px;
+	width: 12%;
+	background-color: #D7EFA5;
+	padding:25px 15px 15px 15px;
+	position:fixed;
+	margin-left:1%;
+	
+	}
+
+#content-boxes-dblist {
+height: auto;
+margin-left: 25%;
+margin-top: 0px;
+margin-right: 8%;
+/* width: 80%; */
+background-color: #ffffff;
+padding: 0px 15px 15px 15px;
+/* float: ; */
+}
+.centered{
+text-align:center;
+}
+.advancedsearchbutton{
+max-width: 60px;
+margin: 0px;
+max-height: 41px;
+padding: 0px;
+padding-left: 10px;
+}
+.advanced-search {
+margin-top:5%;
+text-align: center;
+position: inline;
+display: flex;
+margin-left: 13px;
+margin-bottom: 30px;
+}
+#filtering a{
+background-color: #FCF4ED;
+padding:5%;	
+text-decoration: none;
+color: rgb(22, 115, 15);
+margin-left: 25%
+}
+
+#mapPopUp{top: 0; 
+left: 0; 
+position: fixed; 
+width: 100%; 
+height: 120%;
+background-color: rgba(0,0,0,0.7); 
+display: none;
+}
+
+.popupBoxWrapper{
+width: 550px; 
+margin: 50px auto; 
+text-align: left;
+}
+.popupBoxContent{
+background-color: #FFF; 
+padding: 15px;
+}
+
+#content-boxes-dblist table{
+margin-top:0%;
+border-collapse:collapse;
+width:100%;
+border: 1px;
+padding-bottom:1.5%;
+white-space: wrap;
+font-size:100%;
+
+}
+
+#content-boxes-dblist th{
+height: 50px;
+text-align:center;
+background-color:#48577D;
+color:white;
+border:none;
+
+}
+#content-boxes-dblist tr{
+border:solid;
+border-width:1px;
+}
+#content-boxes-dblist td{
+padding: 15px;
+text-align: left;
+border-left: none;
+border-right:none;
+}
+
+/* input images */
+input[type=submit] {
+    background: url("images/search.png");
+    max-width: 58px;
+margin: 0px;
+/* float: right; */
+max-height: 41px;
+}
