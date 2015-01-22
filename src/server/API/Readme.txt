@@ -1,6 +1,6 @@
 Hi James
 
-You suck lots of suckiness
+You suck lots of sucky suckiness
 
 DO NOT FUCKING CHANGE THIS.
 @Copyright Max Atkins && Maxim Harizanov
@@ -15,13 +15,18 @@ Use the API from my server: users.aber.ac.uk/mta2/groupapi/commandName.php
 
 Available Commands:
 
-addRecord.php
-addResource.php
-getRecord.php
+addRecord.php (Encode a JSON called "record")
+addResource.php (Send a JPEG called "resource")
+getRecord.php (Decode the JSON) -- Not for use
+getResource.php (Download the JPEG in PHP)
 
 To do:
 
-getRecords.php
+getRecords.php -- Gone
 modifyRecord.php
-getResource.php
 removeRecord.php
+getSpecimen.php
+getSpecimens.php
+addSpecimen.php
+modifySpecimen.php
+removeSpecimen.php
