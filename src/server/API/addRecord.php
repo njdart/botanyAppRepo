@@ -29,6 +29,7 @@
 	$UserPhone = $record->UserPhone;
 	$UserEmail = $record->UserEmail;
 	$LocationName = $record->LocationName;
+	$LocationOS = $record->LocationOS;
 	$RecordTime = $record->Timestamp;
 	$Specimens = $record->Specimens;
 	
@@ -46,9 +47,11 @@
 	//Grabs the automatically incremented User ID
 	$userID = $conn->insert_id;
 	
+	echo $LocationOS;
+
 	//Query to insert JSON record data into Database
-	$insertRecord = "INSERT INTO botany_records (user_id, location_name, time_stamp)
-	VALUES ($userID, '$LocationName', $RecordTime)";
+	$insertRecord = "INSERT INTO botany_records (user_id, location_name, time_stamp, location_os)
+	VALUES ($userID, '$LocationName', $RecordTime, '$LocationOS')";
 	
 	//Runs the record query
 	$conn->query($insertRecord);
@@ -104,6 +107,7 @@
 		$valid = property_exists($LocalRecord, 'UserName')
 			&& property_exists($LocalRecord, 'UserPhone')
 			&& property_exists($LocalRecord, 'LocationName') 
+			&& property_exists($LocalReocrd, 'LocationOS')
 			&& property_exists($LocalRecord, 'Specimens')
 			&& property_exists($LocalRecord, 'Timestamp');
 			
