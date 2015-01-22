@@ -50,8 +50,8 @@ public class SiteDataSource {
 
     }
 
-    public List<Visit> findAll(){
-        List<Visit>  sites =  new ArrayList<Visit>();
+    public List<String> findAll(){
+        List<String>  sites =  new ArrayList<String>();
         Cursor cursor = database.query(DatabaseUtils.TABLE_SITE, allColumns ,null,null,null,null,null);
         if(cursor.getCount()>0){
             while(cursor.moveToNext()){
@@ -61,6 +61,11 @@ public class SiteDataSource {
             }
         }
         return sites;
+
+    }
+
+    public Visit FindByName(String s){
+        //work on this
 
     }
 
