@@ -1,4 +1,5 @@
-[
+{
+    "plantList": [
 	"Chara aculeolata",
 	"Chara aspera",
 	"Chara baltica",
@@ -15236,7 +15237,7 @@
 	"Chamorchis alpina",
 	"Serapias lingua",
 	"Serapias neglecta",
-	"Serapias parviflora"
+	"Serapias parviflora",
 	"Psilurus incurvus",
 	"Rostraria cristata",
 	"Rostraria litorea",
@@ -15700,4 +15701,5 @@
 	"Serapias lingua",
 	"Serapias neglecta",
 	"Serapias parviflora"
-]
+    ]
+} 

@@ -84,17 +84,8 @@
         \end{itemize}
         \item POST Arguments:
         \begin{itemize}
-            \item maxResultCount : Integer
-            \item resultStartOffset : Integer?
-        	\item speciesFilter : String?
-            \item abundanceFilter : Integer?
-            \item userNameFilter : String?
-            \item fullNameFilter : String?
-            \item commentFilter : String?
-            \item locationNameFilter : String?
-            \item locationLatitudeProximityFilter : Float?
-            \item locationLongitudeProximityFilter : Float?
-            \item locationProximityRadius : Float?
+            \item order : String ("ascending" or "descending")
+            \item method : String ("speciesName", "locationName", "userName", "timestamp")
         \end{itemize}
         \item Statuses: 
         \begin{itemize}

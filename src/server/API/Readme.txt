@@ -1,6 +1,6 @@
 Hi James
 
-You suck lots of sucky suckiness
+You suck lots of sucky sucking suckily suckiness
 
 DO NOT FUCKING CHANGE THIS.
 @Copyright Max Atkins && Maxim Harizanov
@@ -18,15 +18,16 @@ Available Commands:
 addRecord.php (Encode a JSON called "record")
 addResource.php (Send a JPEG called "resource")
 getRecord.php (Decode the JSON) -- Not for use
-getResource.php (Download the JPEG in PHP)
+getResource.php (eg ID: 13)
+getSpecimen.php (Decode the JSON. POST name = specimenID) 
+getSpecimens.php (Decode the JSON. All specimens are in array. POST order = ascending/descending. POST method = speciesName/locationName/userName/timeStamp)
 
 To do:
 
-getRecords.php -- Gone
-modifyRecord.php
-removeRecord.php
-getSpecimen.php
-getSpecimens.php
 addSpecimen.php
 modifySpecimen.php
 removeSpecimen.php
+getRecords.php -- Gone
+modifyRecord.php -- Gone
+removeRecord.php -- Gone
+

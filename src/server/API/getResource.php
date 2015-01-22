@@ -42,7 +42,7 @@
 
 	
 	//COPIED
-	$downloadPath = 'http:/users.aber.ac.uk/mta2/groupapi/DBPictures/' . $resourceID;
+	$downloadPath = 'http://users.aber.ac.uk/mta2/groupapi/DBPictures/' . $resourceID;
         /*if (file_exists($downloadPath)) {
 
             http_response_code(200);
