@@ -75,6 +75,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.aber.cs221.group2.dataClasses.Visit;
+
 
 /**
  * Created by xander on 21/01/2015.
@@ -86,7 +88,9 @@ public class SiteDataSource {
 
     private static final String[] allColumns = {
             DatabaseUtils.COLUMN_ID,
-            DatabaseUtils.COLUMN_VISIT_NAME
+            DatabaseUtils.COLUMN_VISIT_NAME,
+            DatabaseUtils.COLUMN_OS,
+            DatabaseUtils.COLUMN_DATE
     };
     public SiteDataSource( Context context){
         dbhelper = new DatabaseUtils(context);
@@ -101,9 +105,12 @@ public class SiteDataSource {
         dbhelper.close();
     }
 
-    public void create(String visit){
+    public void create(Visit visit){
         ContentValues values = new ContentValues();
-        values.put(DatabaseUtils.COLUMN_VISIT_NAME,visit);
+        values.put(DatabaseUtils.COLUMN_VISIT_NAME,visit.getVisitName());
+        values.put(DatabaseUtils.COLUMN_OS,visit.getVisitOS());
+        values.put(DatabaseUtils.COLUMN_DATE,visit.getVisitDate());
+
         long insertid = database.insert(DatabaseUtils.TABLE_SITE, null, values);
 
 

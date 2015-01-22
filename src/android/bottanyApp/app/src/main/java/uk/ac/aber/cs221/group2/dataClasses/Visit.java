@@ -78,25 +78,36 @@ import java.sql.Time;
 import java.util.Date;
 
 public class Visit {
-	
-	
-	private Date VisitDate;
-	private Time VisitTime;
-	
-	
+
+
+
+    private String visitName;
+	private Double visitDate;
+	private String visitOS;
+
+    public String getVisitOS() {
+        return visitOS;
+    }
+
+    public void setVisitOS(String visitOS) {
+        this.visitOS = visitOS;
+    }
+
+
+
+    public String getVisitName() {
+        return visitName;
+    }
+
+    public void setVisitName(String visitName) {
+        this.visitName = visitName;
+    }
 	
 	/**
 	 * set the visit date
 	 */
-	public void setVisitDate(Date a){
-		VisitDate = a;
-	}
-	
-	/**
-	 * set the visit time
-	 */
-	public void setVisitTime(Time a){
-		VisitTime = a;
+	public void setVisitDate(Double a){
+		visitDate = a;
 	}
 	
 	 /**
@@ -104,20 +115,9 @@ public class Visit {
      * https://docs.oracle.com/javase/7/docs/api/java/sql/Date.html
      * Fulfils requirement FR2
      */
-    public Date getVisitDate() {
-		return VisitDate;
+    public Double getVisitDate() {
+		return visitDate;
 	}
-
-
-    /**
-     * Returns the visit Time when the user logged in
-     * https://docs.oracle.com/javase/7/docs/api/java/sql/Time.html
-     * Fulfils requirement FR2
-     */
-    public Time getVisitTime() {
-		return VisitTime;
-	}
-
 
     /**
      * Returns a list of all specimens entered so far
