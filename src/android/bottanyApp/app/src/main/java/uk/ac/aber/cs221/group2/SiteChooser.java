@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,10 +25,13 @@ import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 
 public class SiteChooser extends Activity {
 
+    private LocationManager locationManager = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_site_chooser);
+        locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
         //Toast.makeText(getApplicationContext(), "Hello World! I'm Toast!", Toast.LENGTH_LONG).show();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -33,6 +39,14 @@ public class SiteChooser extends Activity {
         AutoCompleteTextView textView = (AutoCompleteTextView)
                 findViewById(R.id.siteNameAutoComplete);
         textView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                3600000, 1000, onLocationChange);
     }
 
     public static ArrayList<String> autoCompleteEntries = new ArrayList<String>() {{
@@ -73,12 +87,12 @@ public class SiteChooser extends Activity {
 
         source.open();
 
-        source.create(((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete)).getText().toString());
-        List<String> list = source.findAll();
+        //source.create(((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete)).getText().toString());
+        //List<String> list = source.findAll();
 
-        System.out.println(list.toString());
-        System.out.println(list.get(0));
-
+        //System.out.println(list.toString());
+        //System.out.println(list.get(0));
+        //TODO redo database reading/writing
     }
 
     public void onUseSiteClick(View view){
@@ -110,14 +124,28 @@ public class SiteChooser extends Activity {
         }
     }
 
-    public class ArrayListCaseInsensitive extends ArrayList<String> {
+    LocationListener onLocationChange = new LocationListener(){
+
         @Override
-        public boolean contains(Object o) {
-            String paramStr = (String)o;
-            for (String s : this) {
-                if (paramStr.equalsIgnoreCase(s)) return true;
-            }
-            return false;
+        public void onLocationChanged(Location location) {
+            System.out.println("LAT: " + location.getLatitude() + " LNG: " + location.getLongitude());
+            Toast.makeText(SiteChooser.this, "LAT: " + location.getLatitude() + " LNG: " + location.getLongitude(), Toast.LENGTH_LONG).show();
         }
-    }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            System.out.println("STATUS: " + provider.toString() + ", " + status);
+            Toast.makeText(SiteChooser.this, "Status " + status, Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            System.out.println("Provider Enables");
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            System.out.println("Provider Disabled");
+        }
+    };
 }

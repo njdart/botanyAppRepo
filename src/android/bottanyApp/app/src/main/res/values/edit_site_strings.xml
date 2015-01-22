@@ -2,4 +2,6 @@
 <resources>
     <string name="siteNameHint">Site Name</string>
     <string name="useSite">Use Site</string>
+    <string name="customGridRefCheckbox">Use a Different Grid Reference</string>
+    <string name="customGridRefTextEdit">Enter a Grid Reference</string>
 </resources>
