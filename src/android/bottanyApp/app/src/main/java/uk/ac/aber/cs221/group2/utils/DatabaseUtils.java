@@ -13,12 +13,12 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final String DB_NAME = "site.db";
     public static final int DB_VERSION = 1;
 
-    public static final String TABLE_SITE = "site";
+    public static final String TABLE_TOURS = "site";
     public static final String COLUMN_ID = "siteId";
     public static final String COLUMN_VISIT_NAME = "siteName";
 
-    private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_SITE + " (" +
-            COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+    private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_TOURS + " (" +
+            COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCFREMENT, " +
             COLUMN_VISIT_NAME + " TEXT )";
 
     public DatabaseUtils(Context context) {
@@ -33,7 +33,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SITE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TOURS);
         onCreate(db);
     }
 }

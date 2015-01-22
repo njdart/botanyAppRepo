@@ -9,7 +9,7 @@ create table botany_users (
     user_name VARCHAR(20) NOT NULL,
     user_fullname VARCHAR(50),
     user_phone VARCHAR(20),
-    user_email VARCHAR(20),
+    user_email VARCHAR(50),
     user_password BINARY(20),
     PRIMARY KEY (user_id));
     
