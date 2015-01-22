@@ -1,0 +1,36 @@
+{
+	"UserID": 
+		1,
+	"UserName":
+		"Harry", 
+	"UserPhone":
+		"07949021123", 
+	"UserEmail":
+		"harry.potter@hogwarts.com",
+	
+	"RecordID":
+		1,
+	"LocationName":
+		"Hogwarts", 
+	"LocationOS":
+		"DB912321",
+	"Timestamp":
+		54
+
+	"SpecimenID":
+		1,
+	"SpeciesName":
+		"Potato",
+	"LocationLatitude":
+		654.123,
+	"LocationLongitude":
+		71.01,
+	"Abundance":
+		3,
+	"Comment":
+		"This plant sucks",
+	"ScenePhoto":
+		"1",
+	"SpecimenPhoto":
+		"2"
+}
