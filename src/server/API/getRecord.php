@@ -1,9 +1,9 @@
 <?php
 
 	//Stops warnings
-	error_reporting(E_ERROR);
+	//error_reporting(E_ERROR);
 	
-	//Takes POST into variable
+	//Decodes the JSON into PHP readable
 	$recordID = $_POST["recordID"];
 
 	//Returns success code for successful data and connects to Database
@@ -74,6 +74,13 @@
 	//Get user from database
 	while($row = $specimensQuery ->fetch_assoc())
 	{
+		//$speciesName = $row['species_name'];
+		//$latitude = $row['latitude'];
+		//$longitude = $row['longitude'];
+		//$abundance = $row['abundance'];
+		//$comment = $row['comment'];
+		//$scenePhoto = $row['scene_photo'];
+		//$specimenPhoto = $row['specimen_photo'];
 		array_push($specimens, array('SpeciesName' => $row['species_name'], 
 									  'LocationLatitude' => $row['latitude'],
 									  'LocationLongitude' => $row['longitude'],

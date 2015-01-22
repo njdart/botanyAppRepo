@@ -40,6 +40,7 @@
 	
 	//Specimens table
 	$specimenID = (int)$specimen['specimen_id'];
+	$specimenName = $specimen['species_name'];
 	$latitude = (float)$specimen['latitude'];
 	$longitude = (float)$specimen['longitude'];
 	$abundance = (int)$specimen['abundance'];
@@ -58,6 +59,7 @@
 	$userEmail = $specimen['user_email'];
 	
 	$lastRecord = array('SpecimenID' => $specimenID,
+			    'SpeciesName' => $specimenName,
 		   	    'LocationLatitude' => $latitude, 
 			    'LocationLongitude' => $longitude,
 			    'Abundance' => $abundance,
