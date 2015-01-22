@@ -20,6 +20,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_TOURS + " (" +
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCFREMENT, " +
             COLUMN_VISIT_NAME + " TEXT )";
+    public static final String TABLE_SITE = "site";
 
     public DatabaseUtils(Context context) {
         super(context, DB_NAME, null, DB_VERSION);

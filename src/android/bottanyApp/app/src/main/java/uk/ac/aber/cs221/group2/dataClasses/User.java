@@ -1,15 +1,12 @@
+package uk.ac.aber.cs221.group2.dataClasses;
 
-public class user {
-	
-	
+public class User {
+
 	private String ForeName;
 	private String LastName;
 	private String PhoneNumber;
 	private String Email;
-	
-	
-	
-	
+
 	/**
 	 * sets the users forename
 	 */
@@ -67,11 +64,4 @@ public class user {
     public String getUserEmail() {
 		return Email;
 	}
-    
-    
-    
-    
-    
-    
-    
 }
