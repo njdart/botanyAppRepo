@@ -1,24 +1,67 @@
 package uk.ac.aber.cs221.group2.dataClasses;
 
-
 public class User {
 
-    private String name;
-    private String phoneNumber;
-    private String email;
-    private String siteLocation;
+	private String ForeName;
+	private String LastName;
+	private String PhoneNumber;
+	private String Email;
 
-    //Possible use?
-    private double lat;
-    private double lng;
+	/**
+	 * sets the users forename
+	 */
+	public void setForeName(String a){
+		ForeName = a;
+	}
+	
+	/**
+	 * sets the users lastname
+	 */
+	public void setLastName(String a){
+		LastName = a;
+	}
+	
+	/**
+	 * sets the users phonenumber
+	 */
+	public void setPhoneNumber(String a){
+		LastName = a;
+	}
+	
+	/**
+	 * sets the users email
+	 */
+	public void setEmail(String a){
+		LastName = a;
+	}
 
-    public User(String name,
-                String phone,
-                String email,
-                String siteLoc){
-        this.name = name;
-        this.phoneNumber = phone;
-        this.email = email;
-        this.siteLocation = siteLoc;
-    }
+
+	 /**
+     * Returns the users first name
+     */
+    public String getUserForeName() {
+		return ForeName;
+	}
+
+    /**
+     * Returns the users last name
+     */
+    public String getUserLastName() {
+		return LastName;
+	}
+
+    /**
+     * Returns the users phone number
+     * Formatted accordingly (Eg 07...)
+     */
+    public String getUserPhoneNumber() {
+		return PhoneNumber;
+	}
+
+    /**
+     * Returns the users email
+     */
+    public String getUserEmail() {
+		return Email;
+	}
 }

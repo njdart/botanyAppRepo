@@ -38,14 +38,14 @@ public class SiteDataSource {
     public void create(String visit){
         ContentValues values = new ContentValues();
         values.put(DatabaseUtils.COLUMN_VISIT_NAME,visit);
-        long insertid = database.insert(DatabaseUtils.TABLE_TOURS, null, values);
+        long insertid = database.insert(DatabaseUtils.TABLE_SITE, null, values);
 
 
     }
 
     public List<String> findAll(){
         List<String>  sites =  new ArrayList<String>();
-        Cursor cursor = database.query(DatabaseUtils.TABLE_TOURS, allColumns ,null,null,null,null,null);
+        Cursor cursor = database.query(DatabaseUtils.TABLE_SITE, allColumns ,null,null,null,null,null);
         if(cursor.getCount()>0){
             while(cursor.moveToNext()){
                 String site = new String();
