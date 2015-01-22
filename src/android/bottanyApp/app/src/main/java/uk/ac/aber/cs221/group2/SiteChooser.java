@@ -19,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import uk.ac.aber.cs221.group2.dataClasses.Visit;
 import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 
 
@@ -27,13 +29,20 @@ public class SiteChooser extends Activity {
 
     private LocationManager locationManager = null;
     boolean useCustomGridRef = false;
+    public static List<String> autoCompleteEntries;
+    SiteDataSource siteDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_site_chooser);
         locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-        //Toast.makeText(getApplicationContext(), "Hello World! I'm Toast!", Toast.LENGTH_LONG).show();
+
+        siteDataSource = new SiteDataSource(this);
+
+        siteDataSource.open();
+
+        autoCompleteEntries = siteDataSource.findAll();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, autoCompleteEntries);
@@ -48,17 +57,6 @@ public class SiteChooser extends Activity {
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3600000, 1000, onLocationChange);
     }
-
-    public static ArrayList<String> autoCompleteEntries = new ArrayList<String>() {{
-        add("Foo");
-        add("Bar");
-        add("FooBar");
-        add("BarFoo");
-        add("Faz");
-        add("Baz");
-    }};
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,46 +80,40 @@ public class SiteChooser extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onButtonClick(View view){
-        SiteDataSource source = new SiteDataSource(this);
+    public void onUseSiteClick(View view){
+        final String siteName = ((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete))
+                .getText().toString();
+        String siteNameLower = siteName.toLowerCase();
 
-        source.open();
+        //check if the site is already in the list
+        for(String s : autoCompleteEntries){
+            if(s.toLowerCase().equals(siteNameLower)){
+                goToSpeciesAdderActivity();
+                return;
+            }
+        }
 
-        //source.create(((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete)).getText().toString());
-        //List<String> list = source.findAll();
+        //if we get to here, it isn't in the list, alert the user and if
+        //it's a genuine new site, add it
+        new AlertDialog.Builder(this)
+                .setTitle("Create Site")
+                .setMessage("No site was previously found by this name, Do you want to create this site")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        siteDataSource.create(new Visit(siteName, "FOOBAR"));
 
-        //System.out.println(list.toString());
-        //System.out.println(list.get(0));
-        //TODO redo database reading/writing
+                        //TODO site ref is NOT "foobar", but fuck it...
+
+                        goToSpeciesAdderActivity();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
     }
 
-    public void onUseSiteClick(View view){
-        String compareTo = ((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete))
-                .getText().toString();
-        if(!autoCompleteEntries.contains(compareTo)) {
-            autoCompleteEntries.add(compareTo);
-            System.out.println("Adding entry " + compareTo);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_dropdown_item_1line, autoCompleteEntries);
-            AutoCompleteTextView textView = (AutoCompleteTextView)
-                    findViewById(R.id.siteNameAutoComplete);
-            textView.setAdapter(adapter);
-
-            new AlertDialog.Builder(this)
-                    .setTitle("New Site")
-                    .setMessage("No site was previously found by this name, Are you sure?")
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            Intent i = new Intent(SiteChooser.this, SpeciesAdder.class);
-                            startActivity(i);
-                        }})
-                    .setNegativeButton(android.R.string.no, null).show();
-        } else {
-            Intent i = new Intent(SiteChooser.this, SpeciesAdder.class);
-            startActivity(i);
-        }
+    private void goToSpeciesAdderActivity() {
+        Intent i = new Intent(this, SpeciesAdder.class);
+        startActivity(i);
     }
 
     public void onClickUseCustomGridRef(View view){
@@ -139,7 +131,7 @@ public class SiteChooser extends Activity {
             //Toast.makeText(SiteChooser.this, "LAT: " + location.getLatitude() + " LNG: " + location.getLongitude(), Toast.LENGTH_LONG).show();
             TextView gridRef = (TextView)findViewById(R.id.customGridReferenceEditText);
             if(!useCustomGridRef) {
-                gridRef.setText(location.getLatitude() + " " + location.getLongitude());
+                gridRef.setText(location.getLatitude() + "\n" + location.getLongitude());
             }
         }
 

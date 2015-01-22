@@ -1,7 +1,7 @@
 <?php
 
 	//Stops warnings
-	//error_reporting(E_ERROR);
+	error_reporting(E_ERROR);
 	
 	//Decodes the JSON into PHP readable
 	$recordID = $_POST["recordID"];
@@ -14,6 +14,7 @@
 	if($conn->connect_errno)
 	{
 		http_response_code(500);
+
 		die('Could not connect: ' . $mysqli->connect_error);
 	}
 	
