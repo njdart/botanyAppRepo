@@ -32,3 +32,4 @@ build/
 .directory.lock
 
 src/android/production/*
+src/android/gen/uk/ac/aber/cs221/group2/*

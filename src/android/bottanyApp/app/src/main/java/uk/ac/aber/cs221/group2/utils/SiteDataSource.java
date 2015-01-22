@@ -45,14 +45,14 @@ public class SiteDataSource {
         values.put(DatabaseUtils.siteTable_siteOSGridRef, visit.getVisitOS());
         values.put(DatabaseUtils.siteTable_siteTimeStamp, visit.getVisitDate());
 
-        long insertid = database.insert(DatabaseUtils.sitesTableName, null, values);
+        long insertid = database.insert(DatabaseUtils.siteTable_siteName, null, values);
 
 
     }
 
     public List<String> findAll(){
         List<String>  sites =  new ArrayList<String>();
-        Cursor cursor = database.query(DatabaseUtils.sitesTableName, allColumns ,null,null,null,null,null);
+        Cursor cursor = database.query(DatabaseUtils.siteTable_siteName, allColumns ,null,null,null,null,null);
         if(cursor.getCount()>0){
             while(cursor.moveToNext()){
                 String site = new String();
@@ -65,7 +65,7 @@ public class SiteDataSource {
     }
 
     public Visit FindByName(String s){
-        //work on this
+        //TODO Find all by name
         return null;
     }
 

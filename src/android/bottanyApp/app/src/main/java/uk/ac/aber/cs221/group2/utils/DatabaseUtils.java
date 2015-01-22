@@ -1,7 +1,6 @@
 package uk.ac.aber.cs221.group2.utils;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -12,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseUtils extends SQLiteOpenHelper {
 
 
-    public static final String databaseName = "botanyApp.db";
+    public static final String databaseName = "site.db";
     public static final int dbVersion = 1;
 
     public static final String sitesTableName = "site";
@@ -40,7 +39,6 @@ public class DatabaseUtils extends SQLiteOpenHelper {
             createPlantsTableQuery
     };
 
-
     public DatabaseUtils(Context context) {
         super(context, databaseName, null, dbVersion);
         System.out.println("DATABASE LOCATED AT : " + context.getDatabasePath(databaseName));
@@ -54,7 +52,6 @@ public class DatabaseUtils extends SQLiteOpenHelper {
                 db.execSQL(creationQuery);
             }
         } catch (SQLException e){
-
             e.printStackTrace();
         }
     }
