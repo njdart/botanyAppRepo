@@ -19,14 +19,20 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final String COLUMN_OS = "osRef";
     public static final String COLUMN_DATE = "siteDate";
 
+    public static final String TABLE_TWO = "plants";
+    public static final String PLANT_ID = "plantId";
+    public static final String PLANT_NAME = "plantName";
 
 
     private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_ONE + " (" +
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCFREMENT, " +
             COLUMN_VISIT_NAME + " TEXT, " +
             COLUMN_DATE + " DOUBLE, "+
-            COLUMN_OS + " TEXT )";
-    public static final String TABLE_SITE = "site";
+            COLUMN_OS + " TEXT )," +
+            "CREATE TABLE " + TABLE_TWO + " (" +
+            PLANT_ID + " INTEGER PRIMARY KEY AUTOINCFREMENT, " +
+            PLANT_NAME + " TEXT, ";
+
 
     public DatabaseUtils(Context context) {
         super(context, DB_NAME, null, DB_VERSION);

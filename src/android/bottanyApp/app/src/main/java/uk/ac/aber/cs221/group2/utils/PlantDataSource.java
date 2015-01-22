@@ -11,22 +11,20 @@ import java.util.List;
 
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 
-
 /**
- * Created by xander on 21/01/2015.
+ * Created by xander on 22/01/2015.
  */
-public class SiteDataSource {
+public class PlantDataSource {
 
     SQLiteOpenHelper dbhelper;
     SQLiteDatabase database;
 
     private static final String[] allColumns = {
-            DatabaseUtils.COLUMN_ID,
-            DatabaseUtils.COLUMN_VISIT_NAME,
-            DatabaseUtils.COLUMN_OS,
-            DatabaseUtils.COLUMN_DATE
-    };
-    public SiteDataSource( Context context){
+            DatabaseUtils.PLANT_ID,
+            DatabaseUtils.PLANT_NAME,
+            };
+
+    public PlantDataSource(Context context){
         dbhelper = new DatabaseUtils(context);
         database = dbhelper.getWritableDatabase();
     }
@@ -39,24 +37,23 @@ public class SiteDataSource {
         dbhelper.close();
     }
 
-    public void create(Visit visit){
+    public void create(String plant){
         ContentValues values = new ContentValues();
-        values.put(DatabaseUtils.COLUMN_VISIT_NAME, visit.getVisitName());
-        values.put(DatabaseUtils.COLUMN_OS, visit.getVisitOS());
-        values.put(DatabaseUtils.COLUMN_DATE, visit.getVisitDate());
+        values.put(DatabaseUtils.PLANT_NAME, plant);
 
-        long insertid = database.insert(DatabaseUtils.TABLE_ONE, null, values);
+
+        long insertid = database.insert(DatabaseUtils.TABLE_TWO, null, values);
 
 
     }
 
     public List<String> findAll(){
         List<String>  sites =  new ArrayList<String>();
-        Cursor cursor = database.query(DatabaseUtils.TABLE_ONE, allColumns ,null,null,null,null,null);
+        Cursor cursor = database.query(DatabaseUtils.TABLE_TWO, allColumns ,null,null,null,null,null);
         if(cursor.getCount()>0){
             while(cursor.moveToNext()){
                 String site = new String();
-                site = cursor.getString(cursor.getColumnIndex(DatabaseUtils.COLUMN_VISIT_NAME));
+                site = cursor.getString(cursor.getColumnIndex(DatabaseUtils.PLANT_NAME));
                 sites.add(site);
             }
         }
@@ -69,4 +66,5 @@ public class SiteDataSource {
         return null;
     }
 
+}
 }
