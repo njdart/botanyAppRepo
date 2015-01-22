@@ -1,15 +1,16 @@
 package uk.ac.aber.cs221.group2;
 
 import android.app.Activity;
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,17 +21,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,10 +40,10 @@ public class LaunchActivity extends Activity  {
         if (savedInstanceState == null) {
             //Add fragments here
         }
-        new PlantDataSource(this).open().create("FooBar");
+
         //Run the background thread
-        //InitThread i = new InitThread(new PlantDataSource(this).open());
-        //i.run();
+        InitThread i = new InitThread(new PlantDataSource(this).open(), this);
+        i.execute();
     }
 
     public void newVisitOnClick(View buttonView){
@@ -118,23 +113,26 @@ public class LaunchActivity extends Activity  {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            System.out.println("Settings Button Clicked!");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public class InitThread implements Runnable {
+    public class InitThread extends AsyncTask {
 
         PlantDataSource plantDataSource;
+        Context context;
 
-        public InitThread(PlantDataSource plantDataSource){
+        public InitThread(PlantDataSource plantDataSource, Context context){
             this.plantDataSource = plantDataSource;
+            this.context = context;
         }
+
         @Override
-        public void run() {
+        protected Object doInBackground(Object[] params) {
             try {
+                long startTime = System.currentTimeMillis();
                 DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
                 HttpPost httppost = new HttpPost("http://nic-dart.co.uk/~nic/res/plantlist.json");
                 // Depends on your web service
@@ -155,32 +153,30 @@ public class LaunchActivity extends Activity  {
                     sb.append(line + "\n");
                 }
                 result = sb.toString();
+                long timeToDownload = System.currentTimeMillis() - startTime;
+                startTime = System.currentTimeMillis();
 
-                JSONObject jObject = new JSONObject(result);
-                //System.out.println("JSON object: " + jObject.toString());
-                JSONArray jsonArray = jObject.getJSONArray("plantList");
-
-                //for(int i = 0; i < jsonArray.length(); i++){
-                //    String name = jsonArray.getString(i);
-                //    System.out.println(name);
-                //    plantDataSource.create(name);
-                //}
+                //Dont bother saving anything of the decoded json array, just do the transaction really fast!
+                plantDataSource.jsonTransaction(new JSONObject(result).getJSONArray("plantList"));
 
                 plantDataSource.close();
-
-
+                long timeToProcess = System.currentTimeMillis() - startTime;
+                System.out.println(String.format("DB done processing in %2.2f seconds (%2.2f for the download)", (float)timeToProcess / 1000, (float)timeToDownload / 1000));
+                Toast.makeText(context, "Plant Database is now up to date!", Toast.LENGTH_LONG).show();
             } catch (JSONException e){
                 System.out.println("Error, bad json?");
                 e.printStackTrace();
                 //TODO nice errors
             } catch (MalformedURLException ex){
-                System.out.println("Unable to download Latin Names Resource");
+                System.out.println("Unable to download Latin Names Resource?");
                 ex.printStackTrace();
                 //TODO some nice error for the user
             } catch (IOException exc){
-                System.out.println("OH SHIT! some IO exception occured");
+                System.out.println("OH SHIT! some IO exception occurred");
                 exc.printStackTrace();
                 //TODO more nice errors
+            } finally {
+                return null;
             }
         }
     }

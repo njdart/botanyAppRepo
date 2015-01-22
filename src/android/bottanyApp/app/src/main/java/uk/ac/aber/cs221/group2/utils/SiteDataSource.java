@@ -32,7 +32,7 @@ public class SiteDataSource {
     }
 
     public void open(){
-        database = dbhelper.getWritableDatabase();
+       database = dbhelper.getWritableDatabase();
     }
 
     public void close(){
