@@ -2,11 +2,21 @@ import java.sql.Time;
 import java.util.Date;
 
 
-public class visit {
+public class Visit {
 	
 	
 	private Date VisitDate;
 	private Time VisitTime;
+    private String VisitName;
+
+    public String getVisitName() {
+        return VisitName;
+    }
+
+    public void setVisitName(String visitName) {
+
+        VisitName = visitName;
+    }
 	
 	
 	
