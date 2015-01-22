@@ -18,26 +18,26 @@ public class Specimen {
 	}
 
 	
-	private String Latitude;
-	private String Longitude;
-	private AbundanceEnum Abundance;
-	private String Comment;
-	private String ScenePhotoURI;
-	private String SpecimenPhotoURI;
+	private String latitude;
+	private String longitude;
+	private AbundanceEnum abundance;
+	private String comment;
+	private String scenePhotoURI;
+	private String specimenPhotoURI;
 	
 	
 	/**
 	 * Set the approximate Specimen latitude
 	 */
 	public void setLatitude(String a){
-		Latitude = a;
+		latitude = a;
 	}
 	
 	/**
 	 * Set the approximate Specimen longitude
 	 */
 	public void setLongitude(String a){
-		Longitude = a;
+		longitude = a;
 	}
 	
 	/**
@@ -51,63 +51,63 @@ public class Specimen {
 	 * Set the comment
 	 */
 	public void setComment(String a){
-		Comment = a;
+		comment = a;
 	}
 	
 	/**
 	 * Set the scene photo URI
 	 */
 	public void setScenePhotoURI(String a){
-		ScenePhotoURI = a;
+		scenePhotoURI = a;
 	}
 	
 	/**
 	 * Set the Specimen photo URI
 	 */
 	public void setSpecimenPhotoURI(String a){
-		SpecimenPhotoURI = a;
+		specimenPhotoURI = a;
 	}
 	
 	/**
 	 * Gets the approximate Specimen longitude
 	 */
 	public String getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 
 	/**
 	 * Gets the approximate Specimen latitude
 	 */
 	public String getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 
 	/**
 	 * Gets the abundance rating
 	 */
 	public AbundanceEnum getAbundance() {
-		return Abundance;
+		return abundance;
 	}
 
 	/**
 	 * returns the free text comment made by the user
 	 */
 	public String getComment() {
-		return Comment;
+		return comment;
 	}
 
 	/**
 	 * returns a URI to the scene photo if one is provided
 	 */
 	public String getScenePhotoURI() {
-		return ScenePhotoURI;
+		return scenePhotoURI;
 	}
 
 	/**
 	 * returns a URI to the Specimen photo if one is provided
 	 */
 	public String getSpecimenPhotoURI() {
-		return SpecimenPhotoURI;
+		return specimenPhotoURI;
 	}
 
 	/**

@@ -2,37 +2,37 @@ package uk.ac.aber.cs221.group2.dataClasses;
 
 public class User {
 
-	private String ForeName;
-	private String LastName;
-	private String PhoneNumber;
-	private String Email;
+	private String foreName;
+	private String lastName;
+	private String phoneNumber;
+	private String email;
 
 	/**
 	 * sets the users forename
 	 */
 	public void setForeName(String a){
-		ForeName = a;
+		foreName = a;
 	}
 	
 	/**
 	 * sets the users lastname
 	 */
 	public void setLastName(String a){
-		LastName = a;
+		lastName = a;
 	}
 	
 	/**
 	 * sets the users phonenumber
 	 */
 	public void setPhoneNumber(String a){
-		LastName = a;
+		phoneNumber = a;
 	}
 	
 	/**
 	 * sets the users email
 	 */
 	public void setEmail(String a){
-		LastName = a;
+		email = a;
 	}
 
 
@@ -40,14 +40,14 @@ public class User {
      * Returns the users first name
      */
     public String getUserForeName() {
-		return ForeName;
+		return foreName;
 	}
 
     /**
      * Returns the users last name
      */
     public String getUserLastName() {
-		return LastName;
+		return lastName;
 	}
 
     /**
@@ -55,13 +55,13 @@ public class User {
      * Formatted accordingly (Eg 07...)
      */
     public String getUserPhoneNumber() {
-		return PhoneNumber;
+		return phoneNumber;
 	}
 
     /**
      * Returns the users email
      */
     public String getUserEmail() {
-		return Email;
+		return email;
 	}
 }
