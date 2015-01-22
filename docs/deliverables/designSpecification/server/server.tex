@@ -20,14 +20,15 @@
         	\item 500 Internal Server Error
         \end{itemize}
 
-        \item RemoveRecord
+        \item RemoveSpecimen
         \item Headers required: 
         \begin{itemize}
-        	\item Authorization
+        	\item none
         \end{itemize}
         \item POST Arguments:
         \begin{itemize}
-        	\item recordID : Integer
+        	\item specimenID : Integer
+        	\item password : String
         \end{itemize}
         \item Statuses:
         \begin{itemize}
@@ -37,15 +38,16 @@
         	\item 500 Internal Server Error
         \end{itemize}
 
-        \item ModifyRecord
+        \item ModifySpecimen
         \item Headers required:
         \begin{itemize}
-        	\item Authorization
+        	\item none
         \end{itemize}
         \item POST Arguments:
         \begin{itemize}
-        	\item recordID : Integer
-        	\item record : Record
+        	\item specimenID : Integer
+        	\item specimen : Specimen
+        	\item password : String
         \end{itemize}
         \item Statuses:
         \begin{itemize}
@@ -56,26 +58,26 @@
         \end{itemize}
 
 
-        \item GetRecord
+        \item GetSpecimen
         \item Headers required: 
         \begin{itemize}
             \item none
         \end{itemize}
         \item POST Arguments:
         \begin{itemize}
-        	\item recordID : Integer
+        	\item specimenID : Integer
         \end{itemize}
         \item Statuses:
         \begin{itemize}
         	\item 200 OK :
             \begin{itemize}
-                \item record : Record
+                \item specimen : SpecimenResult
             \end{itemize}
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
 
-        \item GetRecords
+        \item GetSpecimens
         \item Headers Required:
         \begin{itemize}
         	\item none
@@ -96,7 +98,7 @@
         \end{itemize}
         \item Statuses: 
         \begin{itemize}
-        	\item 200 OK : array of Record
+        	\item 200 OK : array of SpecimenResult
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
@@ -188,6 +190,29 @@
                 \item ScenePhoto : String (ID of a resource on the server)
                 \item SpecimenPhoto : String (ID of a resource on the server)
             \end{itemize}
+        \end{itemize}
+        
+        The structure of a Specimen result is as follows:
+        \begin{itemize}
+        	\item SpecimenResult : Object
+        	\begin{itemize}
+	        	\item UserID : Number
+	        	\item RecordID : Number
+	        	\item SpecimenID : Number
+        		\item UserName : String
+        		\item UserEmail : String
+        		\item UserPhone : String
+        		\item LocationName : String
+        		\item LocationOS : String
+        		\item Timestamp : Number
+        		\item SpeciesName : String
+        		\item LocationLatitude : Number
+        		\item LocationLongtitude : Number
+        		\item Abundance : Number
+        		\item Comment : String
+        		\item ScenePhoto : String (ID of a resource on the server)
+        		\item SpecimenPhoto : String (ID of a resource on the server)
+        	\end{itemize}
         \end{itemize}
 
         The web API is going to use a relational database as a data store.
