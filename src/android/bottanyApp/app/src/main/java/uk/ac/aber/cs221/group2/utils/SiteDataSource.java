@@ -64,4 +64,9 @@ public class SiteDataSource {
 
     }
 
+    public Visit FindByName(String s){
+        //work on this
+
+    }
+
 }
