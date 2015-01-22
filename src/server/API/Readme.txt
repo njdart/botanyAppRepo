@@ -1,6 +1,6 @@
 Hi James
 
-You suck lots of suckiness
+You suck lots of sucky suckiness
 
 DO NOT FUCKING CHANGE THIS.
 @Copyright Max Atkins && Maxim Harizanov
