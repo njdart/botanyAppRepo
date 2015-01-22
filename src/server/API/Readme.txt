@@ -19,13 +19,13 @@ addRecord.php (Encode a JSON called "record")
 addResource.php (Send a JPEG called "resource")
 getRecord.php (Decode the JSON) -- Not for use
 getResource.php (Download the JPEG in PHP)
+getSpecimen.php (Decode the JSON. POST name = specimenID) 
 
 To do:
 
 getRecords.php -- Gone
 modifyRecord.php
 removeRecord.php
-getSpecimen.php
 getSpecimens.php
 addSpecimen.php
 modifySpecimen.php
