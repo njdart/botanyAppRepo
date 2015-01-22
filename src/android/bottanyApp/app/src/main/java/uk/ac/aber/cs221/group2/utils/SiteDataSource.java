@@ -20,7 +20,8 @@ public class SiteDataSource {
 
     private static final String[] allColumns = {
             DatabaseUtils.COLUMN_ID,
-            DatabaseUtils.COLUMN_VISIT_NAME
+            DatabaseUtils.COLUMN_VISIT_NAME,
+            DatabaseUtils.COLUMN_OS
     };
     public SiteDataSource( Context context){
         dbhelper = new DatabaseUtils(context);
@@ -38,6 +39,7 @@ public class SiteDataSource {
     public void create(String visit){
         ContentValues values = new ContentValues();
         values.put(DatabaseUtils.COLUMN_VISIT_NAME,visit);
+
         long insertid = database.insert(DatabaseUtils.TABLE_TOURS, null, values);
 
 

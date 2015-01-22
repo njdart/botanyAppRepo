@@ -13,13 +13,15 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final String DB_NAME = "site.db";
     public static final int DB_VERSION = 1;
 
-    public static final String TABLE_TOURS = "site";
+    public static final String TABLE_ONE = "site";
     public static final String COLUMN_ID = "siteId";
     public static final String COLUMN_VISIT_NAME = "siteName";
+    public static final String COLUMN_OS = "os_grid_refrence";
 
-    private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_TOURS + " (" +
+    private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_ONE + " (" +
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCFREMENT, " +
-            COLUMN_VISIT_NAME + " TEXT )";
+            COLUMN_VISIT_NAME + " TEXT, " +
+            COLUMN_OS + " TEXT )";
 
     public DatabaseUtils(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -33,7 +35,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TOURS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ONE);
         onCreate(db);
     }
 }
