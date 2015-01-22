@@ -21,10 +21,10 @@ public class SiteDataSource {
     SQLiteDatabase database;
 
     private static final String[] allColumns = {
-            DatabaseUtils.COLUMN_ID,
-            DatabaseUtils.COLUMN_VISIT_NAME,
-            DatabaseUtils.COLUMN_OS,
-            DatabaseUtils.COLUMN_DATE
+            DatabaseUtils.sitesTable_siteId,
+            DatabaseUtils.siteTable_siteName,
+            DatabaseUtils.siteTable_siteOSGridRef,
+            DatabaseUtils.siteTable_siteTimeStamp
     };
     public SiteDataSource( Context context){
         dbhelper = new DatabaseUtils(context);
@@ -41,22 +41,22 @@ public class SiteDataSource {
 
     public void create(Visit visit){
         ContentValues values = new ContentValues();
-        values.put(DatabaseUtils.COLUMN_VISIT_NAME, visit.getVisitName());
-        values.put(DatabaseUtils.COLUMN_OS, visit.getVisitOS());
-        values.put(DatabaseUtils.COLUMN_DATE, visit.getVisitDate());
+        values.put(DatabaseUtils.siteTable_siteName, visit.getVisitName());
+        values.put(DatabaseUtils.siteTable_siteOSGridRef, visit.getVisitOS());
+        values.put(DatabaseUtils.siteTable_siteTimeStamp, visit.getVisitDate());
 
-        long insertid = database.insert(DatabaseUtils.TABLE_ONE, null, values);
+        long insertid = database.insert(DatabaseUtils.sitesTableName, null, values);
 
 
     }
 
     public List<String> findAll(){
         List<String>  sites =  new ArrayList<String>();
-        Cursor cursor = database.query(DatabaseUtils.TABLE_ONE, allColumns ,null,null,null,null,null);
+        Cursor cursor = database.query(DatabaseUtils.sitesTableName, allColumns ,null,null,null,null,null);
         if(cursor.getCount()>0){
             while(cursor.moveToNext()){
                 String site = new String();
-                site = cursor.getString(cursor.getColumnIndex(DatabaseUtils.COLUMN_VISIT_NAME));
+                site = cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteName));
                 sites.add(site);
             }
         }

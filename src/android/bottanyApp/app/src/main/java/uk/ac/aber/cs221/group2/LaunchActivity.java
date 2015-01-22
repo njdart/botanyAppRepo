@@ -1,6 +1,8 @@
 package uk.ac.aber.cs221.group2;
 
 import android.app.Activity;
+import android.app.LauncherActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,6 +34,8 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import uk.ac.aber.cs221.group2.utils.PlantDataSource;
+
 public class LaunchActivity extends Activity  {
 
     @Override
@@ -42,7 +46,7 @@ public class LaunchActivity extends Activity  {
             //Add fragments here
         }
         //Run the background thread
-        InitThread i = new InitThread();
+        InitThread i = new InitThread(this);
         i.run();
     }
 
@@ -122,6 +126,11 @@ public class LaunchActivity extends Activity  {
 
     public class InitThread implements Runnable {
 
+        Context context;
+
+        public InitThread(Context context){
+            this.context = context;
+        }
         @Override
         public void run() {
             try {
@@ -148,11 +157,19 @@ public class LaunchActivity extends Activity  {
 
                 JSONObject jObject = new JSONObject(result);
                 //System.out.println("JSON object: " + jObject.toString());
-                JSONArray jsonArray = jObject.getJSONArray("list");
+                JSONArray jsonArray = jObject.getJSONArray("plantList");
+
+                PlantDataSource plantDataSource = new PlantDataSource(context);
+
+                plantDataSource.open();
 
                 for(int i = 0; i < jsonArray.length(); i++){
-                    //TODO add names to database
+                    String name = jsonArray.getString(i);
+                    System.out.println(name);
+                    plantDataSource.create(name);
                 }
+
+                plantDataSource.close();
 
 
             } catch (JSONException e){
