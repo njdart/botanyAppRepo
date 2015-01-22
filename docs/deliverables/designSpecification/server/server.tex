@@ -171,6 +171,7 @@
                 \item UserEmail : String
                 \item LocationName : String 
                 \item Timestamp : Number 
+                \item LocationOS : String
                 \item Specimens : Array of Specimen
             \end{itemize}
         \end{itemize}
@@ -209,6 +210,7 @@
                 \item UserId : INT not-null
                 \item LocationName : VARCHAR(50)
                 \item Timestamp : INT
+                \item LocationOS : VARCHAR(10)
             \end{itemize}
                 
             \item Resources
@@ -228,4 +230,13 @@
                 \item ScenePhoto : INT
                 \item SpecimenPhoto : INT   
             \end{itemize}
+                \item Comment : String
+                \item ScenePhoto : String (ID of a resource on the server)
+                \item SpecimenPhoto : String (ID of a resource on the server)
+            \end{itemize}
+        \end{itemize}
+
+        The web API is going to use a relational database as a data store.
+        The database tables are as follows:
+
         \end{itemize}
