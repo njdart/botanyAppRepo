@@ -22,7 +22,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
 
 
     private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_ONE + " (" +
-            COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCFREMENT, " +
+            COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_VISIT_NAME + " TEXT, " +
             COLUMN_DATE + " DOUBLE, "+
             COLUMN_OS + " TEXT )";

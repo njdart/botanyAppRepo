@@ -1,10 +1,18 @@
 package uk.ac.aber.cs221.group2.dataClasses;
 
+import java.util.Calendar;
+
 public class Visit {
 
     private String visitName;
-	private Double visitDate;
+	private double visitDate;
 	private String visitOS;
+
+    public Visit(String name, String OSGridRef){
+        visitName = name;
+        visitOS = OSGridRef;
+        visitDate = (double)Calendar.getInstance().get(Calendar.SECOND);
+    }
 
     public String getVisitOS() {
         return visitOS;
@@ -13,7 +21,6 @@ public class Visit {
     public void setVisitOS(String visitOS) {
         this.visitOS = visitOS;
     }
-
 
 
     public String getVisitName() {
@@ -36,7 +43,7 @@ public class Visit {
      * https://docs.oracle.com/javase/7/docs/api/java/sql/Date.html
      * Fulfils requirement FR2
      */
-    public Double getVisitDate() {
+    public double getVisitDate() {
 		return visitDate;
 	}
 
