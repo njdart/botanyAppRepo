@@ -29,20 +29,21 @@ public class PlantDataSource {
         database = dbhelper.getWritableDatabase();
     }
 
-    public void open(){
+    public PlantDataSource open(){
         database = dbhelper.getWritableDatabase();
+        return this;
     }
 
     public void close(){
         dbhelper.close();
     }
 
-    public void create(String plant){
+    public long create(String plant){
         ContentValues values = new ContentValues();
         values.put(DatabaseUtils.plantTable_plantLatinName, plant);
 
 
-        long insertid = database.insert(DatabaseUtils.plantsTable, null, values);
+        return database.insert(DatabaseUtils.plantsTable, null, values);
     }
 
     public List<String> findAll(){

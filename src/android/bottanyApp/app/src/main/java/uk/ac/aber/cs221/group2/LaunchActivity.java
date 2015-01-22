@@ -45,9 +45,10 @@ public class LaunchActivity extends Activity  {
         if (savedInstanceState == null) {
             //Add fragments here
         }
+        new PlantDataSource(this).open().create("FooBar");
         //Run the background thread
-        InitThread i = new InitThread(this);
-        i.run();
+        //InitThread i = new InitThread(new PlantDataSource(this).open());
+        //i.run();
     }
 
     public void newVisitOnClick(View buttonView){
@@ -126,10 +127,10 @@ public class LaunchActivity extends Activity  {
 
     public class InitThread implements Runnable {
 
-        Context context;
+        PlantDataSource plantDataSource;
 
-        public InitThread(Context context){
-            this.context = context;
+        public InitThread(PlantDataSource plantDataSource){
+            this.plantDataSource = plantDataSource;
         }
         @Override
         public void run() {
@@ -159,15 +160,11 @@ public class LaunchActivity extends Activity  {
                 //System.out.println("JSON object: " + jObject.toString());
                 JSONArray jsonArray = jObject.getJSONArray("plantList");
 
-                PlantDataSource plantDataSource = new PlantDataSource(context);
-
-                plantDataSource.open();
-
-                for(int i = 0; i < jsonArray.length(); i++){
-                    String name = jsonArray.getString(i);
-                    System.out.println(name);
-                    plantDataSource.create(name);
-                }
+                //for(int i = 0; i < jsonArray.length(); i++){
+                //    String name = jsonArray.getString(i);
+                //    System.out.println(name);
+                //    plantDataSource.create(name);
+                //}
 
                 plantDataSource.close();
 

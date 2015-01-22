@@ -80,17 +80,6 @@ public class SiteChooser extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-//        SiteDataSource source = new SiteDataSource(this);
-
-//        source.open();
-
-        //source.create(((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete)).getText().toString());
-        //List<String> list = source.findAll();
-
-        //System.out.println(list.toString());
-        //System.out.println(list.get(0));
-        //TODO redo database reading/writing
-
     public void onUseSiteClick(View view){
         final String siteName = ((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete))
                 .getText().toString();
