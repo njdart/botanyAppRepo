@@ -10,21 +10,23 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:id="@+id/linearLayout"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/linearLayout">
+        android:layout_alignParentRight="true">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/siteNameAutoComplete"
-            android:hint="@string/siteNameHint" />
+            android:hint="@string/siteNameHint"
+            android:inputType="textCapWords" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/customGridRefCheckbox"
-            android:id="@+id/useCustomGridRefCheckBox" />
+            android:id="@+id/useCustomGridRefCheckBox"
+            android:onClick="onClickUseCustomGridRef" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -33,12 +35,14 @@
             android:layout_gravity="center_horizontal">
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/customGridReferenceEditText"
                 android:layout_weight="1"
                 android:hint="@string/customGridRefTextEdit"
-                android:enabled="false" />
+                android:enabled="false"
+                android:gravity="left|top"
+                android:longClickable="false" />
         </LinearLayout>
 
         <Button
@@ -54,7 +58,8 @@
             android:layout_height="wrap_content"
             android:text="New Button"
             android:id="@+id/button"
-            android:onClick="onButtonClick" />
+            android:onClick="onButtonClick"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -8,17 +8,17 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ListView;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 
@@ -26,6 +26,7 @@ import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 public class SiteChooser extends Activity {
 
     private LocationManager locationManager = null;
+    boolean useCustomGridRef = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,7 @@ public class SiteChooser extends Activity {
     public void onResume() {
         super.onResume();
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                3600000, 1000, onLocationChange);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3600000, 1000, onLocationChange);
     }
 
     public static ArrayList<String> autoCompleteEntries = new ArrayList<String>() {{
@@ -124,12 +124,23 @@ public class SiteChooser extends Activity {
         }
     }
 
+    public void onClickUseCustomGridRef(View view){
+        CheckBox checkBox = (CheckBox)(view);
+        TextView customGridRefEdit = (TextView)(findViewById(R.id.customGridReferenceEditText));
+        useCustomGridRef = checkBox.isChecked();
+        customGridRefEdit.setEnabled(useCustomGridRef);
+    }
+
     LocationListener onLocationChange = new LocationListener(){
 
         @Override
         public void onLocationChanged(Location location) {
-            System.out.println("LAT: " + location.getLatitude() + " LNG: " + location.getLongitude());
-            Toast.makeText(SiteChooser.this, "LAT: " + location.getLatitude() + " LNG: " + location.getLongitude(), Toast.LENGTH_LONG).show();
+            //System.out.println("LAT: " + location.getLatitude() + " LNG: " + location.getLongitude());
+            //Toast.makeText(SiteChooser.this, "LAT: " + location.getLatitude() + " LNG: " + location.getLongitude(), Toast.LENGTH_LONG).show();
+            TextView gridRef = (TextView)findViewById(R.id.customGridReferenceEditText);
+            if(!useCustomGridRef) {
+                gridRef.setText(location.getLatitude() + " " + location.getLongitude());
+            }
         }
 
         @Override
