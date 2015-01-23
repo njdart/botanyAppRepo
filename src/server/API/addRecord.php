@@ -43,6 +43,26 @@
 		die('A field is empty');
 	}
 	
+    if(strlen($LocationOS) < 8 || strlen($LocationOS) > 10)
+    {
+        http_response_code(400);
+        die("LocationOS less than 8 or more than 10 in length");
+    }
+    
+    
+    
+    if(!preg_match("/^[A-Z]{2}[0-9]{6,8}$/", $LocationOS))
+    {
+        http_response_code(400);
+        die("Invalid LocationOS format");
+    }
+    
+    if(!preg_match("/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/", $UserEmail))
+    {
+        http_response_code(400);
+        die("Invalid UserEmail format");
+    }
+    
 	//Selects the Database
 	$conn->select_db('msh4');
 	
