@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import uk.ac.aber.cs221.group2.OScode.LatLng;
+import uk.ac.aber.cs221.group2.OScode.OSRef;
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 
@@ -102,6 +104,12 @@ public class SiteChooserActivity extends BaseActivity {
 
         @Override
         public void onLocationChanged(Location location) {
+
+            LatLng loc = new LatLng(location.getLatitude(),location.getLongitude());
+            OSRef os2 = loc.toOSRef();
+            System.out.println("Converted to OS Grid Ref: " + os2.toString() + " - "
+                    + os2.toSixFigureString());
+
             //System.out.println("LAT: " + location.getLatitude() + " LNG: " + location.getLongitude());
             //Toast.makeText(SiteChooserActivity.this, "LAT: " + location.getLatitude() + " LNG: " + location.getLongitude(), Toast.LENGTH_LONG).show();
             TextView gridRef = (TextView)findViewById(R.id.customGridReferenceEditText);
