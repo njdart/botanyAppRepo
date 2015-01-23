@@ -1,41 +1,100 @@
 <?php
 $title = "Add";
-
 // include 'includes/config.php';
-
-include "/includes/header.php";
+include "header.php";
 
 echo "<div id='content-boxes'>
-<h1 class='indent'>Welcome</h1>
-<h2>Basic layout, no functionality</h2>
+<h1 class='indent'>Add Record</h1>
+<h2>Please enter the details in the form below</h2>
 <div id='right-section'>";
-
-// if no picture is attatched, use default image2wbmp
-
-echo "<img class='image' src='images/default_image.png'  alt='default'/>
-<br />
-<a href='#'>Upload Image</a>
-<br /><br /><br />
-<a href='#'>Save</a>
-<a href='#'>Cancel</a>
+//if no picture is attatched, use default image2wbmp
+echo"<img class='image' src='images/default_image.png'  alt='default'/>
+<br>
+<a href='AddResource.php'>Upload Image</a>
+<br><br><br>
 
 
 </div>
 <div id='left-section'>
-<form class='edit-record' action='edit_record.php' method='post'>
-<!--value will have some kind of php code that will get the value of the specific specimen in the specific field. -->
-Scientific name: <input type='text' id='scientific' name='scientific'/><br /><br />
-Pronunciation: <input type='text' id='pronunciation' name='pronunciation' /><br /><br />
-Common name: <input type='text' id='common' name='common' /><br /><br />
-Family name: <input type='text' id='family' name='family' /><br /><br />
-Plant type: <input type='text' id='plant' name='plant' /><br /><br />
-Habit: <input type='text' id='habit' name='habit' /><br /><br />
-Form: <input type='text' id='form' name='form' /><br /><br />
-Origin: <input type='text' id='origin' name='origin' /><br /><br />
-Location: <input type='text' id='location' name='location' /><br /><br />
+<form class='add-record' action='add_specimen.php' method='GET'>
+Username:<br>
+<input type='text' id='UserName' name='UserName' /><br><br>
+
+Phone:<br>
+<input type='text' id='UserPhone' name='UserPhone' /><br><br>
+
+Email:<br>
+<input type='text' id='UserEmail' name='UserEmail' /><br><br>
+
+Location Name:<br>
+<input type='text' id='LocationName' name='LocationName' /><br><br>
+
+Location OS:<br>
+<input type='text' id='LocationOS' name='LocationOS' /><br><br>
+
+Species Name:<br>
+<input type='text' id='SpeciesName' name='SpeciesName'/><br><br>
+
+Location Latitude:<br>
+<input type='text' id='LocationLatitude' name='LocationLatitude' /><br><br>
+
+Location Longitude:<br>
+<input type='text' id='LocationLongitude' name='LocationLongitude' /><br><br>
+
+Abundance:<br>
+<input type='text' id='Abundance' name='Abundance' /><br><br>
+
+Comment:<br>
+<input type='text' id='Comment' name='Comment' /><br><br>
+
+<input type='submit' id='Submit' name='Submit' />
 </form>
 </div>
 </div>";
-include '/includes/footer.php';
 
+$submit='Submit';
+
+$timestamp=time();
+
+$specimen=array(
+	'SpeciesName' => $_GET['SpeciesName'],
+	'LocationLatitude' => (float)$_GET['LocationLatitude'],
+	'LocationLongitude' => (float)$_GET['LocationLongitude'],
+	'Abundance' => (int)$_GET['Abundance'],
+	'Comment' => $_GET['Comment'],
+	'SpecimenPhoto' => "0",
+	'ScenePhoto' => "0");
+	
+	
+
+$record=array(
+	'UserName' => $_GET['UserName'],
+	'UserPhone' => $_GET['UserPhone'],
+	'UserEmail' => $_GET['UserEmail'],
+	'LocationName' => $_GET['LocationName'],
+	'LocationOS' => $_GET['LocationOS'],
+	'Specimens' => array($specimen),
+	'Timestamp' => $timestamp);
+
+$json = json_encode($record);
+print("<pre>");
+var_dump ($specimen);
+
+print("<br />");
+var_dump ($record);
+
+var_dump($json);
+
+$url='http://users.aber.ac.uk/mta2/groupapi/addRecord.php';
+
+$ch=curl_init($url);
+var_dump ($ch);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, array('record' => $json));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response=curl_exec($ch);
+curl_close($ch);
+var_dump($response);
+print("</pre>");
+include 'footer.php';
 ?>
