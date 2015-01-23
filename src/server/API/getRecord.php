@@ -104,4 +104,7 @@
 	//Print out JSON output for reading
 	echo $json;
 	
+	//Close connection
+	$conn->close();
+
 ?>

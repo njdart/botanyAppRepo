@@ -3,7 +3,7 @@
 	include 'config.php';
 	
 	//Stops warnings
-	//error_reporting(E_ERROR);
+	error_reporting(E_ERROR);
 	
 	//Takes POST into variable
 	$specimenID = (int)$_POST["specimenID"];
@@ -60,6 +60,7 @@
 	$userPhone = $specimen['user_phone'];
 	$userEmail = $specimen['user_email'];
 	
+	//Assign all variables to an array for JSON encoding	
 	$lastRecord = array('SpecimenID' => $specimenID,
 			    'SpeciesName' => $specimenName,
 		   	    'LocationLatitude' => $latitude, 
@@ -82,5 +83,8 @@
 	
 	//Print out JSON output for reading
 	echo $json;
+
+	//Close connection
+	$conn->close();
 	
 ?>

@@ -22,6 +22,8 @@ Updates:
 config.php file added to protect sensitive data from online publications.
 getSpecimens.php can now order/search by abundance and can paginate with start row and range of rows
 Added sanitisation to all API commands
+Added more Database protection with transactions and connection closing
+Added resource location protection with config
 
 Available Commands:
 
@@ -34,7 +36,7 @@ getSpecimens.php (Decode the JSON. All specimens are in array. POST order = asce
 							       POST method = speciesName/locationName/userName/timeStamp/abundance,
 							       POST value = user input, POST column = speciesName/locationName/userName/abundance,
 							       POST start = starting row, POST range = number of rows to display)
-removeSpecimen.php (POST specimenID. POST password = "admin".)
+removeSpecimen.php (POST specimenID. POST password = ask Max.)
 getLocations.php (No POST data.)
 
 

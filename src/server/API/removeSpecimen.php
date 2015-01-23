@@ -40,9 +40,7 @@
 		die('Invalid password.');
 	}
 
-
-
-
-
+	//Close connection
+	$conn->close();
 
 ?>
