@@ -32,7 +32,7 @@
 	$resourceID = $conn->insert_id;
 	
 	//Defines the upload path for file
-	$uploadPath = './DBPictures/' . $resourceID;
+	$uploadPath = './'. $CONFIG['resourcePath'] . $resourceID;
 	
 	//Move file from temporary location to defined storage; error code 500 if can't
 	if(!move_uploaded_file($resource['tmp_name'], $uploadPath)) {
@@ -42,4 +42,8 @@
 	
 	//Echo resource ID for use by Database
 	echo $resourceID;
+
+	//Close connection
+	$conn->close();
+
 ?>

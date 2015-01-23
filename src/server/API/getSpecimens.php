@@ -128,4 +128,8 @@
 
 	//Send JSON to HTTP 
 	echo $json;
+
+	//Close connection
+	$conn->close();
+
 ?>
