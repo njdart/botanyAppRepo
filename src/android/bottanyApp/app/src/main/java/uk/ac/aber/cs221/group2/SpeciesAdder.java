@@ -20,6 +20,8 @@ import uk.ac.aber.cs221.group2.utils.PlantDataSource;
 public class SpeciesAdder extends BaseActivity {
 
     public static List<String> latinNames;
+    public AutoCompleteTextView latinNamesAutoComplete;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +29,24 @@ public class SpeciesAdder extends BaseActivity {
         setContentView(R.layout.activity_species_adder);
         if (savedInstanceState == null) {}
 
-        AutoCompleteTextView latinNamesAutoComplete = (AutoCompleteTextView)(findViewById(R.id.latinNameAutoComplete));
+        latinNamesAutoComplete = (AutoCompleteTextView)(findViewById(R.id.latinNameAutoComplete));
 
         latinNamesAutoComplete.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if(s.length()>3){
+                    PlantDataSource p = new PlantDataSource(SpeciesAdder.this);
+                    p.open();
+                    System.out.println("hit");
+                    latinNames = p.findMatches(s.toString());
+                    System.out.println(latinNames.size());
 
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpeciesAdder.this,
+                            android.R.layout.simple_dropdown_item_1line, latinNames);
+
+                    latinNamesAutoComplete.setAdapter(adapter);
+
+                }
             }
 
             @Override
@@ -45,14 +59,6 @@ public class SpeciesAdder extends BaseActivity {
 
             }
         });
-
-        PlantDataSource plantDataSource = new PlantDataSource(this);
-        plantDataSource.open();
-        latinNames = plantDataSource.findAll();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, latinNames);
-        latinNamesAutoComplete.setAdapter(adapter);
     }
 
     public void onSpecimenPhotoClick(View view){
