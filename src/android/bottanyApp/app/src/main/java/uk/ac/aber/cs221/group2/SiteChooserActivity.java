@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -134,7 +135,21 @@ public class SiteChooserActivity extends BaseActivity {
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
             System.out.println("STATUS: " + provider.toString() + ", " + status);
-            //Toast.makeText(SiteChooserActivity.this, "Status " + status, Toast.LENGTH_LONG).show();
+            if(status == LocationProvider.OUT_OF_SERVICE) {
+                new AlertDialog.Builder(SiteChooserActivity.this)
+                        .setTitle("GPS Required")
+                        .setMessage("GPS is required for automatic Grid Reference Detection. Would you like to open GPS settigns?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Intent i = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(i);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
+            } else if(status == LocationProvider.TEMPORARILY_UNAVAILABLE) {
+                Toast.makeText(SiteChooserActivity.this, "GPS temporally unavailable", Toast.LENGTH_LONG).show();
+            }
         }
 
         @Override
@@ -145,6 +160,7 @@ public class SiteChooserActivity extends BaseActivity {
         @Override
         public void onProviderDisabled(String provider) {
             System.out.println("Provider Disabled");
+            Toast.makeText(SiteChooserActivity.this, "GPS is required for automatic OS grid referencing", Toast.LENGTH_LONG).show();
         }
     };
 }
