@@ -1,6 +1,5 @@
 package uk.ac.aber.cs221.group2;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,81 +7,43 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.aber.cs221.group2.utils.IntentRequestCodes;
+import uk.ac.aber.cs221.group2.utils.PlantDataSource;
 
 
 public class SpeciesAdder extends BaseActivity {
+
+    public static List<String> latinNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_species_adder);
-        if (savedInstanceState == null) {
-        }
+        if (savedInstanceState == null) {}
 
-        // Camera.
-        final List<Intent> cameraIntents = new ArrayList<Intent>();
-        final Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        final PackageManager packageManager = getPackageManager();
-        final List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
-        for(ResolveInfo res : listCam) {
-            final String packageName = res.activityInfo.packageName;
-            final Intent intent = new Intent(captureIntent);
-            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-            intent.setPackage(packageName);
-            //intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-            cameraIntents.add(intent);
-        }
+        AutoCompleteTextView latinNamesAutoComplete = (AutoCompleteTextView)(findViewById(R.id.latinNameAutoComplete));
+        PlantDataSource plantDataSource = new PlantDataSource(this);
+        plantDataSource.open();
+        latinNames = plantDataSource.findAll();
 
-        // Filesystem.
-        final Intent galleryIntent = new Intent();
-        galleryIntent.setType("image/*");
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-
-        // Chooser of filesystem options.
-        final Intent chooserIntent = Intent.createChooser(galleryIntent, "Select Source");
-
-        // Add the camera options.
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toArray(new Parcelable[]{}));
-
-        //startActivityForResult(chooserIntent, IntentRequestCodes.SPECIES_ADDER_IMAGE_CHOOSER);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, latinNames);
+        latinNamesAutoComplete.setAdapter(adapter);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if(resultCode == RESULT_OK) {
-
-            if(requestCode == IntentRequestCodes.SPECIES_ADDER_IMAGE_CHOOSER) {
-
-                final boolean isCamera;
-                if(data == null) {
-                    isCamera = true;
-                } else {
-                    final String action = data.getAction();
-                    if(action == null) {
-                        isCamera = false;
-                    } else {
-                        isCamera = action.equals(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    }
-                }
-
-                Uri selectedImageUri;
-                if(isCamera)
-                {
-                 //   selectedImageUri = outputFileUri;
-                }
-                else
-                {
-                    selectedImageUri = data.getData();
-                }
-            }
-        }
+    public void onSpecimenPhotoClick(View view){
+        System.out.println("Taking a specimen photo");
     }
+
+    public void onScenePhotoClick(View view){
+        System.out.println("Taking a scene photo");
+    }
+
 }

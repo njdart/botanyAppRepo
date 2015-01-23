@@ -113,7 +113,7 @@ public class SiteChooserActivity extends BaseActivity {
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
             System.out.println("STATUS: " + provider.toString() + ", " + status);
-            Toast.makeText(SiteChooserActivity.this, "Status " + status, Toast.LENGTH_LONG).show();
+            //Toast.makeText(SiteChooserActivity.this, "Status " + status, Toast.LENGTH_LONG).show();
         }
 
         @Override

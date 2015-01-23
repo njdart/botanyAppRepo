@@ -6,49 +6,48 @@
     tools:context="uk.ac.aber.cs221.group2.SpeciesAdder"
     tools:ignore="MergeRootFrame">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView"
-        android:layout_gravity="center|top">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal">
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/latinNameAutoComplete"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/latinNamesHint"
+            android:maxLines="4" />
 
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/latinNameAutoComplete"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/latinNamesHint" />
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar"
+            android:layout_gravity="center_horizontal"
+            android:max="4"
+            android:progress="2" />
 
-            <RatingBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ratingBar" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sceneView"
+            android:gravity="left|top"
+            android:focusableInTouchMode="true"
+            android:padding="10dp"
+            android:src="@drawable/specimen"
+            android:onClick="onScenePhotoClick" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/sceneView"
-                android:gravity="left|top"
-                android:focusableInTouchMode="true"
-                android:padding="10dp"
-                android:src="@drawable/specimen" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/specimenView"
+            android:src="@drawable/specimen"
+            android:padding="10dp"
+            android:gravity="right|top"
+            android:onClick="onSpecimenPhotoClick" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/specimenView"
-                android:src="@drawable/specimen"
-                android:padding="10dp"
-                android:gravity="right|top" />
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 </FrameLayout>
