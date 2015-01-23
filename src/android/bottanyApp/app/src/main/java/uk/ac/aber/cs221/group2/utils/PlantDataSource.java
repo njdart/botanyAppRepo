@@ -84,11 +84,10 @@ public class PlantDataSource {
 
     }
 
-    public int getRows(){
-        String count = "SELECT count(*) FROM " + DatabaseUtils.plantsTableName + " ; ";
-        Cursor cursor =  database.rawQuery(count,null);
-        cursor.moveToFirst();
-        return cursor.getInt(0);
+    public Long getRows(){
+
+        return android.database.DatabaseUtils.queryNumEntries(database,DatabaseUtils.plantsTableName);
+
     }
 
     public Visit FindByName(String s){
