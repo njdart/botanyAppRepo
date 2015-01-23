@@ -39,20 +39,18 @@ public class SiteDataSource {
         dbhelper.close();
     }
 
-    public void create(Visit visit){
+    public long create(Visit visit){
         ContentValues values = new ContentValues();
         values.put(DatabaseUtils.siteTable_siteName, visit.getVisitName());
         values.put(DatabaseUtils.siteTable_siteOSGridRef, visit.getVisitOS());
         values.put(DatabaseUtils.siteTable_siteTimeStamp, visit.getVisitDate());
 
-        long insertid = database.insert(DatabaseUtils.siteTable_siteName, null, values);
-
-
+        return database.insert(DatabaseUtils.sitesTableName, null, values);
     }
 
     public List<String> findAll(){
         List<String>  sites =  new ArrayList<String>();
-        Cursor cursor = database.query(DatabaseUtils.siteTable_siteName, allColumns ,null,null,null,null,null);
+        Cursor cursor = database.query(DatabaseUtils.sitesTableName, allColumns ,null,null,null,null,null);
         if(cursor.getCount()>0){
             while(cursor.moveToNext()){
                 String site = new String();

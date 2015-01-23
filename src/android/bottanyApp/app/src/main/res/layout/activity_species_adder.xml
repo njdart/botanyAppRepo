@@ -4,4 +4,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="uk.ac.aber.cs221.group2.SpeciesAdder"
-    tools:ignore="MergeRootFrame"/>
+    tools:ignore="MergeRootFrame">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center|top">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/latinNameAutoComplete"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/latinNamesHint" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBar" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sceneView"
+                android:gravity="left|top"
+                android:focusableInTouchMode="true"
+                android:padding="10dp"
+                android:src="@drawable/specimen" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/specimenView"
+                android:src="@drawable/specimen"
+                android:padding="10dp"
+                android:gravity="right|top" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
