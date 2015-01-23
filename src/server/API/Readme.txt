@@ -1,6 +1,6 @@
 Hi James
 
-You suck lots of sucky sucking suckily suckiness, Mr. Suckington of the sucky town Suckingworth
+You suck lots of sucky sucking suckily suckiness, Mr. Suckington of the sucky town Suckingham, Suckingshire, Suck Kingdom
 
 DO NOT FUCKING CHANGE THIS.
 @Copyright Max Atkins && Maxim Harizanov
@@ -12,6 +12,10 @@ Look at commandName.php to explore how it works (with beautiful comments)
 Chrome has a great extension to play with API: Postman
 
 Use the API from my server: users.aber.ac.uk/mta2/groupapi/commandName.php
+
+Updates:
+
+config.php file added to protect sensitive data from online publications.
 
 Available Commands:
 

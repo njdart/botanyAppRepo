@@ -1,14 +1,16 @@
 <?php 
 	
+	include 'config.php';		
+
 	//Stops warnings
-	//error_reporting(E_ERROR);
+	error_reporting(E_ERROR);
 	
 	//Decodes the JSON into PHP readable from POST
 	$resource = $_FILES["resource"];
 	
 	//Returns success code for successful data and connects to Database
 	http_response_code(200);
-	$conn = new mysqli('db.dcs.aber.ac.uk', 'msh4', 'password');
+	$conn = new mysqli($CONFIG['dbname'], $CONFIG['username'], $CONFIG['password']);
 	
 	//Checks Database connection and returns error code 500 to show server error, then end the script
 	if($conn->connect_errno)
