@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseUtils extends SQLiteOpenHelper {
 
+    public static DatabaseUtils db;
 
     public static final String databaseName = "site.db";
     public static final int dbVersion = 1;
@@ -75,6 +76,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
 
     public DatabaseUtils(Context context) {
         super(context, databaseName, null, dbVersion);
+        this.db = this;
         System.out.println("DATABASE LOCATED AT : " + context.getDatabasePath(databaseName));
         System.out.println("SQL Query " + createSitesTableQuery);
     }

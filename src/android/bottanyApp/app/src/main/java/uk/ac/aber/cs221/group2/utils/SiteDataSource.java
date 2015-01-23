@@ -27,7 +27,10 @@ public class SiteDataSource {
             DatabaseUtils.siteTable_siteTimeStamp
     };
     public SiteDataSource( Context context){
-        dbhelper = new DatabaseUtils(context);
+        if(DatabaseUtils.db == null) {
+            DatabaseUtils.db = new DatabaseUtils(context);
+        }
+        dbhelper = DatabaseUtils.db;
         database = dbhelper.getWritableDatabase();
     }
 
