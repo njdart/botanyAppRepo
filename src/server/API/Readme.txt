@@ -2,6 +2,9 @@ Hi James
 
 You suck lots of sucky sucking suckily suckiness, Mr. Sucker Suckington of the sucky town Suckingham, Suckingshire, Suck Kingdom. 
 
+Yours suckily,
+Sucky Emperor Suckerustus
+
 DO NOT FUCKING CHANGE THIS.
 @Copyright Max Atkins && Maxim Harizanov
 
@@ -16,6 +19,7 @@ Use the API from my server: users.aber.ac.uk/mta2/groupapi/commandName.php
 Updates:
 
 config.php file added to protect sensitive data from online publications.
+getSpecimens.php can now order/search by abundance and can paginate with start row and range of rows
 
 Available Commands:
 
