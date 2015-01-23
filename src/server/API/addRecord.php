@@ -38,6 +38,9 @@
 	//Selects the Database
 	$conn->select_db('msh4');
 	
+	//Begin transaction
+	$conn->autocommit(FALSE);	
+
 	//Query to inserts JSON user data into Database
 	$insertUser = "INSERT INTO botany_users (user_name, user_phone, user_email)
 		VALUES ('$UserName', '$UserPhone', '$UserEmail')";
@@ -45,6 +48,15 @@
 	
 	//Runs the user query
 	$conn->query($insertUser);
+
+	//Check if specimen exists in DB
+	if($conn->affected_rows < 1)
+	{
+		http_response_code(500);
+		die('Record was not added. Bad user.');	
+	}
+
+
 
 	//Grabs the automatically incremented User ID
 	$userID = $conn->insert_id;
@@ -56,6 +68,13 @@
 	
 	//Runs the record query
 	$conn->query($insertRecord);
+
+	//Check if specimen exists in DB
+	if($conn->affected_rows < 1)
+	{
+		http_response_code(500);
+		die('Record was not added. Bad record.');	
+	}
 
 	//Grabs the automatically incremented Record ID
 	$recordID = $conn->insert_id;
@@ -79,10 +98,22 @@
 			
 		//Runs the specimen query
 		$conn->query($insertSpecimens);
+		//Check if specimen exists in DB
+		if($conn->affected_rows < 1)
+		{
+			http_response_code(500);
+			die('Record was not added. Bad specimen.');	
+		}
 	}
 	
+	//Commit transaction
+	$conn->commit();	
+
 	//Prints recordID for use by Database
 	echo $recordID;
+	
+	//Close connection
+	$conn->close();
 
 	//Function to check if all specimen data exists
 	//@param Takes Specimen variables

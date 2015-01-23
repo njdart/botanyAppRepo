@@ -43,22 +43,12 @@
 	$resourceID = (int)$resource['resource_id'];
 
 	
-	//COPIED
-	$downloadPath = 'http://users.aber.ac.uk/mta2/groupapi/DBPictures/' . $resourceID;
-        /*if (file_exists($downloadPath)) {
-
-            http_response_code(200);
-            header("Content-Type: application/octet-stream");
-            header("Content-Transfer-Encoding: Binary");
-            header("Content-Length:".filesize($downloadPath));
-            header("Content-Disposition: attachment; filename='$resourceID'");
-            readfile($downloadPath);
-            die();        
-        } else {
-	    http_response_code(500);
-            die("Error: File not found.");
-        } */
+	//Find file path for requested resource
+	$downloadPath = $CONFIG['serverRoot'] . $CONFIG['resourcePath'] . $resourceID;
 
 	echo $downloadPath;
+
+	//Close connection
+	$conn->close();
 
 ?>

@@ -30,7 +30,7 @@
 				"SpeciesName":"Crazy Carrot",
 				"LocationLatitude":798.890,
 				"LocationLongitude":76.23,
-				"Abundance":2,
+				"Abundance":"cat",
 				"Comment":"This plant rulez",
 				"ScenePhoto":"3",
 				"SpecimenPhoto":"4"

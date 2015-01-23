@@ -1,6 +1,5 @@
 <?php
 
-
 	include 'config.php';	
 
 	//Stops warnings
@@ -41,6 +40,7 @@
 	//Send JSON to HTTP 
 	echo $json;
 
-
+	//Close connection
+	$conn->close();
 
 ?>
