@@ -28,7 +28,10 @@ public class PlantDataSource {
             };
 
     public PlantDataSource(Context context){
-        dbhelper = new DatabaseUtils(context);
+        if(DatabaseUtils.db == null) {
+            DatabaseUtils.db = new DatabaseUtils(context);
+        }
+        dbhelper = DatabaseUtils.db;
         database = dbhelper.getWritableDatabase();
     }
 
