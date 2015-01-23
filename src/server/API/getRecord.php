@@ -1,12 +1,12 @@
 <?php
 
-	include 'config.php';	
+	include 'config.php';
 
 	//Stops warnings
 	error_reporting(E_ERROR);
 	
 	//Decodes the JSON into PHP readable
-	$recordID = $_POST["recordID"];
+	$recordID = (int)$_POST["recordID"];
 
 	//Returns success code for successful data and connects to Database
 	http_response_code(200);

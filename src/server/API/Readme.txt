@@ -4,6 +4,7 @@ You suck lots of sucky sucking suckily suckiness, Mr. Sucker Suckington of the s
 
 Yours suckily,
 Sucky Emperor Suckerustus
+Suckpire of Suck Kingdom
 
 DO NOT FUCKING CHANGE THIS.
 @Copyright Max Atkins && Maxim Harizanov
@@ -20,6 +21,7 @@ Updates:
 
 config.php file added to protect sensitive data from online publications.
 getSpecimens.php can now order/search by abundance and can paginate with start row and range of rows
+Added sanitisation to all API commands
 
 Available Commands:
 

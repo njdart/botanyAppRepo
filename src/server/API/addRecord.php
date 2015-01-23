@@ -3,7 +3,7 @@
 	include 'config.php';		
 
 	//Stops warnings
-	error_reporting(E_ERROR);
+	//error_reporting(E_ERROR);
 	
 	//Decodes the JSON into PHP readable
 	$record = json_decode($_POST["record"]);
@@ -27,12 +27,12 @@
 	}
 	
 	//Pull JSON variables into PHP variables
-	$UserName = $record->UserName;
-	$UserPhone = $record->UserPhone;
-	$UserEmail = $record->UserEmail;
-	$LocationName = $record->LocationName;
-	$LocationOS = $record->LocationOS;
-	$RecordTime = $record->Timestamp;
+	$UserName = $conn->real_escape_string($record->UserName);
+	$UserPhone = $conn->real_escape_string($record->UserPhone);
+	$UserEmail = $conn->real_escape_string($record->UserEmail);
+	$LocationName = $conn->real_escape_string($record->LocationName);
+	$LocationOS = $conn->real_escape_string($record->LocationOS);
+	$RecordTime = $conn->real_escape_string($record->Timestamp);
 	$Specimens = $record->Specimens;
 	
 	//Selects the Database
@@ -63,13 +63,13 @@
 	//Loops through Specimens array and pulls JSON variables into PHP variables
 	foreach($Specimens as $specimen)
 	{
-		$SpeciesName = $specimen->SpeciesName;
-		$Latitude = $specimen->LocationLatitude;
-		$Longitude = $specimen->LocationLongitude;
-		$Abundance = $specimen->Abundance;
-		$Comment = $specimen->Comment;
-		$ScenePhoto = $specimen->ScenePhoto;
-		$SpecimenPhoto = $specimen->SpecimenPhoto;
+		$SpeciesName = $conn->real_escape_string($specimen->SpeciesName);
+		$Latitude = $conn->real_escape_string($specimen->LocationLatitude);
+		$Longitude = $conn->real_escape_string($specimen->LocationLongitude);
+		$Abundance = $conn->real_escape_string($specimen->Abundance);
+		$Comment = $conn->real_escape_string($specimen->Comment);
+		$ScenePhoto = $conn->real_escape_string($specimen->ScenePhoto);
+		$SpecimenPhoto = $conn->real_escape_string($specimen->SpecimenPhoto);
 		
 		//Query to insert JSON specimen data into Database
 		$insertSpecimens = "INSERT INTO botany_specimens (record_id, species_name, 

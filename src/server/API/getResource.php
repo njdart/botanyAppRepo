@@ -6,7 +6,7 @@
 	error_reporting(E_ERROR);
 
 	//Takes POST into variable
-	$resourceID = $_POST["resourceID"];
+	$resourceID = (int)$_POST["resourceID"];
 
 	//Returns success code for successful data and connects to Database
 	http_response_code(200);

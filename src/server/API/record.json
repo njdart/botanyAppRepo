@@ -1,7 +1,7 @@
 {
 
 	"UserName":
-		"Harry", 
+		"Harry Potter", 
 		
 	"UserPhone":
 		"07949021123", 
@@ -10,7 +10,7 @@
 		"harry.potter@hogwarts.com",
 	
 	"LocationName":
-		"Hogwarts", 
+		"Hogwarts, England", 
 
 	"LocationOS":
 		"DB123432",
@@ -18,7 +18,7 @@
 	"Specimens":
 		[
 			{
-				"SpeciesName":"Potato",
+				"SpeciesName":"Potato Man",
 				"LocationLatitude":654.123,
 				"LocationLongitude":71.01,
 				"Abundance":3,
@@ -27,7 +27,7 @@
 				"SpecimenPhoto":"2"
 			},
 			{
-				"SpeciesName":"Carrot",
+				"SpeciesName":"Crazy Carrot",
 				"LocationLatitude":798.890,
 				"LocationLongitude":76.23,
 				"Abundance":2,
@@ -37,7 +37,7 @@
 			},
 			
 			{
-				"SpeciesName":"JamesOharePlant",
+				"SpeciesName":"James Ohare Plant",
 				"LocationLatitude":100.211,
 				"LocationLongitude":22.33,
 				"Abundance":2,
@@ -47,7 +47,7 @@
 			},
 			
 			{
-				"SpeciesName":"Human",
+				"SpeciesName":"Human Feet",
 				"LocationLatitude":443.334,
 				"LocationLongitude":55.44,
 				"Abundance":1,

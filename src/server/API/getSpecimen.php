@@ -6,7 +6,7 @@
 	//error_reporting(E_ERROR);
 	
 	//Takes POST into variable
-	$specimenID = $_POST["specimenID"];
+	$specimenID = (int)$_POST["specimenID"];
 
 	//Returns success code for successful data and connects to Database
 	http_response_code(200);

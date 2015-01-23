@@ -11,8 +11,8 @@
 	$order = $_POST["order"]; //ascending or descending
 	$method = $_POST["method"]; // speciesName, locationName, userName, timestamp
 	$numeric = false;
-	$start = $_POST["start"]; //number for row start
-	$range = $_POST["range"]; //how many records to display
+	$start = (int)$_POST["start"]; //number for row start
+	$range = (int)$_POST["range"]; //how many records to display
 
 	//Switch statements to prevent SQL injection. Creates SQL code based on POSTS
 	switch($searchColumn)
