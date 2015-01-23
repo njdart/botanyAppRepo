@@ -100,9 +100,7 @@ public class PlantDataSource {
     }
 
     public Long getRows(){
-
         return android.database.DatabaseUtils.queryNumEntries(database,DatabaseUtils.plantsTableName);
-
     }
 
     public Visit FindByName(String s){
