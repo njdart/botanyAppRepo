@@ -25,6 +25,7 @@ public class SpeciesAdder extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        latinNamesAutoComplete = (AutoCompleteTextView)(findViewById(R.id.latinNameAutoComplete));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_species_adder);
         if (savedInstanceState == null) {}
@@ -56,7 +57,17 @@ public class SpeciesAdder extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(s.length()>4){
+                    PlantDataSource p = new PlantDataSource(SpeciesAdder.this);
+                    p.open();
+                    latinNames = p.findMatches(s.toString());
 
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpeciesAdder.this,
+                            android.R.layout.simple_dropdown_item_1line, latinNames);
+
+                    latinNamesAutoComplete.setAdapter(adapter);
+
+                }
             }
         });
     }

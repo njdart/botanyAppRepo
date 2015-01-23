@@ -10,6 +10,9 @@
 	$searchColumn = $_POST["column"]; //speciesName, locationName, userName
 	$order = $_POST["order"]; //ascending or descending
 	$method = $_POST["method"]; // speciesName, locationName, userName, timestamp
+	$numeric = false;
+	$start = $_POST["start"]; //number for row start
+	$range = $_POST["range"]; //how many records to display
 
 	//Switch statements to prevent SQL injection. Creates SQL code based on POSTS
 	switch($searchColumn)
@@ -22,6 +25,10 @@
 			break;
 		case "userName":
 			$columnName = "user_name";
+			break;
+		case "abundance":
+			$columnName = "abundance";
+			$numeric = true;
 			break;
 		default:
 			$columnName = "species_name";
@@ -40,6 +47,10 @@
 			break;
 		case "timeStamp":
 			$methodName = "time_stamp";
+			break;
+		case "abundance":
+			$methodName = "abundance";
+			$numeric = true;
 			break;
 		default:
 			$methodName = "species_name";
@@ -78,21 +89,12 @@
 	
 	//Query database specimens table for specimens that match the in-putted recordID
 	//Runs first if $searchValue has value, second if no value
-	if($searchValue)
-	{
-		$specimenQuery = $conn->query("SELECT * FROM botany_specimens 
-				       	INNER JOIN botany_records ON botany_specimens.record_id = botany_records.record_id
-				       	INNER JOIN botany_users ON botany_records.user_id = botany_users.user_id
-				        WHERE $columnName LIKE '$searchValue%' ORDER BY $methodName $orderName");
-	}
-	else
-	{
-		$specimenQuery = $conn->query("SELECT * FROM botany_specimens 
-				       INNER JOIN botany_records ON botany_specimens.record_id = botany_records.record_id
-				       INNER JOIN botany_users ON botany_records.user_id = botany_users.user_id
-				       ORDER BY $methodName $orderName");
-	}
-	
+	$specimenQuery = $conn->query("SELECT * FROM botany_specimens 
+			       	INNER JOIN botany_records ON botany_specimens.record_id = botany_records.record_id
+			       	INNER JOIN botany_users ON botany_records.user_id = botany_users.user_id "
+			        . ($searchValue ? ($numeric ? "WHERE $columnName = $searchValue" : "WHERE $columnName LIKE '%$searchValue%'") : "")
+				. ($method ? " ORDER BY $methodName $orderName" : "")
+				. ($start && $range ? " LIMIT $start, $range" : ""));
 	//Create array for Specimens
 	$specimens = array();
 	

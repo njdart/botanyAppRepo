@@ -2,6 +2,9 @@ Hi James
 
 You suck lots of sucky sucking suckily suckiness, Mr. Sucker Suckington of the sucky town Suckingham, Suckingshire, Suck Kingdom. 
 
+Yours suckily,
+Sucky Emperor Suckerustus
+
 DO NOT FUCKING CHANGE THIS.
 @Copyright Max Atkins && Maxim Harizanov
 
@@ -16,6 +19,7 @@ Use the API from my server: users.aber.ac.uk/mta2/groupapi/commandName.php
 Updates:
 
 config.php file added to protect sensitive data from online publications.
+getSpecimens.php can now order/search by abundance and can paginate with start row and range of rows
 
 Available Commands:
 
@@ -24,8 +28,10 @@ addResource.php (Send a JPEG called "resource")
 getRecord.php (Decode the JSON) -- Not for use
 getResource.php (eg ID: 13)
 getSpecimen.php (Decode the JSON. POST name = specimenID) 
-getSpecimens.php (Decode the JSON. All specimens are in array. POST order = ascending/descending. POST method = speciesName/locationName/userName/timeStamp
-							       POST searchValue = user input, POST searchColumn = speciesName/locationName/userName)
+getSpecimens.php (Decode the JSON. All specimens are in array. POST order = ascending/descending,
+							       POST method = speciesName/locationName/userName/timeStamp/abundance,
+							       POST value = user input, POST column = speciesName/locationName/userName/abundance,
+							       POST start = starting row, POST range = number of rows to display)
 removeSpecimen.php (POST specimenID. POST password = "admin".)
 getLocations.php (No POST data.)
 

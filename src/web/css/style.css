@@ -313,9 +313,8 @@ border-right:none;
 
 /* input images */
 input[type=submit] {
-    background: url("images/search.png");
-    max-width: 58px;
-margin: 0px;
-/* float: right; */
-max-height: 41px;
+
+background:url("images/search.png");
+
+}
 }
