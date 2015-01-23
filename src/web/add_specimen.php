@@ -18,7 +18,8 @@ echo"<img class='image' src='images/default_image.png'  alt='default'/>
 <div id='left-section'>
 <form class='add-record' action='add_specimen.php' method='GET'>
 Username:<br>
-<input type='text' id='UserName' name='UserName' /><br><br>
+<input type='text' id='UserName' name='UserName' <input type='text' id='UserName' name='UserName' pattern="[A-Za-z]{3,10}" title="Username, 3-10 letters. No numbers or symbols." /><br><br>
+/><br><br>
 
 Phone:<br>
 <input type='text' id='UserPhone' name='UserPhone' /><br><br>
@@ -27,7 +28,7 @@ Email:<br>
 <input type='text' id='UserEmail' name='UserEmail' /><br><br>
 
 Location Name:<br>
-<input type='text' id='LocationName' name='LocationName' /><br><br>
+<input type='text' id='LocationName' name='LocationName'pattern="[A-Za-z]{2,30}" title "Location name, 2 to 30 letters /><br><br>
 
 Location OS:<br>
 <input type='text' id='LocationOS' name='LocationOS' /><br><br>
