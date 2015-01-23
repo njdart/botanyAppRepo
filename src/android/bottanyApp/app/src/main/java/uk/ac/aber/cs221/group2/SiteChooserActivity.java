@@ -107,14 +107,15 @@ public class SiteChooserActivity extends BaseActivity {
 
             LatLng loc = new LatLng(location.getLatitude(),location.getLongitude());
             OSRef os2 = loc.toOSRef();
-            System.out.println("Converted to OS Grid Ref: " + os2.toString() + " - "
-                    + os2.toSixFigureString());
+//            System.out.println("Converted to OS Grid Ref: " + os2.toString() + " - "
+//                    + os2.toSixFigureString());
 
             //System.out.println("LAT: " + location.getLatitude() + " LNG: " + location.getLongitude());
             //Toast.makeText(SiteChooserActivity.this, "LAT: " + location.getLatitude() + " LNG: " + location.getLongitude(), Toast.LENGTH_LONG).show();
             TextView gridRef = (TextView)findViewById(R.id.customGridReferenceEditText);
             if(!useCustomGridRef) {
-                gridRef.setText(location.getLatitude() + "\n" + location.getLongitude());
+                //gridRef.setText(location.getLatitude() + "\n" + location.getLongitude());
+                gridRef.setText(os2.toSixFigureString());
             }
         }
 
