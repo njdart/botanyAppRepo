@@ -84,6 +84,19 @@ public class PlantDataSource {
 
     }
 
+    public List<String> findMatches(String string){
+        List<String>  words =  new ArrayList<String>();
+        String selectQuery = "SELECT "+ DatabaseUtils.plantTable_plantLatinName +" FROM " + DatabaseUtils.plantsTableName + "  WHERE "+ DatabaseUtils.plantTable_plantLatinName + " LIKE  '%w"+string+"%';";
+        Cursor cursor = database.rawQuery(selectQuery,null);
+        if(cursor.getCount()>0) {
+            while (cursor.moveToNext()) {
+                String word = cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userName));
+                words.add(word);
+            }
+        }
+        return words;
+    }
+
     public Long getRows(){
 
         return android.database.DatabaseUtils.queryNumEntries(database,DatabaseUtils.plantsTableName);
