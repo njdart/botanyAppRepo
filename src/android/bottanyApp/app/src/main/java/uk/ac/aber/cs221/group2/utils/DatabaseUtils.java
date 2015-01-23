@@ -34,6 +34,18 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final String specimenTable_specimenScenePhoto = "specimenScenePhoto";
     public static final String specimenTable_specimenSpecimenPhoto = "specimenSpecimenPhoto";
 
+    public static final String userTableName = "user";
+    public static final String userTable_userId = "userId";
+    public static final String userTable_userName = "userName";
+    public static final String userTable_userPhoneNumber = "userPhoneNumber";
+    public static final String userTable_userEmail = "userEmail";
+
+    private static final String createUserTableQuery = "CREATE TABLE " + userTableName + " (" +
+            userTable_userId + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            userTable_userName + " TEXT, " +
+            userTable_userPhoneNumber + " TEXT, "+
+            userTable_userEmail + " TEXT); ";
+
     private static final String createSpecimenTableQuery = "CREATE TABLE " + specimenTableName + " (" +
             specimenTable_specimenId + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             specimenTable_specimenName + " TEXT, " +
@@ -49,6 +61,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
             siteTable_siteName + " TEXT, " +
             siteTable_siteTimeStamp + " DOUBLE, "+
             siteTable_siteOSGridRef + " TEXT); ";
+
     public static final String createPlantsTableQuery = "CREATE TABLE " + plantsTableName + " (" +
             plantTable_plantId + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             plantTable_plantLatinName + " TEXT);";
@@ -56,7 +69,8 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final String[] tableCreationQueries = {
             createSitesTableQuery,
             createPlantsTableQuery,
-            createSpecimenTableQuery
+            createSpecimenTableQuery,
+            createUserTableQuery
     };
 
     public DatabaseUtils(Context context) {
@@ -80,6 +94,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + sitesTableName + "; " +
                    "DROP TABLE IF EXISTS " + specimenTableName + "; " +
+                   "DROP TABLE IF EXISTS " + userTableName + "; " +
                    "DROP TABLE IF EXISTS " + plantsTableName + "; ");
         onCreate(db);
     }
