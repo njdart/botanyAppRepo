@@ -115,46 +115,46 @@ public class LaunchActivity extends BaseActivity  {
                 System.out.println("ROWS: " + rows);
                 if(rows > 1l) {
                     System.out.println("A table exists by the name of plants and it has data, skipping db upgrade!");
-                    return null;
+                } else {
+                    long startTime = System.currentTimeMillis();
+                    DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
+                    HttpPost httppost = new HttpPost("http://nic-dart.co.uk/~nic/res/plantlist.json");
+                    // Depends on your web service
+                    httppost.setHeader("Content-type", "application/json");
+
+                    InputStream inputStream = null;
+                    String result = null;
+                    HttpResponse response = httpclient.execute(httppost);
+                    HttpEntity entity = response.getEntity();
+
+                    inputStream = entity.getContent();
+                    // json is UTF-8 by default
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
+                    StringBuilder sb = new StringBuilder();
+
+                    String line = null;
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    result = sb.toString();
+                    long timeToDownload = System.currentTimeMillis() - startTime;
+                    startTime = System.currentTimeMillis();
+
+                    //Dont bother saving anything of the decoded json array, just do the transaction really fast!
+                    plantDataSource.jsonTransaction(new JSONObject(result).getJSONArray("plantList"));
+
+                    plantDataSource.close();
+                    long timeToProcess = System.currentTimeMillis() - startTime;
+                    System.out.println(String.format("DB done processing in %2.2f seconds (%2.2f for the download)", (float) timeToProcess / 1000, (float) timeToDownload / 1000));
+                    Toast.makeText(context, "Plant Database is now up to date!", Toast.LENGTH_LONG).show();
                 }
-                long startTime = System.currentTimeMillis();
-                DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
-                HttpPost httppost = new HttpPost("http://nic-dart.co.uk/~nic/res/plantlist.json");
-                // Depends on your web service
-                httppost.setHeader("Content-type", "application/json");
-
-                InputStream inputStream = null;
-                String result = null;
-                HttpResponse response = httpclient.execute(httppost);
-                HttpEntity entity = response.getEntity();
-
-                inputStream = entity.getContent();
-                // json is UTF-8 by default
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-                StringBuilder sb = new StringBuilder();
-
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                result = sb.toString();
-                long timeToDownload = System.currentTimeMillis() - startTime;
-                startTime = System.currentTimeMillis();
-
-                //Dont bother saving anything of the decoded json array, just do the transaction really fast!
-                plantDataSource.jsonTransaction(new JSONObject(result).getJSONArray("plantList"));
-
-                plantDataSource.close();
-                long timeToProcess = System.currentTimeMillis() - startTime;
-                System.out.println(String.format("DB done processing in %2.2f seconds (%2.2f for the download)", (float)timeToProcess / 1000, (float)timeToDownload / 1000));
-                Toast.makeText(context, "Plant Database is now up to date!", Toast.LENGTH_LONG).show();
 
                 //////////////////////////////
 
                 DefaultHttpClient httpclient2 = new DefaultHttpClient(new BasicHttpParams());
                 HttpPost httppost2 = new HttpPost("http://users.aber.ac.uk/mta2/groupapi/getLocations.php");
                 // Depends on your web service
-                httppost.setHeader("Content-type", "application/json");
+                httppost2.setHeader("Content-type", "application/json");
 
                 InputStream inputStream2 = null;
                 String result2 = null;
@@ -181,15 +181,6 @@ public class LaunchActivity extends BaseActivity  {
                     sitedb.create(v);
                     System.out.print("added" +v.getVisitName()+ " "+v.getVisitOS());
                 }
-
-
-
-
-
-
-
-
-
             } catch (JSONException e){
                 System.out.println("Error, bad json?");
                 e.printStackTrace();

@@ -29,23 +29,20 @@
             android:max="4"
             android:progress="2" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sceneView"
-            android:gravity="left|top"
-            android:focusableInTouchMode="true"
-            android:padding="10dp"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/specimen"
             android:onClick="onScenePhotoClick" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/specimenView"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/specimen"
-            android:padding="10dp"
-            android:gravity="right|top"
             android:onClick="onSpecimenPhotoClick" />
 
     </LinearLayout>

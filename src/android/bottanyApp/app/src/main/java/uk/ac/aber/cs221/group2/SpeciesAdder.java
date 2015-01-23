@@ -2,15 +2,20 @@ package uk.ac.aber.cs221.group2;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ImageView;
-
+import android.widget.ImageButton;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import uk.ac.aber.cs221.group2.utils.IntentRequestCodes;
@@ -83,29 +88,45 @@ public class SpeciesAdder extends BaseActivity {
     }
 
     private void takePhoto(int intentReturnId){
-        Intent i = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //set the filename to the date and time now
+        filename = "botanyApp_" + new SimpleDateFormat("yyyyMMdd-HHmmSS").format(new Date()) + ".jpg";
+        System.out.println("Saving image as " + filename);
+        File f = new File(android.os.Environment.getExternalStorageDirectory(), filename);
+        System.out.println("FILEPATH: " + f.getAbsolutePath());
+        i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+        //i.putExtra("Filename", fileName);
         startActivityForResult(i, intentReturnId);
     }
 
+    String filename;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == RESULT_OK){
-            Bundle extras = data.getExtras();
-            Bitmap bitmapThumbnail = (Bitmap) extras.get("data");
-            ImageView imageView;
+        if (resultCode == RESULT_OK) {
+            File f = new File(Environment.getExternalStorageDirectory(), filename);
+            System.out.println("FILEPATH: " + f.getAbsolutePath());
 
-            if(requestCode == IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO){
-                imageView = (ImageView)findViewById(R.id.sceneView);
-            } else if(requestCode == IntentRequestCodes.SPECIES_ADDER_SPECIMEN_PHOTO){
-                imageView = (ImageView)findViewById(R.id.specimenView);
+            BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
+
+            Bitmap bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
+                    btmapOptions);
+
+            bitmap = Bitmap.createScaledBitmap(bitmap, 256, 256, true);
+            ImageButton imageButton;
+
+            if (requestCode == IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO) {
+                imageButton = (ImageButton) findViewById(R.id.sceneView);
+            } else if (requestCode == IntentRequestCodes.SPECIES_ADDER_SPECIMEN_PHOTO) {
+                imageButton = (ImageButton) findViewById(R.id.specimenView);
             } else {
                 System.out.println("SPECIES ADDER: Got an unknown result code back, ignoring it!");
                 return;
             }
-            imageView.setImageBitmap(bitmapThumbnail);
-        } else {
-            System.out.println("ERROR! Something happened!");
+
+            imageButton.setImageBitmap(bitmap);
         }
     }
 }
