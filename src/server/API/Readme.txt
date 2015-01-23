@@ -1,6 +1,6 @@
 Hi James
 
-You suck lots of sucky sucking suckily suckiness, Mr. Suckington of the sucky town Suckingham, Suckingshire, Suck Kingdom
+You suck lots of sucky sucking suckily suckiness, Mr. Sucker Suckington of the sucky town Suckingham, Suckingshire, Suck Kingdom. 
 
 DO NOT FUCKING CHANGE THIS.
 @Copyright Max Atkins && Maxim Harizanov
@@ -27,6 +27,7 @@ getSpecimen.php (Decode the JSON. POST name = specimenID)
 getSpecimens.php (Decode the JSON. All specimens are in array. POST order = ascending/descending. POST method = speciesName/locationName/userName/timeStamp
 							       POST searchValue = user input, POST searchColumn = speciesName/locationName/userName)
 removeSpecimen.php (POST specimenID. POST password = "admin".)
+getLocations.php (No POST data.)
 
 
 To do:
