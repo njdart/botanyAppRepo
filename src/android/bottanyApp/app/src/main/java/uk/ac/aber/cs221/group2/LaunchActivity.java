@@ -106,6 +106,13 @@ public class LaunchActivity extends BaseActivity  {
         @Override
         protected Object doInBackground(Object[] params) {
             try {
+
+                long rows = plantDataSource.getRows();
+                System.out.println("ROWS: " + rows);
+                if(rows > 1l) {
+                    System.out.println("A table exists by the name of plants and it has data, skipping db upgrade!");
+                    return null;
+                }
                 long startTime = System.currentTimeMillis();
                 DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
                 HttpPost httppost = new HttpPost("http://nic-dart.co.uk/~nic/res/plantlist.json");
