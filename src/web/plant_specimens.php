@@ -3,6 +3,7 @@ $title = "Plants";
 include "/includes/header.php";
 
 include "/includes/specimens_json.php";
+include "/includes/filter.php";
 
 // main section
 
@@ -30,6 +31,7 @@ echo "<table>
     <th>Location</th>
     <th>User Name</th>
     <th>Date</th>
+    <th>Abundance</th>
   </tr>";
 
 foreach($object as $specimens)
@@ -38,13 +40,16 @@ foreach($object as $specimens)
 	$speciesName = $specimens->SpecimenName;
 	$locationName = $specimens->LocationName;
 	$userName = $specimens->UserName;
-	$timeStamp = $specimens->Timestamp;
-	$specphoto = $specimens->SpecimenPhoto;
+	// $timeStamp = $specimens->Timestamp;
+	$timeStamp= date('Y-m-d',$specimens->Timestamp);
+	
+	$abundance = $specimens->Abundance;
 	echo "<tr>
 		<td>" . $speciesName . "</td>
 		<td>" . $locationName . "</td>
 		<td>" . $userName . "</td>
 		<td>" . $timeStamp . "</td>
+		<td>" . $abundance . "</td>
 		<td>
 			<form action = 'Specimen.php' method= 'GET' name = 'getSpecimen'> 
 				<button class = 'viewSpecimen' type='submit' name='id' value=" . $id . "> View</button> 

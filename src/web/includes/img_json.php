@@ -3,7 +3,7 @@ $urlp = 'users.aber.ac.uk/mta2/groupapi/getResource.php';
 $chp = curl_init($urlp);
 $datap = array(
 	'resourceID' => $object->SpecimenPhoto,
-	'resourceID' => $object->ScenePhoto,
+	
 );
 
 // Form data string

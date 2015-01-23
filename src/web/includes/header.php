@@ -15,6 +15,7 @@ echo $title; ?></title>
 	  <!--google maps javascript code-->
 	   <script src="http://maps.googleapis.com/maps/api/js">
 </script>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script>
 var myCenter=new google.maps.LatLng(<?php
 echo $lat; ?>,<?php
@@ -49,11 +50,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			// -->
 
 		</script>
+		
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+
+
 	</head>	
 	<body>
 		<header class="header-bar">
 			<img class="logo" src="images/main_logo.png"  alt="logo"/>
-        </header>
+			<form class='pass' action='includes/authenticate.php' method='POST'>
+				<input type='text' id='pass' name='pass' class='pass'/>
+				<input type='submit' id='pass' name='submitpass'/>
+			</form>
+		</header>
 			<!--Doesn't need to be changed-->
 	<div id='container'>
 		<nav>

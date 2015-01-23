@@ -16,6 +16,26 @@ $data = array(
 	'order' => 'ascending',
 	'method' => 'speciesName'
 );
+
+}elseif(isset($_POST['submitdateorder'])){ 
+$data = array(
+	'value' => '',
+	'column' => '',
+	'order' => $_POST['dateorder'],
+	'method' => 'timeStamp'
+);
+
+
+}
+elseif(isset($_POST['submitorder'])){ 
+$data = array(
+	'value' => '',
+	'column' => '',
+	'order' => $_POST['ordertype'],
+	'method' => $_POST['orderby']
+);
+
+
 }else{
 $data = array(
 	'order' => "ascending",

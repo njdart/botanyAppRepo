@@ -8,6 +8,7 @@ include "/includes/record_json.php";
 include "/includes/header.php";
 
 include "/includes/img_json.php";
+include "/includes/delete_json.php";
 
 ?>
 <!--where the maps stored-->
@@ -32,13 +33,25 @@ echo "
 <h1 class='indent'>Welcome</h1>
 <h2>Basic layout, no functionality. Will show specific specimin</h2>
 <div id='right-section'>
-<a href='#'>Remove</a>
-<br /><br />";
+<form action = 'delete_json.php' method= 'GET' name = 'deleteSpecimen'> 
+				<button class = 'deleteSpecimen' type='submit' name='id' value=" . $id . "> View</button> 
+			</form>
+<br /><br />
 
-// if no picture is attatched, use default image
+<script>
+$(document).ready(function()
+{
+    $('.image').error(function(){
+        $(this).attr('src', './images/default_image.png');
+    });
+});
+</script>";
 
-echo "<img class='image' src='" . $responsep . "'  alt='default'/>";
-echo "<img class='image' src='" . $responsepp . "'  alt='default'/>
+
+
+
+echo "<p>specimen</p><img class='image' src='" . $responsep . "' alt='default'/>";
+echo "<p>scene</p><img class='image' src='" . $responsepp . "' alt='default'/>
 <br />";
 ?>
 <!--where link to show map on pop up-->
@@ -84,6 +97,11 @@ echo"<tr>";
 	echo"<th>Abundance</th>";
 	echo"<td>";
 	echo $object->Abundance;
+	echo "</td>";
+echo"</tr>";
+echo"<th>Date Submitted</th>";
+	echo"<td>";
+	echo date('Y-m-d',$object->Timestamp);
 	echo "</td>";
 echo"</tr>";
 echo"<tr>";

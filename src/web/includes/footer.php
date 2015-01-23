@@ -2,8 +2,35 @@
 <div id="footer-bar">
 <a class="footer-left" href="sitemap.php">Site Map</a>
 <img class="footer-center" src="images/footer-logo.png"  alt="Logo"/>
-<a href='#' class='download'>Download App</a>
-
+<a href='about.php' class='download'>Download App</a>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#orderby").change(function(){
+            $( "#orderby option:selected").each(function(){
+                if($(this).attr("value")=="speciesName"){
+                    $(".box").hide();
+                    $(".speciesName").show();
+                }
+                if($(this).attr("value")=="locationName"){
+                    $(".box").hide();
+                    $(".locationName").show();
+                }
+                if($(this).attr("value")=="userName"){
+                    $(".box").hide();
+                    $(".userName").show();
+                }
+				if($(this).attr("value")=="timeStamp"){
+                    $(".box").hide();
+                    $(".timeStamp").show();
+                }
+				if($(this).attr("value")=="abundance"){
+                    $(".box").hide();
+                    $(".abundance").show();
+                }
+            });
+        }).change();
+    });
+</script>
 </div>
 </div>
 </body>
