@@ -24,6 +24,7 @@ getSpecimens.php can now order/search by abundance and can paginate with start r
 Added sanitisation to all API commands
 Added more Database protection with transactions and connection closing
 Added resource location protection with config
+Added validation on Lat and Long and empty fields
 
 Available Commands:
 
