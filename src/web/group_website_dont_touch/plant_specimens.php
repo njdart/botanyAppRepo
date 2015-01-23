@@ -15,10 +15,10 @@ echo "<form class='advanced-search' action='plant_specimens.php' method='post'>
 		<input type='submit' name='submitadvsearch' class='advancedsearchbutton' src='images/search.png' alt='Search' />
 		<input type='text' size='50' id='search' class='simpletext' name='search' placeholder='Enter the plant you want to find' value=''/>
 		<select name='searchfield'>
-			<option value='id'>ID</option>
-			<option value='name'>name</option>
-			<option value='price'>price</option>
-			<option value='description'>description</option>
+			<option value='speciesName'>Species Name</option>
+			<option value='locationName'>Location</option>
+			<option value='userName'>User</option>
+			
 		</select>
 	</form>";
 

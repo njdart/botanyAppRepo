@@ -20,9 +20,9 @@
 		SE-F-008 & FR4 & User not allowed to add a non-image file when prompted for a picture of a plant. & Attempt to enter a non-image file to the database. & States that the file is not an image file. & Does not enter to database. Returns to input page. \\ \hline
 		SE-F-009 & FR4 & User not allowed to add a picture of a plant to the database if over a certain size (to be discussed with group.) &  Attempt to enter an absurdly large image file to the database (e.g 20MB). & States that the file exceeds filesize limits. & Does not enter to database. Returns to input page. \\ \hline
 		SE-F-010 & FR4 & User allowed to record the level of abundance of the plant within the area. &  Record level of abundance of plant within the area. Enter a valid input. & States that abundance of plant is successfully added to the database. & Level of abundance successfully added to the database. \\ \hline
-		SE-F-011 & FR4 & User not allowed to enter an invalid input for abundance of plant. & Attempt to enter an invalid input for abundance of plant. & States that the input is invalid. & Does not enter to database, returns to input page. \\ \hline
-		SE-F-012 & FR6 & Application should know whether it is connected to the internet, and that it is able to send records to the database. If not, the data is stored in local storage. & Attempt to use app whilst connected to the internet. & States that records successfully sent to the database. & Successfully sends records to the database. \\ \hline
-		SE-F-013 & FR6 & Application should know whether it is connected to the internet, and that it is able to send records to the database. If not, the data is stored in local storage. & Attempt to use app whilst not connected to the internet. &  States that the app is not connected to the internet and that the records were stored in local storage. & Stores the records on local storage. \\ \hline
+		SE-F-011 & FR4 & User not allowed to enter an invalid input for abundance of plant. & Attempt to enter an invalid input for abundance of plant. & Pop up sttates that the input is invalid. & Does not enter to database, returns to input page. \\ \hline
+		SE-F-012 & FR6 & Application should know whether it is connected to the internet, and that it is able to send records to the database. If not, the data is stored in local storage. & Attempt to do SE-F-004/5/7/10 whilst connected to the internet. & Pop-up states that records successfully sent to the database. & Successfully sends records to the database. \\ \hline
+		SE-F-013 & FR6 & Application should know whether it is connected to the internet, and that it is able to send records to the database. If not, the data is stored in local storage. & Attempt to SE-F-004/5/7/10 whilst not connected to the internet. &  Pop-up states that the app is not connected to the internet and that the records were stored in local storage. & Stores the records on local storage. \\ \hline
 		\end{longtable}	
 	\end{landscape}
 
@@ -33,8 +33,8 @@
 		\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
 		\hline
 		Test Ref & Req Being Tested & Test Content & Input & Output & Pass Criteria \\ \hline
-		SE-F-014 & FR2 & Valid Username/Password allows user to login. & Login with valid Username/Password. & & \\ \hline
-		SE-F-015 & FR2 & Invalid Username/Password does not allow user to login. & Login with invalid Username/Password. & & \\ \hline
+		SE-F-014 & FR2 & Valid Username allows user to login. & Login with valid Username. & & \\ \hline
+		SE-F-015 & FR2 & Invalid Username does not allow user to login. & Login with invalid Username. & & \\ \hline
 		SE-F-016 & FR3 & User allowed to add a plant name to the database. & Enter valid plant name using the website. & States that plant details are successfully added to the database. & Plant details successfully added to the database. \\ \hline
 		SE-F-017 & FR3 & User not allowed to add an invalid plant name to the database. & Enter invalid plant name using the website. & States that the plant name is invalid. & Plant details not added to database, returns to input page. \\ \hline
 		SE-F-018 & FR4 & User allowed to add Species Details. & Enter valid Species Details using the website. & States that plant details are successfully added to the database. & Plant details successfully added to database. \\ \hline
