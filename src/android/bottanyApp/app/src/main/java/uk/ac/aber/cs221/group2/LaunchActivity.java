@@ -15,6 +15,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,10 +24,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import uk.ac.aber.cs221.group2.dataClasses.Visit;
 import uk.ac.aber.cs221.group2.utils.PlantDataSource;
+import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 
 public class LaunchActivity extends BaseActivity  {
 
@@ -144,6 +148,48 @@ public class LaunchActivity extends BaseActivity  {
                 long timeToProcess = System.currentTimeMillis() - startTime;
                 System.out.println(String.format("DB done processing in %2.2f seconds (%2.2f for the download)", (float)timeToProcess / 1000, (float)timeToDownload / 1000));
                 Toast.makeText(context, "Plant Database is now up to date!", Toast.LENGTH_LONG).show();
+
+                //////////////////////////////
+
+                DefaultHttpClient httpclient2 = new DefaultHttpClient(new BasicHttpParams());
+                HttpPost httppost2 = new HttpPost("http://users.aber.ac.uk/mta2/groupapi/getLocations.php");
+                // Depends on your web service
+                httppost.setHeader("Content-type", "application/json");
+
+                InputStream inputStream2 = null;
+                String result2 = null;
+                HttpResponse response2 = httpclient2.execute(httppost2);
+                HttpEntity entity2 = response2.getEntity();
+
+                inputStream2 = entity2.getContent();
+                // json is UTF-8 by default
+                BufferedReader reader2 = new BufferedReader(new InputStreamReader(inputStream2, "UTF-8"), 8);
+                StringBuilder sb2 = new StringBuilder();
+
+                String line2 = null;
+                while ((line2 = reader2.readLine()) != null) {
+                    sb2.append(line2 + "\n");
+                }
+                result2 = sb2.toString();
+
+                SiteDataSource sitedb = new SiteDataSource(LaunchActivity.this);
+                sitedb.open();
+                JSONArray a = new JSONArray(result2);
+                //ArrayList<Visit> locations = new ArrayList<Visit>();
+                for(int i = 0; i<a.length();i++){
+                    Visit v = new Visit(a.getJSONObject(i).getString("LocationName"),a.getJSONObject(i).getString("LocationOS"));
+                    sitedb.create(v);
+                    System.out.print("added" +v.getVisitName()+ " "+v.getVisitOS());
+                }
+
+
+
+
+
+
+
+
+
             } catch (JSONException e){
                 System.out.println("Error, bad json?");
                 e.printStackTrace();
@@ -159,6 +205,7 @@ public class LaunchActivity extends BaseActivity  {
             } finally {
                 return null;
             }
+
         }
     }
 }
