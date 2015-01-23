@@ -1,7 +1,8 @@
 \subsection{Interface}
     These are the commands that the web API will be using to maintain the database and receive commands.
     \begin{itemize}
-        \item AddRecord
+        \item AddRecord - adds a record to the database, and returns the record ID. Used by the Android application.
+        \begin{itemize}
         \item Headers required:
         \begin{itemize}
             \item none
@@ -19,8 +20,11 @@
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
+	    \end{itemize}
+    
 
-        \item RemoveSpecimen
+        \item RemoveSpecimen - removes a single specimen from the database, provided an ID and an administrator password. Used by the web site.
+        \begin{itemize}
         \item Headers required: 
         \begin{itemize}
         	\item none
@@ -37,28 +41,10 @@
         	\item 401 Unauthorized
         	\item 500 Internal Server Error
         \end{itemize}
+	    \end{itemize}
 
-        \item ModifySpecimen
-        \item Headers required:
+        \item GetSpecimen - returns a single specimen result, which includes data from the record the specimen belongs to when provided an ID. Used by the web site.
         \begin{itemize}
-        	\item none
-        \end{itemize}
-        \item POST Arguments:
-        \begin{itemize}
-        	\item specimenID : Integer
-        	\item specimen : Specimen
-        	\item password : String
-        \end{itemize}
-        \item Statuses:
-        \begin{itemize}
-        	\item 200 OK : no data
-        	\item 400 Bad Request
-        	\item 401 Unauthorized
-        	\item 500 Internal Server Error
-        \end{itemize}
-
-
-        \item GetSpecimen
         \item Headers required: 
         \begin{itemize}
             \item none
@@ -76,8 +62,10 @@
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
+	    \end{itemize}
 
-        \item GetSpecimens
+        \item GetSpecimens - returns a list of specimen results, which include data from the record the specimen belongs to, searching and sorting them by defined criteria. Used by the web site.
+        \begin{itemize}
         \item Headers Required:
         \begin{itemize}
         	\item none
@@ -95,8 +83,10 @@
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
+	    \end{itemize}
 
-        \item AddResource
+        \item AddResource - adds a file resource to the server, and returns an ID. Used by the Android application and the web site.
+        \begin{itemize}
         \item Headers required: 
         \begin{itemize}
             \item none
@@ -114,8 +104,10 @@
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
-
-        \item GetResource
+		\end{itemize}
+	
+        \item GetResource - returns a file resource when provided with a resource ID. Used by the web site.
+        \begin{itemize}
         \item Headers required:
         \begin{itemize}
             \item none
@@ -133,6 +125,25 @@
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
+	    \end{itemize}
+	    
+        \item GetLocations - returns a list of distinct locations used by records in the database for use by the Android application.
+        \begin{itemize}
+        \item Headers Required:
+        \begin{itemize}
+              	\item none
+        \end{itemize}
+        \item POST Arguments:
+        \begin{itemize}
+              	\item none
+        \end{itemize}
+        \item Statuses: 
+        \begin{itemize}
+              	\item 200 OK : array of RecordLocation
+              	\item 400 Bad Request
+              	\item 500 Internal Server Error
+        \end{itemize}
+	    \end{itemize}
     \end{itemize}
 
 \subsection{Detailed design}
@@ -155,7 +166,7 @@
 
     \subsubsection{Significant data structures}
 
-        The web API is going to make use of the Record and Specimen data structures, which will be exchanged between the server and its clients (the Android application and the website). They will be represented in a JSON format, which is readily available for use in PHP, JavaScript, and Android. Data types, where specified, are JSON data types. 
+        The web API is going to make use of the Record, Specimen, RecordLocation and SpecimenResult data structures, which will be exchanged between the server and its clients (the Android application and the website). They will be represented in a JSON format, which is readily available for use in PHP, JavaScript, and Android. Data types, where specified, are JSON data types. 
 
         The structure of a Record is as follows:
         \begin{itemize}
@@ -169,6 +180,15 @@
                 \item LocationOS : String
                 \item Specimens : Array of Specimen
             \end{itemize}
+        \end{itemize}
+        
+        The structure of a RecordLocation is as follows:
+        \begin{itemize}
+        	\item RecordLocation : Object
+        	\begin{itemize}
+        		\item LocationName : String 
+        		\item LocationOS : String
+        	\end{itemize}
         \end{itemize}
 
         The structure of a Specimen is as follows:
@@ -185,7 +205,7 @@
             \end{itemize}
         \end{itemize}
         
-        The structure of a Specimen result is as follows:
+        The structure of a SpecimenResult is as follows:
         \begin{itemize}
         	\item SpecimenResult : Object
         	\begin{itemize}
@@ -208,6 +228,14 @@
         	\end{itemize}
         \end{itemize}
 
+		The web API uses config.php as a configuration store. It contains the \$CONFIG array, containing the following entries:
+		
+		 \begin{itemize}
+			 	\item dbname : the address of the MySQL database to be used
+			 	\item username : the user name to use on the MySQL database
+			 	\item password : the password to use on the MySQL database
+			 	\item adminPassword : the password used in the DeleteSpecimen web method
+		\end{itemize}
         The web API is going to use a relational database as a data store.
         The database tables are as follows:
 
@@ -248,13 +276,4 @@
                 \item ScenePhoto : INT
                 \item SpecimenPhoto : INT   
             \end{itemize}
-                \item Comment : String
-                \item ScenePhoto : String (ID of a resource on the server)
-                \item SpecimenPhoto : String (ID of a resource on the server)
             \end{itemize}
-        \end{itemize}
-
-        The web API is going to use a relational database as a data store.
-        The database tables are as follows:
-
-        \end{itemize}
