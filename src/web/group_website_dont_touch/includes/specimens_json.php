@@ -1,10 +1,29 @@
 <?php
 $url = 'users.aber.ac.uk/mta2/groupapi/getSpecimens.php';
 $ch = curl_init($url);
+
+if(isset($_POST['submitsearch'])){ 
+$data = array(
+	'value' => $_POST['search'],
+	'column' => 'speciesName',
+	'order' => 'ascending',
+	'method' => 'speciesName'
+);
+}elseif(isset($_POST['submitadvsearch'])){ 
+$data = array(
+	'value' => $_POST['search'],
+	'column' => $_POST['searchfield'],
+	'order' => 'ascending',
+	'method' => 'speciesName'
+);
+}else{
 $data = array(
 	'order' => "ascending",
 	'method' => "speciesName",
 );
+}
+
+
 
 // Form data string
 

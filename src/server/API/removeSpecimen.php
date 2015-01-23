@@ -9,7 +9,7 @@
 
 	//Returns success code for successful data and connects to Database
 	http_response_code(200);
-	$conn = new mysqli('db.dcs.aber.ac.uk', 'msh4', 'password');
+	$conn = new mysqli($CONFIG['dbname'], $CONFIG['username'], $CONFIG['password']);
 	
 	//Checks Database connection and returns error code 500 to show server error, then end the script
 	if($conn->connect_errno)
