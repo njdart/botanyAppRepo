@@ -84,6 +84,13 @@ public class PlantDataSource {
 
     }
 
+    public int getRows(){
+        String count = "SELECT count(*) FROM " + DatabaseUtils.plantsTableName + " ; ";
+        Cursor cursor =  database.rawQuery(count,null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
+
     public Visit FindByName(String s){
         //work on this
         return null;
