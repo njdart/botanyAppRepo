@@ -7,9 +7,12 @@
 		\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
 		\hline
 		Test Ref & Req Test & Test Content & Input & Output & Pass \\ \hline
-		SE-F-001 & FR1 & Startup of Software & Start up Android & Android App should open. & Android app opens without error. \\ \hline
-		SE-F-002 & FR2 & Valid username/password allows user to login & Enter valid username/ & App should confirm successful login and proceed to App. & App confirms successful login and proceeds to the App. \\ \hline
-		SE-F-003 & FR2 & Invalid username/password does not allow user to login & Enter invalid username/password combination. &  App should state that it was an invalid login and does not allow user to login. & App states that the login details are invalid, stays on login page. \\ \hline
+		SE-F-001 & FR1 & Startup of Software & Touch App logo & Botany App should open & Android app opens without error. \\ \hline
+		SE-F-002 & FR2 & Valid username allows user to login & Enter validusername of size 3>UN>10 & App should confirm successful login and proceed to App. & Splash screen showing correct Username is showing. \\ \hline
+		SE-F-003 & FR2 & Invalid username does not allow user to login & Enter username that is outside of the required length &  App should display an error & An error message in a box should pop up saying that the username has to be between 3 and 10 characters long.  \\ \hline
+		SE-F-004 & FR2 & Valid Location name storage & When prompted, enter a Location Name that is <50 & App should proceeed to record selection & Record selection screen is showing \\ \hline
+		
+		
 		SE-F-004 & FR3 & User allowed to add a plant name to the database. & Enter plant name to the database via android app. & States that plant details are successfully added to the database. & Plant details successfully added to the database. \\ \hline
 		SE-F-005 & FR4 & User allowed to add Species Details. & Enter Species Details to the database via android app. & States that plant details are successfully added to the database. & Plant details successfully added to the database. \\ \hline
 		SE-F-006 & FR4 & User not allowed to enter invalid Species Details to the database. & Enter invalid Species Details to the database via android app. & App states that the details entered are invalid. & Does not enter to database. Returns to input page. \\ \hline
