@@ -1,50 +1,74 @@
 package uk.ac.aber.cs221.group2.dataClasses;
 
 public class Specimen {
-	/**
+    public Specimen(String name, Double latitude, Double longitude, AbundanceEnum abundance, String comment, String scenePhotoURI, String specimenPhotoURI) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.abundance = abundance;
+        this.comment = comment;
+        this.scenePhotoURI = scenePhotoURI;
+        this.specimenPhotoURI = specimenPhotoURI;
+    }
+
+    /**
 	 * Abundance scale
 	 * Fulfills FR4
 	 */
 	
 	
-	
-	
 	public enum AbundanceEnum {
-		DOMINANT,
-		ABUNDANT,
-		FREQUENT,
-		OCCASIONAL,
-		RARE,
-	}
+        DOMINANT ,
+        ABUNDANT ,
+        FREQUENT,
+        OCCASIONAL ,
+        RARE;
 
-	
-	private String latitude;
-	private String longitude;
+    }
+
+
+
+
+
+
+    private String name;
+	private Double latitude;
+	private Double longitude;
 	private AbundanceEnum abundance;
 	private String comment;
 	private String scenePhotoURI;
 	private String specimenPhotoURI;
-	
-	
+
+
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 	/**
 	 * Set the approximate Specimen latitude
 	 */
-	public void setLatitude(String a){
+	public void setLatitude(Double a){
 		latitude = a;
 	}
 	
 	/**
 	 * Set the approximate Specimen longitude
 	 */
-	public void setLongitude(String a){
+	public void setLongitude(Double a){
 		longitude = a;
 	}
 	
 	/**
 	 * Set the approximate Specimen Abundance
 	 */
-	public void setAbundance(String a){
-		/*Abundance = a;*/
+	public void setAbundance(AbundanceEnum a){
+		abundance = a;
 	}
 	
 	/**
@@ -71,14 +95,14 @@ public class Specimen {
 	/**
 	 * Gets the approximate Specimen longitude
 	 */
-	public String getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
 	/**
 	 * Gets the approximate Specimen latitude
 	 */
-	public String getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 

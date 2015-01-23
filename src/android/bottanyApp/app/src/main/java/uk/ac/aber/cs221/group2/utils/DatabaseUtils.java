@@ -24,6 +24,25 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final String plantTable_plantId = "plantId";
     public static final String plantTable_plantLatinName = "plantName";
 
+    public static final String specimenTableName = "specimen";
+    public static final String specimenTable_specimenId = "specimenId";
+    public static final String specimenTable_specimenName = "specimenName";
+    public static final String specimenTable_specimenLat = "specimenLat";
+    public static final String specimenTable_specimenLong= "specimenLong";
+    public static final String specimenTable_specimenAbundance = "specimenAbundance";
+    public static final String specimenTable_specimenComment = "specimenComment";
+    public static final String specimenTable_specimenScenePhoto = "specimenScenePhoto";
+    public static final String specimenTable_specimenSpecimenPhoto = "specimenSpecimenPhoto";
+
+    private static final String createSpecimenTableQuery = "CREATE TABLE " + specimenTableName + " (" +
+            specimenTable_specimenId + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            specimenTable_specimenName + " TEXT, " +
+            specimenTable_specimenLat + " DOUBLE, "+
+            specimenTable_specimenLong + " DOUBLE, "+
+            specimenTable_specimenAbundance + " TEXT, " +
+            specimenTable_specimenComment + " TEXT, " +
+            specimenTable_specimenScenePhoto + " TEXT, " +
+            specimenTable_specimenSpecimenPhoto + " TEXT ); ";
 
     private static final String createSitesTableQuery = "CREATE TABLE " + sitesTableName + " (" +
             sitesTable_siteId + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -36,7 +55,8 @@ public class DatabaseUtils extends SQLiteOpenHelper {
 
     public static final String[] tableCreationQueries = {
             createSitesTableQuery,
-            createPlantsTableQuery
+            createPlantsTableQuery,
+            createSpecimenTableQuery
     };
 
     public DatabaseUtils(Context context) {
@@ -59,6 +79,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + sitesTableName + "; " +
+                   "DROP TABLE IF EXISTS " + specimenTableName + "; " +
                    "DROP TABLE IF EXISTS " + plantsTableName + "; ");
         onCreate(db);
     }
