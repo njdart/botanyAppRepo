@@ -25,15 +25,20 @@
         </activity>
         <activity
             android:name=".SpeciesAdder"
-            android:label="@string/title_activity_species_adder" >
+            android:label="@string/title_activity_species_adder"
+            android:parentActivityName=".SiteChooserActivity">
         </activity>
         <activity
-            android:name=".SiteChooser"
+            android:name=".SiteChooserActivity"
+            android:parentActivityName=".LaunchActivity"
             android:label="@string/title_activity_site_chooser" >
-            <!--android:parentActivityName=".LaunchActivity" >-->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.ac.aber.cs221.group2.LaunchActivity" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 
