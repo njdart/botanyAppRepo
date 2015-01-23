@@ -58,9 +58,29 @@ public class SiteChooserActivity extends BaseActivity {
     }
 
     public void onUseSiteClick(View view){
-        final String siteName = ((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete))
-                .getText().toString();
+        AutoCompleteTextView siteNameAutoComplete = ((AutoCompleteTextView)findViewById(R.id.siteNameAutoComplete));
+        TextView gridRefTextView = ((TextView)findViewById(R.id.customGridReferenceEditText));
+        final String siteName = siteNameAutoComplete.getText().toString();
+        final String gridRef = gridRefTextView.getText().toString();
         String siteNameLower = siteName.toLowerCase();
+        boolean foundErrors = false;
+
+        if(siteName.length() < 3 || siteName.length() > 20){
+            foundErrors = true;
+            siteNameAutoComplete.setError("The site name should be between 3 and 20 characters");
+        } else {
+            siteNameAutoComplete.setError(null);
+        }
+
+        if(gridRef.length() != 8) {
+            foundErrors = true;
+            gridRefTextView.setError("Expected a 6 fig grid ref without spaces");
+        } else {
+            gridRefTextView.setError(null);
+        }
+
+        //If errors are found, abort the transaction!
+        if(foundErrors) return;
 
         //check if the site is already in the list
         for(String s : autoCompleteEntries){
@@ -78,10 +98,7 @@ public class SiteChooserActivity extends BaseActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        siteDataSource.create(new Visit(siteName, "FOOBAR"));
-
-                        //TODO site ref is NOT "foobar", but fuck it...
-
+                        siteDataSource.create(new Visit(siteName, gridRef));
                         goToSpeciesAdderActivity();
                     }
                 })
@@ -107,11 +124,6 @@ public class SiteChooserActivity extends BaseActivity {
 
             LatLng loc = new LatLng(location.getLatitude(),location.getLongitude());
             OSRef os2 = loc.toOSRef();
-//            System.out.println("Converted to OS Grid Ref: " + os2.toString() + " - "
-//                    + os2.toSixFigureString());
-
-            //System.out.println("LAT: " + location.getLatitude() + " LNG: " + location.getLongitude());
-            //Toast.makeText(SiteChooserActivity.this, "LAT: " + location.getLatitude() + " LNG: " + location.getLongitude(), Toast.LENGTH_LONG).show();
             TextView gridRef = (TextView)findViewById(R.id.customGridReferenceEditText);
             if(!useCustomGridRef) {
                 //gridRef.setText(location.getLatitude() + "\n" + location.getLongitude());
