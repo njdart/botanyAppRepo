@@ -31,6 +31,20 @@
         }).change();
     });
 </script>
+<script type="text/javascript">
+<!--
+function confirmation() {
+	var answer = confirm("Delete Specimen?")
+	if (answer){
+		alert("Specimen <?php echo $id ?> has been deleted")
+		window.location = "http://www.google.com/";
+	}
+	else{
+		alert("Thanks for sticking around!")
+	}
+}
+//-->
+</script>
 </div>
 </div>
 </body>

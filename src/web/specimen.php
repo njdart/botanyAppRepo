@@ -8,7 +8,7 @@ include "/includes/record_json.php";
 include "/includes/header.php";
 
 include "/includes/img_json.php";
-include "/includes/delete_json.php";
+
 
 ?>
 <!--where the maps stored-->
@@ -32,11 +32,13 @@ echo "
 <div id='content-boxes'>
 <h1 class='indent'>Welcome</h1>
 <h2>Basic layout, no functionality. Will show specific specimin</h2>
-<div id='right-section'>
-<form action = 'delete_json.php' method= 'GET' name = 'deleteSpecimen'> 
-				<button class = 'deleteSpecimen' type='submit' name='id' value=" . $id . "> View</button> 
-			</form>
-<br /><br />
+<div id='right-section'>";
+
+if(isset($_SESSION['pass'])){
+echo"<form action = 'includes/delete_json.php' method= 'GET' name = 'deleteSpecimen'> 
+				<button class = 'deleteSpecimen' onclick='confirmation()' type='submit' name='id' value=" . $id . "> delete</button> 
+			</form>";}
+echo"<br /><br />
 
 <script>
 $(document).ready(function()

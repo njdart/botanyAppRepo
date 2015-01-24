@@ -1,11 +1,11 @@
 <?php
+session_start();
 $url = 'users.aber.ac.uk/mta2/groupapi/removeSpecimen.php';
 $ch = curl_init($url);
-$_SESSION['pass']=$_POST['pass'];
-$pass=$_SESSION['pass'];
+
 $data = array(
-	'specimenID' => $id,
-	'password' => $pass
+	'specimenID' => $_GET['id'],
+	'password' => $_SESSION['pass']
 
 );
 
@@ -24,12 +24,11 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($ch);
 
 // echo $response;
-$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE;
+$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if($http_status == 200){
-	header('Location: plant_specimens.php');
-
+header('Location: ' . $_SERVER['HTTP_REFERER']);
 }else{
-echo "Wrong";
+header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
 

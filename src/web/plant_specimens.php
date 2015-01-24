@@ -12,6 +12,8 @@ echo "<div id='content-boxes-dblist'>
 
 // Advance form start
 
+
+
 echo "<form class='advanced-search' action='plant_specimens.php' method='post'>
 		<input type='submit' name='submitadvsearch' class='advancedsearchbutton' src='images/search.png' alt='Search' />
 		<input type='text' size='50' id='search' class='simpletext' name='search' placeholder='Enter the plant you want to find' value=''/>
@@ -22,7 +24,6 @@ echo "<form class='advanced-search' action='plant_specimens.php' method='post'>
 			
 		</select>
 	</form>";
-
 // Advance form end
 
 echo "<table>

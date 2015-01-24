@@ -1,10 +1,16 @@
 <?php
+session_start();
 $url = 'users.aber.ac.uk/mta2/groupapi/authenticateAdmin.php';
 $ch = curl_init($url);
-echo $_POST['pass'];
-$data = array(
-	'password' => $_POST['pass']
 
+if (array_key_exists('submitpass', $_POST))
+	{
+	$_SESSION['pass'] = $_POST['pass'];
+	}
+
+echo $_SESSION['pass'];
+$data = array(
+	'password' => $_SESSION['pass']
 );
 
 // Form data string
@@ -21,21 +27,17 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $response = curl_exec($ch);
 
-var_dump ($response);
-
-// echo $response;
-// if($response == true){
-		
-
-// }else{
-// echo "Wrong";
-// }
-
-
+if ($response == "true")
+	{
+	header('location:' . $_SERVER['HTTP_REFERER'] . '?loginmsg=' . urlencode(base64_encode("You have logged in")));
+	}
+  else
+	{
+	session_destroy();
+	header('location:' . $_SERVER['HTTP_REFERER'] . '?errormsg=' . urlencode(base64_encode("Login Incorrect")));
+	}
 
 curl_close($ch);
-
-// echo $response;
 
 
 

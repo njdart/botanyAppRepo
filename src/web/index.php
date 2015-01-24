@@ -1,7 +1,7 @@
 <?php
 	$title = "Home";
 	include "/includes/header.php";
-	//first top box
+	//first top boxes
 	echo "<div id='content-boxes' class='top-index'>
 <br>
 <h1 class='indent'>Welcome</h1>

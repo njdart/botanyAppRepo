@@ -58,10 +58,27 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	<body>
 		<header class="header-bar">
 			<img class="logo" src="images/main_logo.png"  alt="logo"/>
-			<form class='pass' action='includes/authenticate.php' method='POST'>
+				<br><br><br>	
+
+		<?php
+		if(!isset($_SESSION['pass'])){
+			echo"<form class='pass' action='includes/authenticate.php' method='POST'>
 				<input type='text' id='pass' name='pass' class='pass'/>
-				<input type='submit' id='pass' name='submitpass'/>
-			</form>
+				<input type='submit' id='submit' name='submitpass'/>
+			</form>";
+			}else{
+			echo "<a href = 'includes/logout.php'>Logout</a>";
+			}
+			if(isset($_GET['msg'])){
+			 echo '<div class="success_message">' . base64_decode(urldecode($_GET['msg'])) . '</div>';
+			}
+			if(isset($_GET['loginmsg'])){
+			 echo '<div class="success_message">' . base64_decode(urldecode($_GET['loginmsg'])) . '</div>';
+			}
+			if(isset($_GET['errormsg'])){
+			 echo '<div class="success_message">' . base64_decode(urldecode($_GET['errormsg'])) . '</div>';
+			}
+			?><br><br><br>
 		</header>
 			<!--Doesn't need to be changed-->
 	<div id='container'>
