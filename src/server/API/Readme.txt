@@ -26,7 +26,6 @@ Added more Database protection with transactions and connection closing
 Added resource location protection with config
 Added validation on Lat and Long and empty fields
 Added authenticateAdmin command. Added includes to relevant places
-Added email and OS grid reference format checks to addRecord.php
 
 Available Commands:
 

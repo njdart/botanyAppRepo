@@ -32,13 +32,15 @@ echo "<div id='content-boxes-dblist'>
 		</tr>";
 		
 //loop round all specimens
+        $abundances = array( 1 => "Rare", 2 => "Occassional", 3 => "Frequent",
+                             4 => "Abundant", 5 => "Dominant" );
 		foreach($object as $specimens){
 			$id = $specimens->SpecimenID;
 			$speciesName = $specimens->SpecimenName;
 			$locationName = $specimens->LocationName;
 			$userName = $specimens->UserName;
 			$timeStamp = date('Y-m-d', $specimens->Timestamp);
-			$abundance = $specimens->Abundance;
+			$abundance = $abundances[$specimens->Abundance];
 			echo "<tr>
 				<td>" . $speciesName . "</td>
 				<td>" . $locationName . "</td>

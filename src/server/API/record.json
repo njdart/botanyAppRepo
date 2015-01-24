@@ -1,7 +1,7 @@
 {
 
 	"UserName":
-		"Harry Plotter", 
+		"Harry Potter", 
 		
 	"UserPhone":
 		"07949021123", 
@@ -13,13 +13,13 @@
 		"Hogwarts, England", 
 
 	"LocationOS":
-		"DB134326",
+		"DB123432",
 		
 	"Specimens":
 		[
 			{
 				"SpeciesName":"Potato Man",
-				"LocationLatitude":54.123,
+				"LocationLatitude":654.123,
 				"LocationLongitude":71.01,
 				"Abundance":3,
 				"Comment":"This plant sucks",
@@ -28,7 +28,7 @@
 			},
 			{
 				"SpeciesName":"Crazy Carrot",
-				"LocationLatitude":68.890,
+				"LocationLatitude":798.890,
 				"LocationLongitude":76.23,
 				"Abundance":5,
 				"Comment":"This plant rulez",
@@ -38,7 +38,7 @@
 			
 			{
 				"SpeciesName":"James Ohare Plant",
-				"LocationLatitude":10.211,
+				"LocationLatitude":100.211,
 				"LocationLongitude":22.33,
 				"Abundance":2,
 				"Comment":"This plant is strange",
@@ -48,7 +48,7 @@
 			
 			{
 				"SpeciesName":"Human Feet",
-				"LocationLatitude":43.334,
+				"LocationLatitude":443.334,
 				"LocationLongitude":55.44,
 				"Abundance":1,
 				"Comment":"This plant makes me sick",
