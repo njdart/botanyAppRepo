@@ -1,6 +1,6 @@
 <?php
-//$url = 'users.aber.ac.uk/mta2/groupapi/getSpecimens.php';
-$url = 'localhost:8080/api/getSpecimens.php';
+$url = 'users.aber.ac.uk/mta2/groupapi/getSpecimens.php';
+//$url = 'localhost:8080/api/getSpecimens.php';
 $ch = curl_init($url);
 
 $data = array(
