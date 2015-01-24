@@ -18,7 +18,7 @@ echo"<img class='image' src='images/default_image.png'  alt='default'/>
 <div id='left-section'>
 <form class='add-record' action='add_specimen.php' method='GET'>
 Username:<br>
-<input type='text' id='UserName' name='UserName' <input type='text' id='UserName' name='UserName' pattern="[A-Za-z]{3,10}" title="Username, 3-10 letters. No numbers or symbols." /><br><br>
+<input type='text' id='UserName' name='UserName' pattern='[A-Za-z]{3,10}' title='Username, 3-10 letters. No numbers or symbols.' /><br><br>
 /><br><br>
 
 Phone:<br>
