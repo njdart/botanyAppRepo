@@ -14,8 +14,7 @@ echo "<div id='filtering'>
 			<option value='abundance'>Abundance</option>
 		</select>
 
-		<select name='ordertype'>
-			<option value=''>Select an option</option>
+		<select id='ordertype' name='ordertype'>
 			<option class='speciesName locationName userName box' value='ascending'>A-Z</option>
 			<option class='speciesName locationName userName box' value='descending'>Z-A</option>
 			<option class='timeStamp box' value='ascending'>Oldest</option>
@@ -24,7 +23,7 @@ echo "<div id='filtering'>
 			<option class='abundance box' value='descending'>High-Low</option>
 		</select>
 		
-		<input type='submit' name='submitorder' value='Submit' />
+		<!-- <input type='submit'<input type='submit' name='submitorder' value='Submit' /> -->
 	</form>";
 	
 echo "</div>";
