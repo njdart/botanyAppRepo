@@ -93,7 +93,7 @@ public class LaunchActivity extends BaseActivity  {
         EditText email = (EditText) findViewById(R.id.editEmail);
         System.out.println("NAME: " + name.getText() + " PHONE: " + phone.getText() + " EMAIL: " + email.getText());
         User user = new User(name.getText().toString(),phone.getText().toString(),email.getText().toString());
-       // userdb = new UserDataSource(this);
+        userdb = new UserDataSource(this);
 
 
         if(userdb.FindByName(user.getName())==null){
