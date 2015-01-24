@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -38,7 +39,7 @@ import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 import uk.ac.aber.cs221.group2.utils.UserDataSource;
 
 public class LaunchActivity extends BaseActivity  {
-
+    AutoCompleteTextView textView;
     UserDataSource userdb;
     public static List<String> autoCompleteEntries;
     @Override
@@ -61,11 +62,29 @@ public class LaunchActivity extends BaseActivity  {
         if(autoCompleteEntries.size()>0){
             System.out.println(autoCompleteEntries.size());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,autoCompleteEntries) ;
-        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.editNameAutoComplete);
+        textView = (AutoCompleteTextView) findViewById(R.id.editNameAutoComplete);
+        //textView.setOnItemClickListener(actvClicked);
         textView.setAdapter(adapter);
-        }
+            textView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    AutoCompleteTextView temp = textView;
+                    System.out.println(temp.getText());
+                    User user = userdb.FindByName(temp.getText().toString());
+                    EditText phone = (EditText) findViewById(R.id.editPhoneNumber);
+                    EditText email = (EditText) findViewById(R.id.editEmail);
+                    phone.setText(user.getUserPhoneNumber());
+                    email.setText(user.getUserEmail());
+                }
+            });
 
-    }
+        }}
+
+
+
+
+
+
 
     public void newVisitOnClick(View buttonView){
         boolean errors = false;

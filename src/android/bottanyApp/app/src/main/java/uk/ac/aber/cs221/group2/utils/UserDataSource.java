@@ -88,10 +88,36 @@ public class UserDataSource {
 
     }
 
+    public List<String> findMatches(String string){
+        List<String>  words =  new ArrayList<String>();
+
+        String selectQuery = "SELECT "+ DatabaseUtils.plantTable_plantLatinName +" FROM " + DatabaseUtils.plantsTableName + "  WHERE "+ DatabaseUtils.plantTable_plantLatinName + " LIKE  '%"+string+"%';";
+        System.out.println(selectQuery);
+        Cursor cursor = database.rawQuery(selectQuery,null);
+        System.out.println("CURSOR: " + cursor.toString());
+        if(cursor.getCount()>0) {
+            while (cursor.moveToNext()) {
+                words.add(cursor.getString(cursor.getColumnIndex(DatabaseUtils.plantTable_plantLatinName)));
+            }
+        }
+        return words;
+    }
+
+        public User FindByName(String s) {
+
+            String selectQuery = "SELECT * FROM " + DatabaseUtils.userTableName + "  WHERE " + DatabaseUtils.userTable_userName + "= '" + s + "';";
+            System.out.println(selectQuery);
+            Cursor cursor = database.rawQuery(selectQuery, null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    User user = new User(cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userName)), cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userPhoneNumber)), cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userEmail)));
+                    return user;
+                }
+            } else {
+                return null;
+            }
 
 
-        public Visit FindByName(String s){
-            //work on this
             return null;
         }
 
