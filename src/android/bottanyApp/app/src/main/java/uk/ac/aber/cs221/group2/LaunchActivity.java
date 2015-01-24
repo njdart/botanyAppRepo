@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,19 +27,26 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 import uk.ac.aber.cs221.group2.utils.PlantDataSource;
 import uk.ac.aber.cs221.group2.utils.SiteDataSource;
+import uk.ac.aber.cs221.group2.utils.UserDataSource;
 
 public class LaunchActivity extends BaseActivity  {
 
+    UserDataSource userdb;
+    public static List<String> autoCompleteEntries;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+        userdb = new UserDataSource(this);
+        userdb.open();
         if (savedInstanceState == null) {
             //Add fragments here
         }
@@ -45,14 +54,28 @@ public class LaunchActivity extends BaseActivity  {
         //Run the background thread
         InitThread i = new InitThread(new PlantDataSource(this).open(), this);
         i.execute();
+
+
+        autoCompleteEntries = userdb.findAllNames();
+        System.out.println(autoCompleteEntries.size());
+        if(autoCompleteEntries.size()>0){
+            System.out.println(autoCompleteEntries.size());
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,autoCompleteEntries) ;
+        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.editNameAutoComplete);
+        textView.setAdapter(adapter);
+        }
+
     }
 
     public void newVisitOnClick(View buttonView){
         boolean errors = false;
-        EditText name = (EditText) findViewById(R.id.editName);
+        EditText name = (EditText) findViewById(R.id.editNameAutoComplete);
         EditText phone = (EditText) findViewById(R.id.editPhoneNumber);
         EditText email = (EditText) findViewById(R.id.editEmail);
         System.out.println("NAME: " + name.getText() + " PHONE: " + phone.getText() + " EMAIL: " + email.getText());
+        User user = new User(name.getText().toString(),phone.getText().toString(),email.getText().toString());
+        UserDataSource userdb = new UserDataSource(this);
+        userdb.create(user);
 
         //Validate the name field
         if(name.length() < 3 || name.length() > 25){

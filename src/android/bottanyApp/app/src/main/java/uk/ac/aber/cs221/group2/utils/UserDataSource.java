@@ -31,10 +31,8 @@ public class UserDataSource {
         };
 
         public UserDataSource(Context context){
-            if(DatabaseUtils.db == null) {
-                DatabaseUtils.db = new DatabaseUtils(context);
-            }
-            dbhelper = DatabaseUtils.db;
+
+            dbhelper = new DatabaseUtils(context);
             database = dbhelper.getWritableDatabase();
         }
 
@@ -54,12 +52,12 @@ public class UserDataSource {
             values.put(DatabaseUtils.userTable_userName, user.getName());
             values.put(DatabaseUtils.userTable_userPhoneNumber, user.getUserPhoneNumber());
             values.put(DatabaseUtils.userTable_userEmail, user.getUserEmail());
-            return database.insert(DatabaseUtils.plantsTableName, null, values);
+            return database.insert(DatabaseUtils.userTableName, null, values);
         }
 
         public List<User> findAll(){
             List<User>  users =  new ArrayList<User>();
-            Cursor cursor = database.query(DatabaseUtils.specimenTableName, allColumns ,null,null,null,null,null);
+            Cursor cursor = database.query(DatabaseUtils.userTableName, allColumns ,null,null,null,null,null);
             if(cursor.getCount()>0){
                 while(cursor.moveToNext()){
 
@@ -74,6 +72,23 @@ public class UserDataSource {
             return users;
 
         }
+
+    public List<String> findAllNames(){
+        List<String>  users =  new ArrayList<String>();
+        Cursor cursor = database.query(DatabaseUtils.userTableName, allColumns ,null,null,null,null,null);
+        if(cursor.getCount()>0){
+            while(cursor.moveToNext()){
+
+                String user = cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userName));
+
+                users.add(user);
+            }
+        }
+        return users;
+
+    }
+
+
 
         public Visit FindByName(String s){
             //work on this

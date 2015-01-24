@@ -11,15 +11,13 @@
         android:layout_gravity="center"
         android:weightSum="1">
 
-        <EditText
-            android:layout_width="match_parent"
+        <AutoCompleteTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/editName"
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/editNameAutoComplete"
             android:hint="@string/name"
-            android:nextFocusDown="@+id/editPhoneNumber"/>
+            android:clickable="false"
+            android:autoText="false" />
 
         <EditText
             android:layout_width="match_parent"

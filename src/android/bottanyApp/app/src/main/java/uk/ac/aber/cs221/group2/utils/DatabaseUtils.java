@@ -12,7 +12,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
 
     public static DatabaseUtils db;
 
-    public static final String databaseName = "site.db";
+    public static final String databaseName = "app.db";
     public static final int dbVersion = 1;
 
     public static final String sitesTableName = "site";
@@ -68,10 +68,11 @@ public class DatabaseUtils extends SQLiteOpenHelper {
             plantTable_plantLatinName + " TEXT);";
 
     public static final String[] tableCreationQueries = {
+            createUserTableQuery,
             createSitesTableQuery,
             createPlantsTableQuery,
-            createSpecimenTableQuery,
-            createUserTableQuery
+            createSpecimenTableQuery
+
     };
 
     public DatabaseUtils(Context context) {
