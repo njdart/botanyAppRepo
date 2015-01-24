@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +23,13 @@ import java.util.List;
 
 import uk.ac.aber.cs221.group2.OScode.LatLng;
 import uk.ac.aber.cs221.group2.OScode.OSRef;
+import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 
 
 public class SiteChooserActivity extends BaseActivity {
-
+    AutoCompleteTextView textView;
     private LocationManager locationManager = null;
     boolean useCustomGridRef = false;
     public static List<String> autoCompleteEntries;
@@ -46,9 +49,21 @@ public class SiteChooserActivity extends BaseActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, autoCompleteEntries);
-        AutoCompleteTextView textView = (AutoCompleteTextView)
+        textView = (AutoCompleteTextView)
                 findViewById(R.id.siteNameAutoComplete);
         textView.setAdapter(adapter);
+        textView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AutoCompleteTextView temp = textView;
+                System.out.println(temp.getText());
+
+                EditText os = (EditText)findViewById(R.id.customGridReferenceEditText);
+
+                os.setText(siteDataSource.FindByName(temp.getText().toString()));
+
+            }
+        });
     }
 
     @Override

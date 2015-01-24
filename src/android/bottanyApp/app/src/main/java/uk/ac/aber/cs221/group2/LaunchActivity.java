@@ -69,7 +69,7 @@ public class LaunchActivity extends BaseActivity  {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     AutoCompleteTextView temp = textView;
-                    System.out.println(temp.getText());
+                    //System.out.println(temp.getText());
                     User user = userdb.FindByName(temp.getText().toString());
                     EditText phone = (EditText) findViewById(R.id.editPhoneNumber);
                     EditText email = (EditText) findViewById(R.id.editEmail);

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 
 
@@ -65,9 +66,23 @@ public class SiteDataSource {
 
     }
 
-    public Visit FindByName(String s){
-        //TODO Find all by name
+    public String FindByName(String s){
+
+        String selectQuery = "SELECT * FROM " + DatabaseUtils.sitesTableName + "  WHERE " +
+                DatabaseUtils.siteTable_siteName + "= '" + s + "';";
+        System.out.println(selectQuery);
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                return cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteOSGridRef));
+            }
+        } else {
+            return null;
+        }
+
+
         return null;
+
     }
 
 }
