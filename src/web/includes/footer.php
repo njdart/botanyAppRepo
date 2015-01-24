@@ -7,28 +7,24 @@
 		$(document).ready(function(){
 			$("#orderby").change(function(){
 				$( "#orderby option:selected").each(function(){
+                    $(".box").hide();
 					if($(this).attr("value")=="speciesName"){
-						$(".box").hide();
 						$(".speciesName").show();
 					}
 					if($(this).attr("value")=="locationName"){
-						$(".box").hide();
 						$(".locationName").show();
 					}
 					if($(this).attr("value")=="userName"){
-						$(".box").hide();
 						$(".userName").show();
 					}
 					if($(this).attr("value")=="timeStamp"){
-						$(".box").hide();
 						$(".timeStamp").show();
 					}
 					if($(this).attr("value")=="abundance"){
-						$(".box").hide();
 						$(".abundance").show();
 					}
 				});
-			}).change();
+			});
 		});
 	</script>
 	<script type="text/javascript">
