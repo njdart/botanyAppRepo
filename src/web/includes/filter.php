@@ -13,7 +13,6 @@ echo "<div id='filtering'>
 		</select>
 
 		<select name='ordertype' id='ordertype' class='ordertype'>
-			<option value=''>Select an option</option>
 			<option class='speciesName locationName userName box' value='ascending'>A-Z</option>
 			<option class='speciesName locationName userName box' value='descending'>Z-A</option>
 			<option class='timeStamp box' value='ascending'>Oldest</option>
@@ -23,8 +22,10 @@ echo "<div id='filtering'>
 		</select>
 		<br>
 		<br>
-		<input type='submit' class='filter-submit' name='submitorder' value='Submit' />
-	</form>";
+		<!--<input type='submit' class='filter-submit' name='submitorder' value='Submit' />-->
 	
+	</form>
+	    <button class = 'filter-submit' id='next-page'>Next page</button>
+    <button class = 'filter-submit' id='prev-page'>Previous page</button>";
 echo "</div>";
 ?>

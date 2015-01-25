@@ -5,7 +5,7 @@ include "/includes/specimens_curl.php";
 include "/includes/filter.php";
 ?>
 <div id='content-boxes-dblist'>
-	<h1>Plant Database</h1>
+	<h1>Plant Database</h1>"
 
 	<form class='advanced-search' action='plant_specimens.php' method='post'>
 		<!-- <input type='submit' name='submitadvsearch' class='advancedsearchbutton' src='images/search.png' alt='Search' /> -->
@@ -17,7 +17,8 @@ include "/includes/filter.php";
 		</select>
 	</form>
     <p id="result-number">0 results</p>
-
+    <button id="next-page">Next page</button>
+    <button id="prev-page">Previous page</button>
     <table id='results'>
         <thead><tr>
 			<th>Specimen Name</th>
@@ -25,23 +26,21 @@ include "/includes/filter.php";
 			<th>User Name</th>
 			<th>Date</th>
 			<th>Abundance</th>
-            <th></th>
-		</tr></thead>
+            <td>Details</th>
+		</tr></thead>"
 		
         <tbody><tr><td>Loading...</td></tr>
         </tbody>
         
 	</table>
-    <button id="prev-page">Previous page</button>
-    <button id="next-page">Next page</button>
-	</div>;
+</div>;
 <?php
 include '/includes/footer.php';
 ?>
 
 <script type="text/javascript">
     
-    var lastValue = $('#search').val();
+    var lastValue = $("#search").val();
     var lastChange = $.now();
     var start = 0;
     var range = 20;
@@ -99,7 +98,7 @@ include '/includes/footer.php';
                 "<td><a href='specimen.php?id=" + specimen.SpecimenID + "'>View</a></td></tr>");
             }
             results = specimens.length;
-            $('#result-number').text(specimens.length + ' results displayed. Maximum range: ' + range + '; Offset: ' + start);
+            $("#result-number").text(specimens.length + " results displayed. Maximum range: " + range + "; Offset: " + start);
             if(specimens.length < 1) {
                 $("#results").append("<tr><td>Nothing found.</td></tr>");
             }

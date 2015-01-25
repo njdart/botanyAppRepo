@@ -208,7 +208,7 @@ margin: 0px auto 0px auto;
 padding-top: 10px;
 padding-bottom: 11px;
 padding-left: 19px;
-width: 75%;
+width: 83%;
 }
 .searchbutton {
 max-width: 58px;
@@ -424,6 +424,8 @@ font-size: 15px;
 color: #000000;
 padding: 0px 20px;
 background-color: #ffffff;
+width: 86%;
+margin-bottom: 4px;
 }
 #filtering p{
 font-weight:700;
