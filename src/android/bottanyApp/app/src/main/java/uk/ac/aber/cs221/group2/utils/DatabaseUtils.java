@@ -79,13 +79,13 @@ public class DatabaseUtils extends SQLiteOpenHelper {
         super(context, databaseName, null, dbVersion);
         this.db = this;
         System.out.println("DATABASE LOCATED AT : " + context.getDatabasePath(databaseName));
-        System.out.println("SQL Query " + createSitesTableQuery);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         try{
             for(String creationQuery : tableCreationQueries){
+                System.out.println("RUNNING SQL CREATION:" + creationQuery);
                 db.execSQL(creationQuery);
             }
         } catch (SQLException e){

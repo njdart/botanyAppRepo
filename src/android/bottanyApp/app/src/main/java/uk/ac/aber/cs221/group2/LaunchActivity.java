@@ -80,12 +80,6 @@ public class LaunchActivity extends BaseActivity  {
 
         }}
 
-
-
-
-
-
-
     public void newVisitOnClick(View buttonView){
         boolean errors = false;
         EditText name = (EditText) findViewById(R.id.editNameAutoComplete);
@@ -97,9 +91,7 @@ public class LaunchActivity extends BaseActivity  {
 
 
         if(userdb.FindByName(user.getName())==null){
-
-
-        userdb.create(user);
+            userdb.create(user);
         }
 
         //Validate the name field

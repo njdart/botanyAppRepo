@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -13,8 +14,19 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -90,24 +102,45 @@ public class SpeciesAdder extends BaseActivity {
     private void takePhoto(int intentReturnId){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //set the filename to the date and time now
-        filename = "botanyApp_" + new SimpleDateFormat("yyyyMMdd-HHmmSS").format(new Date()) + ".jpg";
+        String filename = "botanyApp_" + new SimpleDateFormat("yyyyMMdd-HHmmSS").format(new Date()) + ".jpg";
         System.out.println("Saving image as " + filename);
         File f = new File(android.os.Environment.getExternalStorageDirectory(), filename);
-        System.out.println("FILEPATH: " + f.getAbsolutePath());
+        System.out.println("FILEPATH: " + f.getAbsolutePath() + " FILENAME: " + filename);
         i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-        //i.putExtra("Filename", fileName);
+        switch (intentReturnId){
+            case IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO:
+                scenePhoto = f;
+                break;
+            case IntentRequestCodes.SPECIES_ADDER_SPECIMEN_PHOTO:
+                specimenPhoto = f;
+                break;
+            default:
+                System.out.println("ERROR, Unknown intent request code");
+        }
         startActivityForResult(i, intentReturnId);
     }
 
-    String filename;
+    File scenePhoto;
+    File specimenPhoto;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            File f = new File(Environment.getExternalStorageDirectory(), filename);
-            System.out.println("FILEPATH: " + f.getAbsolutePath());
+            ImageButton imageButton;
+            File f;
+
+            if (requestCode == IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO) {
+                imageButton = (ImageButton) findViewById(R.id.sceneView);
+                f = scenePhoto;
+            } else if (requestCode == IntentRequestCodes.SPECIES_ADDER_SPECIMEN_PHOTO) {
+                imageButton = (ImageButton) findViewById(R.id.specimenView);
+                f =specimenPhoto;
+            } else {
+                System.out.println("SPECIES ADDER: Got an unknown result code back, ignoring it!");
+                return;
+            }
 
             BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
 
@@ -115,18 +148,115 @@ public class SpeciesAdder extends BaseActivity {
                     btmapOptions);
 
             bitmap = Bitmap.createScaledBitmap(bitmap, 256, 256, true);
-            ImageButton imageButton;
-
-            if (requestCode == IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO) {
-                imageButton = (ImageButton) findViewById(R.id.sceneView);
-            } else if (requestCode == IntentRequestCodes.SPECIES_ADDER_SPECIMEN_PHOTO) {
-                imageButton = (ImageButton) findViewById(R.id.specimenView);
-            } else {
-                System.out.println("SPECIES ADDER: Got an unknown result code back, ignoring it!");
-                return;
-            }
 
             imageButton.setImageBitmap(bitmap);
+        }
+    }
+
+    //public final String serverURLString = "http://users.aber.ac.uk/mta2/groupapi/addResource.php";
+    public final String serverURLString = "http://192.168.1.74/testing/index.php";
+
+
+    //http://stackoverflow.com/questions/23921356/android-upload-image-to-php-server
+    public void onUploadButtonClick(View view){
+        new AsyncUploadImageThread().execute();
+    }
+
+    public class AsyncUploadImageThread extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            HttpURLConnection conn = null;
+            DataOutputStream outputStream = null;
+            String lineEnding = "\n";
+            String twoHyphens = "--";
+            String boundary = "*****";
+
+            int bytesRead = 0,
+                    bytesAvailable = 0,
+                    bufferSize;
+
+            byte[] buffer;
+
+            int maxBufferSize = 1024 * 1024; // 1MB
+
+            List<File> specimenFiles = new ArrayList<File>();
+            if(specimenPhoto != null){
+                specimenFiles.add(specimenPhoto);
+            } else {
+                System.out.println("Specimen photo file empty? ignoring!");
+            }
+
+            if(scenePhoto != null){
+                specimenFiles.add(scenePhoto);
+            } else {
+                System.out.println("Scene photo file empty? ignoring!");
+            }
+
+            try {
+                for (File f : specimenFiles) {
+                    if (!f.isFile()) {
+                        System.out.println("ERROR, File " + f.getAbsolutePath() + " file wasn't a file!. ABORTING UPLOAD");
+                        //continue to next file
+                        continue;
+                    }
+                    FileInputStream inputStream = new FileInputStream(f);
+                    URL url = new URL(serverURLString);
+
+                    System.out.println("URL: " + url.toString());
+
+                    //Open a connection to the server
+                    conn = (HttpURLConnection)url.openConnection();
+                    conn.setDoInput(true);  //required for max's return id's
+                    conn.setDoOutput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("ENCTYPE", "multipart/form-data;boundary=" + boundary);
+                    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                    conn.setRequestProperty("uploaded_file", f.getName());
+
+                    System.out.println("CONN:" + conn.toString());
+                    OutputStream outputStream1 = conn.getOutputStream();
+                    outputStream = new DataOutputStream(outputStream1);
+
+                    outputStream.writeBytes(twoHyphens + boundary + lineEnding);
+                    outputStream.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename="+ f.getName() + "" + lineEnding);
+                    outputStream.writeBytes(lineEnding);
+
+                    bytesAvailable = inputStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    buffer = new byte[bufferSize];
+
+                    bytesRead = inputStream.read(buffer, 0, bufferSize);
+
+                    while(bytesRead > 0) {
+                        outputStream.write(buffer, 0, bufferSize);
+                        bytesAvailable = inputStream.available();
+                        bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                        bytesRead = inputStream.read(buffer, 0, bufferSize);
+                    }
+
+                    outputStream.writeBytes(lineEnding);
+                    outputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnding);
+
+                    int responseCode = conn.getResponseCode();
+                    String responseMessage = conn.getResponseMessage();
+
+                    System.out.println("Upload completed, response code " + responseCode + " msg: " + responseMessage);
+
+                    inputStream.close();
+                    outputStream.flush();
+                    outputStream.close();
+                }
+            } catch (FileNotFoundException | MalformedURLException e){
+                e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("Unable to open connection to the server!");
+                e.printStackTrace();
+            } finally {
+                return null;
+            }
         }
     }
 }
