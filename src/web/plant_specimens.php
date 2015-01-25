@@ -16,9 +16,10 @@ include "/includes/filter.php";
 			<option value='userName'>User</option>
 		</select>
 	</form>
-    <p id="result-number">0 results</p>
+    
 
     <table id='results'>
+	<a name="top"></a>
         <thead><tr>
 			<th>Specimen Name</th>
 			<th>Location</th>
@@ -32,10 +33,8 @@ include "/includes/filter.php";
         </tbody>
         
 	</table>
-    <button id="prev-page">Previous page</button>
-    <button id="next-page">Next page</button>
 	</div>;
-<?php
+     <?php
 include '/includes/footer.php';
 ?>
 
@@ -99,7 +98,7 @@ include '/includes/footer.php';
                 "<td><a href='specimen.php?id=" + specimen.SpecimenID + "'>View</a></td></tr>");
             }
             results = specimens.length;
-            $('#result-number').text(specimens.length + ' results displayed. Maximum range: ' + range + '; Offset: ' + start);
+            $('#result-number').text(specimens.length + ' results displayed Maximum range: ' + range + '; Offset: ' + start);
             if(specimens.length < 1) {
                 $("#results").append("<tr><td>Nothing found.</td></tr>");
             }

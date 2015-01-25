@@ -3,7 +3,7 @@
 echo "<div id='filtering'>
 	<form action='plant_specimens.php' method='post'>
 		
-		<p>Order By</p>
+		<p class='filtertitle'>Order By</p>
 		<select class='orderby' id='orderby' name='orderby'>
 			<option value='speciesName'>Species Name</option>
 			<option value='locationName'>Location</option>
@@ -25,7 +25,8 @@ echo "<div id='filtering'>
 		<!--<input type='submit' class='filter-submit' name='submitorder' value='Submit' />-->
 	
 	</form>
-	    <button class = 'filter-submit' id='next-page'>Next page</button>
-    <button class = 'filter-submit' id='prev-page'>Previous page</button>";
-echo "</div>";
+	    <button href='#top' class = 'filter-submit' id='next-page'>Next page</button>
+    <button class = 'filter-submit' id='prev-page'>Previous page</button>
+<p class='pageinfo' id='result-number'>0 results</p>
+	</div>";
 ?>

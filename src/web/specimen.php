@@ -3,28 +3,26 @@ $title = "Specimen";
 include "includes/record_curl.php";
 include "includes/header.php";
 include "includes/img_curl.php";
+if (!is_object($object)){
+	header('Location: plant_specimens.php');
+}
+if (!isset($_GET['id']) || empty($_GET['id'])){
+	header('Location: plant_specimens.php');
+	exit(); 
+}
+$_SESSION['latlong']="$lat,$long";
 
 ?>
 
-<!--Googlemap popup-->
-<div id="mapPopUp">
-	<div class="popupBoxWrapper">
-		<div class="popupBoxContent">
-			<div id="googleMap" style="width:500px;height:380px;"></div>
-			<p>Click <a href="javascript:void(0)" onclick="toggle_visibility('mapPopUp');">here</a> to the map!</p>
-		</div>
-	</div>
-</div>
-<!--Googlemap end-->
 
 <?php
 // right section
 
 //record navigation
 $idp = $id - 1;
-echo "<a class='previous' href = 'specimen.php?id=" . $idp . "'><<</a>";
+echo "<a class='previous navigation' href = 'specimen.php?id=" . $idp . "'><<</a>";
 $idn = $id + 1;
-echo "<a class='next' href = 'specimen.php?id=" . $idn . "'>>></a>";
+echo "<a class='next navigation' href = 'specimen.php?id=" . $idn . "'>>></a>";
 //end record navigation
 
 //start content boxes
@@ -48,21 +46,25 @@ echo "<div id='content-boxes'>
 			<th>Specimen Photo</th>
 			<th>Scene Image</th>
 			<tr>
-				<td>
-		<img class='image' src='" . $responsep . "' alt='default'/>
+				<td>";
+				 
+		echo"<a class='fancybox' href='" . $responsep . "' rel='gallery1'><img class='image' src='" . $responsep . "' alt='default'/></a>
 				</td><td>
-		<img class='image' src='" . $responsepp . "' alt='default'/>
-</td>
+<a class='fancybox' href='" . $responsepp . "' rel='gallery1'><img class='image' src='" . $responsepp . "' alt='default'/></a>
+				</td>
 </tr>
 <tr>
-<td>";
-		echo "<a href='javascript:void(0)' onclick='toggle_visibility('mapPopUp');'>Where to find</a>
-	
-</td>
+<td>";?>
+		
+<!--Googlemap popup-->
+<a class="butdes various fancybox.iframe" href="includes/map.php">Where to find</a>
+<!--Googlemap end-->
+	<?php
+echo"</td>
 <td>";
 		if (isset($_SESSION['pass'])){
 			echo "<form action = 'includes/delete_curl.php' method= 'GET' name = 'deleteSpecimen'> 
-				<button class = 'deleteSpecimen' onclick='confirmation()' type='submit' name='id' value=" . $id . ">Delete</button> 
+				<button class = 'butdes deleteSpecimen' onclick='confirmation()' type='submit' name='id' value=" . $id . ">Delete</button> 
 			</form>";
 		}
 echo"</td>

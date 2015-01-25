@@ -42,6 +42,54 @@
 	// -->
 
 	</script>
+	
+<!-- ********************************************** -->
+<!-- JavaScript at the bottom for fast page loading -->
+<!-- ********************************************** -->
+
+	<!-- Grab Google CDN's jQuery, fall back to local if offline -->
+  		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  		<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+        
+        
+	<!-- FancyBox -->
+		<script src="js/fancybox/jquery.fancybox.js"></script>
+		<script src="js/fancybox/jquery.fancybox-buttons.js"></script>
+		<script src="js/fancybox/jquery.fancybox-thumbs.js"></script>
+        <script src="js/fancybox/jquery.easing-1.3.pack.js"></script>
+		<script src="js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+        
+        <script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
+</script>
+        
+
+        
+        <script type="text/javascript">
+        	$(document).ready(function() {
+				$(".various").fancybox({
+					maxWidth	: 800,
+					maxHeight	: 600,
+					fitToView	: true,
+					width		: 800,
+					height		: 400,
+					autoSize	: false,
+					closeClick	: false,
+					openEffect	: 'elastic',
+					closeEffect	: 'none'
+				});
+			});
+		</script>
+		<script>
+		$(document).ready(function() {
+	$(".fancybox").fancybox({
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+</script>
 	</div>
 </div>
 </body>

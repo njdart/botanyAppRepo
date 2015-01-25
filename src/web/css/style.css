@@ -14,7 +14,7 @@ body{
 
 .logo {
 max-width: 40%;
-margin: 10px;
+margin: 10px 10px 10px 10px;
 }
 header{
 margin:0px;
@@ -163,7 +163,6 @@ nav.align-right li:first-child a:after {
 }	
 	
 #footer-bar{
-opacity: 0.9;
 background-color: #388922;
 height: auto;
 margin-right: auto;
@@ -208,7 +207,7 @@ margin: 0px auto 0px auto;
 padding-top: 10px;
 padding-bottom: 11px;
 padding-left: 19px;
-width: 83%;
+width: 90%;
 }
 .searchbutton {
 max-width: 58px;
@@ -245,13 +244,13 @@ float: right;
 margin-right: 17px;
 
 margin-top:-41px;
-background-color: #FCF4ED;
+background-color: #ffffff;
 padding:10px;	
 text-decoration: none;
 color: #107010;
 }
 
-.download:hover{
+/* .download:hover{
 float: right;
 margin-right: 17px;
 margin-top: -41px;
@@ -259,7 +258,7 @@ background-color: rgb(0, 0, 0);
 padding:10px;	
 text-decoration: none;
 color: white;
-}
+} */
 
 #left-section{
 width:46%;
@@ -271,7 +270,7 @@ float: right;
 
 margin: 0px 0px 0px 0px;
 }
-#right-section a {
+.butdes {
 background-color: rgb(22, 115, 15);
 padding: 10px;
 text-decoration: none;
@@ -298,7 +297,7 @@ margin-left: 2%;
 #content-boxes-dblist {
 height: auto;
 margin-left: 22%;
-margin-top: 68px;
+margin-top: 0px;
 margin-right: 3%;
 /* width: 80%; */
 background-color: #ffffff;
@@ -385,6 +384,7 @@ border-right:none;
 background-image: url('http://nic-dart.co.uk/~nic/images/search.png');
 background-size: 100%;
 color: transparent;
+border-style: none;
 }
 .advanced-search input[type=submit] {
 background-image: url('http://nic-dart.co.uk/~nic/images/search.png');
@@ -396,9 +396,19 @@ color: transparent;
 float: right;
 margin-right: 15px;
 color: white;
+margin-top: 15px;
+text-align: -webkit-right;
+width: 38%;
 }
-.passsubmit{
-margin-top:10px;
+.passsubmit {
+margin-top: 10px;
+border: solid 2px #ffffff;
+font-size: 13px;
+color: #000000;
+padding: 0px 0px;
+background-color: #ffffff;
+width: 16%;
+margin-bottom: 4px;
 }
 .orderby{
 width: 100%;
@@ -427,12 +437,14 @@ background-color: #ffffff;
 width: 86%;
 margin-bottom: 4px;
 }
-#filtering p{
+.filtertitle{
 font-weight:700;
 }
 .messages {
 float: right;
 color: white;
+margin-right: 15px;
+margin-top: -35px;
 }
 #content-boxes p{
 padding: 20px;
@@ -445,6 +457,7 @@ float: left;
 margin-left: 35px;
 border-radius: 38px;
 text-decoration:none;
+color:#000;
 }
 
 .next {
@@ -454,6 +467,13 @@ float: right;
 margin-right: 35px;
 border-radius: 38px;
 text-decoration:none;
+color:#000;
+}
+
+.navigation:hover{
+background-color:#388922;
+color:#000;
+
 }
 .deleteSpecimen{
 background-color: rgb(22, 115, 15);
@@ -464,5 +484,18 @@ border:0px;
 font-size: 100%;
 }
 .ff td{
+
+}
+.bottompag {
+border: solid 2px #ffffff;
+font-size: 15px;
+color: #FFFFFF;
+padding: 6px 20px;
+background-color: #408B28;
+width: 22%;
+margin-bottom: 4px;
+margin-top: 10px;
+}
+.pageinfo{
 
 }
