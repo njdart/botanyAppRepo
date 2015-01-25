@@ -9,28 +9,25 @@ body{
 	padding-right: 0%;
 	padding-left: 0%;
 	padding-bottom: 0%;
+	font-family:;font-family: 'Lato', sans-serif;
 }
 
-.logo{
-	max-width: 50%;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	margin-left: 0px;
+.logo {
+max-width: 40%;
+margin: 10px;
 }
 header{
 margin:0px;
 padding:0px;
 }
 .header-bar{
-	opacity: 0.9;
-	background-color: #629330;
+	background-color: #388922;
 	height: 0%;
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: auto;
 	margin-bottom: auto;
-	width: 70%;
+	width: 85%;
 	padding-top: 0px;
 	padding-right: 0px;
 	padding-bottom: 0px;
@@ -39,51 +36,122 @@ padding:0px;
 }
 
 
-#container{
-	background-color: rgba(83, 119, 83, 0.56);
-	height: auto;
-	width: 70%;
-	padding-top: 50px;
-	margin-right: auto;
-	margin-left: auto;
+#container {
 
-	
+background-color: rgba(83, 119, 83, 0.56);
+height: auto;
+width: 85%;
+padding-top: 44px;
+margin-right: auto;
+margin-left: auto;
 }
-nav{
-	margin-left: 5%;
-	margin-bottom: 0px;
-	margin-top: 0px;
-	
-	
+nav {
+margin-left: 0%;
+margin-bottom: 75px;
+margin-top: -60px;
 }
-nav ul{
-	list-style-type: none;
-	padding: 0px;
-	
-	
+nav ul {
+list-style-type: none;
+padding: 0px;
 }
 nav li{
 	text-align: center;
 	}
 
-nav a{
-	width: 20%;
-	display: inline;
-	float: left;
-	text-align: center;
-	margin-top: -50px;
-	background-color: #D7EFA5;
-	margin-left: 2%;
-	margin-right: 2%;
-	margin-bottom: 2%;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-decoration: none;
-	color: #3B5803;
-	border-radius:10px 10px 10px 10px;
-	}
-	
+nav a {
+width: 25%;
+display: inline;
+float: left;
+text-align: center;
+position: relative;
+background-color: #388922;
+margin-left: 0%;
+margin-right: 0%;
+margin-bottom: 3%;
+text-transform: uppercase;
+padding-top: 10px;
+padding-bottom: 10px;
+font-weight: 700;
+text-decoration: blink;
+color: #FFFFFF;
+}
+ 
 
+nav ul li a:hover {
+  color: #ffffff;
+}
+nav ul li a:hover:before {
+  width: 100%;
+}
+nav ul li a:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -3px;
+  top: 19px;
+  height: 6px;
+  width: 6px;
+  background: #ffffff;
+  opacity: .5;
+}
+nav ul li a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: #ffffff;
+  -webkit-transition: width .25s;
+  -moz-transition: width .25s;
+  -ms-transition: width .25s;
+  -o-transition: width .25s;
+  transition: width .25s;
+}
+nav ul li.last > a:after,
+nav ul li:last-child > a:after {
+  display: none;
+}
+nav ul li.active a {
+  color: white;
+}
+nav ul li.active a:before {
+  width: 100%;
+}
+nav.align-right li.last > a:after,
+nav.align-right li:last-child > a:after {
+  display: block;
+}
+nav.align-right li:first-child a:after {
+  display: none;
+} 
+/* @media screen and (max-width: 768px) {
+  nav ul li {
+    float: none;
+    display: block;
+  }
+  nav ul li a {
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #fb998c;
+  }
+  nav ul li.last > a,
+  nav ul li:last-child > a {
+    border: 0;
+  }
+ nav ul li a:after {
+    display: none;
+  }
+  nav ul li a:before {
+    display: none;
+  }
+}*/
+ 
+	
+	
 #content-boxes{
 	height: auto;
 	margin-right: auto;
@@ -92,13 +160,11 @@ nav a{
 	margin-bottom: 0%;
 	width: 80%;
 	background-color: #ffffff;
-	padding:0px 15px 15px 15px;
 }	
-
 	
 #footer-bar{
 opacity: 0.9;
-background-color: #629330;
+background-color: #388922;
 height: auto;
 margin-right: auto;
 margin-left: auto;
@@ -132,15 +198,17 @@ margin-left:58px;
 
 .simple-search {
 text-align: center;
-margin: 20px auto 0px auto;
+margin: 20px auto 20px auto;
 width: 50%;
 display: flex;
 }
-.simpletext{
-margin:0px;
-padding-top: 11px;
+
+.simpletext {
+margin: 0px auto 0px auto;
+padding-top: 10px;
 padding-bottom: 11px;
-padding-left: 10px;
+padding-left: 19px;
+width: 75%;
 }
 .searchbutton {
 max-width: 58px;
@@ -194,43 +262,44 @@ color: white;
 }
 
 #left-section{
-width:60%;
+width:46%;
+padding-bottom: 2%;
 }
-#right-section{
-width:40%;
-float:right;
-text-align:center;
-margin: 0px auto 0px auto;
+#right-section {
+width: 63%;
+float: right;
+
+margin: 0px 0px 0px 0px;
 }
-#right-section a{
+#right-section a {
 background-color: rgb(22, 115, 15);
-padding:10px;	
+padding: 10px;
 text-decoration: none;
 color: white;
 }
-.image{
-max-width:80%;
-margin-bottom:20px;
+.image {
+max-width: 97%;
+margin-bottom: 20px;
+margin-right: 2%;
 }
-#filtering{
+#filtering {
 height: auto;
-	color:#3B5803;
-	margin-top: 0px;
-	margin-bottom: 0%;
-	border-radius: 5px 5px 5px 5px;
-	width: 12%;
-	background-color: #D7EFA5;
-	padding:25px 15px 15px 15px;
-	position:fixed;
-	margin-left:1%;
-	
-	}
+color: white;
+margin-top: 0px;
+margin-bottom: 0%;
+border-radius: 10px;
+width: 12%;
+background-color:#388922;
+padding: 0px 15px 15px 15px;
+position: fixed;
+margin-left: 2%;
+}
 
 #content-boxes-dblist {
 height: auto;
-margin-left: 25%;
-margin-top: 0px;
-margin-right: 8%;
+margin-left: 22%;
+margin-top: 68px;
+margin-right: 3%;
 /* width: 80%; */
 background-color: #ffffff;
 padding: 0px 15px 15px 15px;
@@ -247,12 +316,12 @@ padding: 0px;
 padding-left: 10px;
 }
 .advanced-search {
-margin-top:5%;
+margin-top: 2%;
 text-align: center;
-position: inline;
 display: flex;
-margin-left: 13px;
-margin-bottom: 30px;
+margin-right: 5%;
+margin-left: 5%;
+margin-bottom: 2%;
 }
 #filtering a{
 background-color: #FCF4ED;
@@ -295,7 +364,7 @@ font-size:100%;
 #content-boxes-dblist th{
 height: 50px;
 text-align:center;
-background-color:#48577D;
+background-color:#388922;
 color:white;
 border:none;
 
@@ -306,15 +375,92 @@ border-width:1px;
 }
 #content-boxes-dblist td{
 padding: 15px;
-text-align: left;
+text-align: center;
 border-left: none;
 border-right:none;
 }
 
 /* input images */
-input[type=submit] {
-
-background:url("images/search.png");
-
+.simple-search input[type=submit] {
+background-image: url('http://nic-dart.co.uk/~nic/images/search.png');
+background-size: 100%;
+color: transparent;
 }
+.advanced-search input[type=submit] {
+background-image: url('http://nic-dart.co.uk/~nic/images/search.png');
+background-size: 100%;
+color: transparent;
+}
+
+.pass {
+float: right;
+margin-right: 15px;
+color: white;
+}
+.passsubmit{
+margin-top:10px;
+}
+.orderby{
+width: 100%;
+padding: 4%;
+font-size: 15px;
+text-align: center;
+/* border-top-left-radius: 10px;
+border-top-right-radius: 10px; */
+}
+
+.ordertype{
+width: 100%;
+padding: 4%;
+font-size: 15px;
+text-align: center;
+/* border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px; */
+}
+
+.filter-submit {
+border: solid 2px #ffffff;
+font-size: 15px;
+color: #000000;
+padding: 0px 20px;
+background-color: #ffffff;
+}
+#filtering p{
+font-weight:700;
+}
+.messages {
+float: right;
+color: white;
+}
+#content-boxes p{
+padding: 20px;
+}
+
+.previous {
+padding: 10px;
+background-color: white;
+float: left;
+margin-left: 35px;
+border-radius: 38px;
+text-decoration:none;
+}
+
+.next {
+padding: 10px;
+background-color: white;
+float: right;
+margin-right: 35px;
+border-radius: 38px;
+text-decoration:none;
+}
+.deleteSpecimen{
+background-color: rgb(22, 115, 15);
+padding: 10px;
+text-decoration: none;
+color: white;
+border:0px;
+font-size: 100%;
+}
+.ff td{
+
 }

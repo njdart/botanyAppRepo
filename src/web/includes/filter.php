@@ -1,12 +1,10 @@
 <?php
 // filter column
 echo "<div id='filtering'>
-	<a href='add_specimen.php'>Add Specimen</a>
-	<h3 class='centered sortingheading'>Sorting</h3>
 	<form action='plant_specimens.php' method='post'>
 		
 		<p>Order By</p>
-		<select id='orderby' name='orderby'>
+		<select class='orderby' id='orderby' name='orderby'>
 			<option value='speciesName'>Species Name</option>
 			<option value='locationName'>Location</option>
 			<option value='userName'>User</option>
@@ -14,7 +12,7 @@ echo "<div id='filtering'>
 			<option value='abundance'>Abundance</option>
 		</select>
 
-		<select name='ordertype'>
+		<select name='ordertype' id='ordertype' class='ordertype'>
 			<option value=''>Select an option</option>
 			<option class='speciesName locationName userName box' value='ascending'>A-Z</option>
 			<option class='speciesName locationName userName box' value='descending'>Z-A</option>
@@ -23,8 +21,9 @@ echo "<div id='filtering'>
 			<option class='abundance box' value='ascending'>Low-High</option>
 			<option class='abundance box' value='descending'>High-Low</option>
 		</select>
-		
-		<input type='submit' name='submitorder' value='Submit' />
+		<br>
+		<br>
+		<input type='submit' class='filter-submit' name='submitorder' value='Submit' />
 	</form>";
 	
 echo "</div>";

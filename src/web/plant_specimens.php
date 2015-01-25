@@ -1,8 +1,8 @@
 <?php
 $title = "Plants";
-include "/includes/header.php";
-include "/includes/specimens_curl.php";
-include "/includes/filter.php";
+include "includes/header.php";
+include "includes/specimens_curl.php";
+include "includes/filter.php";
 
 // main section
 echo "<div id='content-boxes-dblist'>
@@ -29,10 +29,11 @@ echo "<div id='content-boxes-dblist'>
 			<th>User Name</th>
 			<th>Date</th>
 			<th>Abundance</th>
+			<th></th>
 		</tr>";
 		
 //loop round all specimens
-        $abundances = array( 1 => "Rare", 2 => "Occassional", 3 => "Frequent",
+		$abundances = array( 1 => "Rare", 2 => "Occassional", 3 => "Frequent",
                              4 => "Abundant", 5 => "Dominant" );
 		foreach($object as $specimens){
 			$id = $specimens->SpecimenID;
@@ -48,7 +49,7 @@ echo "<div id='content-boxes-dblist'>
 				<td>" . $timeStamp . "</td>
 				<td>" . $abundance . "</td>
 				<td>
-					<form action = 'Specimen.php' method= 'GET' name = 'getSpecimen'> 
+					<form action = 'specimen.php' method= 'GET' name = 'getSpecimen'> 
 						<button class = 'viewSpecimen' type='submit' name='id' value=" . $id . "> View</button> 
 					</form>
 				</td>
@@ -59,5 +60,5 @@ echo "<div id='content-boxes-dblist'>
 </div>";
 // main section end
 
-include '/includes/footer.php';
+include 'includes/footer.php';
 ?>

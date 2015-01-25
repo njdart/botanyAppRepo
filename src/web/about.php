@@ -1,6 +1,6 @@
 <?php
 $title = "About";
-include "/includes/header.php";
+include "includes/header.php";
 
 //top box
 echo "<div id='content-boxes' class='top-index'>
@@ -16,6 +16,6 @@ echo "<div id='content-boxes' class='bottom-index'>
 </div>";
 // second box ends
 
-include "/includes/footer.php";
+include "includes/footer.php";
 ?>
 

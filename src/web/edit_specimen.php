@@ -1,6 +1,6 @@
 <?php
 $title = "Edit";
-include "/includes/header.php";
+include "includes/header.php";
 
 // container start
 echo "<div id='content-boxes'>
@@ -34,5 +34,5 @@ echo "<div id='content-boxes'>
 </div>";
 // left ends
 
-include '/includes/footer.php';
+include 'includes/footer.php';
 ?>

@@ -1,0 +1,92 @@
+#spectable table {
+/* border-collapse: collapse; */
+text-align: left;
+width: 100%;
+}
+
+#spectable {
+background: #fff;
+border: 2px solid #388922;
+/* font: normal 12px/150% Arial, Helvetica, sans-serif; */
+/* overflow: hidden; */
+width: 75%;
+margin-left: 4%;
+}
+
+#spectable table td, #spectable table th {
+padding: 4% 2%;
+}
+
+#spectable table thead th
+{
+	background:0;
+	background-color:#388922;
+	border-left:0 solid #388922;
+	color:#FFF;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#388922',endColorstr='#388922');
+	font-size:13px;
+	font-weight:700;
+}
+
+#spectable table tbody td {
+color: #000;
+font-size: 75%;
+font-weight: 400;
+}
+
+
+#spectable table tfoot td div
+{
+	background:#FFF;
+	border-top:1px solid #388922;
+	padding:1px;
+}
+
+#spectable table tfoot td
+{
+	font-size:13px;
+	padding:0;
+}
+
+#spectable table tfoot td ul
+{
+	list-style:none;
+	margin:0;
+	padding:0;
+	text-align:right;
+}
+
+#spectable table tfoot li
+{
+	display:inline;
+}
+
+#spectable table tfoot li a
+{
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	background:0;
+	background-color:#388922;
+	border:1px solid #388922;
+	border-radius:3px;
+	color:#FFF;
+	display:inline-block;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#388922',endColorstr='#388922');
+	margin:1px;
+	padding:2px 8px;
+	text-decoration:none;
+}
+
+#spectable table tfoot ul.active,#spectable  table tfoot ul a:hover
+{
+	background:none;
+	background-color:#388922;
+	border-color:#FFF;
+	color:#FFF;
+	text-decoration:none;
+}
+
+div.dhtmlx_window_active,div.dhx_modal_cover_dv
+{
+	position:fixed!important;
+}

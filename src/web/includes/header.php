@@ -8,8 +8,8 @@ session_start(); ?>
 		<meta name="author" content="Botany App group Web team"/> 
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
 		<title><?php echo $title; ?></title>
-		<link href="css/style.css" rel='stylesheet' type='text/css'/>
-		<link href="css/typography.css" rel='stylesheet' type='text/css'/>
+		<link href="css/style.css?v=<?=time();?>" rel='stylesheet' type='text/css'/>
+		<link href="css/table.css?v=<?=time();?>" rel='stylesheet' type='text/css'/>
 		<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 	  
 		<!--google maps javascript code-->
@@ -48,29 +48,29 @@ session_start(); ?>
 	</head>	
 		<body>
 			<header class="header-bar">
-				<img class="logo" src="images/main_logo.png"  alt="logo"/>
 <?php
 				if (!isset($_SESSION['pass'])){
-					echo "<form class='pass' action='includes/authenticate.php' method='POST'>
-						<input type='text' id='pass' name='pass' class='pass'/>
-						<input type='submit' id='submit' name='submitpass'/>
+					echo "<form class='pass' action='includes/authenticate.php' method='POST'>Password:
+						<input type='submit' class='passsubmit' id='submit' name='submitpass'/>
+						<input type='text' id='pass' class='passinput' name='pass' class='pass'/>
 					</form>";
 				}else{
-					echo "<a href = 'includes/logout.php'>Logout</a>";
+					echo "<a class='pass' href = 'includes/logout.php'>Logout</a>";
 				}
 				
 				if (isset($_GET['msg'])){
-					echo '<div class="success_message">' . base64_decode(urldecode($_GET['msg'])) . '</div>';
+					echo '<br><p class="messages">' . base64_decode(urldecode($_GET['msg'])) . '</p>';
 				}
 
 				if (isset($_GET['loginmsg'])){
-					echo '<div class="success_message">' . base64_decode(urldecode($_GET['loginmsg'])) . '</div>';
+					echo '<br><p class="messages">' . base64_decode(urldecode($_GET['loginmsg'])) . '</p>';
 				}
 
 				if (isset($_GET['errormsg'])){
-					echo '<div class="success_message">' . base64_decode(urldecode($_GET['errormsg'])) . '</div>';
+					echo '<br><p class="messages">' . base64_decode(urldecode($_GET['errormsg'])) . '</p>';
 				}
 
+				echo"<img class='logo' href = 'index.php' src='images/main_logo.png'  alt='logo'/>";
 ?>
 		</header>
 			<!--Doesn't need to be changed-->
