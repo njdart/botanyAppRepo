@@ -1,8 +1,8 @@
 <?php
 $title = "Plants";
-include "/includes/header.php";
-include "/includes/specimens_curl.php";
-include "/includes/filter.php";
+include "includes/header.php";
+include "includes/specimens_curl.php";
+include "includes/filter.php";
 ?>
 <div id='content-boxes-dblist'>
 	<h1>Plant Database</h1>
@@ -35,7 +35,7 @@ include "/includes/filter.php";
 	</table>
 	</div>;
      <?php
-include '/includes/footer.php';
+include 'includes/footer.php';
 ?>
 
 <script type="text/javascript">
