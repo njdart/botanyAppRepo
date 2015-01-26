@@ -121,6 +121,23 @@ public class UserDataSource {
             return null;
         }
 
+    public String FindByNamegetIndex(String s) {
+
+        String selectQuery = "SELECT * FROM " + DatabaseUtils.userTableName + "  WHERE " + DatabaseUtils.userTable_userName + "= '" + s + "';";
+        System.out.println(selectQuery);
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                String user = cursor.getString(cursor.getColumnIndex(DatabaseUtils.sitesTable_siteId));
+                return user;
+            }
+        } else {
+            return null;
+        }
+
+
+        return null;
+    }
     }
 
 
