@@ -83,8 +83,8 @@ public class SpecimenDataSource {
                                                              cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenComment)),
                                                              cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenScenePhoto)),
                                                              cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenSpecimenPhoto)),
-                                                             User.CurrentUser,
-                                                             Visit.CurrentVisit);
+                                                             User.CurrentUser.getUserId(),
+                                                             Visit.CurrentVisit.getVisitId());
 
                     specimens.add(specimen);
                 }
