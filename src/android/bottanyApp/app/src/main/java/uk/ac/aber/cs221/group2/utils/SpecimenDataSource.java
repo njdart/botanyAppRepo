@@ -32,7 +32,9 @@ public class SpecimenDataSource {
                 DatabaseUtils.specimenTable_specimenAbundance,
                 DatabaseUtils.specimenTable_specimenComment,
                 DatabaseUtils.specimenTable_specimenScenePhoto,
-                DatabaseUtils.specimenTable_specimenSpecimenPhoto
+                DatabaseUtils.specimenTable_specimenSpecimenPhoto,
+                DatabaseUtils.specimenTable_visitId,
+                DatabaseUtils.specimenTable_UsedId
         };
 
         public SpecimenDataSource(Context context){
@@ -53,10 +55,13 @@ public class SpecimenDataSource {
         }
 
 
-        public long create(Specimen specimen, User user, Visit visit){
+        public long create(Specimen specimen, int user, int visit){
             ContentValues values = new ContentValues();
 
             values.put(DatabaseUtils.specimenTable_specimenName, specimen.getName());
+
+                    values.put(DatabaseUtils.specimenTable_UsedId, user);
+                    values.put(DatabaseUtils.specimenTable_visitId, visit );
                     values.put(DatabaseUtils.specimenTable_specimenLat, specimen.getLatitude());
                     values.put(DatabaseUtils.specimenTable_specimenLong, specimen.getLongitude());
                     values.put(DatabaseUtils.specimenTable_specimenAbundance, specimen.getAbundance().toString());

@@ -34,6 +34,8 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final String specimenTable_specimenComment = "specimenComment";
     public static final String specimenTable_specimenScenePhoto = "specimenScenePhoto";
     public static final String specimenTable_specimenSpecimenPhoto = "specimenSpecimenPhoto";
+    public static final String specimenTable_visitId = "specimenVisitId";
+    public static final String specimenTable_UsedId = "speciminUserId";
 
     public static final String userTableName = "user";
     public static final String userTable_userId = "userId";
@@ -55,6 +57,8 @@ public class DatabaseUtils extends SQLiteOpenHelper {
             specimenTable_specimenAbundance + " TEXT, " +
             specimenTable_specimenComment + " TEXT, " +
             specimenTable_specimenScenePhoto + " TEXT, " +
+            specimenTable_visitId + " DOUBLE, " +
+            specimenTable_UsedId + " DOUBLE, " +
             specimenTable_specimenSpecimenPhoto + " TEXT ); ";
 
     private static final String createSitesTableQuery = "CREATE TABLE " + sitesTableName + " (" +
