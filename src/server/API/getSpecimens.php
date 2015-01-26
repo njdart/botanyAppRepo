@@ -21,8 +21,12 @@
 			$columnName = "species_name";
 			break;
 		case "locationName":
-			$columnName = "location_name";
+			$columnName = "botany_reserves.location_name";
 			break;
+        case "reserveID":
+            $columnName = "botany_records.reserve_id";
+            $numeric = true;
+            break;
 		case "userName":
 			$columnName = "user_name";
 			break;
@@ -40,7 +44,7 @@
 			$methodName = "species_name";
 			break;
 		case "locationName":
-			$methodName = "location_name";
+			$methodName = "botany_reserves.location_name";
 			break;
 		case "userName":
 			$methodName = "user_name";
@@ -89,17 +93,18 @@
 	
 	//Query database specimens table for specimens that match the in-putted recordID
 	//Runs first if $searchValue has value, second if no value
-	$specimenQuery = $conn->query("SELECT * FROM botany_specimens 
-			       	INNER JOIN botany_records ON botany_specimens.record_id = botany_records.record_id
-			       	INNER JOIN botany_users ON botany_records.user_id = botany_users.user_id "
-			        . ($searchValue ? ($numeric ? "WHERE $columnName = $searchValue" : "WHERE $columnName LIKE '%$searchValue%'") : "")
-				. ($method ? " ORDER BY $methodName $orderName" : "")
-				. ($range ? " LIMIT $start, $range" : ""));
+    $queryText = "SELECT * FROM botany_specimens 
+                    INNER JOIN botany_records ON botany_specimens.record_id = botany_records.record_id
+                    INNER JOIN botany_users ON botany_records.user_id = botany_users.user_id 
+                    INNER JOIN botany_reserves ON botany_records.reserve_id = botany_reserves.reserve_id "
+                    . ($searchValue ? ($numeric ? "WHERE $columnName = $searchValue" : "WHERE $columnName LIKE '%$searchValue%'") : "")
+                    . ($method ? " ORDER BY $methodName $orderName" : "")
+                    . ($range ? " LIMIT $start, $range" : "");
+	$specimenQuery = $conn->query($queryText);
 	//Create array for Specimens
 	$specimens = array();
-	
 	//Fill array
-	while($row = $specimenQuery ->fetch_assoc())
+	while($row = $specimenQuery->fetch_assoc())
 	{
 		array_push($specimens, array(
 		//Specimens table
