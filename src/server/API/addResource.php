@@ -7,7 +7,10 @@
 	
 	//Decodes the JSON into PHP readable from POST
 	$resource = $_FILES["resource"];
-	
+	if($resource["error"] > 0) {
+        http_response_code(500);
+        die("File error code " . $resource["error"]);
+    }
 	//Returns success code for successful data and connects to Database
 	http_response_code(200);
 	$conn = new mysqli($CONFIG['dbname'], $CONFIG['username'], $CONFIG['password']);
@@ -34,7 +37,6 @@
 	
 	//Defines the upload path for file
 	$uploadPath = './'. $CONFIG['resourcePath'] . $resourceID;
-	
 	//Move file from temporary location to defined storage; error code 500 if can't
 	if(!move_uploaded_file($resource['tmp_name'], $uploadPath)) {
 		http_response_code(500);
