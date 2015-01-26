@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView" >
+        android:id="@+id/scrollView">
 
         <LinearLayout
             android:orientation="vertical"
@@ -24,7 +24,8 @@
                 android:id="@+id/latinNameAutoComplete"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/latinNamesHint"
-                android:maxLines="4" />
+                android:maxLines="4"
+                android:dropDownHeight="match_parent" />
 
             <SeekBar
                 android:layout_width="match_parent"
@@ -145,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/submit"
                     android:layout_weight="1"
-                    />
+                    android:onClick="onUploadButtonClick" />
 
             </LinearLayout>
 

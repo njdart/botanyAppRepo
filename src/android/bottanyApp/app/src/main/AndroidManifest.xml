@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name=".SpecimenAdder"
-            android:label="@string/title_activity_species_adder">
+            android:label="@string/title_activity_species_adder"
+            android:windowSoftInputMode="adjustUnspecified">
             <!--android:parentActivityName=".SiteChooserActivity">-->
         </activity>
         <activity

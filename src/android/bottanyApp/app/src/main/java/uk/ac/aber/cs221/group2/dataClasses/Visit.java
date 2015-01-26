@@ -64,4 +64,7 @@ public class Visit {
      */
     public void addSpecimen(Specimen s){}
 
+    public int getVisitId() {
+        return 0;
+    }
 }

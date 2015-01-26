@@ -41,13 +41,17 @@ import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 import uk.ac.aber.cs221.group2.utils.IntentRequestCodes;
 import uk.ac.aber.cs221.group2.utils.PlantDataSource;
+import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 import uk.ac.aber.cs221.group2.utils.SpecimenDataSource;
+import uk.ac.aber.cs221.group2.utils.UserDataSource;
 
 public class SpecimenAdder extends BaseActivity {
 
     public static List<String> latinNames;
     public AutoCompleteTextView latinNamesAutoComplete;
     private SpecimenDataSource specimenDataSource;
+    private UserDataSource userDataSource;
+    private SiteDataSource siteDataSource;
     private Double latitude = 0D,
                    longitude = 0D;
 
@@ -59,6 +63,8 @@ public class SpecimenAdder extends BaseActivity {
 
         //Get the dataSource for the specimens
         specimenDataSource = new SpecimenDataSource(this);
+        userDataSource = new UserDataSource(this);
+        siteDataSource = new SiteDataSource(this);
 
         //Screen Rotaion will reset some aspects of the app and call onCreate again
         //if so, we need to reset the images for the buttons
@@ -88,24 +94,10 @@ public class SpecimenAdder extends BaseActivity {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
-            public void afterTextChanged(Editable s) {
-//                if(s.length()>4){
-//                    PlantDataSource p = new PlantDataSource(SpecimenAdder.this);
-//                    p.open();
-//                    latinNames = p.findMatches(s.toString());
-//
-//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpecimenAdder.this,
-//                            android.R.layout.simple_dropdown_item_1line, latinNames);
-//
-//                    latinNamesAutoComplete.setAdapter(adapter);
-//
-//                }
-            }
+            public void afterTextChanged(Editable s) {}
         });
     }
 
@@ -172,7 +164,7 @@ public class SpecimenAdder extends BaseActivity {
             Bitmap bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
                     btmapOptions);
 
-            bitmap = Bitmap.createScaledBitmap(bitmap, 256, 256, true);
+            bitmap = Bitmap.createScaledBitmap(bitmap, 128, 128, true);
 
             switch(requestCode) {
                 case IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO:
@@ -206,7 +198,18 @@ public class SpecimenAdder extends BaseActivity {
         }
 
         //else we're good to go sync with the database!
-        String latinName = ((EditText)findViewById(R.id.latinNameAutoComplete)).getText().toString();
+        EditText latinNameAutoComplete = (EditText)findViewById(R.id.latinNameAutoComplete);
+        String latinName = latinNameAutoComplete.getText().toString();
+
+        //do some error checking
+        if(latinName == null || latinName.length() < 3){
+            latinNameAutoComplete.setError("The latin name should be more than 3 characters!");
+            return;
+        } else {
+            latinNameAutoComplete.setError(null);
+        }
+
+
         String comment = ""; //TODO add comment box
         Specimen.AbundanceEnum abundanceEnum = Specimen.AbundanceEnum.values()
                 [((SeekBar)findViewById(R.id.abundanceSlider)).getProgress()];
@@ -217,9 +220,20 @@ public class SpecimenAdder extends BaseActivity {
                                          abundanceEnum,
                                          comment,
                                          (scenePhoto == null)?"":scenePhoto.getAbsolutePath(),
-                                         (specimenPhoto == null)?"":specimenPhoto.getAbsolutePath());
+                                         (specimenPhoto == null)?"":specimenPhoto.getAbsolutePath(),
+                                         Integer.parseInt(userDataSource.FindByNamegetIndex(user.getName())),
+                                         Integer.parseInt(siteDataSource.FindByNameGetIndex(visit.getVisitName())));
 
         specimenDataSource.create(specimen, user, visit);
+
+
+        //Now clear the input fields
+        ((SeekBar)findViewById(R.id.abundanceSlider)).setProgress(2);
+        ((EditText) findViewById(R.id.latinNameAutoComplete)).setText("");
+        ((ImageButton)findViewById(R.id.sceneView)).setImageResource(R.drawable.specimen);
+        ((ImageButton)findViewById(R.id.specimenView)).setImageResource(R.drawable.specimen);
+        Toast.makeText(this, "New Specimein '" + latinName + " added!", Toast.LENGTH_LONG).show();
+
 
         for(Specimen s : specimenDataSource.findAll()){
             System.out.println("Specimen:" + s.getName() + " (" + s.getLatitude() + "," + s.getLongitude() +")" + s.getAbundance() +
@@ -234,139 +248,7 @@ public class SpecimenAdder extends BaseActivity {
 
     //http://stackoverflow.com/questions/23921356/android-upload-image-to-php-server
     public void onUploadButtonClick(View view){
-        new AsyncUploadImageThread().execute();
-    }
-
-    public class AsyncUploadImageThread extends AsyncTask {
-
-        @Override
-        protected Object doInBackground(Object[] params) {
-            HttpURLConnection conn = null;
-            DataOutputStream outputStream = null;
-            String lineEnding = "\n";
-            String twoHyphens = "--";
-            String boundary = "*****";
-
-            int bytesRead = 0,
-                    bytesAvailable = 0,
-                    bufferSize;
-
-            byte[] buffer;
-
-            int maxBufferSize = 1024 * 1024; // 1MB
-
-            List<File> specimenFiles = new ArrayList<File>();
-            if(specimenPhoto != null){
-                specimenFiles.add(specimenPhoto);
-            } else {
-                System.out.println("Specimen photo file empty? ignoring!");
-            }
-
-            if(scenePhoto != null){
-                specimenFiles.add(scenePhoto);
-            } else {
-                System.out.println("Scene photo file empty? ignoring!");
-            }
-
-            try {
-                for (File f : specimenFiles) {
-                    if (!f.isFile()) {
-                        System.out.println("ERROR, File " + f.getAbsolutePath() + " file wasn't a file!. ABORTING UPLOAD");
-                        //continue to next file
-                        continue;
-                    }
-                    FileInputStream inputStream = new FileInputStream(f);
-                    URL url = new URL(serverURLString);
-
-                    System.out.println("URL: " + url.toString());
-
-                    //Open a connection to the server
-                    conn = (HttpURLConnection)url.openConnection();
-                    conn.setDoInput(true);  //required for max's return id's
-                    conn.setDoOutput(true);
-                    conn.setUseCaches(false);
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Connection", "Keep-Alive");
-                    conn.setRequestProperty("ENCTYPE", "multipart/form-data;boundary=" + boundary);
-                    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-                    conn.setRequestProperty("resource", f.getName());
-
-                    System.out.println("CONN:" + conn.toString());
-                    OutputStream outputStream1 = conn.getOutputStream();
-                    outputStream = new DataOutputStream(outputStream1);
-
-                    outputStream.writeBytes(twoHyphens + boundary + lineEnding);
-                    outputStream.writeBytes("Content-Disposition: form-data; name=\"resource\";filename="+ f.getName() + "" + lineEnding);
-                    outputStream.writeBytes(lineEnding);
-
-                    bytesAvailable = inputStream.available();
-                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                    buffer = new byte[bufferSize];
-
-                    bytesRead = inputStream.read(buffer, 0, bufferSize);
-
-                    while(bytesRead > 0) {
-                        outputStream.write(buffer, 0, bufferSize);
-                        bytesAvailable = inputStream.available();
-                        bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                        bytesRead = inputStream.read(buffer, 0, bufferSize);
-                    }
-
-                    outputStream.writeBytes(lineEnding);
-                    outputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnding);
-
-                    int responseCode = conn.getResponseCode();
-                    String responseMessage = conn.getResponseMessage();
-
-                    //read back the page
-                    InputStream responseStream = conn.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream));
-                    StringBuilder builder = new StringBuilder();
-                    String line;
-
-                    while((line = reader.readLine()) != null){
-                        builder.append(line);
-                    }
-
-                    System.out.println("Upload completed, response code " + responseCode + " msg: " + responseMessage + " page: " + builder.toString());
-
-                    inputStream.close();
-                    outputStream.flush();
-                    outputStream.close();
-                }
-            } catch (FileNotFoundException | MalformedURLException e){
-                e.printStackTrace();
-            } catch (IOException e) {
-                System.out.println("Unable to open connection to the server!");
-                e.printStackTrace();
-            } finally {
-                return null;
-            }
-        }
-
-        public LocationListener locationListener = new LocationListener() {
-
-            @Override
-            public void onLocationChanged(Location location) {
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                Toast.makeText(SpecimenAdder.this, "GPS is off!", Toast.LENGTH_LONG);
-                //TODO add manual location boxes
-            }
-        };
+        onNewSpecimenButtonClick(view);
+        startActivity(new Intent(this, ReviewActivity.class));
     }
 }
