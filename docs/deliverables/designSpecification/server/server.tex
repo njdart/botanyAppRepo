@@ -127,7 +127,7 @@
         \end{itemize}
 	    \end{itemize}
 	    
-        \item GetLocations - returns a list of distinct locations used by records in the database for use by the Android application.
+        \item GetReserves - returns a list of distinct locations used by records in the database for use by the Android application.
         \begin{itemize}
         \item Headers Required:
         \begin{itemize}
@@ -139,7 +139,7 @@
         \end{itemize}
         \item Statuses: 
         \begin{itemize}
-              	\item 200 OK : array of RecordLocation
+              	\item 200 OK : array of Reserve
               	\item 400 Bad Request
               	\item 500 Internal Server Error
         \end{itemize}
@@ -182,12 +182,14 @@
             \end{itemize}
         \end{itemize}
         
-        The structure of a RecordLocation is as follows:
+        The structure of a Reserve is as follows:
         \begin{itemize}
-        	\item RecordLocation : Object
+        	\item Reserve : Object
         	\begin{itemize}
+                \item ReserveID : Number
         		\item LocationName : String 
         		\item LocationOS : String
+                \item Description : String
         	\end{itemize}
         \end{itemize}
 
@@ -262,6 +264,14 @@
             \item Resources
             \begin{itemize}
                 \item ResourceId : INT auto-increment PK
+            \end{itemize}
+            
+            \item Reserves
+            \begin{itemize}
+                \item ReserveID : INT auto-increment PK
+                \item LocationName : VARCHAR(50)
+                \item LocationOS : VARCHAR(10)
+                \item Description : TEXT
             \end{itemize}
 
             \item Specimens
