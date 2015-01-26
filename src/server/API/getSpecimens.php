@@ -10,7 +10,7 @@
 	$searchColumn = $_POST["column"]; //speciesName, locationName, userName
 	$order = $_POST["order"]; //ascending or descending
 	$method = $_POST["method"]; // speciesName, locationName, userName, timestamp
-	$numeric = false;
+	$numericColumn = $numericMethod = false;
 	$start = (int)$_POST["start"]; //number for row start
 	$range = (int)$_POST["range"]; //how many records to display
 
@@ -32,7 +32,7 @@
 			break;
 		case "abundance":
 			$columnName = "abundance";
-			$numeric = true;
+			$numericColumn = true;
 			break;
 		default:
 			$columnName = "species_name";
@@ -54,7 +54,7 @@
 			break;
 		case "abundance":
 			$methodName = "abundance";
-			$numeric = true;
+			$numericMethod = true;
 			break;
 		default:
 			$methodName = "species_name";
@@ -97,7 +97,7 @@
                     INNER JOIN botany_records ON botany_specimens.record_id = botany_records.record_id
                     INNER JOIN botany_users ON botany_records.user_id = botany_users.user_id 
                     INNER JOIN botany_reserves ON botany_records.reserve_id = botany_reserves.reserve_id "
-                    . ($searchValue ? ($numeric ? "WHERE $columnName = $searchValue" : "WHERE $columnName LIKE '%$searchValue%'") : "")
+                    . ($searchValue ? ($numericColumn ? "WHERE $columnName = $searchValue" : "WHERE $columnName LIKE '%$searchValue%'") : "")
                     . ($method ? " ORDER BY $methodName $orderName" : "")
                     . ($range ? " LIMIT $start, $range" : "");
 	$specimenQuery = $conn->query($queryText);
