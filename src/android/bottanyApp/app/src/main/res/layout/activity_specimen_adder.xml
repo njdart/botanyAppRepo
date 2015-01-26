@@ -28,14 +28,12 @@
             android:layout_gravity="center_horizontal"
             android:max="4"
             android:progress="2"
-            android:splitTrack="true"
             android:theme="@style/AppTheme"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:indeterminate="false"
             android:progressDrawable="@android:color/transparent"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp" />
+            android:focusableInTouchMode="false" />
 
         <LinearLayout
             android:orientation="horizontal"
