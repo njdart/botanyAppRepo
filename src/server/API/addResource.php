@@ -3,10 +3,11 @@
 	include 'config.php';		
 
 	//Stops warnings
-	error_reporting(E_ERROR);
+	//error_reporting(E_ERROR);
 	
 	//Decodes the JSON into PHP readable from POST
 	$resource = $_FILES["resource"];
+	echo $resource;
 	if($resource["error"] > 0) {
         http_response_code(500);
         die("File error code " . $resource["error"]);
@@ -36,9 +37,10 @@
 	$resourceID = $conn->insert_id;
 	
 	//Defines the upload path for file
-	$uploadPath = './'. $CONFIG['resourcePath'] . $resourceID;
+	$uploadPath = './'. $CONFIG['resourcePath'] . $resourceID . ".jpg";
 	//Move file from temporary location to defined storage; error code 500 if can't
 	if(!move_uploaded_file($resource['tmp_name'], $uploadPath)) {
+		echo $uploadPath;
 		http_response_code(500);
 		die("Can not copy file");
 	}
