@@ -18,23 +18,23 @@ echo"<img class='image' src='images/default_image.png'  alt='default'/>
 <div id='left-section'>
 <form class='add-record' action='add_specimen.php' method='GET'>
 Username:<br>
-<input type='text' id='UserName' name='UserName' pattern='[A-Za-z]{3,10}' title='Username, 3-10 letters. No numbers or symbols.' /><br><br>
+<input type='text' id='UserName' name='UserName' pattern='[A-Za-z]{3,10}' title="Username, 3-10 letters. No numbers or symbols." /><br><br>
 /><br><br>
 
 Phone:<br>
-<input type='text' id='UserPhone' name='UserPhone' /><br><br>
+<input type='text' id='UserPhone' name='UserPhone' pattern='[0-9]{9,12}' title="Phone number, no letters or symnbols" /><br><br>
 
 Email:<br>
-<input type='text' id='UserEmail' name='UserEmail' /><br><br>
-
+<input type='email' id='UserEmail' name='UserEmail' required placeholder="Enter a valid email address please" /><br><br>
+	
 Location Name:<br>
-<input type='text' id='LocationName' name='LocationName'pattern="[A-Za-z]{2,30}" title "Location name, 2 to 30 letters /><br><br>
+<input type='text' id='LocationName' name='LocationName' pattern="[A-Za-z]{2,30}" title "Location name, 2 to 30 letters" /><br><br>
 
 Location OS:<br>
 <input type='text' id='LocationOS' name='LocationOS' /><br><br>
 
 Species Name:<br>
-<input type='text' id='SpeciesName' name='SpeciesName'/><br><br>
+<input type='text' id='SpeciesName' name='SpeciesName'pattern="[A-Za-z -]{2,30}" title "Species name, 2 to 30 letters "/><br><br>
 
 Location Latitude:<br>
 <input type='text' id='LocationLatitude' name='LocationLatitude' /><br><br>
