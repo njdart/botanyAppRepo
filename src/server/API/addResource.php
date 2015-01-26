@@ -23,6 +23,7 @@
 	$conn->select_db('msh4');
 	
 	//Query to insert resource into Database 
+    $conn->autocommit = false;
 	$insertResource = "INSERT INTO botany_resources () VALUES ()";
 	
 	//Execute query
@@ -37,10 +38,11 @@
 	//Move file from temporary location to defined storage; error code 500 if can't
 	if(!move_uploaded_file($resource['tmp_name'], $uploadPath)) {
 		http_response_code(500);
-		return;
+		die("Can not copy file");
 	}
 	
 	//Echo resource ID for use by Database
+    $conn->commit();
 	echo $resourceID;
 
 	//Close connection
