@@ -41,13 +41,17 @@ import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 import uk.ac.aber.cs221.group2.utils.IntentRequestCodes;
 import uk.ac.aber.cs221.group2.utils.PlantDataSource;
+import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 import uk.ac.aber.cs221.group2.utils.SpecimenDataSource;
+import uk.ac.aber.cs221.group2.utils.UserDataSource;
 
 public class SpecimenAdder extends BaseActivity {
 
     public static List<String> latinNames;
     public AutoCompleteTextView latinNamesAutoComplete;
     private SpecimenDataSource specimenDataSource;
+    private UserDataSource userDataSource;
+    private SiteDataSource siteDataSource;
     private Double latitude = 0D,
                    longitude = 0D;
 
@@ -59,6 +63,8 @@ public class SpecimenAdder extends BaseActivity {
 
         //Get the dataSource for the specimens
         specimenDataSource = new SpecimenDataSource(this);
+        userDataSource = new UserDataSource(this);
+        siteDataSource = new SiteDataSource(this);
 
         //Screen Rotaion will reset some aspects of the app and call onCreate again
         //if so, we need to reset the images for the buttons
@@ -88,24 +94,10 @@ public class SpecimenAdder extends BaseActivity {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
-            public void afterTextChanged(Editable s) {
-//                if(s.length()>4){
-//                    PlantDataSource p = new PlantDataSource(SpecimenAdder.this);
-//                    p.open();
-//                    latinNames = p.findMatches(s.toString());
-//
-//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpecimenAdder.this,
-//                            android.R.layout.simple_dropdown_item_1line, latinNames);
-//
-//                    latinNamesAutoComplete.setAdapter(adapter);
-//
-//                }
-            }
+            public void afterTextChanged(Editable s) {}
         });
     }
 
@@ -206,7 +198,18 @@ public class SpecimenAdder extends BaseActivity {
         }
 
         //else we're good to go sync with the database!
-        String latinName = ((EditText)findViewById(R.id.latinNameAutoComplete)).getText().toString();
+        EditText latinNameAutoComplete = (EditText)findViewById(R.id.latinNameAutoComplete);
+        String latinName = latinNameAutoComplete.getText().toString();
+
+        //do some error checking
+        if(latinName == null || latinName.length() < 3){
+            latinNameAutoComplete.setError("The latin name should be more than 3 characters!");
+            return;
+        } else {
+            latinNameAutoComplete.setError(null);
+        }
+
+
         String comment = ""; //TODO add comment box
         Specimen.AbundanceEnum abundanceEnum = Specimen.AbundanceEnum.values()
                 [((SeekBar)findViewById(R.id.abundanceSlider)).getProgress()];
@@ -218,8 +221,8 @@ public class SpecimenAdder extends BaseActivity {
                                          comment,
                                          (scenePhoto == null)?"":scenePhoto.getAbsolutePath(),
                                          (specimenPhoto == null)?"":specimenPhoto.getAbsolutePath(),
-                                         visit.getVisitId(),
-                                         user.getUserId());
+                                         Integer.parseInt(userDataSource.FindByNamegetIndex(user.getName())),
+                                         Integer.parseInt(siteDataSource.FindByNameGetIndex(visit.getVisitName())));
 
         specimenDataSource.create(specimen, user, visit);
 

@@ -1,7 +1,7 @@
 package uk.ac.aber.cs221.group2.dataClasses;
 
 public class Specimen {
-    public Specimen(String name, Double latitude, Double longitude, AbundanceEnum abundance, String comment, String scenePhotoURI, String specimenPhotoURI, User visitId, Visit userId) {
+    public Specimen(String name, Double latitude, Double longitude, AbundanceEnum abundance, String comment, String scenePhotoURI, String specimenPhotoURI, int visitId, int userId) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -35,6 +35,7 @@ public class Specimen {
 	private String comment;
 	private String scenePhotoURI;
 	private String specimenPhotoURI;
+<<<<<<< HEAD
 
     public User getUser() {
         return user;
@@ -54,6 +55,10 @@ public class Specimen {
 
     private Visit visit;
     private User user;
+=======
+    private int visit;
+    private int user;
+>>>>>>> origin/master
 
 
     public String getName() {

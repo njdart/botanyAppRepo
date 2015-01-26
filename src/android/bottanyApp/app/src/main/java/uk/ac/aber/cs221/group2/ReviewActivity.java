@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import uk.ac.aber.cs221.group2.dataClasses.Specimen;
-import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.utils.SpecimenDataSource;
 
 /**
@@ -29,12 +28,13 @@ public class ReviewActivity extends Activity {
 
         SpecimenDataSource specimenDataSource = new SpecimenDataSource(this);
         final List<Specimen> specimens = specimenDataSource.findAll();
-        final List<String> specimenNames = new ArrayList<>();int userId, visitId;
+        final List<String> specimenNames = new ArrayList<>();
         for(Specimen s : specimens){
             specimenNames.add(s.getName());
+            System.out.println("adding specimen " + s.getName());
         }
 
-        StableArrayAdapter stableArrayAdapter = new StableArrayAdapter(this, R.id.specimenReviewList, specimenNames);
+        final StableArrayAdapter stableArrayAdapter = new StableArrayAdapter(this, R.id.specimenReviewList, specimenNames);
         ((ListView)findViewById(R.id.specimenReviewList)).setAdapter(stableArrayAdapter);
     }
 
