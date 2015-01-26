@@ -46,3 +46,10 @@ alter table botany_records
 create table botany_resources (
 	resource_id INT AUTO_INCREMENT,
 	PRIMARY KEY (resource_id));
+
+
+create table botany_reserves (
+	reserve_id INT AUTO_INCREMENT,
+	location_os VARCHAR(10),
+	description TEXT,
+	PRIMARY KEY (reserve_id);
