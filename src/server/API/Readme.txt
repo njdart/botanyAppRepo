@@ -26,6 +26,7 @@ Added more Database protection with transactions and connection closing
 Added resource location protection with config
 Added validation on Lat and Long and empty fields
 Added authenticateAdmin command. Added includes to relevant places
+Added addReserve and removeReserve commands.
 
 Available Commands:
 
@@ -41,6 +42,8 @@ getSpecimens.php (Decode the JSON. All specimens are in array. POST order = asce
 removeSpecimen.php (POST specimenID. POST password = ask Max.)
 getLocations.php (No POST data.)
 authenticateAdmin.php (POST password = admin password, will return true or false)
+addReserve.php (Encode a JSON called "reserve")
+removeReserve.php (POST reserveID    POST password = ask Max)
 
 
 To do:
