@@ -77,12 +77,14 @@ public class SpecimenDataSource {
                     Specimen.AbundanceEnum abun = Specimen.AbundanceEnum.valueOf(cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenAbundance)));
 
                             Specimen specimen = new Specimen(cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenName)),
-                            (double)cursor.getDouble(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenLat)),
-                            (double)cursor.getDouble(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenLong)),
-                            abun,
-                                                    cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenComment)),
-                                                            cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenScenePhoto)),
-                                                                    cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenSpecimenPhoto)));
+                                                             (double)cursor.getDouble(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenLat)),
+                                                             (double)cursor.getDouble(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenLong)),
+                                                             abun,
+                                                             cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenComment)),
+                                                             cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenScenePhoto)),
+                                                             cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenSpecimenPhoto)),
+                                                             User.CurrentUser,
+                                                             Visit.CurrentVisit);
 
                     specimens.add(specimen);
                 }

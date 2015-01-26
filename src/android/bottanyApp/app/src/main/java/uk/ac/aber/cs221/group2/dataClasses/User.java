@@ -53,4 +53,8 @@ public class User {
     public String getUserEmail() {
 		return email;
 	}
+
+    public int getUserId() {
+        return 0;
+    }
 }
