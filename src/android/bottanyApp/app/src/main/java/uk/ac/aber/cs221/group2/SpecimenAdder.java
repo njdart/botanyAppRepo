@@ -3,6 +3,8 @@ package uk.ac.aber.cs221.group2;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationListener;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,7 +14,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -31,32 +36,48 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import uk.ac.aber.cs221.group2.dataClasses.Specimen;
 import uk.ac.aber.cs221.group2.dataClasses.User;
+import uk.ac.aber.cs221.group2.dataClasses.Visit;
 import uk.ac.aber.cs221.group2.utils.IntentRequestCodes;
 import uk.ac.aber.cs221.group2.utils.PlantDataSource;
+import uk.ac.aber.cs221.group2.utils.SpecimenDataSource;
 
 public class SpecimenAdder extends BaseActivity {
 
     public static List<String> latinNames;
     public AutoCompleteTextView latinNamesAutoComplete;
+    private SpecimenDataSource specimenDataSource;
+    private Double latitude = 0D,
+                   longitude = 0D;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        latinNamesAutoComplete = (AutoCompleteTextView)(findViewById(R.id.latinNameAutoComplete));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specimen_adder);
-        if (savedInstanceState == null) {}
 
+        //Get the dataSource for the specimens
+        specimenDataSource = new SpecimenDataSource(this);
+
+        //Screen Rotaion will reset some aspects of the app and call onCreate again
+        //if so, we need to reset the images for the buttons
+        if(sceneThumbnail != null){
+            ((ImageButton)findViewById(R.id.sceneView)).setImageBitmap(sceneThumbnail);
+        }
+
+        if(specimenThumbnail != null){
+            ((ImageButton)findViewById(R.id.specimenView)).setImageBitmap(specimenThumbnail);
+        }
+
+        //get the latin names autcomplete box and add a watcher for sql queries
         latinNamesAutoComplete = (AutoCompleteTextView)(findViewById(R.id.latinNameAutoComplete));
-
         latinNamesAutoComplete.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if(s.length()>3){
                     PlantDataSource p = new PlantDataSource(SpecimenAdder.this);
                     p.open();
-                    System.out.println("hit");
                     latinNames = p.findMatches(s.toString());
                     System.out.println(latinNames.size());
 
@@ -73,17 +94,17 @@ public class SpecimenAdder extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()>4){
-                    PlantDataSource p = new PlantDataSource(SpecimenAdder.this);
-                    p.open();
-                    latinNames = p.findMatches(s.toString());
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpecimenAdder.this,
-                            android.R.layout.simple_dropdown_item_1line, latinNames);
-
-                    latinNamesAutoComplete.setAdapter(adapter);
-
-                }
+//                if(s.length()>4){
+//                    PlantDataSource p = new PlantDataSource(SpecimenAdder.this);
+//                    p.open();
+//                    latinNames = p.findMatches(s.toString());
+//
+//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpecimenAdder.this,
+//                            android.R.layout.simple_dropdown_item_1line, latinNames);
+//
+//                    latinNamesAutoComplete.setAdapter(adapter);
+//
+//                }
             }
         });
     }
@@ -113,22 +134,10 @@ public class SpecimenAdder extends BaseActivity {
                 specimenPhoto = f;
                 break;
             default:
-                System.out.println("ERROR, Unknown intent request code");
+                System.out.println("ERROR, Unknown intent request code, ignoring it");
+                return;
         }
         startActivityForResult(i, intentReturnId);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if(sceneThumbnail != null){
-            ((ImageButton)findViewById(R.id.sceneView)).setImageBitmap(sceneThumbnail);
-        }
-
-        if(specimenThumbnail != null){
-            ((ImageButton)findViewById(R.id.specimenView)).setImageBitmap(specimenThumbnail);
-        }
     }
 
     private static File scenePhoto;
@@ -144,15 +153,18 @@ public class SpecimenAdder extends BaseActivity {
             ImageButton imageButton;
             File f;
 
-            if (requestCode == IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO) {
-                imageButton = (ImageButton) findViewById(R.id.sceneView);
-                f = scenePhoto;
-            } else if (requestCode == IntentRequestCodes.SPECIES_ADDER_SPECIMEN_PHOTO) {
-                imageButton = (ImageButton) findViewById(R.id.specimenView);
-                f = specimenPhoto;
-            } else {
-                System.out.println("SPECIES ADDER: Got an unknown result code back, ignoring it!");
-                return;
+            switch(requestCode) {
+                case IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO:
+                    imageButton = (ImageButton) findViewById(R.id.sceneView);
+                    f = scenePhoto;
+                    break;
+                case IntentRequestCodes.SPECIES_ADDER_SPECIMEN_PHOTO:
+                    imageButton = (ImageButton) findViewById(R.id.specimenView);
+                    f = specimenPhoto;
+                    break;
+                default:
+                    System.out.println("ERROR, unknown request code, ignoring!" + requestCode);
+                    return;
             }
 
             BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
@@ -162,6 +174,17 @@ public class SpecimenAdder extends BaseActivity {
 
             bitmap = Bitmap.createScaledBitmap(bitmap, 256, 256, true);
 
+            switch(requestCode) {
+                case IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO:
+                    sceneThumbnail = bitmap;
+                    break;
+                case IntentRequestCodes.SPECIES_ADDER_SPECIMEN_PHOTO:
+                    specimenThumbnail = bitmap;
+                    break;
+                default:
+                    return;
+            }
+
             imageButton.setImageBitmap(bitmap);
         }
     }
@@ -170,7 +193,39 @@ public class SpecimenAdder extends BaseActivity {
         //save everything to the database and reset fields for a new specimen
 
         User user = User.CurrentUser;
-        
+        Visit visit = Visit.CurrentVisit;
+
+        //Sanity Check
+
+        if(user == null){
+            throw new NullPointerException("User was Null, expecting something else!");
+        }
+
+        if(visit == null){
+            throw new NullPointerException("Visit was Null, expecting something different");
+        }
+
+        //else we're good to go sync with the database!
+        String latinName = ((EditText)findViewById(R.id.latinNameAutoComplete)).getText().toString();
+        String comment = ""; //TODO add comment box
+        Specimen.AbundanceEnum abundanceEnum = Specimen.AbundanceEnum.values()
+                [((SeekBar)findViewById(R.id.abundanceSlider)).getProgress()];
+
+        Specimen specimen = new Specimen(latinName,
+                                         latitude,
+                                         longitude,
+                                         abundanceEnum,
+                                         comment,
+                                         (scenePhoto == null)?"":scenePhoto.getAbsolutePath(),
+                                         (specimenPhoto == null)?"":specimenPhoto.getAbsolutePath());
+
+        specimenDataSource.create(specimen, user, visit);
+
+        for(Specimen s : specimenDataSource.findAll()){
+            System.out.println("Specimen:" + s.getName() + " (" + s.getLatitude() + "," + s.getLongitude() +")" + s.getAbundance() +
+                               " Comment " + s.getComment() + " scene " + s.getScenePhotoURI() + " specimen: " + s.getSpecimenPhotoURI());
+        }
+
     }
 
     public final String serverURLString = "http://users.aber.ac.uk/mta2/groupapi/addResource.php";
@@ -288,5 +343,30 @@ public class SpecimenAdder extends BaseActivity {
                 return null;
             }
         }
+
+        public LocationListener locationListener = new LocationListener() {
+
+            @Override
+            public void onLocationChanged(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                Toast.makeText(SpecimenAdder.this, "GPS is off!", Toast.LENGTH_LONG);
+                //TODO add manual location boxes
+            }
+        };
     }
 }

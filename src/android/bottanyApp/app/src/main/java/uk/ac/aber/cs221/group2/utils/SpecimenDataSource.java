@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.aber.cs221.group2.dataClasses.Specimen;
+import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 
 /**
@@ -52,17 +53,20 @@ public class SpecimenDataSource {
         }
 
 
-        public long create(Specimen specimen){
+        public long create(Specimen specimen, User user, Visit visit){
             ContentValues values = new ContentValues();
 
             values.put(DatabaseUtils.specimenTable_specimenName, specimen.getName());
                     values.put(DatabaseUtils.specimenTable_specimenLat, specimen.getLatitude());
                     values.put(DatabaseUtils.specimenTable_specimenLong, specimen.getLongitude());
                     values.put(DatabaseUtils.specimenTable_specimenAbundance, specimen.getAbundance().toString());
-                    values.put(DatabaseUtils.specimenTable_specimenComment, specimen.getComment());
-                    values.put(DatabaseUtils.specimenTable_specimenScenePhoto, specimen.getScenePhotoURI());
-                    values.put(DatabaseUtils.specimenTable_specimenSpecimenPhoto, specimen.getSpecimenPhotoURI());
-            return database.insert(DatabaseUtils.plantsTableName, null, values);
+                    if(specimen.getComment() != null)
+                        values.put(DatabaseUtils.specimenTable_specimenComment, specimen.getComment());
+                    if(specimen.getScenePhotoURI() != null)
+                        values.put(DatabaseUtils.specimenTable_specimenScenePhoto, specimen.getScenePhotoURI());
+                    if(specimen.getSpecimenPhotoURI() != null)
+                        values.put(DatabaseUtils.specimenTable_specimenSpecimenPhoto, specimen.getSpecimenPhotoURI());
+            return database.insert(DatabaseUtils.specimenTableName, null, values);
         }
 
         public List<Specimen> findAll(){

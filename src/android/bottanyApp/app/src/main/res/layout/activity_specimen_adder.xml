@@ -8,7 +8,7 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/scrollView" >
 
         <LinearLayout
@@ -29,7 +29,7 @@
             <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/seekBar"
+                android:id="@+id/abundanceSlider"
                 android:layout_gravity="center_horizontal"
                 android:max="4"
                 android:progress="2"

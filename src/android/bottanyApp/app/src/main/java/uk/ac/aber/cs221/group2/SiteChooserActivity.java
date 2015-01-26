@@ -95,6 +95,11 @@ public class SiteChooserActivity extends BaseActivity {
         //If errors are found, abort the transaction!
         if(foundErrors) return;
 
+        final Visit v = new Visit(siteName, gridRef);
+        //Lets be 2038-compliant!
+        v.setVisitDate((double) (System.currentTimeMillis() / 1000L));
+        Visit.CurrentVisit = v;
+
         //check if the site is already in the list
         for(String s : autoCompleteEntries){
             if(s.toLowerCase().equals(siteNameLower)){
@@ -111,7 +116,7 @@ public class SiteChooserActivity extends BaseActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        siteDataSource.create(new Visit(siteName, gridRef));
+                        siteDataSource.create(v);
                         goToSpeciesAdderActivity();
                     }
                 })

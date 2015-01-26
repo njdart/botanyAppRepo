@@ -72,7 +72,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
             createSitesTableQuery,
             createPlantsTableQuery,
             createSpecimenTableQuery
-
+            //Dont forget to add a drop query to onUpgrade()...
     };
 
     public DatabaseUtils(Context context) {
@@ -95,10 +95,10 @@ public class DatabaseUtils extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + sitesTableName + "; " +
-                   "DROP TABLE IF EXISTS " + specimenTableName + "; " +
-                   "DROP TABLE IF EXISTS " + userTableName + "; " +
-                   "DROP TABLE IF EXISTS " + plantsTableName + "; ");
+        db.execSQL("DROP TABLE IF EXISTS " + sitesTableName);
+        db.execSQL("DROP TABLE IF EXISTS " + specimenTableName);
+        db.execSQL("DROP TABLE IF EXISTS " + userTableName);
+        db.execSQL("DROP TABLE IF EXISTS " + plantsTableName);
         onCreate(db);
     }
 }
