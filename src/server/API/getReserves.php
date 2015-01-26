@@ -20,22 +20,24 @@
 	$conn->select_db('msh4');
 	
 	//Query database records table for record_ids that match the in-putted recordID
-	$recordQuery = $conn->query("SELECT DISTINCT location_name, location_os FROM botany_records");
+	$reservesQuery = $conn->query("SELECT * FROM botany_reserves");
 	
 	//Create array for Specimens
-	$records = array();
+	$reserves = array();
 	
 	//Fill array
 	while($row = $recordQuery ->fetch_assoc())
 	{
-		array_push($records, array(
+		array_push($reserves, array(
 		//Records table
 		'LocationName' => $row['location_name'],
-		'LocationOS' => $row['location_os']));
+		'LocationOS' => $row['location_os']),
+        'Description' => $row['description']),
+        'ReserveID' => $row['reserve_id']));
 	}
 	
 	//Decode array into JSON
-	$json = json_encode($records);
+	$json = json_encode($reserves);
 
 	//Send JSON to HTTP 
 	echo $json;
