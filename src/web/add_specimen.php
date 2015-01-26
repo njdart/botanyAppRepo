@@ -1,101 +1,148 @@
 <?php
-$title = "Add";
-// include 'includes/config.php';
-include "header.php";
+	$title = "Add";
+	// include 'includes/config.php';
+	include "header.php";
+?>
+	<div id='content-boxes'>
+		<h1 class='indent'>Add Record</h1>
+		<h2>Please enter the details in the form below</h2>
+		
+		<div id='left-section'>
+			<form enctype="multipart/form-data" class='add-record' name='formMain' action='add_specimen.php' method='POST'>
+				Username:<br>
+				<input type='text' id='UserName' name='UserName' /><br><br>
 
-echo "<div id='content-boxes'>
-<h1 class='indent'>Add Record</h1>
-<h2>Please enter the details in the form below</h2>
-<div id='right-section'>";
-//if no picture is attatched, use default image2wbmp
-echo"<img class='image' src='images/default_image.png'  alt='default'/>
-<br>
-<a href='AddResource.php'>Upload Image</a>
-<br><br><br>
+				Phone:<br>
+				<input type='text' id='UserPhone' name='UserPhone' /><br><br>
 
+				Email:<br>
+				<input type='text' id='UserEmail' name='UserEmail' /><br><br>
 
-</div>
-<div id='left-section'>
-<form class='add-record' action='add_specimen.php' method='GET'>
-Username:<br>
-<input type='text' id='UserName' name='UserName' pattern="[A-Za-z]{3,10}" title="Username, 3-10 letters. No numbers or symbols." /><br><br>
-/><br><br>
+				Location Name:<br>
+				<input type='text' id='LocationName' name='LocationName' /><br><br>
 
-Phone:<br>
-<input type='text' id='UserPhone' name='UserPhone' pattern="[0-9]{9,12}" title="Phone number, no letters or symnbols" /><br><br>
+				Location OS:<br>
+				<input type='text' id='LocationOS' name='LocationOS' /><br><br>
 
-Email:<br>
-<input type='email' id='UserEmail' name='UserEmail' required placeholder="Enter a valid email address please" /><br><br>
-	
-Location Name:<br>
-<input type='text' id='LocationName' name='LocationName' pattern="[A-Za-z]{2,30}" title "Location name, 2 to 30 letters" /><br><br>
+				Species Name:<br>
+				<input type='text' id='SpeciesName' name='SpeciesName'/><br><br>
 
-Location OS:<br>
-<input type='text' id='LocationOS' name='LocationOS' /><br><br>
+				Location Latitude:<br>
+				<input type='text' id='LocationLatitude' name='LocationLatitude' /><br><br>
 
-Species Name:<br>
-<input type='text' id='SpeciesName' name='SpeciesName'pattern="[A-Za-z -]{2,30}" title "Species name, 2 to 30 letters "/><br><br>
+				Location Longitude:<br>
+				<input type='text' id='LocationLongitude' name='LocationLongitude' /><br><br>
 
-Location Latitude:<br>
-<input type='text' id='LocationLatitude' name='LocationLatitude' /><br><br>
+				Abundance:<br>
+				<input type='text' id='Abundance' name='Abundance' /><br><br>
 
-Location Longitude:<br>
-<input type='text' id='LocationLongitude' name='LocationLongitude' /><br><br>
-
-Abundance:<br>
-<input type='text' id='Abundance' name='Abundance' /><br><br>
-
-Comment:<br>
-<input type='text' id='Comment' name='Comment' /><br><br>
-
-<input type='submit' id='Submit' name='Submit' />
-</form>
-</div>
-</div>";
-
-$submit='Submit';
-
-$timestamp=time();
-
-$specimen=array(
-	'SpeciesName' => $_GET['SpeciesName'],
-	'LocationLatitude' => (float)$_GET['LocationLatitude'],
-	'LocationLongitude' => (float)$_GET['LocationLongitude'],
-	'Abundance' => (int)$_GET['Abundance'],
-	'Comment' => $_GET['Comment'],
-	'SpecimenPhoto' => "0",
-	'ScenePhoto' => "0");
+				Comment:<br>
+				<input type='text' id='Comment' name='Comment' /><br><br>
+				
+				
+			
+			
+		</div>
+	</div>
 	
 	
+	
+	<input type='hidden' name='MAX_FILE_SIZE' value='10000000' />
+	Choose a Site image to upload: <input name='resource[]' type='file' /><br><br />	
 
-$record=array(
-	'UserName' => $_GET['UserName'],
-	'UserPhone' => $_GET['UserPhone'],
-	'UserEmail' => $_GET['UserEmail'],
-	'LocationName' => $_GET['LocationName'],
-	'LocationOS' => $_GET['LocationOS'],
-	'Specimens' => array($specimen),
-	'Timestamp' => $timestamp);
+	<input type='hidden' name='MAX_FILE_SIZE' value='10000000' />
+	Choose a specimen image to upload: <input name='resource[]' type='file' /><br><br />
+	<input id='test2' type='submit' value='upload1'><br>
+	</form>
+	
+	
+	<?php
+	var_dump($_POST);
+	echo $_FILES['resource']['error'];
+	print("<pre>");
+	var_dump($_FILES);
+	print("</pre>");
+	if ( isset($_FILES['resource']) ) {
+	 $POST_DATA = array(
+	   'resource' =>  new CurlFile($_FILES['resource']['tmp_name'][0])
+	   
+ 	);
+	}
+	else{echo "NO!!!!";}
+	if ( isset($_FILES['resource']) ) {
+	 $POST_DATA2 = array(
+	   'resource' =>  new CurlFile($_FILES['resource']['tmp_name'][1])
+	   
+ 	);
+	}
+	else{echo "NO!!!!";}
 
-$json = json_encode($record);
-print("<pre>");
-var_dump ($specimen);
+	
+	//move_uploaded_file($_FILES["uploadedfile"], $resource);
+	$submit='Submit';
 
-print("<br />");
-var_dump ($record);
+	$timestamp=time();
 
-var_dump($json);
+	
+	
+	print("<pre>");
 
-$url='http://users.aber.ac.uk/mta2/groupapi/addRecord.php';
+	print("<br />");
 
-$ch=curl_init($url);
-var_dump ($ch);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, array('record' => $json));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$response=curl_exec($ch);
-curl_close($ch);
-var_dump($response);
-print("</pre>");
-include 'footer.php';
+	
+	
+	
+	$ch=curl_init('http://users.aber.ac.uk/mta2/groupapi/addResource.php');
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$photoSpecimen=curl_exec($ch);
+	curl_close($ch);
+ 
+	var_dump($photoSpecimen);
+	echo $photoSpecimen;
+	$ch=curl_init('http://users.aber.ac.uk/mta2/groupapi/addResource.php');
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA2);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$photoScene=curl_exec($ch);
+	curl_close($ch);
+	var_dump($photoScene);
+	
+	$specimen=array(
+		'SpeciesName' => $_POST['SpeciesName'],
+		'LocationLatitude' => (float)$_POST['LocationLatitude'],
+		'LocationLongitude' => (float)$_POST['LocationLongitude'],
+		'Abundance' => (int)$_POST['Abundance'],
+		'Comment' => $_POST['Comment'],
+		'SpecimenPhoto' => "$photoSpecimen",
+		'ScenePhoto' => "$photoScene");
+
+
+	$record=array(
+		'UserName' => $_POST['UserName'],
+		'UserPhone' => $_POST['UserPhone'],
+		'UserEmail' => $_POST['UserEmail'],
+		'ReserveID' => $_POST['LocationName'],
+		
+		'Specimens' => array($specimen),
+		'Timestamp' => $timestamp);
+
+
+	$json = json_encode($record);
+
+	echo $json;
+
+	$url='http://users.aber.ac.uk/mta2/groupapi/addRecord.php';
+
+	$ch=curl_init($url);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, array('record' => $json));
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$response=curl_exec($ch);
+	curl_close($ch);
+	print("</pre>");
+	include 'footer.php';
+	echo"done";
+
 ?>
