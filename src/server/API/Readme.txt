@@ -44,6 +44,7 @@ getLocations.php (No POST data.)
 authenticateAdmin.php (POST password = admin password, will return true or false)
 addReserve.php (Encode a JSON called "reserve")
 removeReserve.php (POST reserveID    POST password = ask Max)
+getReserves.php (No POST data.)
 
 
 To do:
