@@ -26,13 +26,12 @@
 	$reserves = array();
 	
 	//Fill array
-	while($row = $recordQuery ->fetch_assoc())
+	while($row = $reservesQuery->fetch_assoc())
 	{
 		array_push($reserves, array(
-		//Records table
 		'LocationName' => $row['location_name'],
-		'LocationOS' => $row['location_os']),
-        'Description' => $row['description']),
+		'LocationOS' => $row['location_os'],
+        'Description' => $row['description'],
         'ReserveID' => $row['reserve_id']));
 	}
 	
