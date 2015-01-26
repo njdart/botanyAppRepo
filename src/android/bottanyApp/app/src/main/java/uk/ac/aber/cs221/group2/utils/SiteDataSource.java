@@ -79,6 +79,23 @@ public class SiteDataSource {
         } else {
             return null;
         }
+        return null;
+    }
+
+
+    public String FindByNameGetIndex(String s){
+
+        String selectQuery = "SELECT * FROM " + DatabaseUtils.sitesTableName + "  WHERE " +
+                DatabaseUtils.siteTable_siteName + "= '" + s + "';";
+        System.out.println(selectQuery);
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                return cursor.getString(cursor.getColumnIndex(DatabaseUtils.sitesTable_siteId));
+            }
+        } else {
+            return null;
+        }
 
 
         return null;
