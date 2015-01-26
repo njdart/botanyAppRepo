@@ -5,10 +5,9 @@
     <string name="title_activity_launch">Botany App</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_species_adder">Species Adder</string>
+    <string name="title_activity_species_adder">Specimen Adder</string>
     <string name="title_activity_site_chooser">Choose a Site</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="foo_settings">foo</string>
     <string name="action_preferences">Preferences</string>
 
 </resources>

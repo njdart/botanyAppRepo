@@ -8,8 +8,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +21,6 @@ import java.util.List;
 
 import uk.ac.aber.cs221.group2.OScode.LatLng;
 import uk.ac.aber.cs221.group2.OScode.OSRef;
-import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 import uk.ac.aber.cs221.group2.utils.SiteDataSource;
 
@@ -122,7 +119,7 @@ public class SiteChooserActivity extends BaseActivity {
     }
 
     private void goToSpeciesAdderActivity() {
-        Intent i = new Intent(this, SpeciesAdder.class);
+        Intent i = new Intent(this, SpecimenAdder.class);
         startActivity(i);
     }
 

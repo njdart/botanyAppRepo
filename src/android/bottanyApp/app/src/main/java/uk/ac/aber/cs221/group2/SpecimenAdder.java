@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +20,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -33,8 +34,7 @@ import java.util.List;
 import uk.ac.aber.cs221.group2.utils.IntentRequestCodes;
 import uk.ac.aber.cs221.group2.utils.PlantDataSource;
 
-
-public class SpeciesAdder extends BaseActivity {
+public class SpecimenAdder extends BaseActivity {
 
     public static List<String> latinNames;
     public AutoCompleteTextView latinNamesAutoComplete;
@@ -44,7 +44,7 @@ public class SpeciesAdder extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         latinNamesAutoComplete = (AutoCompleteTextView)(findViewById(R.id.latinNameAutoComplete));
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_species_adder);
+        setContentView(R.layout.activity_specimen_adder);
         if (savedInstanceState == null) {}
 
         latinNamesAutoComplete = (AutoCompleteTextView)(findViewById(R.id.latinNameAutoComplete));
@@ -53,17 +53,15 @@ public class SpeciesAdder extends BaseActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if(s.length()>3){
-                    PlantDataSource p = new PlantDataSource(SpeciesAdder.this);
+                    PlantDataSource p = new PlantDataSource(SpecimenAdder.this);
                     p.open();
                     System.out.println("hit");
                     latinNames = p.findMatches(s.toString());
                     System.out.println(latinNames.size());
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpeciesAdder.this,
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpecimenAdder.this,
                             android.R.layout.simple_dropdown_item_1line, latinNames);
-
                     latinNamesAutoComplete.setAdapter(adapter);
-
                 }
             }
 
@@ -75,11 +73,11 @@ public class SpeciesAdder extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length()>4){
-                    PlantDataSource p = new PlantDataSource(SpeciesAdder.this);
+                    PlantDataSource p = new PlantDataSource(SpecimenAdder.this);
                     p.open();
                     latinNames = p.findMatches(s.toString());
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpeciesAdder.this,
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(SpecimenAdder.this,
                             android.R.layout.simple_dropdown_item_1line, latinNames);
 
                     latinNamesAutoComplete.setAdapter(adapter);
@@ -103,7 +101,6 @@ public class SpeciesAdder extends BaseActivity {
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //set the filename to the date and time now
         String filename = "botanyApp_" + new SimpleDateFormat("yyyyMMdd-HHmmSS").format(new Date()) + ".jpg";
-        System.out.println("Saving image as " + filename);
         File f = new File(android.os.Environment.getExternalStorageDirectory(), filename);
         System.out.println("FILEPATH: " + f.getAbsolutePath() + " FILENAME: " + filename);
         i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
@@ -120,8 +117,8 @@ public class SpeciesAdder extends BaseActivity {
         startActivityForResult(i, intentReturnId);
     }
 
-    File scenePhoto;
-    File specimenPhoto;
+    private static File scenePhoto;
+    private static File specimenPhoto;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,7 +133,7 @@ public class SpeciesAdder extends BaseActivity {
                 f = scenePhoto;
             } else if (requestCode == IntentRequestCodes.SPECIES_ADDER_SPECIMEN_PHOTO) {
                 imageButton = (ImageButton) findViewById(R.id.specimenView);
-                f =specimenPhoto;
+                f = specimenPhoto;
             } else {
                 System.out.println("SPECIES ADDER: Got an unknown result code back, ignoring it!");
                 return;
@@ -153,8 +150,8 @@ public class SpeciesAdder extends BaseActivity {
         }
     }
 
-    //public final String serverURLString = "http://users.aber.ac.uk/mta2/groupapi/addResource.php";
-    public final String serverURLString = "http://192.168.1.74/testing/index.php";
+    public final String serverURLString = "http://users.aber.ac.uk/mta2/groupapi/addResource.php";
+    //public final String serverURLString = "http://192.168.1.74/testing/index.php";
 
 
     //http://stackoverflow.com/questions/23921356/android-upload-image-to-php-server
@@ -214,14 +211,14 @@ public class SpeciesAdder extends BaseActivity {
                     conn.setRequestProperty("Connection", "Keep-Alive");
                     conn.setRequestProperty("ENCTYPE", "multipart/form-data;boundary=" + boundary);
                     conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-                    conn.setRequestProperty("uploaded_file", f.getName());
+                    conn.setRequestProperty("resource", f.getName());
 
                     System.out.println("CONN:" + conn.toString());
                     OutputStream outputStream1 = conn.getOutputStream();
                     outputStream = new DataOutputStream(outputStream1);
 
                     outputStream.writeBytes(twoHyphens + boundary + lineEnding);
-                    outputStream.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename="+ f.getName() + "" + lineEnding);
+                    outputStream.writeBytes("Content-Disposition: form-data; name=\"resource\";filename="+ f.getName() + "" + lineEnding);
                     outputStream.writeBytes(lineEnding);
 
                     bytesAvailable = inputStream.available();
@@ -243,7 +240,17 @@ public class SpeciesAdder extends BaseActivity {
                     int responseCode = conn.getResponseCode();
                     String responseMessage = conn.getResponseMessage();
 
-                    System.out.println("Upload completed, response code " + responseCode + " msg: " + responseMessage);
+                    //read back the page
+                    InputStream responseStream = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream));
+                    StringBuilder builder = new StringBuilder();
+                    String line;
+
+                    while((line = reader.readLine()) != null){
+                        builder.append(line);
+                    }
+
+                    System.out.println("Upload completed, response code " + responseCode + " msg: " + responseMessage + " page: " + builder.toString());
 
                     inputStream.close();
                     outputStream.flush();
