@@ -2,6 +2,7 @@ package uk.ac.aber.cs221.group2.dataClasses;
 
 public class User {
 
+    public static User CurrentUser;
 
     private String name;
 	private String phoneNumber;

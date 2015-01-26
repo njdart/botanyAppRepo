@@ -85,14 +85,6 @@ public class LaunchActivity extends BaseActivity  {
         EditText name = (EditText) findViewById(R.id.editNameAutoComplete);
         EditText phone = (EditText) findViewById(R.id.editPhoneNumber);
         EditText email = (EditText) findViewById(R.id.editEmail);
-        System.out.println("NAME: " + name.getText() + " PHONE: " + phone.getText() + " EMAIL: " + email.getText());
-        User user = new User(name.getText().toString(),phone.getText().toString(),email.getText().toString());
-        userdb = new UserDataSource(this);
-
-
-        if(userdb.FindByName(user.getName())==null){
-            userdb.create(user);
-        }
 
         //Validate the name field
         if(name.length() < 3 || name.length() > 25){
@@ -132,6 +124,15 @@ public class LaunchActivity extends BaseActivity  {
         }
         else {
             //we're good to move on!
+            User user = new User(name.getText().toString(),phone.getText().toString(),email.getText().toString());
+            userdb = new UserDataSource(this);
+
+            if(userdb.FindByName(user.getName())==null){
+                userdb.create(user);
+            }
+
+            //and save the current user for this session
+            User.CurrentUser = user;
             Intent intent = new Intent(this, SiteChooserActivity.class);
             startActivity(intent);
         }

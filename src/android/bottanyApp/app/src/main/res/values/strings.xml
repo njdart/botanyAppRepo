@@ -9,5 +9,8 @@
     <string name="title_activity_site_chooser">Choose a Site</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_preferences">Preferences</string>
+    <string name="title_activity_review">Review</string>
+    <string name="addNewSpecimen">Add Another Specimen</string>
+    <string name="newSpecimenButton">Add Another</string>
 
 </resources>

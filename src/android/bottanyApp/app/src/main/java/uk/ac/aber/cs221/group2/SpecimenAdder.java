@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.utils.IntentRequestCodes;
 import uk.ac.aber.cs221.group2.utils.PlantDataSource;
 
@@ -117,8 +118,23 @@ public class SpecimenAdder extends BaseActivity {
         startActivityForResult(i, intentReturnId);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(sceneThumbnail != null){
+            ((ImageButton)findViewById(R.id.sceneView)).setImageBitmap(sceneThumbnail);
+        }
+
+        if(specimenThumbnail != null){
+            ((ImageButton)findViewById(R.id.specimenView)).setImageBitmap(specimenThumbnail);
+        }
+    }
+
     private static File scenePhoto;
     private static File specimenPhoto;
+    private static Bitmap sceneThumbnail;
+    private static Bitmap specimenThumbnail;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -148,6 +164,13 @@ public class SpecimenAdder extends BaseActivity {
 
             imageButton.setImageBitmap(bitmap);
         }
+    }
+
+    public void onNewSpecimenButtonClick (View view){
+        //save everything to the database and reset fields for a new specimen
+
+        User user = User.CurrentUser;
+        
     }
 
     public final String serverURLString = "http://users.aber.ac.uk/mta2/groupapi/addResource.php";

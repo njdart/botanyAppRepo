@@ -26,11 +26,6 @@ public class Specimen {
 
     }
 
-
-
-
-
-
     private String name;
 	private Double latitude;
 	private Double longitude;
@@ -38,8 +33,6 @@ public class Specimen {
 	private String comment;
 	private String scenePhotoURI;
 	private String specimenPhotoURI;
-
-
 
 
     public String getName() {

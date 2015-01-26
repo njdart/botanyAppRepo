@@ -66,8 +66,8 @@ public class SiteChooserActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3600000, 1000, onLocationChange);
+        //parameters for updating                                       minUpdate, minDist
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5, onLocationChange);
     }
 
     public void onUseSiteClick(View view){

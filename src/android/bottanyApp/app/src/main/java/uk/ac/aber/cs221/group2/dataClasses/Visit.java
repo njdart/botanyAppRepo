@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 public class Visit {
 
+    public static Visit CurrentVisit;
+
     private String visitName;
 	private double visitDate;
 	private String visitOS;
