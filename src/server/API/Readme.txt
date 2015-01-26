@@ -37,7 +37,7 @@ getResource.php (eg ID: 13)
 getSpecimen.php (Decode the JSON. POST name = specimenID) 
 getSpecimens.php (Decode the JSON. All specimens are in array. POST order = ascending/descending,
 							       POST method = speciesName/locationName/userName/timeStamp/abundance,
-							       POST value = user input, POST column = speciesName/locationName/userName/abundance,
+							       POST value = user input, POST column = speciesName/locationName/userName/abundance/reserveID,
 							       POST start = starting row, POST range = number of rows to display)
 removeSpecimen.php (POST specimenID. POST password = ask Max.)
 getLocations.php (No POST data.)
