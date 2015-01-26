@@ -1,12 +1,10 @@
 <?php
 // filter column
 echo "<div id='filtering'>
-	<a href='add_specimen.php'>Add Specimen</a>
-	<h3 class='centered sortingheading'>Sorting</h3>
 	<form action='plant_specimens.php' method='post'>
 		
-		<p>Order By</p>
-		<select id='orderby' name='orderby'>
+		<p class='filtertitle'>Order By</p>
+		<select class='orderby' id='orderby' name='orderby'>
 			<option value='speciesName'>Species Name</option>
 			<option value='locationName'>Location</option>
 			<option value='userName'>User</option>
@@ -14,8 +12,7 @@ echo "<div id='filtering'>
 			<option value='abundance'>Abundance</option>
 		</select>
 
-		<select name='ordertype'>
-			<option value=''>Select an option</option>
+		<select name='ordertype' id='ordertype' class='ordertype'>
 			<option class='speciesName locationName userName box' value='ascending'>A-Z</option>
 			<option class='speciesName locationName userName box' value='descending'>Z-A</option>
 			<option class='timeStamp box' value='ascending'>Oldest</option>
@@ -23,9 +20,13 @@ echo "<div id='filtering'>
 			<option class='abundance box' value='ascending'>Low-High</option>
 			<option class='abundance box' value='descending'>High-Low</option>
 		</select>
-		
-		<input type='submit' name='submitorder' value='Submit' />
-	</form>";
+		<br>
+		<br>
+		<!--<input type='submit' class='filter-submit' name='submitorder' value='Submit' />-->
 	
-echo "</div>";
+	</form>
+	    <button href='#top' class = 'filter-submit' id='next-page'>Next page</button>
+    <button class = 'filter-submit' id='prev-page'>Previous page</button>
+<p class='pageinfo' id='result-number'>0 results</p>
+	</div>";
 ?>

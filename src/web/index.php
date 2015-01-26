@@ -1,6 +1,6 @@
 <?php
 $title = "Home";
-include "/includes/header.php";
+include "includes/header.php";
 
 // first top boxes
 echo "<div id='content-boxes' class='top-index'><br>
