@@ -126,7 +126,6 @@
                     . ($search2Value ? ($numericColumn2 ? " AND $column2Name = $search2Value" : " AND $column2Name LIKE '%$search2Value%'") : " ")
                     . ($method ? " ORDER BY $methodName $orderName" : "")
                     . ($range ? " LIMIT $start, $range" : "");
-    echo $queryText;
 	$specimenQuery = $conn->query($queryText);
 	//Create array for Specimens
 	$specimens = array();
