@@ -94,7 +94,7 @@
 			       	INNER JOIN botany_users ON botany_records.user_id = botany_users.user_id "
 			        . ($searchValue ? ($numeric ? "WHERE $columnName = $searchValue" : "WHERE $columnName LIKE '%$searchValue%'") : "")
 				. ($method ? " ORDER BY $methodName $orderName" : "")
-				. ($start && $range ? " LIMIT $start, $range" : ""));
+				. ($range ? " LIMIT $start, $range" : ""));
 	//Create array for Specimens
 	$specimens = array();
 	
