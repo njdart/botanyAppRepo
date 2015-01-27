@@ -69,6 +69,8 @@ Website
 --------------------------------------------------------------------------------
 The website does not need to be installed. Go to this URL to access it:
 http://users.aber.ac.uk/daw54/group_website/
+Features that involve editing or deleting data from the database requires a 
+password. That password is: *****.
 
 Server
 --------------------------------------------------------------------------------
