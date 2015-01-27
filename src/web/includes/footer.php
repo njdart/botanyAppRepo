@@ -1,8 +1,6 @@
 <!--Doesn't need to be changed-->
 <div id="footer-bar">
-	<a class="footer-left" href="sitemap.php">Site Map</a>
 	<img class="footer-center" src="images/footer-logo.png"  alt="Logo"/>
-	<a href='about.php' class='download'>Download App</a>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#orderby").change(function(){
@@ -30,14 +28,13 @@
 	<script type="text/javascript">
 	<!--
 	function confirmation() {
-		var answer = confirm("Delete Specimen?")
-		if (answer){
-			alert("Specimen <?php echo $id ?> has been deleted")
-			window.location = "http://www.google.com/";
-		}else{
-			alert("Thanks for sticking around!")
-		}
-	}
+		var agree=confirm("Are you sure you want to delete this file?");
+if (agree)
+     return true ;
+else
+     return false ;
+}
+	
 
 	// -->
 
@@ -75,7 +72,7 @@
 					fitToView	: true,
 					width		: 800,
 					height		: 400,
-					autoSize	: false,
+					autoSize	: true,
 					closeClick	: false,
 					openEffect	: 'elastic',
 					closeEffect	: 'none'

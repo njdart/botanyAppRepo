@@ -1,6 +1,6 @@
 body{
-	background-image: url("http://www.wallyear.com/wp-content/uploads/2014/06/flower-background-images-184.jpg");
-	background-repeat: no-repeat;
+background-image: url("../images/background.png");
+background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
 	background-color: #000;
@@ -59,7 +59,7 @@ nav li{
 	}
 
 nav a {
-width: 25%;
+width: 20%;
 display: inline;
 float: left;
 text-align: center;
@@ -72,8 +72,8 @@ text-transform: uppercase;
 padding-top: 10px;
 padding-bottom: 10px;
 font-weight: 700;
-text-decoration: blink;
 color: #FFFFFF;
+text-decoration:none;
 }
  
 
@@ -161,7 +161,9 @@ nav.align-right li:first-child a:after {
 	width: 80%;
 	background-color: #ffffff;
 }	
-	
+	.heading{
+	max-width:10%;
+	}
 #footer-bar{
 background-color: #388922;
 height: auto;
@@ -207,7 +209,6 @@ margin: 0px auto 0px auto;
 padding-top: 10px;
 padding-bottom: 11px;
 padding-left: 19px;
-width: 90%;
 }
 .searchbutton {
 max-width: 58px;
@@ -276,25 +277,33 @@ padding: 10px;
 text-decoration: none;
 color: white;
 }
+
 .image {
-max-width: 97%;
+max-width: 100%;
 margin-bottom: 20px;
 margin-right: 2%;
+width:100%;
+max-height:100%
+height:100%;
+
 }
 #filtering {
 height: auto;
 color: white;
 margin-top: 0px;
 margin-bottom: 0%;
-border-radius: 10px;
+/* border-radius: 10px; */
+border-color: whitesmoke;
 width: 12%;
-background-color:#388922;
+border-style: double;
+background-color: #388922;
 padding: 0px 15px 15px 15px;
 position: fixed;
 margin-left: 2%;
 }
 
 #content-boxes-dblist {
+margin-bottom: 18px;
 height: auto;
 margin-left: 22%;
 margin-top: 0px;
@@ -304,6 +313,18 @@ background-color: #ffffff;
 padding: 0px 15px 15px 15px;
 /* float: ; */
 }
+#content-boxes-dblist-res{
+margin-bottom: 18px;
+height: auto;
+margin-left: 3%;
+margin-top: 0px;
+margin-right: 3%;
+/* width: 80%; */
+background-color: #ffffff;
+padding: 0px 15px 15px 15px;
+/* float: ; */
+}
+
 .centered{
 text-align:center;
 }
@@ -317,7 +338,7 @@ padding-left: 10px;
 .advanced-search {
 margin-top: 2%;
 text-align: center;
-display: flex;
+display: inline-flex;
 margin-right: 5%;
 margin-left: 5%;
 margin-bottom: 2%;
@@ -378,7 +399,35 @@ text-align: center;
 border-left: none;
 border-right:none;
 }
+#content-boxes-dblist-res table{
+margin-top:0%;
+border-collapse:collapse;
+width:100%;
+border: 1px;
+padding-bottom:1.5%;
+white-space: wrap;
+font-size:100%;
 
+}
+
+#content-boxes-dblist-res th{
+height: 50px;
+text-align:center;
+background-color:#388922;
+color:white;
+border:none;
+
+}
+#content-boxes-dblist-res tr{
+border:solid;
+border-width:1px;
+}
+#content-boxes-dblist-res td{
+padding: 15px;
+text-align: center;
+border-left: none;
+border-right:none;
+}
 /* input images */
 .simple-search input[type=submit] {
 background-image: url('http://nic-dart.co.uk/~nic/images/search.png');
@@ -398,7 +447,6 @@ margin-right: 15px;
 color: white;
 margin-top: 15px;
 text-align: -webkit-right;
-width: 38%;
 }
 .passsubmit {
 margin-top: 10px;
@@ -446,8 +494,9 @@ color: white;
 margin-right: 15px;
 margin-top: -35px;
 }
-#content-boxes p{
-padding: 20px;
+#content-boxes p {
+padding: 7px 20px 20px 20px;
+margin-top: 0px;
 }
 
 .previous {
@@ -498,4 +547,70 @@ margin-top: 10px;
 }
 .pageinfo{
 
+}
+@media screen and (max-width: 1000px) {	
+	.previous, .next ,.pass{
+	display: none;
+	}
+	#filtering{
+	width: 92%;
+	border-radius: 0px;
+	position:static;
+	padding:0px;
+	}
+	#content-boxes{
+	width:100%;
+	}
+	#content-boxes-dblist{
+	margin-left:0%;
+	margin-right:0%;
+	}
+	.orderby,.ordertype{
+	padding:0%;
+	}
+	#container,.header-bar{
+	width:100%
+	}
+	
+}		
+
+.welcome {
+float: left;
+margin-right: 105px;
+width: 73px;
+font-size: 40px;
+/* font-family: algerian, courier; */
+line-height: 80%;
+color: rgb(56, 137, 34);
+}
+.about {
+float: left;
+margin-right: 50px;
+width: 73px;
+font-size: 40px;
+/* font-family: algerian, courier; */
+line-height: 80%;
+color: rgb(56, 137, 34);
+}
+.downloadh {
+float: left;
+margin-right: 122px;
+width: 73px;
+font-size: 40px;
+/* font-family: algerian, courier; */
+line-height: 80%;
+color: rgb(56, 137, 34);
+}
+#results tr:hover {
+background-color:#B0B0B0;
+color:white;
+
+}
+#results tr a:hover {
+background-color:#B0B0B0;
+color:white;
+
+}#results tr a {
+color:#000;
+text-decoration:none;
 }

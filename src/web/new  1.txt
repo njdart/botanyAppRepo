@@ -1,0 +1,72 @@
+	fix next/previous
+optimize css for other displays
+	Done
+fix light box's
+	Done
+Make map lightbox adjustable
+	Done
+Better error messages-Javascript pop up
+	Specimen page look at but done
+Message upon mesages
+	Done
+Abundance search/sort fix
+	Max
+Black border for filter?
+	Done
+dynamic info css
+	Max helps
+Background css fix
+	Done
+Filtering bottom margin css fix
+	Done
+Heading text wraps
+	done
+	
+Text for everything (write up)
+
+
+Second box (about) change to download
+	
+	
+About css  fix
+	done
+Add specimens css fix
+
+
+adv search select css fix
+	done
+	
+	
+	
+Nth child table colour hover
+	Done
+	
+Table widths (when real data is there)
+	Done
+
+Javascript requirement message
+
+
+Firefox specimen page
+about page text fix
+filter text
+
+
+
+
+Updation
+
+create
+	New page	
+		Delete reserve
+		Reserve category
+		Update
+		New reserve
+
+
+
+
+
+
+
+Testing

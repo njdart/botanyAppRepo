@@ -1,7 +1,6 @@
 <?php
 	$title = "Add";
-	// include 'includes/config.php';
-	include "header.php";
+	include "includes/header.php";
 ?>
 	<div id='content-boxes'>
 		<h1 class='indent'>Add Record</h1>
@@ -41,12 +40,6 @@
 				
 				
 			
-			
-		</div>
-	</div>
-	
-	
-	
 	<input type='hidden' name='MAX_FILE_SIZE' value='10000000' />
 	Choose a Site image to upload: <input name='resource[]' type='file' /><br><br />	
 
@@ -54,28 +47,28 @@
 	Choose a specimen image to upload: <input name='resource[]' type='file' /><br><br />
 	<input id='test2' type='submit' value='upload1'><br>
 	</form>
+			
+		</div>
+	</div>
+	
+	
+	
 	
 	
 	<?php
-	var_dump($_POST);
-	echo $_FILES['resource']['error'];
-	print("<pre>");
-	var_dump($_FILES);
-	print("</pre>");
+	include 'includes/footer.php';
 	if ( isset($_FILES['resource']) ) {
 	 $POST_DATA = array(
 	   'resource' =>  new CurlFile($_FILES['resource']['tmp_name'][0])
 	   
  	);
 	}
-	else{echo "NO!!!!";}
 	if ( isset($_FILES['resource']) ) {
 	 $POST_DATA2 = array(
 	   'resource' =>  new CurlFile($_FILES['resource']['tmp_name'][1])
 	   
  	);
 	}
-	else{echo "NO!!!!";}
 
 	
 	//move_uploaded_file($_FILES["uploadedfile"], $resource);
@@ -85,9 +78,7 @@
 
 	
 	
-	print("<pre>");
 
-	print("<br />");
 
 	
 	
@@ -99,15 +90,12 @@
 	$photoSpecimen=curl_exec($ch);
 	curl_close($ch);
  
-	var_dump($photoSpecimen);
-	echo $photoSpecimen;
 	$ch=curl_init('http://users.aber.ac.uk/mta2/groupapi/addResource.php');
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA2);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$photoScene=curl_exec($ch);
 	curl_close($ch);
-	var_dump($photoScene);
 	
 	$specimen=array(
 		'SpeciesName' => $_POST['SpeciesName'],
@@ -131,7 +119,6 @@
 
 	$json = json_encode($record);
 
-	echo $json;
 
 	$url='http://users.aber.ac.uk/mta2/groupapi/addRecord.php';
 
@@ -141,8 +128,5 @@
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$response=curl_exec($ch);
 	curl_close($ch);
-	print("</pre>");
-	include 'footer.php';
-	echo"done";
 
 ?>

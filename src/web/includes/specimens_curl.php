@@ -2,6 +2,7 @@
 $url = 'users.aber.ac.uk/mta2/groupapi/getSpecimens.php';
 $ch = curl_init($url);
 
+
 if (isset($_POST['submitsearch'])){
 	$data = array(
 		'value' => $_POST['search'],
@@ -9,7 +10,15 @@ if (isset($_POST['submitsearch'])){
 		'order' => 'ascending',
 		'method' => 'speciesName'
 	);
-}elseif (isset($_POST['submitadvsearch'])){
+}elseif (isset($_POST['resID'])){
+	$data = array(
+		'value' => $_POST['resID'],
+		'column' => 'resourceID',
+		'order' => 'ascending',
+		'method' => 'speciesName'
+	);
+}
+elseif (isset($_POST['submitadvsearch'])){
 	$data = array(
 		'value' => $_POST['search'],
 		'column' => $_POST['searchfield'],
@@ -33,6 +42,7 @@ elseif (isset($_POST['submitorder'])){
 	);
 }else{
 	$data = array(
+	
 		'order' => "ascending",
 		'method' => "speciesName",
 	);
