@@ -36,8 +36,35 @@ public class Specimen {
 	private String comment;
 	private String scenePhotoURI;
 	private String specimenPhotoURI;
+<<<<<<< HEAD
     private int visitId;
     private int userId;
+=======
+<<<<<<< HEAD
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Visit getVisit() {
+        return visit;
+    }
+
+    public void setVisit(Visit visit) {
+        this.visit = visit;
+    }
+
+    private Visit visit;
+    private User user;
+=======
+    private int visit;
+    private int user;
+>>>>>>> origin/master
+>>>>>>> 6936cf6f4f3ee4197d8df7c97648784e49213a52
 
 
     /**
