@@ -1,5 +1,5 @@
 <?php
-	$title = "Add";
+	$title = "Add Record";
 	include "includes/header.php";
 ?>
 	<div id='content-boxes'>
@@ -7,7 +7,7 @@
 		<h2>Please enter the details in the form below</h2>
 		
 		<div id='left-section'>
-			<form enctype="multipart/form-data" class='add-record' name='formMain' action='add_specimen.php' method='POST'>
+			<form enctype="multipart/form-data" class='add-record' name='formMain' action='add_specimen.php' method='POST'> 
 				Username:<br>
 				<input type='text' id='UserName' name='UserName' /><br><br>
 
@@ -57,6 +57,8 @@
 	
 	<?php
 	include 'includes/footer.php';
+	
+	//sets the selected image files as a resource 
 	if ( isset($_FILES['resource']) ) {
 	 $POST_DATA = array(
 	   'resource' =>  new CurlFile($_FILES['resource']['tmp_name'][0])
@@ -70,19 +72,9 @@
  	);
 	}
 
+	$timestamp=time(); //gets the timestamp in unix time
 	
-	//move_uploaded_file($_FILES["uploadedfile"], $resource);
-	$submit='Submit';
-
-	$timestamp=time();
-
-	
-	
-
-
-	
-	
-	
+	//uploads the first image file
 	$ch=curl_init('http://users.aber.ac.uk/mta2/groupapi/addResource.php');
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA);
@@ -90,6 +82,7 @@
 	$photoSpecimen=curl_exec($ch);
 	curl_close($ch);
  
+	//uploads the second image file
 	$ch=curl_init('http://users.aber.ac.uk/mta2/groupapi/addResource.php');
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA2);
@@ -97,6 +90,7 @@
 	$photoScene=curl_exec($ch);
 	curl_close($ch);
 	
+	//creates an array for specimen from the form data provided by the user
 	$specimen=array(
 		'SpeciesName' => $_POST['SpeciesName'],
 		'LocationLatitude' => (float)$_POST['LocationLatitude'],
@@ -106,7 +100,7 @@
 		'SpecimenPhoto' => "$photoSpecimen",
 		'ScenePhoto' => "$photoScene");
 
-
+	//creates the array for a record including a specimen
 	$record=array(
 		'UserName' => $_POST['UserName'],
 		'UserPhone' => $_POST['UserPhone'],
@@ -117,11 +111,12 @@
 		'Timestamp' => $timestamp);
 
 
-	$json = json_encode($record);
+	$json = json_encode($record); //creates a record as a json object
 
 
 	$url='http://users.aber.ac.uk/mta2/groupapi/addRecord.php';
 
+	//sends the json object to the server
 	$ch=curl_init($url);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, array('record' => $json));
