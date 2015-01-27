@@ -10,7 +10,7 @@ echo "<div id='content-boxes' class='top-index'>
 
 // second box starts(If needed)(Margins need to be sorted )
 echo "<div id='content-boxes' class='bottom-index'>
-		<p class='main onecolumns'><span class='downloadh'>Download</span>*APPNAME* is a groundbreaking application developed for *CLIENT NAME*, providing the capability or botanists to record and search plants either on the go through an Android App, or at home via the website. With the ability to store records locally until a connection can be established, it provides flexibility for those working in the field, however isolated they may be.</p>
+		<p class='main onecolumns'><span class='downloadh'>Download</span>Botany App is a groundbreaking application developed for Aberystwyth University, providing the capability or botanists to record and search plants either on the go through an Android App, or at home via the website. With the ability to store records locally until a connection can be established, it provides flexibility for those working in the field, however isolated they may be.</p>
 </div>";
 // second box ends
 
