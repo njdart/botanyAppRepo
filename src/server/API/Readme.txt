@@ -28,6 +28,7 @@ Added validation on Lat and Long and empty fields
 Added authenticateAdmin command. Added includes to relevant places
 Added addReserve and removeReserve commands.
 Added updateSpecimen command and updateReserve command.
+Added getReserve command.
 
 Available Commands:
 
@@ -48,6 +49,7 @@ removeReserve.php (POST reserveID    POST password = ask Max)
 getReserves.php (No POST data.)
 updateReserve.php (POST = reserveID of reserve to update. POST reserve = all reserve fields.)
 updateSpecimen.php (POST specimenID = ID of specimen to update. POST specimen = all specimen fields.)
+getReserve.php (POST reserveID = ID of reserve to get.)
 
 
 To do:
