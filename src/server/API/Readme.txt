@@ -27,6 +27,7 @@ Added resource location protection with config
 Added validation on Lat and Long and empty fields
 Added authenticateAdmin command. Added includes to relevant places
 Added addReserve and removeReserve commands.
+Added updateSpecimen command and updateReserve command.
 
 Available Commands:
 
@@ -45,13 +46,11 @@ authenticateAdmin.php (POST password = admin password, will return true or false
 addReserve.php (Encode a JSON called "reserve")
 removeReserve.php (POST reserveID    POST password = ask Max)
 getReserves.php (No POST data.)
+updateReserve.php (POST = reserveID of reserve to update. POST reserve = all reserve fields.)
+updateSpecimen.php (POST specimenID = ID of specimen to update. POST specimen = all specimen fields.)
 
 
 To do:
 
-addSpecimen.php -- Gone
-modifySpecimen.php -- Not required
-getRecords.php -- Gone
-modifyRecord.php -- Gone
-removeRecord.php -- Gone
+Anything people ask.
 
