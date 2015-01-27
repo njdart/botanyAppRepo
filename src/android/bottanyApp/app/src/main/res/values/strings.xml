@@ -12,5 +12,7 @@
     <string name="title_activity_review">Review</string>
     <string name="addNewSpecimen">Add Another Specimen</string>
     <string name="newSpecimenButton">Add Another</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 
 </resources>

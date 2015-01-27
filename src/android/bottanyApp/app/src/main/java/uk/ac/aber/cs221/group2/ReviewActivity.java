@@ -1,24 +1,31 @@
 package uk.ac.aber.cs221.group2;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import android.os.Looper;
+import android.text.Selection;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -36,6 +43,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 import uk.ac.aber.cs221.group2.dataClasses.Specimen;
 import uk.ac.aber.cs221.group2.dataClasses.User;
@@ -71,6 +79,45 @@ public class ReviewActivity extends BaseActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, specimenNames);
         ListView listView = (ListView)findViewById(R.id.specimenList);
         listView.setAdapter(arrayAdapter);
+
+        listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+
+            @Override
+            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                final ListView listView = (ListView)v;
+
+                System.out.println(v);
+                System.out.println(menu);
+                System.out.println(menuInfo);
+                System.out.println("Conext Menu");
+
+                final Dialog dialog = new Dialog(ReviewActivity.this);
+                dialog.setContentView(R.layout.edit_delete_alert_dialog);
+
+                dialog.setTitle("Edit or Delete");
+
+                Button editButton = (Button) dialog.findViewById(R.id.editButton);
+                editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println("edit");
+
+                    }
+                });
+
+                Button deleteButton = (Button) dialog.findViewById(R.id.deleteButton);
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println("Delete");
+                    }
+                });
+
+
+                dialog.show();
+
+            }
+        });
     }
 
     public void onSubmitButtonClick(View view) {
@@ -87,6 +134,7 @@ public class ReviewActivity extends BaseActivity {
             return;
         }
 
+        Toast.makeText(this, "Uploading...", Toast.LENGTH_LONG).show();
         //begin upload!
         new AsyncUploadImageThread().execute();
     }
@@ -108,7 +156,12 @@ public class ReviewActivity extends BaseActivity {
     }
 
     private int uploadImage(File file, Boolean allowRetry){
+
+        int imageId = -1;
+
+        System.out.println("FILE PATH: " + file.toString() + " FILE NAME " + file.getName());
         if(file == null){
+            System.out.println("FILE WAS NULL");
             return -1;
         }
         //upload images and get their
@@ -193,11 +246,12 @@ public class ReviewActivity extends BaseActivity {
                 }
             }
 
-            int imageId = Integer.parseInt(serverResponsePage.toString());
+            imageId = Integer.parseInt(serverResponsePage.toString());
+            System.out.println("UPLOAD RESPONSE: " + responseCode + " " + responseMessage + ", ID: " + imageId);
 
-            inputStream.close();
-            outputStream.flush();
-            outputStream.close();
+            //inputStream.close();
+            //outputStream.flush();
+            //outputStream.close();
 
             return imageId;
 
@@ -206,9 +260,8 @@ public class ReviewActivity extends BaseActivity {
         } catch (IOException e) {
             System.out.println("Unable to open connection to the server!");
             e.printStackTrace();
-        } finally {
-            return -1;
         }
+        return imageId;
     }
 
     private boolean postData(String json){
@@ -224,17 +277,17 @@ public class ReviewActivity extends BaseActivity {
 
             httpPost.setEntity(se);
 
-            httpPost.setHeader("Content-type", "application/json");
+            httpPost.setHeader("Cache-Control", "no-cache");
             httpPost.setHeader("Content-Disposition", "form-data");
 
             System.out.println(httpPost);
+
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+            nameValuePairs.add(new BasicNameValuePair("record", json));
+
             for(Header h : httpPost.getAllHeaders()){
                 System.out.println(h);
             }
-
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("record", json));
-
 
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse httpResponse = httpclient.execute(httpPost);
@@ -252,6 +305,7 @@ public class ReviewActivity extends BaseActivity {
                 System.out.println("RESULT: " + result);
 
                 inputStream.close();
+                return true;
             } else {
                 System.out.println("ERROR, input stream was null, probebly didnt upload ok");
                 Toast.makeText(ReviewActivity.this, "Upload Failed", Toast.LENGTH_LONG).show();
@@ -268,6 +322,10 @@ public class ReviewActivity extends BaseActivity {
 
         @Override
         protected Object doInBackground(Object[] params) {
+
+            //required to make toast (YUM)
+            Looper.prepare();
+
 
             //get all the specimens
             List<Specimen> specimens = specimenDataSource.findAll();
@@ -338,6 +396,23 @@ public class ReviewActivity extends BaseActivity {
             //we dont need to return anything
             System.out.println(json);
             boolean postResponse = postData(json);
+            if(postResponse){
+                Toast.makeText(ReviewActivity.this, "Upload Succeeded", Toast.LENGTH_LONG).show();
+                ListView listView = (ListView)findViewById(R.id.specimenList);
+
+                specimenDataSource.empty();
+
+//                Handler handler = new Handler(Looper.getMainLooper());
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Intent intent = new Intent(ReviewActivity.this, LauncherActivity.class);
+//                        startActivity(intent);
+//                    }
+//                });
+            } else {
+                Toast.makeText(ReviewActivity.this.getApplicationContext(), "Upload Failed", Toast.LENGTH_LONG).show();
+            }
 
             System.out.println("JSON POST " + ((postResponse)?"SUCCEEDED!":"FAILED!"));
             return null;

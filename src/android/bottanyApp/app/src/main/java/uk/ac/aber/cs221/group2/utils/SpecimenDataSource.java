@@ -98,6 +98,10 @@ public class SpecimenDataSource {
 
         }
 
+    public void empty() {
+        String query = "DROP * FROM " + DatabaseUtils.specimenTableName + " WHERE 1;";
+
     }
+}
 
 
