@@ -23,3 +23,31 @@ data and has the ability to manage it.
 Website URL
 ========================================================================================================
 http://users.aber.ac.uk/daw54/group_website/
+
+Members
+========================================================================================================
+Group Leader        							  - 									Alexander Barnes
+Deputy Group Leader                               - 									   Nicholas Dart
+Technical Manager                                 - 									      Max Atkins
+
+Android Leader                                    - 									   Nicholas Dart
+Android Team:
+					                              -										Alexander Barnes
+
+Website Leader                                    - 									    James O'hare
+Website Team:
+					                              -										  Daniel Wilcock
+					                              -										  Sebastian Tuff
+
+Server Leader                                     - 									 Maxim Harizanov
+Server Team:
+					                              -										      Max Atkins 	     
+
+Testing Team:
+												  -										   Andrew Wilmot
+												  -										William Aldridge
+
+
+
+
+
