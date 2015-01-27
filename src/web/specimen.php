@@ -68,7 +68,9 @@ $(document).ready(function()
 			</form>";
 echo"</td>";
 echo"<td>
-<a href='edit_specimens.php'>Edit Specimens</a>
+<form action = 'edit_specimen.php' method= 'GET' name = 'Edit Specimen'> 
+				<button class = 'butdes'  type='submit' name='id' value=" . $id . ">Edit Specimen</button> 
+			</form>
 </td>";
 
 		}

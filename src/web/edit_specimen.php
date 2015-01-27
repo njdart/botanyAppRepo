@@ -1,36 +1,59 @@
+
 <?php
+
 	$title = "Add";
 	include 'includes/edit_specimens_curl.php';
+
 	include 'includes/img_curl.php';
 	include "includes/header.php";
-
+var_dump ($_GET['id']);
+$id=$_GET['id'];
+		
+		$SpecimenPhoto=$object->SpecimenPhoto;
+		$ScenePhoto=$object->ScenePhoto;
+		
 	?>
 	<div id='content-boxes'>
 		<h1 class='indent'>Add Record</h1>
 		<h2>Please enter the details in the form below</h2>
-		
 		<div id='left-section'>
 			<form enctype="multipart/form-data" class='add-record' name='formMain' action='edit_specimen.php' method='POST'>
-	Location Name:<br>
-				<input type='text' id='LocationName' name='LocationName' value='<?php echo $object->LocationName;?>'/><br><br>
+<table>
+<thead>
+<tr>
+<th>Location Name</th>
+<td><input type='text' id='LocationName' name='LocationName' value='<?php echo $object->LocationName;?>'/></td>
+</tr>
+<tr>
+<th>Location OS</th>
+<td><input type='text' id='LocationOS' name='LocationOS' value='<?php echo $object->LocationOS;?>'/></td>
+</tr>
+<tr>
+<th>Specimen Name</th>
+<td><input type='text' id='SpeciesName' name='SpeciesName' value='<?php echo $object->SpeciesName;?>'/></td>
+</tr>
+<tr>
+<th>Latitude</th>
+<td><input type='text' id='LocationLatitude' name='LocationLatitude' value='<?php echo $object->LocationLatitude;?>'/></td>
+</tr>
+<tr>
+<th>Longitude</th>
+<td><input type='text' id='LocationLongitude' name='LocationLongitude' value='<?php echo $object->LocationLongitude;?>'/></td>
 
-				Location OS:<br>
-				<input type='text' id='LocationOS' name='LocationOS' value='<?php echo $object->LocationOS;?>'/><br><br>
+</tr>
+<tr>
+<th>Abundence</th>
+<td><input type='number' placeholder='Enter 1-5' id='Abundance' name='Abundance' value='<?php echo $object->Abundance;?>'/></td>
 
-				Species Name:<br>
-				<input type='text' id='SpeciesName' name='SpeciesName' value='<?php echo $object->SpeciesName;?>'/><br><br>
+</tr>
+<tr>
+<th>Comment</th>
+<td><input type='text' id='Comment' name='Comment' value='<?php echo $object->Comment;?>'/></td>
+</tr>
+</table>
 
-				Latitude:<br>
-				<input type='text' id='LocationLatitude' name='LocationLatitude' value='<?php echo $object->LocationLatitude;?>'/><br><br>
+			
 
-				Longitude:<br>
-				<input type='text' id='LocationLongitude' name='LocationLongitude' value='<?php echo $object->LocationLongitude;?>'/><br><br>
-
-				Abundance:<br>
-				<input type='number' placeholder='Enter 1-5' id='Abundance' name='Abundance' value='<?php echo $object->Abundance;?>'/><br><br>
-
-				Comment:<br>
-				<input type='text' id='Comment' name='Comment' value='<?php echo $object->Comment;?>'/><br><br>
 				
 				<script>
 $(document).ready(function()
@@ -62,6 +85,7 @@ $(document).ready(function()
 	
 	
 	<?php
+	if(isset($_POST['LocationName'])){
 	if ( isset($_FILES['resource']) ) {
 	 $POST_DATA = array(
 	   'resource' =>  new CurlFile($_FILES['resource']['tmp_name'][0])
@@ -83,9 +107,7 @@ $(document).ready(function()
 
 	
 	
-	print("<pre>");
 
-	print("<br />");
 
 	
 	
@@ -111,10 +133,10 @@ $(document).ready(function()
 		'LocationLongitude' => (float)$_POST['LocationLongitude'],
 		'Abundance' => (int)$_POST['Abundance'],
 		'Comment' => $_POST['Comment'],
-		'SpecimenPhoto' => "5",
-		'SpecimenID' => "3",
-		'ScenePhoto' => "6");
-
+		'SpecimenPhoto' => $SpecimenPhoto,
+		'SpecimenID' => $id,
+		'ScenePhoto' => $ScenePhoto);
+		
 
 	// $record=array(
 		// 'UserName' => $_POST['UserName'],
@@ -127,8 +149,7 @@ $(document).ready(function()
 
 
 	$json = json_encode($specimen);
-
-	var_dump($json);
+var_dump($json);
 	$url='http://users.aber.ac.uk/mta2/groupapi/updateSpecimen.php';
 
 	$ch=curl_init($url);
@@ -136,9 +157,10 @@ $(document).ready(function()
 	curl_setopt($ch, CURLOPT_POSTFIELDS, array('specimen' => $json));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$response=curl_exec($ch);
-	echo "hello";
-var_dump($response);
 	curl_close($ch);
+	
+	}
 	include 'includes/footer.php';
 
 ?>
+

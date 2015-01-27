@@ -7,7 +7,7 @@ $ch = curl_init($url);
 	// exit(); 
 // }
 
-$id = '3';
+$id = $_GET['id'];
 $data = array(
 	'specimenID' => $id,
 );

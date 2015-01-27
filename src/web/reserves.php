@@ -38,7 +38,17 @@ include "includes/reserves_curl.php";
 		if (isset($_SESSION['pass'])){
 			echo "<td><form action = 'includes/resdelete_curl.php' method= 'GET' name = 'deleteSpecimen'> 
 				<button class = 'butdes deleteReserve' onclick='confirmation()' type='submit' name='resid' value=" . $resID . ">Delete</button> 
-			</form></td>";
+			</form></td>
+			<td>
+			
+			<form action = 'edit_reserve.php' method= 'GET' name = 'deleteSpecimen'> 
+				<button class = 'butdes ' type='submit' name='resID' value=" . $resID . ">Edit Reserve</button> 
+			</form>
+			
+			</td>
+			
+			
+			";
 		}
 		?>
 		<td>

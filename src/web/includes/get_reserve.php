@@ -3,7 +3,7 @@ $url = 'users.aber.ac.uk/mta2/groupapi/getReserve.php';
 $ch = curl_init($url);
 
 
-$resID = '3';
+$resID = $_GET['resID'];
 	 $data = array(
 	'reserveID' => $resID,
 	);
@@ -22,5 +22,4 @@ $response = curl_exec($ch);
 // var_dump ($response);
 curl_close($ch);
 $objres = json_decode($response);
-var_dump ($objres);
 ?>
