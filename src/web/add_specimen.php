@@ -1,14 +1,13 @@
 <?php
-	$title = "Add";
-	// include 'includes/config.php';
-	include "header.php";
+	$title = "Add Record";
+	include "includes/header.php";
 ?>
 	<div id='content-boxes'>
 		<h1 class='indent'>Add Record</h1>
 		<h2>Please enter the details in the form below</h2>
 		
 		<div id='left-section'>
-			<form enctype="multipart/form-data" class='add-record' name='formMain' action='add_specimen.php' method='POST'>
+			<form enctype="multipart/form-data" class='add-record' name='formMain' action='add_specimen.php' method='POST'> 
 				Username:<br>
 				<input type='text' id='UserName' name='UserName' /><br><br>
 
@@ -41,12 +40,6 @@
 				
 				
 			
-			
-		</div>
-	</div>
-	
-	
-	
 	<input type='hidden' name='MAX_FILE_SIZE' value='10000000' />
 	Choose a Site image to upload: <input name='resource[]' type='file' /><br><br />	
 
@@ -54,44 +47,34 @@
 	Choose a specimen image to upload: <input name='resource[]' type='file' /><br><br />
 	<input id='test2' type='submit' value='upload1'><br>
 	</form>
+			
+		</div>
+	</div>
+	
+	
+	
 	
 	
 	<?php
-	var_dump($_POST);
-	echo $_FILES['resource']['error'];
-	print("<pre>");
-	var_dump($_FILES);
-	print("</pre>");
+	include 'includes/footer.php';
+	
+	//sets the selected image files as a resource 
 	if ( isset($_FILES['resource']) ) {
 	 $POST_DATA = array(
 	   'resource' =>  new CurlFile($_FILES['resource']['tmp_name'][0])
 	   
  	);
 	}
-	else{echo "NO!!!!";}
 	if ( isset($_FILES['resource']) ) {
 	 $POST_DATA2 = array(
 	   'resource' =>  new CurlFile($_FILES['resource']['tmp_name'][1])
 	   
  	);
 	}
-	else{echo "NO!!!!";}
 
+	$timestamp=time(); //gets the timestamp in unix time
 	
-	//move_uploaded_file($_FILES["uploadedfile"], $resource);
-	$submit='Submit';
-
-	$timestamp=time();
-
-	
-	
-	print("<pre>");
-
-	print("<br />");
-
-	
-	
-	
+	//uploads the first image file
 	$ch=curl_init('http://users.aber.ac.uk/mta2/groupapi/addResource.php');
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA);
@@ -99,16 +82,15 @@
 	$photoSpecimen=curl_exec($ch);
 	curl_close($ch);
  
-	var_dump($photoSpecimen);
-	echo $photoSpecimen;
+	//uploads the second image file
 	$ch=curl_init('http://users.aber.ac.uk/mta2/groupapi/addResource.php');
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA2);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$photoScene=curl_exec($ch);
 	curl_close($ch);
-	var_dump($photoScene);
 	
+	//creates an array for specimen from the form data provided by the user
 	$specimen=array(
 		'SpeciesName' => $_POST['SpeciesName'],
 		'LocationLatitude' => (float)$_POST['LocationLatitude'],
@@ -118,7 +100,7 @@
 		'SpecimenPhoto' => "$photoSpecimen",
 		'ScenePhoto' => "$photoScene");
 
-
+	//creates the array for a record including a specimen
 	$record=array(
 		'UserName' => $_POST['UserName'],
 		'UserPhone' => $_POST['UserPhone'],
@@ -129,20 +111,17 @@
 		'Timestamp' => $timestamp);
 
 
-	$json = json_encode($record);
+	$json = json_encode($record); //creates a record as a json object
 
-	echo $json;
 
 	$url='http://users.aber.ac.uk/mta2/groupapi/addRecord.php';
 
+	//sends the json object to the server
 	$ch=curl_init($url);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, array('record' => $json));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$response=curl_exec($ch);
 	curl_close($ch);
-	print("</pre>");
-	include 'footer.php';
-	echo"done";
 
 ?>
