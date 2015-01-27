@@ -77,6 +77,9 @@ Features that involve editing or deleting data from the database requires a
 password. That password is: *****.
 Links to Server API and Session storage are fixed. These need to be changed if
 the server changes.
+Majority of data in database is test data and so discrepencies in data are to 
+be expected. For example, OS grid references and Latitude and Longitude data 
+do not always match up on the map.
 
 Server
 --------------------------------------------------------------------------------
