@@ -17,6 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -43,6 +44,8 @@ public class SpecimenAdder extends BaseActivity {
     private Double latitude = 1D,
                    longitude = 1D;
 
+    private boolean EditMode = false;
+    private String EditSpecimen;
     private LocationManager locationManager = null;
 
 
@@ -51,13 +54,59 @@ public class SpecimenAdder extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specimen_adder);
 
-
-        locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-
         //Get the dataSource for the specimens
         specimenDataSource = new SpecimenDataSource(this);
         userDataSource = new UserDataSource(this);
         siteDataSource = new SiteDataSource(this);
+
+
+        Intent i = getIntent();
+        EditMode = false;
+
+        if(i != null){
+            Bundle bundle = i.getExtras();
+
+            if(bundle != null){
+                String editSpecimenName = bundle.getString("NAME");
+                if(!editSpecimenName.equals("")){
+                    EditMode = true;
+                    EditSpecimen = editSpecimenName;
+                    System.out.println("Specimen Name: " + EditSpecimen);
+
+
+                    Specimen s = specimenDataSource.findByName(EditSpecimen);
+
+                    //now update the user fields with the info to be edited
+                    latitude = s.getLatitude();
+                    longitude = s.getLongitude();
+                    ((TextView)findViewById(R.id.latinNameAutoComplete)).setText(s.getName());
+                    System.out.println("SCENE: " + s.getScenePhotoURI() + " SPECIMEN: " + s.getSpecimenPhotoURI());
+                    ((SeekBar)findViewById(R.id.abundanceSlider)).setProgress(s.getAbundance().ordinal());
+
+                    if(!s.getScenePhotoURI().isEmpty()){
+                        sceneThumbnail = FileToScaledBitmap(new File(s.getScenePhotoURI()));
+                        ((ImageButton)findViewById(R.id.sceneView)).setImageBitmap(sceneThumbnail);
+                        scenePhoto = new File(s.getScenePhotoURI());
+
+                    }
+
+                    if(!s.getSpecimenPhotoURI().isEmpty()){
+                        specimenThumbnail = FileToScaledBitmap(new File(s.getSpecimenPhotoURI()));
+                        ((ImageButton)findViewById(R.id.specimenView)).setImageBitmap(specimenThumbnail);
+                        specimenPhoto = new File(s.getSpecimenPhotoURI());
+                    }
+
+                    specimenDataSource.removeByName(s.getName());
+
+                    i = null;   //prevent from jumping back here on next use
+                }
+            }
+        }
+
+
+        locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+        //TODO visualise location
+
 
         //Screen Rotaion will reset some aspects of the app and call onCreate again
         //if so, we need to reset the images for the buttons
@@ -159,13 +208,7 @@ public class SpecimenAdder extends BaseActivity {
                     return;
             }
 
-            BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
-
-            Bitmap bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
-                    btmapOptions);
-
-            bitmap = Bitmap.createScaledBitmap(bitmap, 128, 128, true);
-
+            Bitmap bitmap = FileToScaledBitmap(f);
             switch(requestCode) {
                 case IntentRequestCodes.SPECIES_ADDER_SCENE_PHOTO:
                     sceneThumbnail = bitmap;
@@ -179,6 +222,15 @@ public class SpecimenAdder extends BaseActivity {
 
             imageButton.setImageBitmap(bitmap);
         }
+    }
+
+    private Bitmap FileToScaledBitmap(File f){
+        BitmapFactory.Options btmapOptions = new BitmapFactory.Options();
+
+        Bitmap bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
+                btmapOptions);
+
+        return Bitmap.createScaledBitmap(bitmap, 128, 128, true);
     }
 
     public void onNewSpecimenButtonClick (View view){
@@ -209,6 +261,13 @@ public class SpecimenAdder extends BaseActivity {
             latinNameAutoComplete.setError(null);
         }
 
+        /*PlantDataSource plantDataSource = new PlantDataSource(this).open();
+        if(plantDataSource.findMatches(latinName).size() != 1){
+            latinNamesAutoComplete.setError("That name doesnt appear in the latin database");
+            return;
+        } else {
+            latinNamesAutoComplete.setError(null);
+        }*/
 
         String comment = ""; //TODO add comment box
         Specimen.AbundanceEnum abundanceEnum = Specimen.AbundanceEnum.values()

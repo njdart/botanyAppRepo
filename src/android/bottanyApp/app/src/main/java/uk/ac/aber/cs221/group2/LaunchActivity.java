@@ -171,6 +171,7 @@ public class LaunchActivity extends BaseActivity  {
             //and save the current user for this session
             User.CurrentUser = userDataSource.FindByName(user.getName());
             Visit.CurrentVisit = siteDataSource.findByName(reserveName.getText().toString());
+            Visit.CurrentVisit.setVisitDate((double)System.currentTimeMillis() / 1000L);
             Intent intent = new Intent(this, SpecimenAdder.class);
             startActivity(intent);
         }

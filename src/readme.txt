@@ -64,11 +64,22 @@ Security -> Enable checkbox "Unknown Sources" to allow non-PlayStore
 applications to be installed. It runs its own local database(SQLite) to store 
 unsent recordings and plant information and it receives and sends data to the 
 server database. 
+Usability:
+           -Reserve name and latin names are auto-complete
+           -When entering latin name, text box disappears at top, off screen
+           -On record review page, long press to edit and delete records
 
 Website
 --------------------------------------------------------------------------------
 The website does not need to be installed. Go to this URL to access it:
 http://users.aber.ac.uk/daw54/group_website/
+Features that involve editing or deleting data from the database requires a 
+password. That password is: *****.
+Links to Server API and Session storage are fixed. These need to be changed if
+the server changes.
+Majority of data in database is test data and so discrepencies in data are to 
+be expected. For example, OS grid references and Latitude and Longitude data 
+do not always match up on the map.
 
 Server
 --------------------------------------------------------------------------------
