@@ -261,13 +261,13 @@ public class SpecimenAdder extends BaseActivity {
             latinNameAutoComplete.setError(null);
         }
 
-        PlantDataSource plantDataSource = new PlantDataSource(this).open();
+        /*PlantDataSource plantDataSource = new PlantDataSource(this).open();
         if(plantDataSource.findMatches(latinName).size() != 1){
             latinNamesAutoComplete.setError("That name doesnt appear in the latin database");
             return;
         } else {
             latinNamesAutoComplete.setError(null);
-        }
+        }*/
 
         String comment = ""; //TODO add comment box
         Specimen.AbundanceEnum abundanceEnum = Specimen.AbundanceEnum.values()
