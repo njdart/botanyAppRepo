@@ -8,4 +8,18 @@
 ========================================================================================================
 ========================================================================================================
 
-                                                      
+Description
+========================================================================================================
+This is a group contribution that has resulted in a system comprising of an Android Application, a back-
+end server with database and a website. This system is designed for botanists to keep a track of their
+plant recordings out in the field, and in the comfort of their own home on the web. These communicate in
+a professional and realistic way that protects the database from potential malicious entries. The 
+Android Application and the Website do not communicate directly with each other or the database. 
+Instead, they both communicate with a Web API server that controls all data inputs. The Android 
+Application sends data from the field into the database, through the API, and the website receieves this
+data and has the ability to manage it.
+
+
+Website URL
+========================================================================================================
+http://users.aber.ac.uk/daw54/group_website/
