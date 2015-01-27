@@ -99,8 +99,32 @@ public class SpecimenDataSource {
         }
 
     public void empty() {
-        String query = "DROP * FROM " + DatabaseUtils.specimenTableName + " WHERE 1;";
+        database.delete(DatabaseUtils.specimenTableName, null, null);
+    }
 
+    public int removeByName(String specimenName) {
+        return database.delete(DatabaseUtils.specimenTableName, DatabaseUtils.specimenTable_specimenName + " = '" + specimenName + "'", null);
+    }
+
+    public Specimen findByName(String editSpecimen) {
+        String query = "SELECT * FROM " + DatabaseUtils.specimenTableName + " WHERE " + DatabaseUtils.specimenTable_specimenName + " = '" + editSpecimen + "' LIMIT 1;";
+        Cursor cursor = database.rawQuery(query, null);
+        if(cursor.getCount() > 0){
+            cursor.moveToFirst();
+            Specimen.AbundanceEnum abun = Specimen.AbundanceEnum.valueOf(cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenAbundance)));
+            Specimen specimen = new Specimen(cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenName)),
+                    (double)cursor.getDouble(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenLat)),
+                    (double)cursor.getDouble(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenLong)),
+                    abun,
+                    cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenComment)),
+                    cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenScenePhoto)),
+                    cursor.getString(cursor.getColumnIndex(DatabaseUtils.specimenTable_specimenSpecimenPhoto)),
+                    User.CurrentUser.getUserId(),
+                    Visit.CurrentVisit.getVisitId());
+            return specimen;
+        }
+
+        return null;
     }
 }
 
