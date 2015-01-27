@@ -155,7 +155,6 @@ header('Location:plant_specimens.php');
 
 
 	$json = json_encode($record);
-	var_dump($json);
 
 	$url='http://users.aber.ac.uk/mta2/groupapi/addRecord.php';
 
@@ -165,6 +164,5 @@ header('Location:plant_specimens.php');
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$response=curl_exec($ch);
 	curl_close($ch);
-	var_dump($response);
 
 	?>
