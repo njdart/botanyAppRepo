@@ -7,6 +7,8 @@
 	
 	//Decodes the JSON into PHP readable
 	$record = json_decode($_POST["record"]);
+	// var_dump($record);
+	// var_dump($_POST);
 
 	//If data is wrong, error code 400
 	if(!checkRecord($record))
@@ -105,7 +107,7 @@
 		}
 
 		//Checks if any variables (except $Comment) are empty
-		if(empty($SpeciesName) || empty($Latitude) || empty($Longitude) || empty($Abundance) || empty($ScenePhoto) || empty($SpecimenPhoto))
+		if(empty($SpeciesName) || empty($Latitude) || empty($Longitude) || empty($Abundance))
 		{
 			http_response_code(400);
 			die('A field is empty');
