@@ -55,13 +55,13 @@ public class SpecimenDataSource {
         }
 
 
-        public long create(Specimen specimen, int user, int visit){
+        public long create(Specimen specimen, User user, Visit visit){
             ContentValues values = new ContentValues();
 
             values.put(DatabaseUtils.specimenTable_specimenName, specimen.getName());
 
-                    values.put(DatabaseUtils.specimenTable_UsedId, user);
-                    values.put(DatabaseUtils.specimenTable_visitId, visit );
+                    values.put(DatabaseUtils.specimenTable_UsedId, user.getUserId());
+                    values.put(DatabaseUtils.specimenTable_visitId, visit.getVisitId());
                     values.put(DatabaseUtils.specimenTable_specimenLat, specimen.getLatitude());
                     values.put(DatabaseUtils.specimenTable_specimenLong, specimen.getLongitude());
                     values.put(DatabaseUtils.specimenTable_specimenAbundance, specimen.getAbundance().toString());
