@@ -1,5 +1,7 @@
 <?php
-$url = 'users.aber.ac.uk/mta2/groupapi/getReserves.php';
+include "config.php";
+session_save_path($CONFIG["session"]);
+$url = $CONFIG["api"] . "/getReserves.php";
 $ch = curl_init($url);
 
 // if (isset($_POST['submitsearch'])){

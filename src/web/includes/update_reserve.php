@@ -1,5 +1,7 @@
 <?php
-$url = 'users.aber.ac.uk/mta2/groupapi/getSpecimen.php';
+include "config.php";
+session_save_path($CONFIG["session"]);
+$url = $CONFIG["api"] . '/getSpecimen.php';
 $ch = curl_init($url);
 
 // if (!isset($_GET['id']) || empty($_GET['id'])){

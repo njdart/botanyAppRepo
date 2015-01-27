@@ -1,6 +1,9 @@
 <?php
+include('config.php');
+session_save_path($CONFIG["session"]);
 session_start();
-$url = 'users.aber.ac.uk/mta2/groupapi/removeReserve.php';
+include "config.php";
+$url = $CONFIG["api"] . '/removeReserve.php';
 $ch = curl_init($url);
 
 $data = array(

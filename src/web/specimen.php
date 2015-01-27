@@ -1,4 +1,6 @@
 <?php
+include "includes/config.php";
+session_save_path($CONFIG["session"]);
 $title = "Specimen";
 include "includes/record_curl.php";
 include "includes/header.php";

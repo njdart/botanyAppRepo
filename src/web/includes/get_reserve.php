@@ -1,5 +1,7 @@
 <?php
-$url = 'users.aber.ac.uk/mta2/groupapi/getReserve.php';
+include "config.php";
+session_save_path($CONFIG["session"]);
+$url = $CONFIG["api"] . '/getReserve.php';
 $ch = curl_init($url);
 
 

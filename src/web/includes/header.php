@@ -1,5 +1,11 @@
 <?php
-session_start(); ?>
+include "config.php";
+session_save_path($CONFIG["session"]);
+session_start();
+
+// error_reporting(0);
+ ?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -28,7 +34,7 @@ session_start(); ?>
 <?php
 				if (!isset($_SESSION['pass'])){
 					echo "<form class='pass' action='includes/authenticate.php' method='POST'>Password:
-						<input type='text'  id='pass' class='passinput' name='pass' class='pass'/>
+						<input type='text'  id='pass' autocomplete='off' class='passinput' name='pass' class='pass'/>
 						<input type='submit' class='passsubmit' id='submit' name='submitpass'/>
 					</form>";
 				}else{
@@ -45,7 +51,6 @@ session_start(); ?>
 					<li><a href='index.php'>Home</a></li>
 					<li><a href='reserves.php'>Reserves</a></li>
 					<li><a href='plant_specimens.php'>Plants</a></li>
-					<li><a href='add_specimen.php'>Add Specimens</a></li>
 					<li><a href='about.php'>About</a></li>
 				</ul>
 			</nav>
