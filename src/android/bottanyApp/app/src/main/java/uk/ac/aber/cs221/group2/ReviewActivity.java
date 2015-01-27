@@ -2,15 +2,12 @@ package uk.ac.aber.cs221.group2;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
-import android.text.Selection;
 import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,7 +40,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import uk.ac.aber.cs221.group2.dataClasses.Specimen;
 import uk.ac.aber.cs221.group2.dataClasses.User;
@@ -60,9 +56,12 @@ public class ReviewActivity extends BaseActivity {
     private SpecimenDataSource specimenDataSource;
     private SiteDataSource siteDataSource;
     private UserDataSource userDataSource;
+    private ArrayList<String> specimenNames;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_submit);
 
@@ -76,9 +75,8 @@ public class ReviewActivity extends BaseActivity {
             System.out.println("adding specimen " + s.getName());
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, specimenNames);
-        ListView listView = (ListView)findViewById(R.id.specimenList);
-        listView.setAdapter(arrayAdapter);
+        listView = (ListView)findViewById(R.id.specimenList);
+        updateAdapters();
 
         listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 
@@ -86,10 +84,12 @@ public class ReviewActivity extends BaseActivity {
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
                 final ListView listView = (ListView)v;
 
-                System.out.println(v);
-                System.out.println(menu);
-                System.out.println(menuInfo);
-                System.out.println("Conext Menu");
+                AdapterView.AdapterContextMenuInfo info =
+                        (AdapterView.AdapterContextMenuInfo) menuInfo;
+
+                final String selectedWord = ((TextView) info.targetView).getText().toString();
+
+                System.out.println("SELECTED WORD: " + selectedWord);
 
                 final Dialog dialog = new Dialog(ReviewActivity.this);
                 dialog.setContentView(R.layout.edit_delete_alert_dialog);
@@ -101,7 +101,9 @@ public class ReviewActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         System.out.println("edit");
-
+                        Intent i = new Intent(ReviewActivity.this, SpecimenAdder.class);
+                        i.putExtra("NAME", selectedWord);
+                        startActivity(i);
                     }
                 });
 
@@ -110,6 +112,11 @@ public class ReviewActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         System.out.println("Delete");
+
+                        specimenDataSource.removeByName(selectedWord);
+                        updateAdapters();
+
+                        dialog.cancel();
                     }
                 });
 
@@ -118,6 +125,16 @@ public class ReviewActivity extends BaseActivity {
 
             }
         });
+    }
+
+    public void updateAdapters() {
+        List<Specimen> specimens = specimenDataSource.findAll();
+        specimenNames = new ArrayList<String>();
+        for(Specimen s : specimens){
+            specimenNames.add(s.getName());
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, specimenNames);
+        listView.setAdapter(arrayAdapter);
     }
 
     public void onSubmitButtonClick(View view) {

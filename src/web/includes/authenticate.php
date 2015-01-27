@@ -1,10 +1,13 @@
 <?php
+include "config.php";
+session_save_path($CONFIG["session"]);
 session_start();
-$url = 'users.aber.ac.uk/mta2/groupapi/authenticateAdmin.php';
+$url = $CONFIG["api"] . '/authenticateAdmin.php';
 $ch = curl_init($url);
 $loginmsg="";
 $errormsg="";
 if (array_key_exists('submitpass', $_POST)){
+	echo"hello";
 	$_SESSION['pass'] = $_POST['pass'];
 }
 
@@ -23,7 +26,7 @@ $temp = $_SERVER['HTTP_REFERER'];
 list($temp, $pass) = explode('?',$temp,2);
 
 if ($response == "true"){
-	header('location:' . $temp . '?loginmsg=' . urlencode(base64_encode("You have logged in")));
+	header('location:' . $temp . '?loginmsg=' . urlencode(base64_encode("You have logged in")));//$_SESSION['pass'] = $_POST['pass'];
 }else{
 	session_destroy();
 	header('location:' . $temp . '?errormsg=' . urlencode(base64_encode("Login Incorrect")));

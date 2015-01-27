@@ -1,5 +1,6 @@
 <?php
-$urlp = 'users.aber.ac.uk/mta2/groupapi/getResource.php';
+include "config.php";
+$urlp = $CONFIG["api"] . '/getResource.php';
 $chp = curl_init($urlp);
 $datap = array(
 	'resourceID' => $object->SpecimenPhoto,
@@ -15,7 +16,7 @@ $responsep = curl_exec($chp);
 
 curl_close($chp);
 
-$urlpp = 'users.aber.ac.uk/mta2/groupapi/getResource.php';
+$urlpp = $CONFIG["api"] . '/getResource.php';
 $chpp = curl_init($urlpp);
 $datapp = array(
 	'resourceID' => $object->ScenePhoto,

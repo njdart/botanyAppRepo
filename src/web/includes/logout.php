@@ -1,4 +1,6 @@
 <?php
+include('config.php');
+session_save_path($CONFIG["session"]);
 Session_start();
 Session_destroy();
 $temp = $_SERVER['HTTP_REFERER'];

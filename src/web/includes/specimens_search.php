@@ -1,5 +1,7 @@
 <?php
-$url = 'users.aber.ac.uk/mta2/groupapi/getSpecimens.php';
+include "config.php";
+session_save_path($CONFIG["session"]);
+$url = $CONFIG["api"] . '/getSpecimens.php';
 //$url = 'localhost:8080/api/getSpecimens.php';
 $ch = curl_init($url);
 $data = array(

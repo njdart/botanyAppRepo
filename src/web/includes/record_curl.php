@@ -1,11 +1,12 @@
 <?php
-$url = 'users.aber.ac.uk/mta2/groupapi/getSpecimen.php';
+include "config.php";
+$url = $CONFIG["api"] . '/getSpecimen.php';
 $ch = curl_init($url);
 
-if (!isset($_GET['id']) || empty($_GET['id'])){
-	header('Location: plant_specimens.php');
-	exit(); 
-}
+// if (!isset($_GET['id']) || empty($_GET['id'])){
+	// header('Location: plant_specimens.php');
+	// exit(); 
+// }
 
 $id = $_GET['id'];
 $data = array(
@@ -25,7 +26,7 @@ $lat = $object->LocationLatitude;
 $long = $object->LocationLongitude;
 
 
-if (!is_object($object)){
-	header('Location: plant_specimens.php');
-}
+// if (!is_object($object)){
+	// header('Location: plant_specimens.php');
+// }
 ?>

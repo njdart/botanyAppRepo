@@ -1,16 +1,17 @@
 <?php
+include "includes/config.php";
+session_save_path($CONFIG["session"]);
 $title = "Plants";
 include "includes/header.php";
 include "includes/specimens_curl.php";
 include "includes/filter.php";
 ?>
 <div id='content-boxes-dblist'>
-	<?php if(isset($_GET['resID'])){
-	echo"<h1>Plant Database ".$loc."</h1>";
-	}else{
-	echo"<h1>Plant Database</h1>";
-	}
-?><br>
+	
+	<h1>Plant Database</h1>
+
+					<a class='butdesa' href='add_specimen.php'>Add Specimens</a>
+
 	<form class='advanced-search' action='plant_specimens.php' method='post'>
 		<!-- <input type='submit' name='submitadvsearch' class='advancedsearchbutton' src='images/search.png' alt='Search' /> -->
 		<input id='search' type='text' size='50'  class='simpletext' name='search' placeholder='Enter the plant you want to find' value=''/>
@@ -137,4 +138,11 @@ include 'includes/footer.php';
     $("#orderby").change(getSpecimens);
     $("#ordertype").change(getSpecimens);
     $("document").ready(getSpecimens);
+	
+	<?php
+		if(isset($_GET['species'])) {
+			echo "$('#search').val('" . $_GET['species'] . "');";
+		}
+	?>
+	
 </script>
