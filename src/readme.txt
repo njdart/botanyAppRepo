@@ -27,25 +27,25 @@ http://users.aber.ac.uk/daw54/group_website/
 Members
 ==================================================A=====================================================
 Group Leader                                      -                                     Alexander Barnes
-Deputy Group Leader-Nicholas Dart
-Technical Manager-Max Atkins
+Deputy Group Leader                               -                                        Nicholas Dart
+Technical Manager                                 -                                           Max Atkins
 
-Android Leader-Nicholas Dart
+Android Leader                                    -                                        Nicholas Dart
 Android Team:
--Alexander Barnes
+                                                  -                                     Alexander Barnes
 
-Website Leader-James O'hare
+Website Leader                                    -                                         James O'hare
 Website Team:
--Daniel Wilcock
--Sebastian Tuff
+                                                  -                                       Daniel Wilcock
+                                                  -                                       Sebastian Tuff
 
-Server Leader-Maxim Harizanov
+Server Leader                                     -                                      Maxim Harizanov
 Server Team:
--Max Atkins 	     
+                                                  -                                           Max Atkins 	     
 
 Testing Team:
--Andrew Wilmot
--William Aldridge
+                                                  -                                        Andrew Wilmot
+                                                  -                                     William Aldridge
 
 
 
