@@ -25,7 +25,7 @@ Website URL
 http://users.aber.ac.uk/daw54/group_website/
 
 Members
-==================================================A=====================================================
+========================================================================================================
 Group Leader                                      -                                     Alexander Barnes
 Deputy Group Leader                               -                                        Nicholas Dart
 Technical Manager                                 -                                           Max Atkins
