@@ -25,19 +25,22 @@
 	//Query database records table for reserve_ids that match the in-putted reserveID
 	$reserveQuery = $conn->query("SELECT * FROM botany_reserves WHERE reserve_id=$reserveID ");
 	
-	
+	//Fetch variables and assign to $reserveFetch
 	$reserveFetch = $reserveQuery->fetch_assoc();	
+	
+	//Assign database values to variables for array
+	$LocationNameArray = $reserveFetch['location_name'];
+	$LocationOSArray = $reserveFetch['location_os'];
+	$DescriptionArray = $reserveFetch['description'];
+	$ReserveIDArray = $reserveFetch['reserve_id'];
 
-	//Create array for Reserves
-	$reserve = array();
-	
 	//Fill array
-	array_push($reserve, array(
-	'LocationName' => $reserveFetch['location_name'],
-	'LocationOS' => $reserveFetch['location_os'],
-	'Description' => $reserveFetch['description'],
-	'ReserveID' => $reserveFetch['reserve_id']));
-	
+	$reserve = array(
+		'LocationName' => $LocationNameArray, 
+		'LocationOS' => $LocationOSArray, 
+		'Description' => $DescriptionArray, 
+		'ReserveID' => $ReserveIDArray);
+
 	//Decode array into JSON
 	$json = json_encode($reserve);
 

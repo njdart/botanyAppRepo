@@ -37,7 +37,7 @@
 	if(empty($ReserveID) || empty($LocationName) || empty($LocationOS))
 	{
 		http_response_code(400);
-		die('A field is empty');
+		die('A field is empty');	
 	}
 	
 	//Selects the Database
@@ -49,10 +49,7 @@
 	//Query to insert JSON reserve data into Database
 	$updateReserve = "UPDATE botany_reserves SET location_name='$LocationName', location_os='$LocationOS', description='$Description'
 				WHERE reserve_id = $ReserveID";
-
-				echo $updateReserve;
 	
-
 	//Runs the specimen query
 	$conn->query($updateReserve);
 

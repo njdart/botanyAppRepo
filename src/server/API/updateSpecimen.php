@@ -51,21 +51,44 @@
 	}
 
 	//Checks if any variables (except $Comment) are empty
-	if( empty($SpecimenID) || empty($SpeciesName) || empty($Latitude) || empty($Longitude) || empty($Abundance) || empty($ScenePhoto) || empty($SpecimenPhoto))
+	if( empty($SpecimenID) || empty($SpeciesName) || empty($Latitude) || empty($Longitude) || empty($Abundance))
 	{
 		http_response_code(400);
 		die('A field is empty');
 	}
 
-	//Query to insert JSON specimen data into Database
-	$updateSpecimen = "UPDATE botany_specimens SET species_name='$SpeciesName', 
+	if(empty($ScenePhoto) && !empty($SpecimenPhoto))
+	{
+		$updateSpecimen = "UPDATE botany_specimens SET species_name='$SpeciesName', 
 		latitude='$Latitude', longitude='$Longitude', abundance='$Abundance', 
-		comment='$Comment', scene_photo='$ScenePhoto', specimen_photo='$SpecimenPhoto' 
+		comment='$Comment', specimen_photo='$SpecimenPhoto' 
 		WHERE specimen_id = $SpecimenID";
-		
+	}
+	else if(empty($SpecimenPhoto) && !empty($ScenePhoto))
+	{
+		$updateSpecimen = "UPDATE botany_specimens SET species_name='$SpeciesName', 
+		latitude='$Latitude', longitude='$Longitude', abundance='$Abundance', 
+		comment='$Comment', scene_photo='$ScenePhoto' 
+		WHERE specimen_id = $SpecimenID";
+	}
+	else if(empty($ScenePhoto) && empty($SpecimenPhoto))
+	{
+		$updateSpecimen = "UPDATE botany_specimens SET species_name='$SpeciesName', 
+		latitude=$Latitude, longitude=$Longitude, abundance=$Abundance, 
+		comment='$Comment'
+		WHERE specimen_id = $SpecimenID";
+	}
+	else
+	{
+		//Query to insert JSON specimen data into Database
+		$updateSpecimen = "UPDATE botany_specimens SET species_name='$SpeciesName', 
+			latitude=$Latitude, longitude=$Longitude, abundance=$Abundance, 
+			comment='$Comment', scene_photo='$ScenePhoto', specimen_photo='$SpecimenPhoto' 
+			WHERE specimen_id = $SpecimenID";
+	}	
 	//Runs the specimen query
-	$conn->query($updateSpecimen);
 
+	$conn->query($updateSpecimen);
 	//Check if specimen exists in DB
 	if($conn->affected_rows < 1)
 	{
