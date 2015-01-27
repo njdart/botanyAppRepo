@@ -57,8 +57,8 @@ public class DatabaseUtils extends SQLiteOpenHelper {
             specimenTable_specimenAbundance + " TEXT, " +
             specimenTable_specimenComment + " TEXT, " +
             specimenTable_specimenScenePhoto + " TEXT, " +
-            specimenTable_visitId + " DOUBLE, " +
-            specimenTable_UsedId + " DOUBLE, " +
+            specimenTable_visitId + " INTEGER, " +
+            specimenTable_UsedId + " INTEGER, " +
             specimenTable_specimenSpecimenPhoto + " TEXT ); ";
 
     private static final String createSitesTableQuery = "CREATE TABLE " + sitesTableName + " (" +
