@@ -24,7 +24,7 @@
 	$conn->select_db('msh4');
 	
 	//Check if password is authorised
-		if($password == $CONFIG['adminPassword'])	
+	if($password == $CONFIG['adminPassword'])	
 	{
 		//Query database specimens table for specimens that match the in-putted recordID
 		$specimenQuery = $conn->query("DELETE FROM botany_specimens WHERE specimen_id = $specimenID ");

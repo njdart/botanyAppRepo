@@ -1,5 +1,8 @@
 {
 
+
+	"SpecimenID":
+		1,
 	"SpeciesName":
 		"Rosa Rubiginosa",
 	"LocationLatitude":
@@ -7,7 +10,7 @@
 	"LocationLongitude":
 		-4.081163,
 	"Abundance":
-		5,
+		3,
 	"Comment":
 		"Rose",
 	"ScenePhoto":
