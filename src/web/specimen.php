@@ -24,51 +24,57 @@ echo "<a class='previous navigation' href = 'specimen.php?id=" . $idp . "'><<</a
 $idn = $id + 1;
 echo "<a class='next navigation' href = 'specimen.php?id=" . $idn . "'>>></a>";
 //end record navigation
-
-//start content boxes
-//right section start
-echo "<div id='content-boxes'>
-	<h1 >Specimen ".$id."</h1>
-	<h2 class='indent'>".$object->SpeciesName."</h2>
-	<div id='right-section'>";
+?>
+<div id='content-boxes'>
+	<h1 >Specimen </h1><br>
+	<h2 class='indent'><?php echo $object->SpeciesName; ?></h2>
+	<div id='right-section'>
 
 		
-//if no image, assigns default image
-		echo"<script>
-			$(document).ready(function(){
-				$('.image').error(function(){
-					$(this).attr('src', './images/default_image.png');
-				});
-			});
-		</script>";
-//end script
-		echo "<table class='centered ff'>
+
+
+		 <table class='centered ff'>
 			<th>Specimen Photo</th>
 			<th>Scene Image</th>
 			<tr>
-				<td>";
-				 
-		echo"<a class='fancybox' href='" . $responsep . "' rel='gallery1'><img class='image' src='" . $responsep . "' alt='default'/></a>
+				<td>
+				
+		<script>
+$(document).ready(function()
+{
+    $('.image').error(function(){
+        $(this).attr('src', './images/default_image.png');
+    });
+});
+</script>		 
+		<a class='fancybox' href='<?php echo $responsep ;?>' rel='gallery1'><img class='image' src='<?php echo $responsep;?>' alt='default'/></a>
 				</td><td>
-<a class='fancybox' href='" . $responsepp . "' rel='gallery1'><img class='image' src='" . $responsepp . "' alt='default'/></a>
+<a class='fancybox' href='<?php echo $responsepp ;?>' rel='gallery1'><img class='image' src='<?php echo $responsepp ;?>' alt='default'/></a>
 				</td>
 </tr>
 <tr>
-<td>";?>
+<td>
 		
 <!--Googlemap popup-->
 <a class="butdes various fancybox.iframe" href="includes/map.php">Where to find</a>
 <!--Googlemap end-->
+</td>
+
 	<?php
-echo"</td>
-<td>";
 		if (isset($_SESSION['pass'])){
+		echo "<td>";
 			echo "<form action = 'includes/delete_curl.php' method= 'GET' name = 'deleteSpecimen'> 
 				<button class = 'butdes deleteSpecimen' onclick='confirmation()' type='submit' name='id' value=" . $id . ">Delete</button> 
 			</form>";
+echo"</td>";
+echo"<td>
+<form action = 'edit_specimen.php' method= 'GET' name = 'Edit Specimen'> 
+				<button class = 'butdes'  type='submit' name='id' value=" . $id . ">Edit Specimen</button> 
+			</form>
+</td>";
+
 		}
-echo"</td>
-</tr>
+echo "</tr>
 </table>";
 //end error button
 echo"</div>";

@@ -26,6 +26,7 @@
 	$specimenQuery = $conn->query("SELECT * FROM botany_specimens 
 				       INNER JOIN botany_records ON botany_specimens.record_id = botany_records.record_id
 				       INNER JOIN botany_users ON botany_records.user_id = botany_users.user_id
+                       INNER JOIN botany_reserves ON botany_records.reserve_id = botany_reserves.reserve_id 
 				       WHERE specimen_id = $specimenID ");
 
 	//If there is more than one result, return error code 500 and end the script

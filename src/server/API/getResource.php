@@ -44,7 +44,7 @@
 
 	
 	//Find file path for requested resource
-	$downloadPath = $CONFIG['serverRoot'] . $CONFIG['resourcePath'] . $resourceID;
+	$downloadPath = $CONFIG['serverRoot'] . $CONFIG['resourcePath'] . $resourceID . ".jpg";
 
 	echo $downloadPath;
 

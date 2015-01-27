@@ -1,57 +1,54 @@
 {
 
 	"UserName":
-		"Harry Potter", 
+		"Nic Dart", 
 		
 	"UserPhone":
-		"07949021123", 
+		"08001066", 
 	
 	"UserEmail":
-		"harry.potter@hogwarts.com",
+		"nic.dart@live.com",
 	
-	"LocationName":
-		"Hogwarts, England", 
-
-	"LocationOS":
-		"DB123432",
+	"ReserveID":
+		1,
 		
 	"Specimens":
 		[
 			{
-				"SpeciesName":"Potato Man",
-				"LocationLatitude":654.123,
-				"LocationLongitude":71.01,
-				"Abundance":3,
-				"Comment":"This plant sucks",
-				"ScenePhoto":"1",
-				"SpecimenPhoto":"2"
+				"SpeciesName":"Taraxacum Officinale",
+				"LocationLatitude":52.415405223,
+				"LocationLongitude":-4.0811625121,
+				"Abundance":2,
+				"Comment":"Dandelion",
+				"ScenePhoto":"9",
+				"SpecimenPhoto":"10"
 			},
 			{
-				"SpeciesName":"Crazy Carrot",
-				"LocationLatitude":798.890,
-				"LocationLongitude":76.23,
+				"SpeciesName":"Narcissus Poeticus",
+				"LocationLatitude":52.415405,
+				"LocationLongitude":-4.0811625,
 				"Abundance":5,
-				"Comment":"This plant rulez",
+				"Comment":"Daffodil",
 				"ScenePhoto":"3",
 				"SpecimenPhoto":"4"
 			},
 			
 			{
-				"SpeciesName":"James Ohare Plant",
-				"LocationLatitude":100.211,
-				"LocationLongitude":22.33,
+				"SpeciesName":"Helianthus Annuus",
+				"LocationLatitude":52.415405,
+				"LocationLongitude":-4.0811625,
 				"Abundance":2,
-				"Comment":"This plant is strange",
+				"Comment":"Sunflower",
 				"ScenePhoto":"5",
 				"SpecimenPhoto":"6"
 			},
 			
 			{
-				"SpeciesName":"Human Feet",
-				"LocationLatitude":443.334,
-				"LocationLongitude":55.44,
+				"SpeciesName":"Papaver Somniferum",
+				"LocationLatitude":52.415405,
+				"LocationLongitude":-4.0811625,
 				"Abundance":1,
-				"Comment":"This plant makes me sick",
+				"Comment":"Poppy",
 				"ScenePhoto":"7",
 				"SpecimenPhoto":"8"
 			}

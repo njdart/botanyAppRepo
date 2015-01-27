@@ -1,8 +1,3 @@
-username: msh4
-password: password
-
-table creation queries:
-
 create table botany_users (
     user_id INT AUTO_INCREMENT,
     user_name VARCHAR(20) NOT NULL,
@@ -15,9 +10,8 @@ create table botany_users (
 create table botany_records ( 
     record_id INT AUTO_INCREMENT , 
     user_id INT NOT NULL, 
-    location_name VARCHAR(50), 
     time_stamp INT,
-    location_os VARCHAR(10),
+    reserve_id INT,
     PRIMARY KEY (record_id));
     
 create table botany_specimens ( 
@@ -31,6 +25,13 @@ create table botany_specimens (
     scene_photo INT, 
     specimen_photo INT, 
     PRIMARY KEY (specimen_id));
+
+create table botany_reserves (
+	reserve_id INT AUTO_INCREMENT,
+    location_name VARCHAR(50) NOT NULL,
+	location_os VARCHAR(10) NOT NULL,
+	description TEXT,
+	PRIMARY KEY (reserve_id));
     
 alter table botany_specimens
     add foreign key (record_id)
@@ -42,6 +43,10 @@ alter table botany_records
     references botany_users(user_id)  
     on delete cascade on update cascade;
 
+alter table botany_records
+    add foreign key (reserve_id)  
+    references botany_reserves(reserve_id)  
+    on delete cascade on update cascade;
 
 create table botany_resources (
 	resource_id INT AUTO_INCREMENT,

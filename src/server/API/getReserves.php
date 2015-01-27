@@ -1,13 +1,9 @@
 <?php
-	
+
 	include 'config.php';	
-	
+
 	//Stops warnings
 	error_reporting(E_ERROR);
-	
-	//Takes POST into variable
-	$specimenID = $_POST["specimenID"];
-	$password = $_POST["password"];
 
 	//Returns success code for successful data and connects to Database
 	http_response_code(200);
@@ -23,24 +19,27 @@
 	//Selects the Database
 	$conn->select_db('msh4');
 	
-	//Check if password is authorised
-	if($password == $CONFIG['adminPassword'])	
+	//Query database records table for record_ids that match the in-putted recordID
+	$reservesQuery = $conn->query("SELECT * FROM botany_reserves");
+	
+	//Create array for Specimens
+	$reserves = array();
+	
+	//Fill array
+	while($row = $reservesQuery->fetch_assoc())
 	{
-		//Query database specimens table for specimens that match the in-putted recordID
-		$specimenQuery = $conn->query("DELETE FROM botany_specimens WHERE specimen_id = $specimenID ");
+		array_push($reserves, array(
+		'LocationName' => $row['location_name'],
+		'LocationOS' => $row['location_os'],
+		'Description' => $row['description'],
+		'ReserveID' => $row['reserve_id']));
+	}
+	
+	//Decode array into JSON
+	$json = json_encode($reserves);
 
-		//Check if specimen exists in DB
-		if($conn->affected_rows < 1)
-		{
-			http_response_code(400);
-			die('Specimen does not exist');	
-		}
-	}
-	else
-	{
-		http_response_code(401);
-		die('Invalid password.');
-	}
+	//Send JSON to HTTP 
+	echo $json;
 
 	//Close connection
 	$conn->close();

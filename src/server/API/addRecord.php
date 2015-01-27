@@ -30,39 +30,18 @@
 	$UserName = $conn->real_escape_string($record->UserName);
 	$UserPhone = $conn->real_escape_string($record->UserPhone);
 	$UserEmail = $conn->real_escape_string($record->UserEmail);
-	$LocationName = $conn->real_escape_string($record->LocationName);
-	$LocationOS = $conn->real_escape_string($record->LocationOS);
+	$ReserveID = $conn->real_escape_string($record->ReserveID);
 	$RecordTime = $conn->real_escape_string($record->Timestamp);
 	$Specimens = $record->Specimens;
 
 	//Checks if any variables are empty
-	if(empty($UserName) || empty($UserPhone) || empty($UserEmail) || empty($LocationName) || empty($LocationOS) || empty($RecordTime) 
+	if(empty($UserName) || empty($UserPhone) || empty($UserEmail) || empty($ReserveID) || empty($RecordTime) 
 		|| empty($Specimens))
 	{
 		http_response_code(400);
 		die('A field is empty');
 	}
 	
-    if(strlen($LocationOS) < 8 || strlen($LocationOS) > 10)
-    {
-        http_response_code(400);
-        die("LocationOS less than 8 or more than 10 in length");
-    }
-    
-    
-    
-    if(!preg_match("/^[A-Z]{2}[0-9]{6,8}$/", $LocationOS))
-    {
-        http_response_code(400);
-        die("Invalid LocationOS format");
-    }
-    
-    if(!preg_match("/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/", $UserEmail))
-    {
-        http_response_code(400);
-        die("Invalid UserEmail format");
-    }
-    
 	//Selects the Database
 	$conn->select_db('msh4');
 	
@@ -91,8 +70,8 @@
 	
 
 	//Query to insert JSON record data into Database
-	$insertRecord = "INSERT INTO botany_records (user_id, location_name, time_stamp, location_os)
-	VALUES ($userID, '$LocationName', $RecordTime, '$LocationOS')";
+	$insertRecord = "INSERT INTO botany_records (user_id, time_stamp, reserve_id)
+	VALUES ($userID, $RecordTime, $ReserveID)";
 	
 	//Runs the record query
 	$conn->query($insertRecord);
@@ -131,11 +110,6 @@
 			http_response_code(400);
 			die('A field is empty');
 		}
-        
-        if($Abundance < 1 || $Abundance > 5) {
-            http_response_code(400);
-            die('Abundance not within bounds of 1 to 5');
-        }
 		//Query to insert JSON specimen data into Database
 		$insertSpecimens = "INSERT INTO botany_specimens (record_id, species_name, 
 			latitude, longitude, abundance, comment, scene_photo, specimen_photo) 
@@ -184,8 +158,7 @@
 	{
 		$valid = property_exists($LocalRecord, 'UserName')
 			&& property_exists($LocalRecord, 'UserPhone')
-			&& property_exists($LocalRecord, 'LocationName') 
-			&& property_exists($LocalRecord, 'LocationOS')
+			&& property_exists($LocalRecord, 'ReserveID')
 			&& property_exists($LocalRecord, 'Specimens')
 			&& property_exists($LocalRecord, 'Timestamp');
 			

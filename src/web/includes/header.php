@@ -28,7 +28,7 @@ session_start(); ?>
 <?php
 				if (!isset($_SESSION['pass'])){
 					echo "<form class='pass' action='includes/authenticate.php' method='POST'>Password:
-						<input type='text' autocomplete='off' id='pass' class='passinput' name='pass' class='pass'/>
+						<input type='text'  id='pass' class='passinput' name='pass' class='pass'/>
 						<input type='submit' class='passsubmit' id='submit' name='submitpass'/>
 					</form>";
 				}else{
@@ -43,6 +43,7 @@ session_start(); ?>
 			<nav>
 				<ul>
 					<li><a href='index.php'>Home</a></li>
+					<li><a href='reserves.php'>Reserves</a></li>
 					<li><a href='plant_specimens.php'>Plants</a></li>
 					<li><a href='add_specimen.php'>Add Specimens</a></li>
 					<li><a href='about.php'>About</a></li>

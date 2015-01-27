@@ -26,6 +26,9 @@ Added more Database protection with transactions and connection closing
 Added resource location protection with config
 Added validation on Lat and Long and empty fields
 Added authenticateAdmin command. Added includes to relevant places
+Added addReserve and removeReserve commands.
+Added updateSpecimen command and updateReserve command.
+Added getReserve command.
 
 Available Commands:
 
@@ -36,18 +39,20 @@ getResource.php (eg ID: 13)
 getSpecimen.php (Decode the JSON. POST name = specimenID) 
 getSpecimens.php (Decode the JSON. All specimens are in array. POST order = ascending/descending,
 							       POST method = speciesName/locationName/userName/timeStamp/abundance,
-							       POST value = user input, POST column = speciesName/locationName/userName/abundance,
+							       POST value = user input, POST column = speciesName/locationName/userName/abundance/reserveID,
 							       POST start = starting row, POST range = number of rows to display)
 removeSpecimen.php (POST specimenID. POST password = ask Max.)
 getLocations.php (No POST data.)
 authenticateAdmin.php (POST password = admin password, will return true or false)
+addReserve.php (Encode a JSON called "reserve")
+removeReserve.php (POST reserveID    POST password = ask Max)
+getReserves.php (No POST data.)
+updateReserve.php (POST = reserveID of reserve to update. POST reserve = all reserve fields.)
+updateSpecimen.php (POST specimenID = ID of specimen to update. POST specimen = all specimen fields.)
+getReserve.php (POST reserveID = ID of reserve to get.)
 
 
 To do:
 
-addSpecimen.php -- Gone
-modifySpecimen.php -- Not required
-getRecords.php -- Gone
-modifyRecord.php -- Gone
-removeRecord.php -- Gone
+Anything people ask.
 

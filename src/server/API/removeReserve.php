@@ -3,10 +3,10 @@
 	include 'config.php';	
 	
 	//Stops warnings
-	error_reporting(E_ERROR);
+	//error_reporting(E_ERROR);
 	
 	//Takes POST into variable
-	$specimenID = $_POST["specimenID"];
+	$reserveID = $_POST["reserveID"];
 	$password = $_POST["password"];
 
 	//Returns success code for successful data and connects to Database
@@ -24,16 +24,15 @@
 	$conn->select_db('msh4');
 	
 	//Check if password is authorised
-	if($password == $CONFIG['adminPassword'])	
+	if($password == $CONFIG['adminPassword'])
 	{
 		//Query database specimens table for specimens that match the in-putted recordID
-		$specimenQuery = $conn->query("DELETE FROM botany_specimens WHERE specimen_id = $specimenID ");
-
-		//Check if specimen exists in DB
+		$reserveQuery = $conn->query("DELETE FROM botany_reserves WHERE reserve_id = $reserveID ");
+		//Check if reserve is removed from DB
 		if($conn->affected_rows < 1)
 		{
 			http_response_code(400);
-			die('Specimen does not exist');	
+			die('Reserve does not exist');	
 		}
 	}
 	else
