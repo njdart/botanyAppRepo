@@ -2,6 +2,7 @@ package uk.ac.aber.cs221.group2.dataClasses;
 
 public class Specimen {
     public Specimen(String name, Double latitude, Double longitude, AbundanceEnum abundance, String comment, String scenePhotoURI, String specimenPhotoURI, int visitId, int userId) {
+        System.out.println("Making specimen with user id " + userId + " And visit id " + visitId);
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -9,8 +10,8 @@ public class Specimen {
         this.comment = comment;
         this.scenePhotoURI = scenePhotoURI;
         this.specimenPhotoURI = specimenPhotoURI;
-        this.user = user;
-        this.visit = visit;
+        this.userId = userId;
+        this.visitId = visitId;
     }
 
     /**
@@ -35,14 +36,20 @@ public class Specimen {
 	private String comment;
 	private String scenePhotoURI;
 	private String specimenPhotoURI;
-    private int visit;
-    private int user;
+    private int visitId;
+    private int userId;
 
 
+    /**
+     * Gets the name of the userId
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the userId
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -111,7 +118,7 @@ public class Specimen {
 	}
 
 	/**
-	 * returns the free text comment made by the user
+	 * returns the free text comment made by the userId
 	 */
 	public String getComment() {
 		return comment;
@@ -131,16 +138,24 @@ public class Specimen {
 		return specimenPhotoURI;
 	}
 
+    public int getUserId(){
+        return userId;
+    }
+
+    public int getVisitId(){
+        return visitId;
+    }
+
 	/**
 	 * takes a Specimen photo.
-	 * Opens up the camera and allows the user to take a photo rather than
+	 * Opens up the camera and allows the userId to take a photo rather than
 	 * asking for the location of one
 	 */
 	public void takeSpecimenPhoto(){}
 
 	/**
 	 * takes a Specimen photo
-	 * Opens up the camera and allows the user to take a photo rather than
+	 * Opens up the camera and allows the userId to take a photo rather than
 	 * asking for the location of one
 	 */
 	public void takeScenePhoto(){}

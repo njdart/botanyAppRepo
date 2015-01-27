@@ -5,8 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -19,20 +19,8 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,14 +40,19 @@ public class SpecimenAdder extends BaseActivity {
     private SpecimenDataSource specimenDataSource;
     private UserDataSource userDataSource;
     private SiteDataSource siteDataSource;
-    private Double latitude = 0D,
-                   longitude = 0D;
+    private Double latitude = 1D,
+                   longitude = 1D;
+
+    private LocationManager locationManager = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specimen_adder);
+
+
+        locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
 
         //Get the dataSource for the specimens
         specimenDataSource = new SpecimenDataSource(this);
@@ -99,6 +92,13 @@ public class SpecimenAdder extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //parameters for updating                                       minUpdate, minDist
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5, onLocationChange);
     }
 
     public void onSpecimenPhotoClick(View view){
@@ -214,6 +214,9 @@ public class SpecimenAdder extends BaseActivity {
         Specimen.AbundanceEnum abundanceEnum = Specimen.AbundanceEnum.values()
                 [((SeekBar)findViewById(R.id.abundanceSlider)).getProgress()];
 
+        int visitId = userDataSource.FindByNameGetIndex(user.getName());
+        int userId = siteDataSource.FindByNameGetIndex(visit.getVisitName());
+
         Specimen specimen = new Specimen(latinName,
                                          latitude,
                                          longitude,
@@ -221,8 +224,8 @@ public class SpecimenAdder extends BaseActivity {
                                          comment,
                                          (scenePhoto == null)?"":scenePhoto.getAbsolutePath(),
                                          (specimenPhoto == null)?"":specimenPhoto.getAbsolutePath(),
-                                         Integer.parseInt(userDataSource.FindByNamegetIndex(user.getName())),
-                                         Integer.parseInt(siteDataSource.FindByNameGetIndex(visit.getVisitName())));
+                                         visitId,
+                                         userId);
 
         specimenDataSource.create(specimen, user, visit);
 
@@ -243,7 +246,7 @@ public class SpecimenAdder extends BaseActivity {
     }
 
     public final String serverURLString = "http://users.aber.ac.uk/mta2/groupapi/addResource.php";
-    //public final String serverURLString = "http://192.168.1.74/testing/index.php";
+    //public final String serverAddResourceUrl = "http://192.168.1.74/testing/index.php";
 
 
     //http://stackoverflow.com/questions/23921356/android-upload-image-to-php-server
@@ -251,4 +254,30 @@ public class SpecimenAdder extends BaseActivity {
         onNewSpecimenButtonClick(view);
         startActivity(new Intent(this, ReviewActivity.class));
     }
+
+    LocationListener onLocationChange = new LocationListener() {
+
+        @Override
+        public void onLocationChanged(Location location) {
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
+
 }

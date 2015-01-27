@@ -9,6 +9,8 @@ public class Visit {
     private String visitName;
 	private double visitDate;
 	private String visitOS;
+    private int id;
+    private String description;
 
     public Visit(String name, String OSGridRef){
         visitName = name;
@@ -65,6 +67,18 @@ public class Visit {
     public void addSpecimen(Specimen s){}
 
     public int getVisitId() {
-        return 0;
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

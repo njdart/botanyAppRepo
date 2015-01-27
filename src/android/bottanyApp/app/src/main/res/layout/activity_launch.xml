@@ -17,7 +17,8 @@
             android:id="@+id/editNameAutoComplete"
             android:hint="@string/name"
             android:clickable="true"
-            android:autoText="false" />
+            android:autoText="false"
+            android:capitalize="words" />
 
         <EditText
             android:layout_width="match_parent"
@@ -37,6 +38,20 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/email" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_gravity="center_horizontal" />
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/autoCompleteReserveNames"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/reserveNameHint"
+            android:dropDownHeight="fill_parent"
+            android:lines="1" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +59,7 @@
             android:id="@+id/newVisitButton"
             android:layout_gravity="center_horizontal"
             android:singleLine="false"
-            android:onClick="newVisitOnClick" />
+            android:onClick="onNewVisitClick" />
 
     </LinearLayout>
 </FrameLayout>

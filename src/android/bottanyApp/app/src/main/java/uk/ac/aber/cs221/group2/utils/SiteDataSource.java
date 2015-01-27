@@ -3,13 +3,13 @@ package uk.ac.aber.cs221.group2.utils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.aber.cs221.group2.dataClasses.User;
 import uk.ac.aber.cs221.group2.dataClasses.Visit;
 
 
@@ -22,7 +22,7 @@ public class SiteDataSource {
     SQLiteDatabase database;
 
     private static final String[] allColumns = {
-            DatabaseUtils.sitesTable_siteId,
+            DatabaseUtils.siteTable_siteId,
             DatabaseUtils.siteTable_siteName,
             DatabaseUtils.siteTable_siteOSGridRef,
             DatabaseUtils.siteTable_siteTimeStamp
@@ -48,22 +48,30 @@ public class SiteDataSource {
         values.put(DatabaseUtils.siteTable_siteName, visit.getVisitName());
         values.put(DatabaseUtils.siteTable_siteOSGridRef, visit.getVisitOS());
         values.put(DatabaseUtils.siteTable_siteTimeStamp, visit.getVisitDate());
+        values.put(DatabaseUtils.siteTable_siteId, visit.getVisitId());
 
-        return database.insert(DatabaseUtils.sitesTableName, null, values);
+        try {
+            if(findByName(visit.getVisitName()) == null){
+                //It doesnt exist in the database, add it
+                return database.insert(DatabaseUtils.sitesTableName, null, values);
+            }
+        } catch (SQLiteConstraintException e){
+            //swallow it, it's not unique
+        }
+        return visit.getVisitId();
     }
 
-    public List<String> findAll(){
-        List<String>  sites =  new ArrayList<String>();
+    public List<Visit> findAll(){
+        List<Visit>  sites =  new ArrayList<Visit>();
         Cursor cursor = database.query(DatabaseUtils.sitesTableName, allColumns ,null,null,null,null,null);
         if(cursor.getCount()>0){
             while(cursor.moveToNext()){
-                String site = new String();
-                site = cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteName));
-                sites.add(site);
+                Visit v = new Visit(cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteName)),
+                                    cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteOSGridRef)));
+                v.setId(cursor.getInt(cursor.getColumnIndex(DatabaseUtils.siteTable_siteId)));
             }
         }
         return sites;
-
     }
 
     public String FindByName(String s){
@@ -83,7 +91,7 @@ public class SiteDataSource {
     }
 
 
-    public String FindByNameGetIndex(String s){
+    public int FindByNameGetIndex(String s){
 
         String selectQuery = "SELECT * FROM " + DatabaseUtils.sitesTableName + "  WHERE " +
                 DatabaseUtils.siteTable_siteName + "= '" + s + "';";
@@ -91,15 +99,50 @@ public class SiteDataSource {
         Cursor cursor = database.rawQuery(selectQuery, null);
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                return cursor.getString(cursor.getColumnIndex(DatabaseUtils.sitesTable_siteId));
+                return cursor.getInt(cursor.getColumnIndex(DatabaseUtils.siteTable_siteId));
             }
-        } else {
-            return null;
         }
-
-
-        return null;
-
+        return -1;
     }
 
+    public Visit findById(int visitId) {
+        String selectQuery = "SELECT * FROM " + DatabaseUtils.sitesTableName + "  WHERE " +
+                DatabaseUtils.siteTable_siteId + "= " + visitId + ";";
+        System.out.println(selectQuery);
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            Visit v = new Visit(cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteName)),
+                    cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteOSGridRef)));
+            v.setId(cursor.getInt(cursor.getColumnIndex(DatabaseUtils.siteTable_siteId)));
+            return v;
+        }
+        return null;
+    }
+
+    public List<String> findAllNames() {
+        String selectQuery = "SELECT * FROM " + DatabaseUtils.sitesTableName + ";";
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.getCount() > 0) {
+            while(cursor.moveToNext()) {
+                list.add(cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteName)));
+            }
+        }
+        return list;
+    }
+
+    public Visit findByName(String s) {
+        String selectQuery = "SELECT * FROM " + DatabaseUtils.sitesTableName + ";";
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            Visit v = new Visit(cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteName)),
+                    cursor.getString(cursor.getColumnIndex(DatabaseUtils.siteTable_siteOSGridRef)));
+            v.setId(cursor.getInt(cursor.getColumnIndex(DatabaseUtils.siteTable_siteId)));
+            return v;
+        }
+        return null;
+    }
 }

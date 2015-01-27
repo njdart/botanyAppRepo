@@ -7,6 +7,7 @@
     <!-- For download of the latin names file -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <user-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature android:name="android.hardware.camera"/>
 
@@ -28,7 +29,6 @@
             android:name=".SpecimenAdder"
             android:label="@string/title_activity_species_adder"
             android:windowSoftInputMode="adjustUnspecified">
-            <!--android:parentActivityName=".SiteChooserActivity">-->
         </activity>
         <activity
 

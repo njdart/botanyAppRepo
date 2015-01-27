@@ -16,7 +16,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
     public static final int dbVersion = 1;
 
     public static final String sitesTableName = "site";
-    public static final String sitesTable_siteId = "siteId";
+    public static final String siteTable_siteId = "siteId";
     public static final String siteTable_siteName = "siteName";
     public static final String siteTable_siteOSGridRef = "osRef";
     public static final String siteTable_siteTimeStamp = "siteDate";
@@ -58,7 +58,7 @@ public class DatabaseUtils extends SQLiteOpenHelper {
             specimenTable_specimenSpecimenPhoto + " TEXT ); ";
 
     private static final String createSitesTableQuery = "CREATE TABLE " + sitesTableName + " (" +
-            sitesTable_siteId + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            siteTable_siteId + " INTEGER," +
             siteTable_siteName + " TEXT, " +
             siteTable_siteTimeStamp + " DOUBLE, "+
             siteTable_siteOSGridRef + " TEXT); ";

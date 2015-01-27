@@ -62,10 +62,10 @@ public class UserDataSource {
                 while(cursor.moveToNext()){
 
                     User user = new User(cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userName)),
-                            cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userPhoneNumber)),
-                            cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userEmail))
+                                         cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userPhoneNumber)),
+                                         cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userEmail))
                             );
-
+                    user.setId(cursor.getInt(cursor.getColumnIndex(DatabaseUtils.userTable_userId)));
                     users.add(user);
                 }
             }
@@ -92,9 +92,7 @@ public class UserDataSource {
         List<String>  words =  new ArrayList<String>();
 
         String selectQuery = "SELECT "+ DatabaseUtils.plantTable_plantLatinName +" FROM " + DatabaseUtils.plantsTableName + "  WHERE "+ DatabaseUtils.plantTable_plantLatinName + " LIKE  '%"+string+"%';";
-        System.out.println(selectQuery);
         Cursor cursor = database.rawQuery(selectQuery,null);
-        System.out.println("CURSOR: " + cursor.toString());
         if(cursor.getCount()>0) {
             while (cursor.moveToNext()) {
                 words.add(cursor.getString(cursor.getColumnIndex(DatabaseUtils.plantTable_plantLatinName)));
@@ -103,42 +101,47 @@ public class UserDataSource {
         return words;
     }
 
+    public User findById(int id){
+        String selectQuery = "SELECT * FROM " + DatabaseUtils.userTableName + "  WHERE "+ DatabaseUtils.userTable_userId + " = " + id + " LIMIT 1";
+        Cursor cursor = database.rawQuery(selectQuery,null);
+        if(cursor.getCount()>0) {
+            cursor.moveToFirst();
+            User u = new User(cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userName)),
+                            cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userPhoneNumber)),
+                            cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userEmail)));
+            u.setId(cursor.getInt(cursor.getColumnIndex(DatabaseUtils.userTable_userId)));
+        }
+        return null;
+    }
+
         public User FindByName(String s) {
 
             String selectQuery = "SELECT * FROM " + DatabaseUtils.userTableName + "  WHERE " + DatabaseUtils.userTable_userName + "= '" + s + "';";
-            System.out.println(selectQuery);
             Cursor cursor = database.rawQuery(selectQuery, null);
             if (cursor.getCount() > 0) {
-                while (cursor.moveToNext()) {
-                    User user = new User(cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userName)), cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userPhoneNumber)), cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userEmail)));
-                    return user;
-                }
-            } else {
-                return null;
+                cursor.moveToFirst();
+                User user = new User(cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userName)),
+                                     cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userPhoneNumber)),
+                                     cursor.getString(cursor.getColumnIndex(DatabaseUtils.userTable_userEmail)));
+                user.setId(          cursor.getInt(   cursor.getColumnIndex(DatabaseUtils.userTable_userId)));
+                return user;
             }
-
-
             return null;
         }
 
-    public String FindByNamegetIndex(String s) {
+    public int FindByNameGetIndex(String s) {
 
         String selectQuery = "SELECT * FROM " + DatabaseUtils.userTableName + "  WHERE " + DatabaseUtils.userTable_userName + "= '" + s + "';";
-        System.out.println(selectQuery);
         Cursor cursor = database.rawQuery(selectQuery, null);
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                String user = cursor.getString(cursor.getColumnIndex(DatabaseUtils.sitesTable_siteId));
-                return user;
+                int id = cursor.getInt(cursor.getColumnIndex(DatabaseUtils.userTable_userId));
+                return id;
             }
-        } else {
-            return null;
         }
-
-
-        return null;
+        return -1;
     }
-    }
+}
 
 
 

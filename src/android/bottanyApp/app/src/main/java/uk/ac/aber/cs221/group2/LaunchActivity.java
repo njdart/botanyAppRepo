@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,7 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,51 +38,72 @@ import uk.ac.aber.cs221.group2.utils.UserDataSource;
 
 public class LaunchActivity extends BaseActivity  {
     AutoCompleteTextView textView;
-    UserDataSource userdb;
-    public static List<String> autoCompleteEntries;
+    AutoCompleteTextView reservesView;
+
+    UserDataSource userDataSource;
+    SiteDataSource siteDataSource;
+    PlantDataSource plantDataSource;
+
+    public static List<String> autoCompleteNames;
+    public static List<String> autoCompleteReserves;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-        userdb = new UserDataSource(this);
-        userdb.open();
-        if (savedInstanceState == null) {
-            //Add fragments here
-        }
+
+        textView = (AutoCompleteTextView)findViewById(R.id.editNameAutoComplete);
+        reservesView = (AutoCompleteTextView)findViewById(R.id.autoCompleteReserveNames);
+
+        //Create and open connections to the databases
+        userDataSource = new UserDataSource(this);
+        siteDataSource = new SiteDataSource(this);
+        plantDataSource = new PlantDataSource(this);
+        userDataSource.open();
+        siteDataSource.open();
+        plantDataSource.open();
 
         //Run the background thread
-        InitThread i = new InitThread(new PlantDataSource(this).open(), this);
+        InitThread i = new InitThread(plantDataSource, this);
         i.execute();
 
+        //Autocomplete users details. No need to check for validity, entries should already
+        // exist in the autocomplete and therefore the database
+        updateAutocompleteAdapters();
+        textView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AutoCompleteTextView temp = textView;
 
-        autoCompleteEntries = userdb.findAllNames();
-        System.out.println(autoCompleteEntries.size());
-        if(autoCompleteEntries.size()>0){
-            System.out.println(autoCompleteEntries.size());
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,autoCompleteEntries) ;
-        textView = (AutoCompleteTextView) findViewById(R.id.editNameAutoComplete);
-        //textView.setOnItemClickListener(actvClicked);
-        textView.setAdapter(adapter);
-            textView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    AutoCompleteTextView temp = textView;
-                    //System.out.println(temp.getText());
-                    User user = userdb.FindByName(temp.getText().toString());
-                    EditText phone = (EditText) findViewById(R.id.editPhoneNumber);
-                    EditText email = (EditText) findViewById(R.id.editEmail);
-                    phone.setText(user.getUserPhoneNumber());
-                    email.setText(user.getUserEmail());
-                }
-            });
+                User user = userDataSource.FindByName(temp.getText().toString());
+                EditText phone = (EditText) findViewById(R.id.editPhoneNumber);
+                EditText email = (EditText) findViewById(R.id.editEmail);
+                phone.setText(user.getUserPhoneNumber());
+                email.setText(user.getUserEmail());
+            }
+        });
+    }
 
-        }}
+    public void updateAutocompleteAdapters(){
+        //find all the existing resources for autocompleting names and reserves
+        userDataSource.open();
+        siteDataSource.open();
+        autoCompleteNames = userDataSource.findAllNames();
+        autoCompleteReserves = siteDataSource.findAllNames();
 
-    public void newVisitOnClick(View buttonView){
+        ArrayAdapter<String> namesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, autoCompleteNames);
+        textView.setAdapter(namesAdapter);
+
+        ArrayAdapter<String> reservesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, autoCompleteReserves);
+        reservesView.setAdapter(reservesAdapter);
+    }
+
+    public void onNewVisitClick(View buttonView){
         boolean errors = false;
         EditText name = (EditText) findViewById(R.id.editNameAutoComplete);
         EditText phone = (EditText) findViewById(R.id.editPhoneNumber);
         EditText email = (EditText) findViewById(R.id.editEmail);
+        AutoCompleteTextView reserveName = (AutoCompleteTextView) findViewById(R.id.autoCompleteReserveNames);
 
         //Validate the name field
         if(name.length() < 3 || name.length() > 25){
@@ -119,26 +138,45 @@ public class LaunchActivity extends BaseActivity  {
             }
         }
 
-        if(errors){
-            return;
+        if(reserveName.getText().toString().length() <= 0){
+            errors = true;
+            reserveName.setError("That does not look like a reserve name");
+        } else {
+            boolean found = false;
+            for(String r : siteDataSource.findAllNames()){
+                if(r.toLowerCase().toLowerCase().equals(reserveName.getText().toString().toLowerCase())) {
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                errors = true;
+                reserveName.setError("No reserve found by that name");
+            } else {
+                reserveName.setError(null);
+            }
         }
-        else {
+
+
+        if(!errors) {
             //we're good to move on!
             User user = new User(name.getText().toString(),phone.getText().toString(),email.getText().toString());
-            userdb = new UserDataSource(this);
+            userDataSource = new UserDataSource(this);
 
-            if(userdb.FindByName(user.getName())==null){
-                userdb.create(user);
+            if(userDataSource.FindByName(user.getName())==null){
+                user.setId((int)userDataSource.create(user));
+                System.out.println("Inserting a user with id " + user.getUserId());
             }
 
             //and save the current user for this session
-            User.CurrentUser = user;
-            Intent intent = new Intent(this, SiteChooserActivity.class);
+            User.CurrentUser = userDataSource.FindByName(user.getName());
+            Visit.CurrentVisit = siteDataSource.findByName(reserveName.getText().toString());
+            Intent intent = new Intent(this, SpecimenAdder.class);
             startActivity(intent);
         }
     }
 
-    public class InitThread extends AsyncTask {
+    public class InitThread extends AsyncTask<String, Void, String> {
 
         PlantDataSource plantDataSource;
         Context context;
@@ -149,11 +187,49 @@ public class LaunchActivity extends BaseActivity  {
         }
 
         @Override
-        protected Object doInBackground(Object[] params) {
+        protected String doInBackground(String... params) {
             try {
 
+                System.out.println("===Init thread starting===");
+                //////////////////////////////////////
+                // update the reserves list
+                //////////////////////////////////////
+
+                System.out.println("INIT: Updating reserve list");
+
+                URL url = new URL("http://users.aber.ac.uk/mta2/groupapi/getReserves.php");
+                // Read all the text returned by the server
+                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+                String str;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((str = in.readLine()) != null)
+                {
+                    stringBuilder.append(str);
+                }
+                in.close();
+
+                SiteDataSource sitedb = new SiteDataSource(LaunchActivity.this);
+                sitedb.open();
+                JSONArray a = new JSONArray(stringBuilder.toString());
+                System.out.println("Downloaded string: " + a.toString());
+
+                for(int i = 0; i<a.length();i++){
+                    Visit v = new Visit(a.getJSONObject(i).getString("LocationName"),
+                                        a.getJSONObject(i).getString("LocationOS"));
+                    v.setDescription(a.getJSONObject(i).getString("Description"));
+                    v.setId(Integer.parseInt(a.getJSONObject(i).getString("ReserveID")));
+                    autoCompleteNames.add(v.getVisitName());
+                    sitedb.create(v);
+                    System.out.println("added reserve " + v.getVisitName());
+                }
+                System.out.println("INIT: Reserve Updated Successfully");
+
+
+                ///////////////////////////////////////
+                //Update the latin names plant database
+                ///////////////////////////////////////
+                System.out.println("INIT: Updating Latin Names database");
                 long rows = plantDataSource.getRows();
-                System.out.println("ROWS: " + rows);
                 if(rows > 1l) {
                     System.out.println("A table exists by the name of plants and it has data, skipping db upgrade!");
                 } else {
@@ -184,44 +260,14 @@ public class LaunchActivity extends BaseActivity  {
                     //Dont bother saving anything of the decoded json array, just do the transaction really fast!
                     plantDataSource.jsonTransaction(new JSONObject(result).getJSONArray("plantList"));
 
-                    plantDataSource.close();
                     long timeToProcess = System.currentTimeMillis() - startTime;
                     System.out.println(String.format("DB done processing in %2.2f seconds (%2.2f for the download)", (float) timeToProcess / 1000, (float) timeToDownload / 1000));
-                    Toast.makeText(context, "Plant Database is now up to date!", Toast.LENGTH_LONG).show();
+
+                    System.out.println("INIT: Latin Names Database Updated Successfully");
                 }
 
-                //////////////////////////////
+                System.out.println("===Init thread completed successfully===");
 
-                DefaultHttpClient httpclient2 = new DefaultHttpClient(new BasicHttpParams());
-                HttpPost httppost2 = new HttpPost("http://users.aber.ac.uk/mta2/groupapi/getLocations.php");
-                // Depends on your web service
-                httppost2.setHeader("Content-type", "application/json");
-
-                InputStream inputStream2 = null;
-                String result2 = null;
-                HttpResponse response2 = httpclient2.execute(httppost2);
-                HttpEntity entity2 = response2.getEntity();
-
-                inputStream2 = entity2.getContent();
-                // json is UTF-8 by default
-                BufferedReader reader2 = new BufferedReader(new InputStreamReader(inputStream2, "UTF-8"), 8);
-                StringBuilder sb2 = new StringBuilder();
-
-                String line2 = null;
-                while ((line2 = reader2.readLine()) != null) {
-                    sb2.append(line2 + "\n");
-                }
-                result2 = sb2.toString();
-
-                SiteDataSource sitedb = new SiteDataSource(LaunchActivity.this);
-                sitedb.open();
-                JSONArray a = new JSONArray(result2);
-                //ArrayList<Visit> locations = new ArrayList<Visit>();
-                for(int i = 0; i<a.length();i++){
-                    Visit v = new Visit(a.getJSONObject(i).getString("LocationName"),a.getJSONObject(i).getString("LocationOS"));
-                    sitedb.create(v);
-                    System.out.print("added" +v.getVisitName()+ " "+v.getVisitOS());
-                }
             } catch (JSONException e){
                 System.out.println("Error, bad json?");
                 e.printStackTrace();
@@ -237,7 +283,13 @@ public class LaunchActivity extends BaseActivity  {
             } finally {
                 return null;
             }
+        }
 
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            System.out.println("Processing post init thread adapters");
+            updateAutocompleteAdapters();
         }
     }
 }

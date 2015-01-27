@@ -93,11 +93,6 @@ public class SpecimenDataSource {
 
         }
 
-        public Visit FindByName(String s){
-            //work on this
-            return null;
-        }
-
     }
 
 
