@@ -58,7 +58,7 @@ INSTALLATION
 
 Android
 --------------------------------------------------------------------------------
-The Android application can be installed by running the "botanyApp.apk" file on 
+The Android application can be installed by running the "android.apk" file on 
 any Android device Version 4.0+. To do this, you need to go to Settings -> 
 Security -> Enable checkbox "Unknown Sources" to allow non-PlayStore 
 applications to be installed. It runs its own local database(SQLite) to store 
@@ -74,15 +74,17 @@ Website
 The website does not need to be installed. Go to this URL to access it:
 http://users.aber.ac.uk/daw54/group_website/
 Features that involve editing or deleting data from the database requires a 
-password. That password is: *****.
+password. That password is: "g2n8A".
 Links to Server API and Session storage are fixed. These need to be changed if
 the server changes.
 Majority of data in database is test data and so discrepencies in data are to 
 be expected. For example, OS grid references and Latitude and Longitude data 
 do not always match up on the map.
+There is a config.php file which holds website configurations.
 
 Server
 --------------------------------------------------------------------------------
 To create the exact, empty database we use for our system, you need to run the 
-SQL table creation queries found in "name.php". The API command scripts are used 
-by both the Android application and the website.
+SQL table creation queries found in "src/server/table_queries.txt". The 
+API command scripts are used by both the Android application and the website.
+There is a config.php file which holds API configurations.
