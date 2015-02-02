@@ -1,4 +1,6 @@
 <?php
+include "config.php";
+session_save_path($CONFIG["session"]);
 session_start();
 ?>
 <html>
