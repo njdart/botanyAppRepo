@@ -27,23 +27,35 @@
     \subsection{Web Interface}
         This section displays the envisioned design of the Website Layout.
 
-        \subsubsection{Web Homepage}
-            The Homepage has a central search bar to search the database for visit records and species information. The navigation bar at the top remains consistent over all pages with breadcrumbs just below to ensure ease of navigation. There is a link to the site map in the footer which also remains consistent. There will be a heading welcoming the user, alongside information regarding the nature and purpose of the website (Fig~\ref{fig:indexWebpage}).
+        \subsubsection{Homepage}
+           The Homepage is the first page that the user will encounter. Included in the home page, there is a central search bar to search the database for specific species, which will allow for easier searching from the start, so users can get straight into searching for a specific specimen. The navigation bar at the top remains consistent over all pages, and this will contain the main pages that the user will be accessing. The user will be able to become authenticated through the means of a form that will be contained within the header and once authenticated, be able to logout. This is essential to the user, due to there is certain features of the website that will be unavailable without authentication and this will be constant throughout the website. The main body contains a welcoming heading and text that describes the purpose of the website and information about how to use the site (Fig~\ref{fig:indexWebpage}).
 
-        \subsubsection{Plant Database Page}
-            The plant database provides access to the entire database using the search bar to search plants by name. The search results will be displayed as a list. At the side there is a sorting bar which contains various drop down menus of search filters to refine the search if required. The user can then click a record which will be linked to the plants details (4.7). The Add Plant button will link the user to the Add record page (Fig~\ref{fig:plantDbWeb}).
+        \subsubsection{Reserves}
+            The reserves page will list all of the reserves in a table that will fit the width of the container that it is in. In each reserve table row, there will be a button to click to view the reserve specimens, which will take the user to the plants database page where only the reserve specimens in question will be displayed (figure). With authentication, the user will have two more buttons available within each table row. The first is the option to delete the reserve, which on click, the user will be prompted with a confirmation to ensure that there is no mistake. The second button will be the button to edit the reserve details (figure). On clicking the button, the user will be taken to a page that will allow editing to the reserve. Above the table, there will be a button to take the user to the page that will allow adding reserves. (Fig~\ref{fig:plantDbWeb}).
 
-        \subsubsection{Add Record Page}
-            This page allows the user to add a new record to the database. The user will be asked to provide information such as scientific name, pronunciation, common name, origin and location alongside an image that can be uploaded to the database upon clicking the save button (Fig~\ref{fig:viewWeb}). 
+        \subsubsection{Add Reserve}
+           The add reserves page will allow the user to add a reserve to the database, which users can then assign specimens to said reserve. There will be input fields to add reserve information such as location name and grid reference.  (Fig~\ref{fig:viewWeb}). 
         
-        \subsubsection{Plant Details Overlay}
-            The specific plant page allows the user to access data about individual plants. Above the picture there are links to edit and remove the records giving the user the ability to update the data about the plant. A where to find button links to a map of the location based from GPS coordinates (Fig~\ref{fig:editWeb}).
+        \subsubsection{Edit Reserve}
+           The edit reserve page will hold the same input fields as the add reserve page, but the data that is held within the reserve record will be displayed already in the input fields. Once submitted, the user will be redirected to the reserves page. (Fig~\ref{fig:editWeb}).
 
-        \subsubsection{Plant Location Overlay}
-            Upon clicking the Where to Find button, a map will open displaying the location of the selected plant using the location from the database. Note: Use of Google Maps (Fig~\ref{fig:mapWeb}).
+        \subsubsection{Plant Specimens}
+           The plant database provides access to the entire database using the search bar to search specimens by species name, reserve and by who created the record. The search results will be displayed within a table, with the default displaying all records. The table will only allow a limited number of specimen records at a time due to pagination which will be accessible on the sorting bar. The sorting bar will be viewable and accessible on the side of the specimen table, where it allows the user the option to order the table to their chosen criteria, where default will be by specimen ID. With the masses of records that will be held within this table, allowing the user to order by their own criteria will allow them to find the information they are looking for faster. This is where the details of the pagination and table status will be displayed. Manipulating the table of specimens will be done through AJAX to make it more dynamic, while understandably it is not a requirement, it will ensure easier and faster use.
+The user will be able to clink on a link that will be held within the table to view specific specimen’s details (specimen ID). Above the table, there will be a button that will link the user to a page that will allow them to add a specimen to the database
+(Fig~\ref{fig:mapWeb}).
 
-        \subsubsection{Remove Plant Record}
-        If the user chooses to remove a record they can do so by pressing the Remove button where they will be prompted to verify their choice before the entry is deleted (Fig~\ref{fig:delete}).
+        \subsubsection{Specimen}
+     The specimen page allows the user to view specific details of the specimen that is viewed. The page will be split into two sections, where the left side will be where the details of the specimen will be contained in a vertical table. On the right side of the page container, will be the two specimen images. If the image does not exist, then there be a default image that will be displayed instead. Below the images, there is a button which will then create a pop up to display the location on a map, according to its latitude and longitude. The website will be using the GoogleMap API for this due to its ease of use and familiarity with users (Figure). If the user has been authenticated, then there will be two buttons next to the map display button. The first is the button to delete the specimen, which on click, will be presented with an alert to confirm whether the specimen should be deleted or not. The other button will be the option to edit the specimen that has been displayed, where when the user clicks on this button, it will take them to the page that will allow them to edit the specimens details  (Fig~\ref{fig:delete}).
+
+ \subsubsection{ Add Specimen}
+     This page allows the user to add a new specimen record to the database. The user will be asked to provide their individual information and specimen details such as the species name, its reserve, abundance and its latitude and longitude alongside two options to submit scene and specimen images that can be uploaded to the database upon clicking the save button.  (Fig~\ref{fig:delete}).
+
+ \subsubsection{Edit Specimen}
+        The edit specimen page is exactly like the add specimen however, the details of the specimen in question are inserted into the form values. The main difference is that the user details will not be able to be changed and the specimen reserve is also not changeable. The images will remain the same, unless the images of the specimen are updated. Once the specimen has be updated, it will be redirected to the specimen in questions page.  (Fig~\ref{fig:delete}).
+
+
+
+
 
     \subsection{Mockups}
 
