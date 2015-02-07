@@ -18,6 +18,8 @@ build/
 *.pdf
 *.synctex.gz
 *.toc
+*.out
+*.gz(busy)
 
 ## minutes 
 !docs/minutes/*.pdf

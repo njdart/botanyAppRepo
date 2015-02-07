@@ -70,33 +70,34 @@
 \subsection{Significant Server Components}
 
 	\begin{tabular}{r p{10cm}}
-	Server & A database and a set of Web API commands to allow manipulation. \\
-	Database & a MySQL database where we will store all data for our system \\
+		Server & A database and a set of Web API commands to allow manipulation. \\
+		Database & a MySQL database where we will store all data for our system \\
+		Web API & A list of commands that allow the Android and website systems to access and manipulate data in the Database. \\
+	\end{tabular}
+	\begin{itemize}
+		\item Tables 
 		\begin{itemize}
-			\item Tables 
-			\begin{itemize}
-				\item botany_users
-				\item botany_records
-				\item botany_specimens
-				\item botany_reserves
-				\item botany_resources
-			\end{itemize}
+			\item botany\_users
+			\item botany\_records
+			\item botany\_specimens
+			\item botany\_reserves
+			\item botany\_resources
 		\end{itemize}
-	Web API & A list of commands that allow the Android and website systems to access and manipulate data in the Database. \\
-		\begin{itemize}
-			\item addRecord.php - Adds a record to the database
-			\item addReserve.php - Adds a reserve to the database
-			\item addResource.php - Adds a resource (picture) to the database
-			\item  authenticateAdmin.php - Checks an inputted password and tells if it's the same as the stored password
-			\item getRecord.php - Returns a record 
-			\item getRecords.php - Returns all records
-			\item getReserve.php - Returns a reserve
-			\item getReserves.php - Returns all reserves
-			\item getResource.php - Returns a resource (picture)
-			\item getSpecimen.php - Returns a specimen
-			\item getSpecimens.php - Returns all specimens
-			\item removeReserve.php - Removes a reserve
-			\item removeSpecimen.php - Removes a specimen
-			\item updateReserve.php - Updates a reserve
-			\item updateSpecimen.php - Updates a specimen
-		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item addRecord.php - Adds a record to the database
+		\item addReserve.php - Adds a reserve to the database
+		\item addResource.php - Adds a resource (picture) to the database
+		\item  authenticateAdmin.php - Checks an inputted password and tells if it's the same as the stored password
+		\item getRecord.php - Returns a record 
+		\item getRecords.php - Returns all records
+		\item getReserve.php - Returns a reserve
+		\item getReserves.php - Returns all reserves
+		\item getResource.php - Returns a resource (picture)
+		\item getSpecimen.php - Returns a specimen
+		\item getSpecimens.php - Returns all specimens
+		\item removeReserve.php - Removes a reserve
+		\item removeSpecimen.php - Removes a specimen
+		\item updateReserve.php - Updates a reserve
+		\item updateSpecimen.php - Updates a specimen
+	\end{itemize}
