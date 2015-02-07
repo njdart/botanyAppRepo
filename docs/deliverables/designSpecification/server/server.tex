@@ -1,7 +1,54 @@
 \subsection{Interface}
     These are the commands that the web API will be using to maintain the database and receive commands.
+
     \begin{itemize}
+        \item AuthenticateAdmin - Checks the inputted password against the listed valid password to allow website use.
+        \begin{itemize}
+        	\item Headers required:
+        	\begin{itemize}
+           		 \item none
+       		 \end{itemize}
+        	\item POST arguments:
+        	\begin{itemize}
+           		 \item password : String
+      		 \end{itemize}
+       		 \item Statuses:
+        	\begin{itemize}
+        		\item 200 OK:
+           	 	\begin{itemize}
+        			\item boolean : true/false
+           		 \end{itemize}
+        		\item 400 Bad Request
+        		\item 500 Internal Server Error
+
+        	\end{itemize}
+	   \end{itemize}
+
+
+	
+
         \item AddRecord - adds a record to the database, and returns the record ID. Used by the Android application.
+        \begin{itemize}
+        	\item Headers required:
+        	\begin{itemize}
+          	  \item none
+        	\end{itemize}
+        	\item POST arguments:
+        	\begin{itemize}
+        	    \item record : Record
+        	\end{itemize}
+        	\item Statuses:
+        	\begin{itemize}
+        		\item 200 OK:
+           	 	\begin{itemize}
+        			\item record ID : Integer
+           	 	\end{itemize}
+        		\item 400 Bad Request
+        		\item 500 Internal Server Error
+       		 \end{itemize}
+	\end{itemize}
+
+        \item AddReserve - adds a reserve to the database, and returns the reserve ID.
         \begin{itemize}
         \item Headers required:
         \begin{itemize}
@@ -9,18 +56,18 @@
         \end{itemize}
         \item POST arguments:
         \begin{itemize}
-            \item record : Record
+            \item reserve : Reserve
         \end{itemize}
         \item Statuses:
         \begin{itemize}
         	\item 200 OK:
             \begin{itemize}
-        		\item record ID : Integer
+        		\item reserve ID : Integer
             \end{itemize}
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
-	    \end{itemize}
+	 \end{itemize}
     
 
         \item RemoveSpecimen - removes a single specimen from the database, provided an ID and an administrator password. Used by the web site.
@@ -41,7 +88,7 @@
         	\item 401 Unauthorized
         	\item 500 Internal Server Error
         \end{itemize}
-	    \end{itemize}
+
 
         \item GetSpecimen - returns a single specimen result, which includes data from the record the specimen belongs to when provided an ID. Used by the web site.
         \begin{itemize}
@@ -62,7 +109,27 @@
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
+
+
+	\item UpdateSpecimen - updates a specific Specimen by ID.
+        \begin{itemize}
+        \item Headers Required:
+        \begin{itemize}
+              	\item none
+        \end{itemize}
+        \item POST Arguments:
+        \begin{itemize}
+              	\item specimenID : int
+		\item password : String
+        \end{itemize}
+        \item Statuses: 
+        \begin{itemize}
+              	\item 200 OK :
+              	\item 400 Bad Request
+              	\item 500 Internal Server Error
+        \end{itemize}
 	    \end{itemize}
+
 
         \item GetSpecimens - returns a list of specimen results, which include data from the record the specimen belongs to, searching and sorting them by defined criteria. Used by the web site.
         \begin{itemize}
@@ -83,7 +150,6 @@
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
-	    \end{itemize}
 
         \item AddResource - adds a file resource to the server, and returns an ID. Used by the Android application and the web site.
         \begin{itemize}
@@ -104,7 +170,6 @@
         	\item 400 Bad Request
         	\item 500 Internal Server Error
         \end{itemize}
-		\end{itemize}
 	
         \item GetResource - returns a file resource when provided with a resource ID. Used by the web site.
         \begin{itemize}
@@ -126,7 +191,28 @@
         	\item 500 Internal Server Error
         \end{itemize}
 	    \end{itemize}
-	    
+
+		\item GetReserve - returns a single reserve result, which holds data about a location used by records. 
+        \begin{itemize}
+        \item Headers required: 
+        \begin{itemize}
+            \item none
+        \end{itemize}
+        \item POST Arguments:
+        \begin{itemize}
+        	\item reserveID : Integer
+        \end{itemize}
+        \item Statuses:
+        \begin{itemize}
+        	\item 200 OK :
+            \begin{itemize}
+                \item reserve : Reserve
+            \end{itemize}
+        	\item 400 Bad Request
+        	\item 500 Internal Server Error
+        \end{itemize}
+	    \end{itemize}	    
+
         \item GetReserves - returns a list of distinct locations used by records in the database for use by the Android application.
         \begin{itemize}
         \item Headers Required:
@@ -140,6 +226,46 @@
         \item Statuses: 
         \begin{itemize}
               	\item 200 OK : array of Reserve
+              	\item 400 Bad Request
+              	\item 500 Internal Server Error
+        \end{itemize}
+	    \end{itemize}
+
+
+	\item UpdateReserve - updates a specific Reserve by ID.
+        \begin{itemize}
+        \item Headers Required:
+        \begin{itemize}
+              	\item none
+        \end{itemize}
+        \item POST Arguments:
+        \begin{itemize}
+              	\item reserveID : int
+		\item password : String
+        \end{itemize}
+        \item Statuses: 
+        \begin{itemize}
+              	\item 200 OK :
+              	\item 400 Bad Request
+              	\item 500 Internal Server Error
+        \end{itemize}
+	    \end{itemize}
+
+
+	\item RemoveReserve - removes a specific Reserve by ID.
+        \begin{itemize}
+        \item Headers Required:
+        \begin{itemize}
+              	\item none
+        \end{itemize}
+        \item POST Arguments:
+        \begin{itemize}
+              	\item reserveID : int
+		\item password : String
+        \end{itemize}
+        \item Statuses: 
+        \begin{itemize}
+              	\item 200 OK : 
               	\item 400 Bad Request
               	\item 500 Internal Server Error
         \end{itemize}
