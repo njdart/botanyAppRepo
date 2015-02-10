@@ -6,9 +6,9 @@
 	\begin{landscape}
 		\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|l|}
 		\hline
-		Test Ref & Req Test & Test Content & Input & Output & Pass & \\ \hline
+		Test Ref & Req & Test Content & Input & Output & Pass & \\ \hline
 		SE-F-001 & FR1 & Startup of Software & Touch App logo & Botany App should open & Android app opens without error. & \\ \hline
-		SE-F-002 & FR2 & Valid username allows user to login & Enter valid username of size 3>UN>10 e.g Alexander & If provided along with a valid email and phone number, App should confirm successful login and proceed to App. & Splash screen showing correct Username is showing. & \\ \hline
+		SE-F-002 & FR2 & Valid username allows user to login & Enter valid username of size 3\textless UN\textless 10 e.g Alexander & If provided along with a valid email and phone number, App should confirm successful login and proceed to App. & Splash screen showing correct Username is showing. & \\ \hline
 		SE-F-003 & FR2 & Invalid username does not allow user to login & Enter username that is outside of the required length &  App should display an error & An error message in a box should pop up saying that the username has to be between 3 and 10 characters long.  & \\ \hline
 		SE-F-004 & FR2 & Empty Username is not accepted & Have the username empty & An error message shows next to the input & User is denied access to rest of the App & \\ \hline
 		SE-F-005 & FR2 & Valid phone number is accepted & Enter a valid phone number e.g. 0780836924 & Along with a valid email and username the user can go to the next part of the app & An error message does not show next to the input and the user moves on & \\ \hline 
@@ -42,7 +42,7 @@
 	\begin{landscape}
 		\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|l|}
 		\hline
-		Test Ref & Req Being Tested & Test Content & Input & Output & Pass Criteria & \\ \hline
+		Test Ref & Req & Test Content & Input & Output & Pass Criteria & \\ \hline
 		SE-F-027 & FR2 & Valid Username allows user to login. & Login with valid Username. & Username displayed on website & Session maintained under that usename& \\ \hline
 		SE-F-028 & FR2 & Invalid Username does not allow user to login. & Login with invalid Username, such as ``$!\$!\$$'' & Error message returned & Session not created & \\ \hline
 		SE-F-029 & FR3 & User able to navigate and view Reserve database & Click reserve link & the Reserve database loads and displays & \\ \hline
@@ -70,7 +70,7 @@
 	\begin{landscape}
 		\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|l|}
 		\hline
-		Test Ref & Req Being Tested & Test Content & Input & Output & Pass Criteria & \\ \hline
+		Test Ref & Req & Test Content & Input & Output & Pass Criteria & \\ \hline
 		SE-F-045 & FR7 & Server allows an addition of a valid record via a POST request) & Valid JSON-formatted record via POST & Returns status code 200 OK and ID of the record & Status code 200 OK and record present in the database & \\ \hline
 		SE-F-046 & FR7 & Server does not allow an addition of an invalid record via a POST request) & Invalid JSON-formatted record via POST & Returns status code 400 & Status code 400 and record not present in the database & \\ \hline
 		SE-F-047 & FR7 & Server allows an addition of a file resource via a POST request & A binary file via POST & Returns status code 200 OK and ID of the resource & Status code 200 OK and file present on server & \\ \hline
