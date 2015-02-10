@@ -6,9 +6,9 @@
 	\begin{landscape}
 		\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|l|}
 		\hline
-		Test Ref & Req & Test Content & Input & Output & Pass & \\ \hline
+		Test Ref & Req Test & Test Content & Input & Output & Pass & \\ \hline
 		SE-F-001 & FR1 & Startup of Software & Touch App logo & Botany App should open & Android app opens without error. & \\ \hline
-		SE-F-002 & FR2 & Valid username allows user to login & Enter valid username of size 3\textless UN\textless 10 e.g Alexander & If provided along with a valid email and phone number, App should confirm successful login and proceed to App. & Splash screen showing correct Username is showing. & \\ \hline
+		SE-F-002 & FR2 & Valid username allows user to login & Enter valid username of size 3>UN>10 e.g Alexander & If provided along with a valid email and phone number, App should confirm successful login and proceed to App. & Splash screen showing correct Username is showing. & \\ \hline
 		SE-F-003 & FR2 & Invalid username does not allow user to login & Enter username that is outside of the required length &  App should display an error & An error message in a box should pop up saying that the username has to be between 3 and 10 characters long.  & \\ \hline
 		SE-F-004 & FR2 & Empty Username is not accepted & Have the username empty & An error message shows next to the input & User is denied access to rest of the App & \\ \hline
 		SE-F-005 & FR2 & Valid phone number is accepted & Enter a valid phone number e.g. 0780836924 & Along with a valid email and username the user can go to the next part of the app & An error message does not show next to the input and the user moves on & \\ \hline 
@@ -42,7 +42,7 @@
 	\begin{landscape}
 		\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|l|}
 		\hline
-		Test Ref & Req & Test Content & Input & Output & Pass Criteria & \\ \hline
+		Test Ref & Req Being Tested & Test Content & Input & Output & Pass Criteria & \\ \hline
 		SE-F-027 & FR2 & Valid Username allows user to login. & Login with valid Username. & Username displayed on website & Session maintained under that usename& \\ \hline
 		SE-F-028 & FR2 & Invalid Username does not allow user to login. & Login with invalid Username, such as ``$!\$!\$$'' & Error message returned & Session not created & \\ \hline
 		SE-F-029 & FR3 & User able to navigate and view Reserve database & Click reserve link & the Reserve database loads and displays & \\ \hline
@@ -70,7 +70,7 @@
 	\begin{landscape}
 		\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|l|}
 		\hline
-		Test Ref & Req & Test Content & Input & Output & Pass Criteria & \\ \hline
+		Test Ref & Req Being Tested & Test Content & Input & Output & Pass Criteria & \\ \hline
 		SE-F-045 & FR7 & Server allows an addition of a valid record via a POST request) & Valid JSON-formatted record via POST & Returns status code 200 OK and ID of the record & Status code 200 OK and record present in the database & \\ \hline
 		SE-F-046 & FR7 & Server does not allow an addition of an invalid record via a POST request) & Invalid JSON-formatted record via POST & Returns status code 400 & Status code 400 and record not present in the database & \\ \hline
 		SE-F-047 & FR7 & Server allows an addition of a file resource via a POST request & A binary file via POST & Returns status code 200 OK and ID of the resource & Status code 200 OK and file present on server & \\ \hline
@@ -78,17 +78,10 @@
 		SE-F-049 & FR7 & Server does not allow the client to get a specimen with a specified specimen ID that does not exist & A POST request with the desired ID specified & Returns status code 400 & Status code 400, nothing returned  & \\ \hline
 		SE-F-050 & FR7 & Server allows client to get a file resource with a specified resource ID that exists & A POST request with the desired ID specified & Returns status code 200 OK and a file & Status code 200 OK and the desired file & \\ \hline
 		SE-F-051 & FR7 & Server does not allow the client to get a file resource with a specified resource ID that does not exist & A POST request with the desired ID specified & Returns status code 400 & Status code 400 no file returned & \\ \hline
-		SE-F-051 & FR7 & Server allows client to get a number of specimens based on a specified offset and range & A POST request with desired offset and range & Returns status code 200 OK, desired number of specimens starting from desired offset are returned as a valid JSON-formatted specimen & Status code 200 OK and an array of valid specimens, limited by desired range and offset & \\ \hline
-		SE-F-051 & FR7 & Server allows client to get a number of specimens based on a specified search value by name, user, location, reserveID & A POST request with desired search value and search type & Returns status code 200 OK, only desired specimens based on search value and search type are returned as a valid JSON-formatted specimen array & Status code 200 OK and an array of valid specimens, limited by search value and search type & \\ \hline
-		SE-F-051 & FR7 & Server allows client to get a number of specimens based on a specified search value by name, user, location and searched by reserveID & A POST request with desired search value and search type and specified reserveID & Returns status code 200 OK, only desired specimens based on search value, search type and reserveID are returned as a valid JSON-formatted specimen array & Status code 200 OK and an array of valid specimens, limited by search value, search type and reserveID & \\ \hline
-		SE-F-051 & FR7 & Server allows client to get a number of specimens ordered by ascending or descending and values name, user, abundance, location & A POST request with desired order method and order type & Returns status code 200 OK, all specimens ordered by desired order method and order type are returned as a valid JSON-formatted specimen array & Status code 200 OK and an array of valid specimens, ordered by desired order type and order value & \\ \hline
-		SE-F-051 & FR7 & Server allows client to get a number of specimens based on a specified search value by name, user, location, reserveID and ordered by ascending or descending and values name, user, abundance, location & A POST request with desired search value, search type, order method and order value & Returns status code 200 OK, only desired specimens based on search value and search type are returned as a valid JSON-formatted specimen array ordered by desired order type and order value & Status code 200 OK and an array of valid specimens, limited by search value and search type, ordered by order method and order type & \\ \hline
-		SE-F-051 & FR7 & Server allows client to get a number of specimens based on a specified search value by name, user, location and searched by reserveID and ordered by ascending or descending and values name, user, abundance, location & A POST request with desired search value, search type, reserveID, order method and order value & Returns status code 200 OK, only desired specimens based on search value, search type and reserveID are returned as a valid JSON-formatted specimen array ordered by desired order type and order value & Status code 200 OK and an array of valid specimens, limited by search value and search type, ordered by order method and order type & \\ \hline
 		SE-F-052 & FR7 & Server allows client to get a number of specimens, filtered by record location name & A POST request with the desired location name specified & Returns status code 200 OK and a JSON-formatted array of relevant records found & Status code 200 OK and an array of valid relevant records with same or similar location name & \\ \hline
 		SE-F-053 & FR7 & Server allows client to remove a specified specimen with a specified valid specimen ID &  A POST request with the desired specimen ID to be deleted &  Returns status code 200 OK &  Status code 200 OK and the specimen is removed from the database & \\ \hline
 		SE-F-054 & FR7 & Server does not allow client to remove a specified specimen with a specified specimen ID that is invalid&  A POST request with the desired specimen ID to be deleted &  Returns status code 400 &  Status code 400 and the specimen is not removed from the database & \\ \hline
-		SE-F-055 & FR7 & Server allows client to edit a specified specimen with a specified valid ID & A POST request with the desired ID and a JSON-formatted specimen & Returns status code 200 OK  & Status code 200 OK and specimen is changed in the database & \\ \hline
-		SE-F-056 & FR7 & Server does not allow client to edit a specified specimen with a specified invalid ID & A POST request with the desired ID and a JSON-formatted specimen & Returns status code 400  & Status code 400 and specimen is not changed in the database & \\ \hline
-		SE-F-056 & FR7 & Server does not allow client to enter any malicious data into the database & A POST request with malicious data & Returns status code 500 & Status code 500 and no data is affected in the database & \\ \hline
+		SE-F-055 & FR7 & Server allows client to edit a specified specimen with a specified valid ID & A post request with the desired ID and a JSON-formatted specimen & Returns status code 200 OK  & Status code 200 OK and specimen is changed in the database & \\ \hline
+		SE-F-056 & FR7 & Server does not allow client to edit a specified specimen with a specified invalid ID & A post request with the desired ID and a JSON-formatted specimen & Returns status code 400  & Status code 400 OK and specimen is not changed in the database & \\ \hline
 		\end{longtable}
 	\end{landscape}
