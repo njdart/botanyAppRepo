@@ -1,0 +1,65 @@
+config.php
+The config.php file will be used to establish the connection to the mysql database using the servers API at the start of a new session.
+$CONFIG=array
+	api="file location"
+	session="where the session is stored"
+The config.php will need to be be included in all php scripts.
+
+
+authenticate.php
+The authenticate.php script will be used to authenticate an admin user on the site. Who through entering a correct password will have access to certain features of the site that regular users will not have. Such as deletion of reserves and specimens. The authentication will be checked to the servers API. If a correct password is entered then the user will see a message confirming it. If an incorrect password is used then a different message will be see saying that a wrong password has been used.
+
+
+delete_curl.php
+This script is used to delete specific specimens from the servers database. This feature will only become available once a user has entered a correct password to show that they are an admin user. PHP CURL is used so that the website can communicate with the server.
+
+
+edit_specimens.php
+This script is similar to the delete script. It uses PHP CURL to communicate with the server. This function is also only available to admin users.
+
+
+footer.php
+This script will be included on every page. It will contain a small website logo in the centre of the footer. 
+
+
+get_reseve.php
+This will be used to call all the data about the reserves stored on the server. PHP CURL will be used to communicate with the server and to decode the JSON that the API will be using so that it can be displayed on the reserves page.
+
+
+header.php
+The header will be responsible for creating a session and storing it for the users. The header script will be responsible for declaring the doctype and meta tags such as description, keywords, content type, CSS and font links, validation as well as JAVASCRIPT and the title. 
+
+
+img_curl.php
+This is used to find get the specimen and scene photo from the database. PHP CURL is again used to communicate with th server.
+
+
+logout.php
+This script is used to logout an admin user who has entered a correct password to the site. It will end the session that is being used and display a message telling the user that they have been logout of the site.
+
+
+
+map.php
+The contains the JAVASCRPIT to be able to view the plants location within a Google maps pop up. It will use the latitude and longitude variables of each specimen to give an accurate location.
+
+
+specimens_curl.php
+This will be used to access the information and each individual specimen. CURL is again used to access the server.
+
+
+resdelete_curl.php
+This will work in a very similar way to the delete_curl.php script but will be used for deleting whole reserves instead of just individual specimens. The user will need the be logged in for this function to work. 
+
+
+reserves_curl.php
+Much like the record_curl.php it will be used to get information form the server, but information about the reserves rather then the specimen details.
+
+
+specimens_search.php
+This will be used to search for certain specimens within the specimen page on the website. Users will be able to search by Species Name, Location Name and The User Name of people using the site.
+
+
+filter.php
+This will also be used on the plants page on the website and will allow users to order by Species Name, Location, User Name, Date and Abundance and allow results to be show in ascending or descending order.
+
+
