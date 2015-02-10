@@ -8,8 +8,24 @@
 		\hline
 		Test Ref & Req Test & Test Content & Input & Output & Pass & \\ \hline
 		SE-F-001 & FR1 & Startup of Software & Touch App logo & Botany App should open & Android app opens without error. & \\ \hline
-		SE-F-002 & FR2 & Valid username allows user to login & Enter valid username of size 3>UN>10 & App should confirm successful login and proceed to App. & Splash screen showing correct Username is showing. & \\ \hline
+		SE-F-002 & FR2 & Valid username allows user to login & Enter valid username of size 3>UN>10 e.g Alexander & If provided along with a valid email and phone number, App should confirm successful login and proceed to App. & Splash screen showing correct Username is showing. & \\ \hline
 		SE-F-003 & FR2 & Invalid username does not allow user to login & Enter username that is outside of the required length &  App should display an error & An error message in a box should pop up saying that the username has to be between 3 and 10 characters long.  & \\ \hline
+		SE-F-004 & FR2 & Empty Username is not accepted & Have the username empty & An error message shows next to the input & User is denied access to rest of the App & \\ \hline
+		
+		SE-F-005 & FR2 & Valid phone number is accepted & Enter a valid phone number e.g. 0780836924 & Along with a valid email and username the user can go to the next part of the app & An error message does not show next to the input and the user moves on & \\ \hline 
+		SE-F-006 & FR2 & Empty phone number is not accepted & Have the phone number empty & An error message shows next to the input & User is denied access to rest of app & \\ \hline
+		SE-F-007 & FR2 & Invalid phone number is not accepted & Enter an invalid phone number e.g "a" & An error message shows next to the input & User is denied access to rest of app & \\ \hline
+		SE-F-008 & FR2 & Valid email is accepted & Enter a valid email address e.g. this@that.com & Along with a valid phone number and username the user can go to the next part of the app & Splash screen showing correct Username is showing. & \\ \hline
+		SE-F-009 & FR2 & Empty Email is not accepted & Have the email address empty & An error message shows next to the input & User is denied access to rest of app & \\ \hline
+		SE-F-010 & FR2 & Invalid email is not accepted & Enter an invalid email address e.g. this@that & An error message shows next to the input & User is denied access to rest of app & \\ \hline 
+		SE-F-011 & FR2 & App gets the GPS information from the phone & User waits for valid GPS signal & Message is shown to say that a valid GPS signal has been found & User is allowed to move on without entering a site name & \\ \hline
+		SE-F-012 & FR2 & Manual site name is accepted & User enters the name of the site e.g Aberystwyth & Button is clickable & User is allowed to move on & \\ \hline
+		SE-F-013 & FR3 & Latin name auto-completes & User enter the first part of a latin name e.g. gara & A list of all the Latin names with the input appears & All the Latin names that appear all have the input in them & \\ \hline
+		SE-F-014 & FR4 & Plant photo button works & User touches the plant photo button & User's phone goes to the inbuilt camera & User able to take picture with inbuilt camera & \\ \hline 
+		SE-F-015 & FR4 & Site photo button works & User touches the site photo button & User's phone goes to the inbuilt camera & User able to take picture with inbuilt camera & \\ \hline
+		SE-F-016 & FR4 & Plant photo is saved & User takes a plant photo & Picture is taken and takes the place of the plant photo button & The photo is saved, and ready to be submitted & \\ \hline
+		SE-F-017 & FR4 & Site photo is saved & User take site photo & Picture is taken and takes the place of the  site photo button & The photo is saved ready to be submitted & \\ \hline
+		
 		SE-F-004 & FR2 & Valid Location name storage & When prompted, enter a Location Name that is <50 & App should proceeed to record selection & Record selection screen is showing & \\ \hline
 		SE-F-004 & FR3 & User allowed to add a plant name to the database. & Enter plant name to the database via android app. & States that plant details are successfully added to the database. & Plant details successfully added to the database. & \\ \hline
 		SE-F-005 & FR4 & User allowed to add Species Details. & Enter Species Details to the database via android app. & States that plant details are successfully added to the database. & Plant details successfully added to the database. & \\ \hline
