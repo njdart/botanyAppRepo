@@ -50,13 +50,9 @@ public class SiteDataSource {
         values.put(DatabaseUtils.siteTable_siteTimeStamp, visit.getVisitDate());
         values.put(DatabaseUtils.siteTable_siteId, visit.getVisitId());
 
-        try {
-            if(findByName(visit.getVisitName()) == null){
-                //It doesnt exist in the database, add it
-                return database.insert(DatabaseUtils.sitesTableName, null, values);
-            }
-        } catch (SQLiteConstraintException e){
-            //swallow it, it's not unique
+        if(findByName(visit.getVisitName()) == null){
+            //It doesnt exist in the database, add it
+            return database.insert(DatabaseUtils.sitesTableName, null, values);
         }
         return visit.getVisitId();
     }
@@ -133,7 +129,7 @@ public class SiteDataSource {
     }
 
     public Visit findByName(String s) {
-        String selectQuery = "SELECT * FROM " + DatabaseUtils.sitesTableName + ";";
+        String selectQuery = "SELECT * FROM " + DatabaseUtils.sitesTableName + " WHERE " + DatabaseUtils.siteTable_siteName  + " = '" + s + "' LIMIT 1;";
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery(selectQuery, null);
         if (cursor.getCount() > 0) {
