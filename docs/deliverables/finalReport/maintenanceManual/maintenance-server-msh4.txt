@@ -63,10 +63,46 @@ Things to watch for when making changes
 	scripts, with no modularity whatsoever. Therefore, extra caution should be
 	practised when editing: a change in one variable, or a slight rearrangement
 	of the statement order could generate unexpected behaviour in seemingly 
-	unrelated sections of code in he same file.
+	unrelated sections of code in the same file.
 
 Physical limitations
 
+	As an interpreted language, PHP is fairly slow compared to compiled and
+	JIT-compiled languages. For low-to-moderate size use cases, it's performance
+	is perfectly reasonable, but it lacks the high scalability offered by some
+	competing technologies. 
 	
+	The technical limitations are, therefore, modest: a mainstream 2006-era CPU
+	such as a Core 2 Duo, and 1GB of RAM, would have little issue running the
+	API provided it is not heavily used. As the incoming requests rise, though,
+	hardware will begin to fail to meet the demand, requiring higher-performance
+	hardware. Eventually, one would not be able to obtain a faster computer, 
+	and load balancing across several machines becomes necessary, which the API 
+	architecture does not allow at the moment (as it uses local file storage
+	to save resources). At this point, resource storage would need to be moved 
+	to a separate server, and the API source code would require change. 
+	
+	Regarding the database: MySQL is a good database engine for all but the
+	highest-performance scenarios. Switching the database engine to InnoDB will
+	bring further performance benefits, but that would remove the support for 
+	referential integrity, currently built into the DB schema, and support for
+	transactions, used by the API. Workarounds can be implemented, however.
+	Considering the project lacks the ability to provide a revenue stream
+	of any sort, purchasing expensive licences for more capable databases such
+	as Oracle Database or Microsoft SQL Server is inconceivable, and according
+	to projections, unlikely to ever become necessary.
 
 Rebuilding and testing
+
+	The web API requires no rebuilding. Copying the API files inside the Apache
+	'public_html' directory, with PHP installed of course, should suffice.
+	
+	The database can be set up by executing the table creation scripts 
+	(found at 'table_queries.txt) on a blank MySQL database.
+	
+	Once the database is set up, one should edit the '/includes/config.php' file
+	and configure it with the database address, name, username and password,
+	the path to the server root, and the path to the resources storage.
+	An admin password should also be picked at this point. 
+	Ensure all PHP scripts have write access to the resources directory.
+	
