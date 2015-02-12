@@ -1,0 +1,262 @@
+config.php
+	Creates an array that will give the main location to the API and declares the directory that the sessions will be  stored in.
+
+###########################################################################################
+header.php
+	includes config.php
+
+	Error reporting
+		On the occurrence of an error, error messages are removed and not displayed
+
+	Meta data
+		This declares the meta information for the site such the author and the site description
+
+	title declaration
+		Echos the title of the page that is declared on each of the individual pages
+	CSS links
+		Links to all the CSS files 
+
+	Login functions
+		If the password session does not exist, then the authentication form is displayed. If the authentication session exists, then a logout is displayed 
+
+	Navigation
+		Creates a constant header throughout the website.
+		
+
+	Messages
+		When the authentication or logout method is called, it will either display a success, error, or logout message 
+
+###########################################################################################
+footer.php
+	The footer will be ending specific div tags from the page and the header.
+
+###########################################################################################
+Authenticate.php	
+	includes config.php 
+
+	Check authentication form is submitted
+		THe script checks if a password has been submitted and attaches the string to a session.
+	
+	Authentication CURL POST request
+		First gets the password session variable and sets the variables.Then uses a variable to connect to the API method through the config file. It will then set the url, the number of POST variables and the data being sent. The server will then reply with a response message stating if the password is correct, it is true, where a message will be generated. If it is false, then a login error message will be sent to the previous page and the session will be destroyed.
+
+###########################################################################################
+index.php
+	Title variable
+		The title is attached to a variable that is then called within the header
+
+	Include header.php
+
+	Simple search form
+		This form will search for a species name that matches any of the data that is inputted inside of the form. The user will be taken to the plant species page where the search results will be displayed.
+
+	Include footer.php
+	
+		
+##########################################################################################
+reserves.php
+	Title variable
+		The title is attached to a variable that is then called within the header
+	
+	include header.php
+
+	include reserves_curl.php
+		includes the script that gets all the reserves from the server.
+
+	Declaration of reserve variables
+		A for each loop will go through all of the reserve objects and attach them to a new variable. The new variable will then attach the data for a variable that is easily recognizable and usable.
+
+	Admin functions
+		If the password session exists, then the user will be able to have more options for each reserves. If they are authenticated, then the user can delete and edit the reserve. If they are not, they do not get the option to do this.
+	
+##########################################################################################
+reserves_curl.php
+	includes config.php 
+		includes the config file that holds the information to access the web API and the session directory
+	
+		First it uses a variable to connect to the API method through the config file. It will then set the url, the number of POST variables and the data being sent, which will get the order and method function, and the methods declared for that function. THe data is then sent, and then received back from the server, which will contain the JSON object, which will then be decoded and assigned to a variable for practical use. The request is then sent, and the connection is closed
+	
+
+
+#####################################################################################
+add_reserve.php
+	Title variable
+		The title is attached to a variable that is then called within the header
+
+	Include header.php
+	
+	Add reserve form
+		This form will be used to input the data that will be sent to the web API via a POST request.
+	
+	addReserve POST request	
+		First it uses a variable to connect to the api method through the config file. The page will have a form inside of it that will POST data, that will then be caught within an array. This array will then be encoded into json and this is assigned to a variable. The script will then set the url, the number that is being posted which will be the single record and then get a response. The POST request will then be closed.
+		
+	include footer.php
+
+#####################################################################################
+edit_reserve.php
+	Title declaration
+		The title is attached to a variable that is then called within the header
+
+	include header.php
+
+	Authentication session confirmation
+		If there is no session, then the user will be redirected to the reserve page.
+	
+	include get_reserve.php
+	
+	Edit reserve form
+		This form will be the same as the add reserve function, however, the values will be already there from an existing reserve, that will get the reserveID that has been posted. Th reserveID will be in a hidden input type so the ID will be recognized for the editing of the reserve. This form will be used to input the data that will be sent to the web API via a POST request.
+	
+	editReserve POST request	
+		First the POST request checks that the location name has been submitted, and then it uses a variable to connect to the api method through the config file. The page will have a form inside of it that will POST data, that will then be caught within an array. This array will then be encoded into JSON and this is assigned to a variable. The script will then set the url, the number that is being posted which will be the single record and then get a response. The POST request will then be closed. Once the script has finished, the user will be redirected to the reserves page.
+		
+	include footer.php
+	
+#####################################################################################
+get_reserve.php
+	
+	include config.php
+	
+	getReserve POST request
+	First it uses a variable to connect to the API method through the config file. The script will be using a GET method to get the resID that the user is editing. The script will then set the url, the number that is being posted which will be the single record and then get a response. Once the response is available, it will be decoded from JSON to an array to an object. The POST request is then closed.
+	
+
+#####################################################################################
+plant_specimens.php
+	Title variable
+		The title is attached to a variable that is then called within the header
+
+	include header.php
+	
+	include specimens_curl.php
+	
+	include filter.php
+	
+	
+	***MAXIM DESCRIPTION***
+	
+#####################################################################################
+filter.php
+	This file starts with a new div tag that will contain the form that will allow the user to filter and sort the results. Once the this div section ends, the pagination will be there, where they will just be buttons.
+
+
+#####################################################################################
+add_specimens.php
+	Title variable
+		The title is attached to a variable that is then called within the header
+	
+	include header.php 
+	
+	include reserve_list.php
+	
+	add specimen form
+		This form will allow the user to input the data concerning the specimen. This will then be posted to be available to be used in the POST request.
+		
+	include footer.php
+	
+	add_resource POST request
+		First it uses a variable to connect to the API method through the config file. It will then set out the options for the CURL POST request. However, if there is no image uploaded, then it will be assigned -1, which will make it that it does not exist. There will be another script basically the same for the other image that will be uploaded.
+	
+	Addrecord
+		An array will be created for all of the fields that will be inputted in the form. Before the submit, they will be empty, and once the form is submitted, the form will POST the data into the array. There will be two arrays for this, the first will be specifically for the specimen and the second will be for the user details. The two arrays will be then encoded into json and sent to the API. 
+		
+#####################################################################################
+reserve_list.php
+	This script will use a POST request that will get all of the reserves, and then put them into an array so they can only existing reserves can be selected.
+
+
+#####################################################################################
+edit_specimens.php
+	Title variable
+		The title is attached to a variable that is then called within the header
+	
+	include header.php 
+	
+	include record_curl.php
+	
+	Edit specimen form
+		This form will allow the user to input the data concerning the specimen. The existing data for the specimens will already be inputted. There will be a hidden field for the ID so that the specimen that is meant to be edited is updated. This will then be posted to be available to be used in the POST request.
+		
+	include footer.php
+	
+	editResource POST request
+		First it uses a variable to connect to the API method through the config file. It will then set out the options for the CURL POST request. However, if there is no image uploaded, then it will be assigned -1, which will make it that it does not exist. There will be another script basically the same for the other image that will be uploaded.
+	
+	editRecord POST request
+		An array will be created for all of the fields that will be inputted in the form. Before the submit, they will be empty, and once the form is submitted, the form will POST the data into the array. There will be two arrays for this, the first will be specifically for the specimen and the second will be for the user details. The two arrays will be then encoded into json and sent to the API. 
+
+#####################################################################################
+specimen.php
+	Title variable
+		The title is attached to a variable that is then called within the header
+
+	include record_curl.php
+	
+	include header.php
+	
+	include img_curl.php
+	
+	Specimen checker
+		If a user were to go the specimen page with no id submitted, then they user will be redirected to plant_specimens page.
+		
+	LatLong Map
+		Because the map is in a separate page, the lat and the long will be included into a session, where it can then be transferred when the map pop up is shown.
+		
+	Specimen table
+		The specimen details will be stored inside of a html table, where they will be presented in a horizontal alignment. Each field data will be received by the record_curl post request include, where it will then be available through through the decoded object. The images will be the same, but with two POST requests for each of the images.
+		
+	Default Picture
+		On the occurrence that a specimen does not have an image attached to it, there will be a Jquery script that will give a default image in its place. If there is an error with getting the image, then it will replace the broken image link with the default.
+		
+	Session Authentication options	
+		If the password session exists, then the user will be able to have two more options for the specimen. They can either edit the specimen or they can delete the specimen. However, if the session does not exist, then the buttons will not exist.
+	
+	include footer.php
+#####################################################################################
+remove_curl.php
+	include config.php
+	
+	removeSpecimen POST Request
+		First it uses a variable to connect to the API method through the config file. Then an array will be created that will be storing the id by use of the GET method, and checking if there is a  password session.
+		The script will then set the url, the number that is being posted which will be the single record and then get a response. If the response is 200 then the specimen is deleted. The POST request is then closed.
+
+#####################################################################################
+about.php
+	Title variable
+		The title is attached to a variable that is then called within the header
+		
+	include header.php
+	
+	include footer.php
+#####################################################################################
+img_curl.php
+	include config.php
+	
+	getResource POST request
+		There will be two separate POST requests that will do the exact same thing, however, they will be different because there are two pictures that will be recieved. First it uses a variable to connect to the API method through the config file. Then an array will be created that will be storing the resourceID that is declared through the record_curl.php page. The script will then set the url, the number that is being posted which will be the single record and then get a response. If the response is 200 then the specimen is deleted. The POST request is then closed.
+		
+#####################################################################################
+logout.php
+	include config.php
+	
+	Logout function
+		As the user is only allowed to have administrative permissions if the password session exists, the user will want to logout. This page basically just destroys the session, which it then creates a message that notifies the user that the user has been logged out.
+
+
+#####################################################################################
+map.php
+	include config.php
+	
+	Google Map API
+		The Google map will be in its own separate page because we will be using an iframe to view the map through, that will be viewable on the specimens page. The script first gets the API from Google, then creates the location where it wants to centre onto, which the information will be stored inside of a session. The function is initialised with specific options such as the zoom and the type of map. The map is then set. In the body, the map is then created.
+
+
+#####################################################################################
+res_remove.php
+	include config.php
+	
+	removeRemove POST Request
+		First it uses a variable to connect to the API method through the config file. Then an array will be created that will be storing the id by use of the GET method, and checking if there is a  password session.
+		The script will then set the url, the number that is being posted which will be the single record and then get a response. If the response is 200 then the specimen is deleted. The POST request is then closed.		
+#####################################################################################
