@@ -1,19 +1,72 @@
 Interfaces
 
-    The server's PHP scripts that implement the Web API functionality use the 
+    The server's PHP scripts that implement the web API functionality use the 
     JSON standard to receive structured data from and transmit structured data 
     to its clients. JSON is used in conjunction with the widely accepted HTTP
     protocol, the JSON being carried in either the POST headers (in client 
     requests), or the HTTP response body (in server responses).
     
-    All Web API commands need to be called via the HTTP protocol using the POST
+    All web API commands need to be called via the HTTP protocol using the POST
     method, and need to be supplied the required parameters (either plain text,
-    or JSON format, described in detail in the design specification).v
+    or JSON format, described in detail in the design specification).
+	
+	A common settings interface is used for storing environmental variables 
+	such as database credentials, administrator password, and server root.
+	Those are all stored in /includes/config.php inside the API
+	directory.
 
 Suggestions for improvements
-
+	
+	A number of improvements could be made, although the basic functionality of
+	the API is complete up to the specification standard.
+	
+	The choice of platform and programming language for the API was limited to 
+	the available technologies on Central. This does not represent a real-life
+	situation, where the developers would likely have administrative control
+	over the server the API is hosted on, allowing them a more flexible choice
+	of technology and platform. Discarding PHP in favour of a more modern
+	language: 
+	1. Would reduce future maintenance issues.
+	2. Would have sped up the development of the product, and will speed up
+	   the development of any future improvements.
+	3. Make quality assurance easier and more efficient.
+	4. Could potentially reduce the hardware requirements of the API,
+	   depending on the selected replacement technology stack (Java EE/ASP.NET).	
+	
+	Therefore, a transition from PHP to Ruby on Rails, Python+Django, or even 
+	Node.js would bring long-term benefits to the project, with Java EE and 
+	ASP.NET bringing immediate savings from hardware and electricity costs.
+	
+	Another, more specific improvement, is the inclusion of 'pretty URLs'.
+	An example of that would be the current '/getResouce.php' web method, which 
+	could be rewritten as '/resource/{id}' followed by the desired resource ID.
+	This requires relaxation of the requirement to use POST requests 
+	exclusively, as in many cases GET requests make more sense (a RESTful 
+	approach would suit the use-case perfectly, in fact).
+	Another example: '/reserve/remove/{id}' replacing '/removeReserve.php'.
+	
 Things to watch for when making changes
 
+	Separate web methods in the web API are reasonably separated. A change
+	in one method should not induce undesired changes in others. However, all
+	methods share a single point of communication, and therefore -- failure:
+	the database. The database structure is rigidly defined, and as of now,
+	the code base does not allow one to easily change table and column names.
+	This means that any changes to the database schema, even trivial ones such
+	as renames, need to be carefully accounted for in the API source code, and
+	thoroughly tested before being released into production.
+	
+	While separate web methods are independent of each other, the same can not
+	be said of the separate routines that constitute the methods. The code was
+	produced in a rush, and little to no time was left for refactoring. Many
+	parts of the source code are therefore in the form of long, function-less
+	scripts, with no modularity whatsoever. Therefore, extra caution should be
+	practised when editing: a change in one variable, or a slight rearrangement
+	of the statement order could generate unexpected behaviour in seemingly 
+	unrelated sections of code in he same file.
+
 Physical limitations
+
+	
 
 Rebuilding and testing
