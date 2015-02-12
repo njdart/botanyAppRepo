@@ -1,3 +1,11 @@
+Files
+	
+	The API accesses the resources directory defined in '/includes/config.php'
+	heavily. One should refrain from manually accessing the contents of that
+	directory, and altering the directory structure. The PHP scripts should
+	be allowed read/write access to said directory.
+	The API does not access files outside of the resources directory.
+	
 Interfaces
 
     The server's PHP scripts that implement the web API functionality use the 
