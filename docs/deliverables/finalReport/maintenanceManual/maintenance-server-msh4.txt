@@ -1,0 +1,19 @@
+Interfaces
+
+    The server's PHP scripts that implement the Web API functionality use the 
+    JSON standard to receive structured data from and transmit structured data 
+    to its clients. JSON is used in conjunction with the widely accepted HTTP
+    protocol, the JSON being carried in either the POST headers (in client 
+    requests), or the HTTP response body (in server responses).
+    
+    All Web API commands need to be called via the HTTP protocol using the POST
+    method, and need to be supplied the required parameters (either plain text,
+    or JSON format, described in detail in the design specification).v
+
+Suggestions for improvements
+
+Things to watch for when making changes
+
+Physical limitations
+
+Rebuilding and testing
