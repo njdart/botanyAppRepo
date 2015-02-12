@@ -1,184 +1,153 @@
 \subsection{Interface}
 	These are the server side scripts that will be used across the website.
 
-	\emph{Constants}
-	\begin{itemize}
-		\item Header
+		
+		\emph{Constants}
 		\begin{itemize}
-			\item session\_start();
-			\item Doctype
-			\item meta tags
-			\begin{itemize}
-				\item description
-				\item Keywords
-				\item authir
-				\item content type
-				\item CSS links
-				\item Font link
-				\item validation.js
-				\item \$title
-			\end{itemize}
-			\item Header/Div
-			\begin{itemize}
-				\item Logo
-			\end{itemize}
-		\end{itemize}
-
-		\item Nav
-		\begin{itemize}
-			\item Nav
-			\item include`breadcrumbs';
-		\end{itemize}
-		\item Footer 
-		\begin{itemize}
-			\item Site map link 
-			\item Icon
-		\end{itemize}
-			
+			\item `header.php'
+			\item `footer.php'
+			\item `config.php'
+			\item \$title
+	
 		\item config.php
 		\begin{itemize}
-			%%\$host = \"\";
-			%%\$port \= \"\";
-			%%\$user \= \"\";
-			%%\$password \= \"\";
-			%%\$dbname \= "";
-			%%mysql \= new mysql(\$...)
-			%%die statements
-			\item Address of Server
-			\item Admin Password
+			\item \$CONFIG
 		\end{itemize}
 
 		\item Index
 		\begin{itemize}
 			\item \$title
 			\item include `header.php';
-			\item include `nav.php';
-			\item text
-			\item include `simple\_search.php';
+			\item include `config.php';
 			\item text
 			\begin{itemize}
 				\item app link
 			\end{itemize}
 			\item include `footer.php';
-		\end{itemize}	
-
-		\item plants
-		\begin{itemize}
-			\item include `config.php';
-			\item \$title
-			\item include `header.php';
-			\item include `nav.php';
-			\item add\_plant\_record link
-			\item include `advanced\_search.php';
-			\item include `plant\_db\_declare.php';
-			\item include `plant\_sorting.php';
-			\item include `footer.php';
 		\end{itemize}
-		\item add\_plants\_record
+
+		\item About
+		\begin{itemize}
+			\item \$title
+			\item include `header.php';
+			\item include `config.php';
+			\item text
+			\begin{itemize}
+				\item app link
+			\end{itemize}
+			\item include `footer.php';
+		\end{itemize}		
+
+		\item reserves
 		\begin{itemize}
 			\item include `config.php';
 			\item \$title
 			\item include `header.php';
-			\item include `nav.php';
-			\item form(input)
-			\item if no image uploaded, default image else uploaded image
-			\item include `upload\_image.php';
-			\item include `save\_record.php';
-			\item a href `plants.php' cancel
+			\item include `reserves\_curl';
+			\item form(GET)
 			\item include `footer.php';
 		\end{itemize}
 		
-		\item plants\_record
+		\item add\_reserve
 		\begin{itemize}
 			\item include `config.php';
 			\item \$title
 			\item include `header.php';
-			\item include `nav.php';
-			\item \$specific record details
-			\item a href `edit\_plant\_record.php' edit
-			\item a href `delete\_plant\_record.php' remove
-			\begin{itemize}
-				\item delete prompt js
-			\end{itemize}
-			\item individual record photo or default image
-			\item a href `plants.php' where to find
-			\begin{itemize}
-				\item (plant\_map.js)
-			\end{itemize}
+			\item form(input)
+			\item include `footer.php';
+		\end{itemize}
+		
+		\item edit\_reserve
+		\begin{itemize}
+			\item include `config.php';
+			\item \$title
+			\item include `header.php';
+			\item include `get\_reseve.php';
+			\item form(input)
+			\item include `footer.php';
+		\end{itemize}
+		
+		\item specimen
+		\begin{itemize}
+			\item include `config.php';
+			\item \$title
+			\item include `header.php';
+			\item include `specimens\_curl.php';
+			\item include `filter.php';
+			\item map pop-up
+			\item include `footer.php';
+		\end{itemize}
+		
+		\item add\_specimen
+		\begin{itemize}
+			\item include `config.php';
+			\item \$title
+			\item include `header.php';
+			\item form(input)
+			\item if no image uploaded, default image else uploaded image
+			\item include `footer.php';
+		\end{itemize}
+		
+		\item edit\_specimen
+		\begin{itemize}
+			\item include `config.php';
+			\item \$title
+			\item include `header.php';
+			\item include `record\_curl.php';
+			\item form(input)
+			\item if no image uploaded, default image else uploaded image
+			\item include `footer.php';
+		\end{itemize}
+		
+		\item plant\_specimens
+		\begin{itemize}
+			\item include `config.php';
+			\item \$title
+			\item include `header.php';
+			\item include `specimens\_curl.php';
+			\item include `filter.php';
+			\item form(input)
 			\item include `footer.php';
 		\end{itemize}
 
-		\item edit\_record
-		\begin{itemize}
-			\item include `config.php';
-			\item \$title
-			\item include `header.php';
-			\item include `nav.php';
-			\item include `breadcrumbs.php';
-			\item \$individual record
-			\item a href `edit\_plant\_record.php' edit
-			\item a href `delete\_plant\_record.php' remove
-			\item \$individual record photo
-			\item a href `plants.php' where to find
-			\begin{itemize}
-				\item (plant\_map.js)
-			\end{itemize}
-			\item include `footer.php';
-		\end{itemize}
-	\end{itemize}
 
 \subsection{Detailed design}
 
-	\subsubsection{config.php}
-		config will open a link to the mysql database at the start of each new session, all changes to records and searches are reliant on this script.
-		\begin{verbatim}
-			$conn = mysql_connect(host=<localhost> 
-			port=3306 dbname=<nameofdatabase> 
-			user=<uid> password=<password>);
-		\end{verbatim}
-		The script will also include a few lines closing the link to the database at the end of the session as not to produce more connections to the database than needed.
+	\subsection{index.php}
+		This is the front page of the website to the user, it contains a description of the purpose of the site.
 
-	\subsubsection{plant\_sorting.php}
-		The plant data can be sorted in multiple different ways there will be a default sort using SORT\_REGULAR however the options of SORT\_STRING and SORT\_NUMERIC will also be available as required. The script will provide the user with an option of how they wish to sort the data.
+		
+	\subsection{about.php}
+		This page contains a short description about the app as well as the team.
 
-	\subsubsection{simple\_search.php}
-		The simple search script will search the database for a string matching the users input, all entries in the database containing that string will be returned. It will require a connection to the database from config.php, if there is no connection then the script will return an error message to notify the user of a problem with the connection to the database.
+		
+	\subsection{reserves.php}
+		This page contains a script to display the data from the json object for the reserves. It includes scripts to retrieve the json oject as well as to delete the json ojects.
 
-	\subsubsection{advanced\_search.php}
-		The script for advanced search will allow for searches by string, ID, data type, location and user. The user should select their search type before inputting, the results shall be returned unless no result is found or there is an issue with the connection to the database in which case an error message shall be returned to the user. 
+		
+	\subsection{add\_reserve.php}
+		The page gives the user the ability to input data for a new reserve in to a html form. This page also contains a script to collect the data into a json object and a curl method to send the json object to the server.
 
-	\subsubsection{edit\_plant\_record.php}
-		This script will take data input from the client side to form an update in an object oriented way. The update will set the field to be updated to the new data. The script will query if the connection to the server is valid before committing the changes, it will also return a confirmation to the user that the record has been updated or that there was a problem connecting to the server (they have timed out) so they can try again.
+		
+	\subsection{edit\_reserve.php}
+		Edit reserve returns the contents of a json object for reserve to a html form allowing the user to edit its details. A script to encode the reserve to a json object is also included in the page as well as a curl methodto send the json object to the server.
 
-	\subsubsection{delete\_plant\_record.php}
-		The script for deleting a record will be very straight forward, using an object oriented approach the script will request for the record to be deleted by using its ID. Much like the edit this script will return a confirmation to the user that the record has successfully been deleted or that there was a problem with the connection to the server.
+		
+	\subsection{specimen.php}
+		Specimen has a script to return the data from the json object to a table to display as a friendly interface to the user. There is scripts for navigation within the record, these create links to the next and previous specimens within the record. There is a script within the page which produces a pop-up map (using google maps) displaying the location of where this specimen was found. This page also contains scripts to include the site and specimen images.
 
-	\subsubsection{upload\_image.php}
-		This script should prompt the user to choose an image file to upload first, when an image file has been selected an upload function will collect the data about the file where it can be validated to check it matches the requirements we have set (eg: file type and size). The image file, if compatible, will be uploaded and the script will return a success message, otherwise a message will be returned to the user explaining which parameter is incorrect or if there is an issue with the connection to the server.
+		
+	\subsection{add\_specimen.php}
+		This page contains a html form to collect data from the user about a new specimen to be added. The page also contains a script to make the data into a new json object as well as a curl method to send the data to the server. There is a script to upload images which are then sent to a private folder via a curl method.
 
-	\subsubsection{regex validation}
-		validation will be done on the client side using javascript and regular expressions. Doing this allows us to use an onchange method when the user is inputting data with fixed parameters, such as what characters can be used, without putting extra load on the server.
+		
+	\subsection{edit\_specimen.php}
+		Edit specimen contains a script to retrieve the data from the specimen json object and places it in to a html form for the user to edit. There is also scripts to encode the edited data to a json object and to submit the object to the server via a curl method.
 
-	\subsubsection{Index.php}
-		The index script will be the home page for the web site, allowing users to read about the Botany Project, navigate the web site, search for a plant and download the app. There will be a header at the top of the page containing the Botany Group Project title and an image of the logo. The banner will be customised using CSS. Underneath there will be a navigation bar using the nav.php script. Below this there will be two text boxes which will be achieved using the echo function and will be customised to have a white background using CSS. Between the texts there will be a search bar controlled by simple\_search.php. At the bottom the footer.php will be included. A background image will be used for the homepage.
+		
+	\subsection{plant\_specimens.php}
+		Plant specimens contains a script which allows the user to search the database to find a specific species. This page also contains 
 
-	\subsubsection{Header.php}
-		The header will be responsible for creating a session for the user. The header script will be responsible used to declare the doctype and meta tags such as description, keywords, content type, CSS and font links, validation.js and title. 
-
-	\subsubsection{footer.php}
-		The footer will contain the site map link allowing users to access all the pages of the website. There will also be an image of the logo in the centre of footer.
-
-	\subsubsection{nav.php}
-		The navigation bar provides an easy reference for the contents of the web site and enables the user to navigate the web site conveniently. This will be achieved by attaching a div class to the navigation text with a href attribute, linking it to the corresponding pages. CSS will be used to style the navigation bar and links accordingly with the Web user interface design. Underneath there will be breadcrumbs included using the breadcrumbs script.
-
-	\subsubsection{Edit/add record}
-		Upon selecting an individual plant from the database, the plant along with its attributes and an image will be displayed by pulling it from the database using SQL. The user can find where to locate the plant by clicking the ‘Where to find’ button which will run the plant\_map.js script, loading Google maps javascript API. The user can then edit the plant’s information by clicking the edit button supplied, running the edit\_plant\_record.php script, loading the Edit Record page. This page will use the config.php script to form a database connection that will insert a table, ready to retrieve and print the selected fields of the plant chosen by the user. This will be achieved using pg\_query; selecting the required fields and echoing a table. A while loop will be used to read and  pull data from the database. Users can then edit plant information by filling in the form with the attributes assigned to a plant. The form is to be validated using javascript, identifying the required fields. If a required field is left blank, an alert will pop up requesting the user to fill the field in. The image can also be updated by clicking the supplied ‘Upload Image’ submit button, running the upload\_image.php script. Once the form has been edited by the user, they can then save the record using the Save button linked to the save\_record.php script. This will update the database with the new edited record. Users will also be given the option to add new plant records to the database. This page will be the same as the Edit Record page but with a blank form for the user to fill in.
-
-	\subsubsection{delete record}
-		Users are given the option to delete a specific plant record. A ‘remove’ button linked to the delete\_plant\_record.php script will be supplied to do this.
-
-	\subsubsection{delete confirmation pop up}
-		If a user clicks the remove button, a javascript alert pop up will be displayed confirming the deletion of a record. This has been included to avoid accidental deletions.
 
 	\subsubsection{config.php}
 		The config.php file will be used to establish the connection to the mysql database using the servers API at the start of a new session.
