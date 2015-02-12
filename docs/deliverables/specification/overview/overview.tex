@@ -27,7 +27,7 @@ PHP: http://php.net/
 		FR4 & Take a photo using an Android device by capturing a new photo or selecting one from the device's library \\
 		FR4 & Obtain location data from the GPS unit within and Android device to include in the recording \\
 		FR4 & Allow the user to enter data for each species
-		RESTATEMENT OF FUNCTIONAL REQUIREMENTS ???
+
 		\begin{itemize}
 			\item Typical location
 			\item Abundance using ``DAFOR'' scale
@@ -46,14 +46,18 @@ PHP: http://php.net/
 \subsubsection{Website (RPSRview)}
     The website fulfills the following roles:\\
     	\begin{tabular}{r | p{15cm}}
-    		FR3 & Add a species to a recording \\
-    		FR4 & Allow the user to enter data for each species\\
-			FR5 & Enables user to edit and remove existing specimen record details \\
-        	FR8 & Enables user to add with relevant data, edit and remove reserve records \\
+        		FR8 & Enables user to add with relevant data, edit and remove reserve records \\
     		FR9 & Allows user to search and browse specimen records through their reserve \\
+		EF1 & Log in to website using password for administrative privileges\\
+		EF2 & Add a species to a recording \\
+    		EF3 & Allow the user to enter data for each species\\
+		EF4 & Enables user to edit and remove existing specimen record details \\
         \end{tabular}
     The platform of execution of this subsystem will be the LAMP stack, making use of PHP as a scripting language and Apache2 as a HTTP server.
-        
+	\begin{verbatim}
+        		Note: EF stands for Extra functionality.
+	\end{verbatim}
+
 \subsubsection{Server (RPSRsrv)}
     The server plays an essential middle-man role in the system, providing persistent storage for RPSRview and RPSRrec,
     and allows for exchange of data (recordings) between the two. 
@@ -66,7 +70,7 @@ PHP: http://php.net/
 	\end{tabular}
     The platform of execution of this subsystem will be the LAMP stack. PHP, the language, and Apache2, the HTTP server, will support the Web API, while MySQL will provide the database back-end.
 
-\subsubsection{Interaction of Components}
+\subsection{Interaction of Components}
 	
 
 \subsubsection{External Interface Requirements}
