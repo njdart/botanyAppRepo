@@ -1,0 +1,116 @@
+Files
+	
+	The API accesses the resources directory defined in '/includes/config.php'
+	heavily. One should refrain from manually accessing the contents of that
+	directory, and altering the directory structure. The PHP scripts should
+	be allowed read/write access to said directory.
+	The API does not access files outside of the resources directory.
+	
+Interfaces
+
+    The server's PHP scripts that implement the web API functionality use the 
+    JSON standard to receive structured data from and transmit structured data 
+    to its clients. JSON is used in conjunction with the widely accepted HTTP
+    protocol, the JSON being carried in either the POST headers (in client 
+    requests), or the HTTP response body (in server responses).
+    
+    All web API commands need to be called via the HTTP protocol using the POST
+    method, and need to be supplied the required parameters (either plain text,
+    or JSON format, described in detail in the design specification).
+	
+	A common settings interface is used for storing environmental variables 
+	such as database credentials, administrator password, and server root.
+	Those are all stored in /includes/config.php inside the API
+	directory.
+
+Suggestions for improvements
+	
+	A number of improvements could be made, although the basic functionality of
+	the API is complete up to the specification standard.
+	
+	The choice of platform and programming language for the API was limited to 
+	the available technologies on Central. This does not represent a real-life
+	situation, where the developers would likely have administrative control
+	over the server the API is hosted on, allowing them a more flexible choice
+	of technology and platform. Discarding PHP in favour of a more modern
+	language: 
+	1. Would reduce future maintenance issues.
+	2. Would have sped up the development of the product, and will speed up
+	   the development of any future improvements.
+	3. Make quality assurance easier and more efficient.
+	4. Could potentially reduce the hardware requirements of the API,
+	   depending on the selected replacement technology stack (Java EE/ASP.NET).	
+	
+	Therefore, a transition from PHP to Ruby on Rails, Python+Django, or even 
+	Node.js would bring long-term benefits to the project, with Java EE and 
+	ASP.NET bringing immediate savings from hardware and electricity costs.
+	
+	Another, more specific improvement, is the inclusion of 'pretty URLs'.
+	An example of that would be the current '/getResouce.php' web method, which 
+	could be rewritten as '/resource/{id}' followed by the desired resource ID.
+	This requires relaxation of the requirement to use POST requests 
+	exclusively, as in many cases GET requests make more sense (a RESTful 
+	approach would suit the use-case perfectly, in fact).
+	Another example: '/reserve/remove/{id}' replacing '/removeReserve.php'.
+	
+Things to watch for when making changes
+
+	Separate web methods in the web API are reasonably separated. A change
+	in one method should not induce undesired changes in others. However, all
+	methods share a single point of communication, and therefore -- failure:
+	the database. The database structure is rigidly defined, and as of now,
+	the code base does not allow one to easily change table and column names.
+	This means that any changes to the database schema, even trivial ones such
+	as renames, need to be carefully accounted for in the API source code, and
+	thoroughly tested before being released into production.
+	
+	While separate web methods are independent of each other, the same can not
+	be said of the separate routines that constitute the methods. The code was
+	produced in a rush, and little to no time was left for refactoring. Many
+	parts of the source code are therefore in the form of long, function-less
+	scripts, with no modularity whatsoever. Therefore, extra caution should be
+	practised when editing: a change in one variable, or a slight rearrangement
+	of the statement order could generate unexpected behaviour in seemingly 
+	unrelated sections of code in the same file.
+
+Physical limitations
+
+	As an interpreted language, PHP is fairly slow compared to compiled and
+	JIT-compiled languages. For low-to-moderate size use cases, it's performance
+	is perfectly reasonable, but it lacks the high scalability offered by some
+	competing technologies. 
+	
+	The technical limitations are, therefore, modest: a mainstream 2006-era CPU
+	such as a Core 2 Duo, and 1GB of RAM, would have little issue running the
+	API provided it is not heavily used. As the incoming requests rise, though,
+	hardware will begin to fail to meet the demand, requiring higher-performance
+	hardware. Eventually, one would not be able to obtain a faster computer, 
+	and load balancing across several machines becomes necessary, which the API 
+	architecture does not allow at the moment (as it uses local file storage
+	to save resources). At this point, resource storage would need to be moved 
+	to a separate server, and the API source code would require change. 
+	
+	Regarding the database: MySQL is a good database engine for all but the
+	highest-performance scenarios. Switching the database engine to InnoDB will
+	bring further performance benefits, but that would remove the support for 
+	referential integrity, currently built into the DB schema, and support for
+	transactions, used by the API. Workarounds can be implemented, however.
+	Considering the project lacks the ability to provide a revenue stream
+	of any sort, purchasing expensive licences for more capable databases such
+	as Oracle Database or Microsoft SQL Server is inconceivable, and according
+	to projections, unlikely to ever become necessary.
+
+Rebuilding and testing
+
+	The web API requires no rebuilding. Copying the API files inside the Apache
+	'public_html' directory, with PHP installed of course, should suffice.
+	
+	The database can be set up by executing the table creation scripts 
+	(found at 'table_queries.txt) on a blank MySQL database.
+	
+	Once the database is set up, one should edit the '/includes/config.php' file
+	and configure it with the database address, name, username and password,
+	the path to the server root, and the path to the resources storage.
+	An admin password should also be picked at this point. 
+	Ensure all PHP scripts have write access to the resources directory.
+	
