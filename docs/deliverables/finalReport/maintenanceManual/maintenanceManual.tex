@@ -10,10 +10,10 @@
         The Android app is structured into several key areas: \\
         
         \emph{Activities}\\
-        Activity classes are bundled together and contain event listeners, ``Async Tasks'' and location listeners. They also contain all the validation for input fields as well as adding lists to ``AutoCompleteTextBoxs''. \\
+        Activity classes are bundled together and contain event listeners, ``AsyncTasks'' and location listeners. They also contain all the validation for input fields as well as adding lists to ``AutoCompleteTextBoxes''. \\
 
         \emph{Utilities}\\
-        The ``Utils'' package contains database utilities and classes for adding, searching, finding and deleting data from the databases. The following databases were implemented in the app:
+        The ``Utils'' package contains SQLite database utilities and classes for adding, searching, finding and deleting data from the databases. The following databases were implemented in the app:
         \begin{enumerate}
             \item Plants - Contains the Latin names
             \item Specimens - Contains specimens the user has take for upload
@@ -26,7 +26,7 @@
         These describe users, visits specimens and species and are used when reading/searching from and inserting into the database. The specimen class was not used as heavily as expected.\\
 
         \emph{Layout}\\
-        The layout of the Android activities are described in xml files, whose names follow the ``activity\_<activityName>'' naming convention and are located in ``src/main/res/layouts''.
+        The layout of the Android activities are described in xml files, whose names follow the ``activity\_\textless activityName\textgreater'' naming convention and are located in ``src/main/res/layouts''.
 
     \subsubsection{Significant Algorithms}
         The following details significant algorithms that may require alterations in the future.
@@ -40,7 +40,7 @@
         Upload of the final list of reserves is done in another ``Async Task'' in the ``ReviewActivity'' where a connection to the API is established and the data from the databases serialised to JSON and uploaded. At present the JSON is constructed manually. The list of specimens is then cleared (however the UI is not updated).
     
     \subsubsection{The Main Data Areas}
-        The app makes extensive use of an ``sqlite'' database to store reserves, specimens, users and species. These are manipulated by classes for each table under the ``Utils'' package, which contain methods for selecting, inserting and deleting data from the databases, via the use of data classes related to the table's content.
+        The app makes extensive use of an SQLite database to store reserves, specimens, users and species. These are manipulated by classes for each table under the ``Utils'' package, which contain methods for selecting, inserting and deleting data from the databases, via the use of data classes related to the table's content.
 
         The ``DataClasses'' package contains classes primarily used for storing data to be entered into or read from the database. These classes contain getters and setters for the data. They also contain an ``id'' property which is only set when the data is read from the database, this is to allow for deletion of data via it's unique id in the database.
 
@@ -50,14 +50,14 @@
     \subsubsection{Files Accessed}
         The App accesses images located on the device which were taken in the specimen selection screen. These images are located on the root of the internal storage device.
 
-        The App also downloads the Latin names file from the remote location ``http://nic-dart.co.uk/~nic/res/plantlist.json'', these are then processed into the sqlite database. This is done only in the init thread.
+        The App also downloads the Latin names file from the remote location ``http://nic-dart.co.uk/\texttildelow~nic/res/plantlist.json'', these are then processed into the SQLite database. This is done only in the init thread.
 
     \subsubsection{Interfaces}
         The app required a gps device to acquire location during the specimen addition process, as well as a camera if an image is desired.
 
     \subsubsection{Suggestions for Improvements}
         \begin{itemize}
-            \item Specimen and Scene images could be silhouetted and represent a scene and an specimen. IE not the same image.
+            \item Specimen and Scene images could be silhouetted and represent a scene and an specimen. ie. not the same image.
             \item Deleting of multiple specimens
             \item Upload completion dialogue/confirmation
             \item Users and sites are specific to specimen, not read at upload time
@@ -105,28 +105,9 @@
         The Web Pages are Index and About these two are not dependent on the API ones pages a that are API dependent are; Reserves, Edit Reserve, Add Reserve, Plant Database, Add Specimen, Specimen and Edit Specimen. For a detailed list of these pages and how they work look at SE-02-DS-00: Design Specification, section 3.2.1, 3.2.2, 3.2.3, 3.2.4, 3.2.5, 3.2.6, 3.2.7, 3.2.8 and 3.2.9
 
     \subsubsection{Significant Algorithms}
-        Sending JSON objects to the server:
+        Once a JSON object has been created it is sent to the server using a curl method. The web avoids using any ``SQL'' queries by using the API. 
 
-        Once a JSON object has been created it is sent to the server using a curl method, to send the JSON object:
-
-        \begin{lstlisting}[language=php]
-$ch=curl_init($url);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, array('object' => $json));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$response=curl_exec($ch);
-curl_close($ch);
-        \end{lstlisting}
-
-        To upload an image:
-        \begin{lstlisting}[language=sql]
-$ch=curl_init('Photo Destination');
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA2);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$photo=curl_exec($ch);
-curl_close($ch); 
-        \end{lstlisting}
+        The web server also uses AJAX to dynamically search and update specimen details. It also uses pagination to display a maximum number of 20 specimens and allow paging through them.
     
     \subsubsection{The Main Data Areas}
         The website stores data locally and also within sessions. In add\_specimen.php and edit\_specimen.php two arrays to create a new record; the first array is to create a new specimen and the second is to create a new record (including reserve and user details and the specimen array), this second array is then used to create the JSON object which is sent to the server via a curl method. add\_reserve.php and edit\_reserve.php also need to have the data encoded in to a JSON object in order to be sent to the server. These pages also contain an array which collects the data from a html form, the arrays then encoded into a JSON object and is sent to the server. 
@@ -138,7 +119,7 @@ curl_close($ch);
         The site has been written to php version 5.5.20 and HTML5 standards and as such is able to be run on most browsers without issue. Data in the form of JSON objects are sent in the form of POST requests to the server. For further detail of the post requests to the server please check the web interface which can be found in document SE\_02\_DS\_00 section 3.1.
 
     \subsubsection{Suggestions For Improvements}
-        When entering the password in the header to login it can be viewed. To fix this the input type of the for needs to be changed from `text' to `password'. Tidying up the code to make it easier to read and change. CSS improvements over the whole site for example, having the scene and specimen pictures the same size, button layout for buttons such as add reserve and improving the looking of the website on smaller screens.
+        When entering the password in the header to login it can be viewed. To fix this the input type of the for needs to be changed from `text' to `password'. Tidying up the code to make it easier to read and change. CSS improvements over the whole site for example, having the scene and specimen pictures the same size, button layout for buttons such as add reserve and improving the looking of the website on smaller screens. It may also be desirable to make the site responsive to suit mobile devices and small screens.
     
     \subsubsection{Future Improvement Problems}
         When adding a new page to the site that needs to be part of the session it is important to remember to put the session save path at the top of every page. As the header and footer are included on every page, changes to them will effect the entire website.
@@ -155,15 +136,15 @@ curl_close($ch);
 
 \subsection{Server}
     \subsubsection{Brief Description of Final Product}
-        The server is a combination of a Database and an application program interface. It acts as the bridge between the Android device and the website to the Database, further protecting the database from direct access. This allows code, sensitive information and data to be stored in a non-accessible place. The server contains a relational database which holds all the data important for the system: specimens, reserves, records and users. To access this data, the website and the android application must use the API .php script commands which run validation, sanitisation and SQL queries using JSON data structures. 
+        The server is a combination of a Database and an application programming interface. It acts as the bridge between the Android device and the website to the Database, further protecting the database from direct access. This allows code, sensitive information and data to be stored in a non-accessible place. The server contains a relational database which holds all the data important for the system: specimens, reserves, records and users. To access this data, the website and the android application must use the API PHP script commands which run validation, sanitisation and SQL queries using JSON data structures. 
 
     \subsubsection{Program Structure}
         The server API is a list of commands that are to be run by the android application and the website to access and manipulate data in the Database. The Design Specification document contains all the information about the program structure.
 
         For a list of the commands in use in the system and what they do, please see the document SE\_O2\-DS\_00: Design Specification, section 1.5: Significant Server Components. For a detailed list of how the commands work including their required POST requests, their return status codes and required headers, please see the document SE\_O2\_DS\_00: Design Specification, section 4.1.3: Server Interface. For an example sequence diagram of the most complex command (addRecord.php), please see document SE-02-DS-00: Design Specification, section 4.1.13. All other commands follow a simplified sequence to this. For the Component Diagram of the server, please see document SE\_02\_DS\_00: Design Specification, section 4.2.1: Detailed Design: Diagrams. 
 
+    \newpage
     \subsubsection{Significant Algorithms}
-
         Validation and Sanitisation:
 
         To validate data inputs we ensure strings are not empty and we ensure latitude and longitudes are valid as true values. Ensuring strings are not empty: 
@@ -277,7 +258,7 @@ else
 
     \subsubsection{Future Improvement Concerns}
 
-        Separate web methods in the web API are reasonably separated. A change in one method should not induce undesired changes in others. However, all methods share a single point of communication, and therefore -- failure: the database. The database structure is rigidly defined, and as of now, the code base does not allow one to easily change table and column names. This means that any changes to the database schema, even trivial ones such as renames, need to be carefully accounted for in the API source code, and thoroughly tested before being released into production.
+        Separate web methods in the web API are reasonably separated. A change in one method should not induce undesired changes in others. However, all methods share a single point of communication, the database, and therefore a single point of failure . The database structure is rigidly defined, and as of now, the code base does not allow one to easily change table and column names. This means that any changes to the database schema, even trivial ones such as renames, need to be carefully accounted for in the API source code, and thoroughly tested before being released into production.
     
         While separate web methods are independent of each other, the same can not be said of the separate routines that constitute the methods. The code was produced in a rush, and little to no time was left for refactoring. Many parts of the source code are therefore in the form of long, function-less scripts, with no modularity whatsoever. Therefore, extra caution should be practised when editing: a change in one variable, or a slight rearrangement of the statement order could generate unexpected behaviour in seemingly unrelated sections of code in the same file.
 
