@@ -78,6 +78,48 @@
     \subsubsection{Building from source}
         The source contains an ``Android Studio'' project file, this contains all the links to the files needed. It will require JDK (or OpenJDK 8) and the Android API and may need to be told where they reside. Building requires either a physical Android device of version 4.0.3 (API 15) or above, or alternatively a virtual Android device, created in the AVD.
 
+\subsection{Web}
+    \subsubsection{Algorithms}
+
+        Sending JSON objects to the server:
+
+        Once a JSON object has been created it is sent to the server using a curl method, to send the JSON object:
+
+        \begin{lstlisting}[language=php]
+$ch=curl_init($url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, array('object' => $json));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response=curl_exec($ch);
+curl_close($ch);
+        \end{lstlisting}
+
+        To upload an image:
+        \begin{lstlisting}[language=sql]
+$ch=curl_init('Photo Destination');
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA2);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$photo=curl_exec($ch);
+curl_close($ch); 
+        \end{lstlisting}
+
+    \subsubsection{The main data areas}
+        The website stores data locally and also within sessions. In add\_specimen.php and edit\_specimen.php two arrays to create a new record; the first array is to create a new specimen and the second is to create a new record (including reserve and user details and the specimen array), this second array is then used to create the JSON object which is sent to the server via a curl method. add\_reserve.php and edit\_reserve.php also need to have the data encoded in to a JSON object in order to be sent to the server. These pages also contain an array which collects the data from a html form, the arrays then encoded into a JSON object and is sent to the server. 
+
+    \subsubsection{Files}
+
+        The website uses html and php to gather and present data to and from the server, the site does not access any external files or directories except for `/includes/config.php' which connects the user to the server to allow for editing and deletion.
+
+    \subsubsection{Interfaces}
+
+        The site has been written to php version 5.5.20 and HTML5 standards and as such is able to be run on most browsers without issue. Data in the form of JSON objects are sent in the form of POST requests to the server. For further detail of the post requests to the server please check the web interface which can be found in document SE\_02\_DS\_00 section 3.1.
+
+
+    \subsubsection{Physical Limitations of the program}
+
+        As the site has been written to php version 5.5.20 and HTML5 standards it may have difficulty being used in some older browsers; however, the HTML and css have been kept simple as to avoid causing issues for users of these older browsers. The site is capable of expanding if extra functionality is needed at a later date.
+
 \subsection{Server}
     \subsubsection{Brief Description of Final Product}
         The server is a combination of a Database and an application program interface. It acts as the bridge between the Android device and the website to the Database, further protecting the database from direct access. This allows code, sensitive information and data to be stored in a non-accessible place. The server contains a relational database which holds all the data important for the system: specimens, reserves, records and users. To access this data, the website and the android application must use the API .php script commands which run validation, sanitisation and SQL queries using JSON data structures. 
@@ -219,4 +261,3 @@ else
         The database can be set up by executing the table creation scripts (found at 'table\_queries.txt) on a blank MySQL database.
     
         Once the database is set up, one should edit the `/includes/config.php' file and configure it with the database address, name, username and password, the path to the server root, and the path to the resources storage. An admin password should also be picked at this point. Ensure all PHP scripts have write access to the resources directory.
-
