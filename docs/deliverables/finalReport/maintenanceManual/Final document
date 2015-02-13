@@ -1,0 +1,52 @@
+Program Description
+
+	The website is used for viewing a list of site names and being able to view a list of plants that have been found within that site. It communicates with the server using an API. A user will be
+	able to view individual specimens as well as being able to delete and edit them.
+
+	Upon a visit to the website the user will be taken to the Home page of the website. This page contains a brief description of how the website is to be used. The first page also contains a simple 
+	search bar which can be used to search for specimens by their name. There will also be an option to enter a password in which an admin user can log into the site to get special privileges for the website.
+
+	The user can then go to the reserves page where a  user will be able to see a list of site names with a OS grid reference and a description. The user will then be able to have the option to view 
+	all the specimens under that reserve. When logged in then the user will see option to delete and edit the reserve as well. There will also be an option to add a reserve on this page however you
+	can only use the add reserve functionality if you are logged into the website. The add reserve page requires the user to enter a Location name, OS grid reference and Description using a from to
+	allow the user to enter the information.
+	
+	The user also has the option of viewing the all the species rather then just the reserves. On this page the species are ordered by Specimen Name by default. There are also options for searching
+	and ordering on this page. For the ordering the it can be done through Species Name, Location Name, User, Date and Abundance by ascending or descending order. This page also uses pagination
+	displaying and maximum of 20 specimens per page.
+	
+	If the user wanted to view details about a species then they would would be able to see details about; the name of the user who entered it into the database, the location where it was found, it's 
+	unique specimenID, it's name, where it was found using an OS grid reference, it's abundance, the date it was submitted, the time and any comments about the species. They will also be able to
+	view two photos one of the species and one of the scene. Users will be able edit and delete specimens as well. It is also possible to view the location of the plant on a Google map pop up.	
+
+	
+Program Structure
+
+	To see a detailed component diagram for the website look at SE-02-DS-00: Design Specification section 3.2, fig 2 Web Component Diagram. This shows the function scripts, web interface and the web
+	pages used in the website.
+
+	Within the function scripts are; logout, authentication, the  POST requests, the config. Which communicate to the Web API through JSON
+	For a detailed list of these function scripts and how they work look at SE-02-DS-00: Design Specification, section 3.2.18, 3.2.11 and 3.2.10
+	
+	Within the Web interface are sub-pages of Header, Footer and Filter.
+	For a detailed list of these sub-pages and how they work look at SE-02-DS-00: Design Specification, section 3.2.16, 3.2.14 and 3.2.24
+	
+	The Web Pages are Index and About these two are not dependent on the API ones pages a that are API dependent are; Reserves, Edit Reserve, Add Reserve, Plant Database, Add Specimen, Specimen
+	and Edit Specimen.
+	For a detailed list of these pages and how they work look at SE-02-DS-00: Design Specification, section 3.2.1, 3.2.2, 3.2.3, 3.2.4, 3.2.5, 3.2.6, 3.2.7, 3.2.8 and 3.2.9
+
+	
+Suggestions For Improvements
+	
+	When entering the password in the header to login it can b viewed. To fix this the input type of the for needs to be changed from 'text' to 'password'.
+	Tidying up the code to make it easier to read and change.
+	CSS improvements over the whole site for example, having the scene and specimen pictures the same size, button layout for buttons such as add reserve and improving the looking of the website
+	on smaller screens.
+	
+
+Things To Watch For When Making Changes
+
+	When adding a new page to the site that needs to be part of the session it is important to remember to put the session save path at the top of every page.
+	As the header and footer are included on every page, changes to them will effect the entire website.
+	
+	
