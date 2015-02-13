@@ -133,12 +133,12 @@ $SpeciesName = $conn->real_escape_string($specimen->SpeciesName);
             
         Get:
         \begin{lstlisting}[language=sql]
-            "SELECT * FROM botany_reserves WHERE reserve_id=$reserveID"
+"SELECT * FROM botany_reserves WHERE reserve_id=$reserveID"
         \end{lstlisting}
         
         Remove:
         \begin{lstlisting}[language=sql]
-            "DELETE FROM botany_reserves WHERE reserve_id = $reserveID"
+"DELETE FROM botany_reserves WHERE reserve_id = $reserveID"
         \end{lstlisting}
 
         We manually manipulate the committing for the SQL queries to ensure no invalid data gets added. All checking is done, and then we tell it to commit. This allows to reverse any affected data if it proves to be wrong.
