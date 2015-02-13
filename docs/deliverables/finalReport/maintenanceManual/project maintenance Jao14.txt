@@ -1,0 +1,40 @@
+Algorithms
+
+sending JSON objects to the server:
+
+Once a JSON object has been created it is sent to the server using a curl method, to send the JSON object:
+ $ch=curl_init($url);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, array('object' => $json));
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$response=curl_exec($ch);
+	curl_close($ch);
+ 
+ To upload an image:
+$ch=curl_init('Photo Destination');
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $POST_DATA2);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$photo=curl_exec($ch);
+	curl_close($ch); 
+
+
+The main data areas
+
+The website stores data locally and also within sessions. In add_specimen.php and edit_specimen.php two arrays to create a new record; the first array is to create a new specimen and the second is to create a new record (including reserve and user details and the specimen array), this second array is then used to create the JSON object which is sent to the server via a curl method.
+add_reserve.php and edit_reserve.php also need to have the data encoded in to a JSON object in order to be sent to the server. These pages also contain an array which collects the data from a html form, the arrayis then encoded into a JSON object and is sent to the server. 
+
+
+Files
+
+The website uses html and php to gather and present data to and from the server, the site does not access any external files or directories except for '/includes/config.php' which connects the user to the server to allow for editing and deletion.
+
+
+Interfaces
+
+The site has been written to php version 5.5.20 and HTML5 standards and as such is able to be run on most browsers without issue. Data in the form of JSON objects are sent in the form of POST requests to the server. For further detail of the post requests to the server please check the web interface which can be found in document SE_02_DS_00 section 3.1.
+
+
+Physical Limitations of the program
+
+As the site has been written to php version 5.5.20 and HTML5 standards it may have difficulty being used in some older browsers; however, the HTML and css have been kept simple as to avoid causing issues for users of these older browsers. The site is capable of expanding if extra functionality is needed at a later date.
