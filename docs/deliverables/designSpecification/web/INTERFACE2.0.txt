@@ -133,8 +133,24 @@ plant_specimens.php
 	
 	include filter.php
 	
-	
-	***MAXIM DESCRIPTION***
+	Search form
+        This form allows the user to select a searching filter (species, user name, or location name), and lets them input a textual value for the selected filter.
+        
+    Sort form
+        This form allows the user to sort the list of specimens by a selected field and pick sorting order. It also includes pagination controls (next page/previous page).
+        
+    Results table
+        The results table is where the results of the current search/sort are being displayed. It is accessed by the client-side script and updated with new rows whenever
+        new search results are ready.
+      
+    Client-side scripts
+        Showing the user search results is performed asynchronously, by calling the website back-end using a POST request. The back-end in turn goes to the Web API, and
+        performs a search request. The Web API returns a JSON-formatted array of specimen results, which gets send back to the client-side for processing and visualisation.
+        
+        The script is able to react instantaneously to user input by placing event handlers on controls in both the sort and search forms, triggering a new request whenever
+        a change in values is detected. The search value text field inside the search form makes an exception -- instead reacting instantaneously to changes in the text value,
+        the script polls the content of the text field every second, and then decides whether to perform a new request to the back-end, thus avoiding an unnecessarily large amount
+        of requests being sent.
 	
 #####################################################################################
 filter.php
