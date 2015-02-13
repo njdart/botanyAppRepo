@@ -78,206 +78,145 @@
     \subsubsection{Building from source}
         The source contains an ``Android Studio'' project file, this contains all the links to the files needed. It will require JDK (or OpenJDK 8) and the Android API and may need to be told where they reside. Building requires either a physical Android device of version 4.0.3 (API 15) or above, or alternatively a virtual Android device, created in the AVD.
 
-
-
-
-
 \subsection{Server}
     \subsubsection{Brief Description of Final Product}
-The server is a combination of a Database and an application program interface. It acts as the bridge between the Android device and the website to the Database, further protecting the database from direct access. This allows 
-code, sensitive information and data to be stored in a non-accessible place. The server contains a relational database which holds all the data important for the system: specimens, reserves, records and users. 
-To access this data, the website and the android application must use the API .php script commands which run validation, sanitisation and SQL queries using JSON data structures. 
-
+        The server is a combination of a Database and an application program interface. It acts as the bridge between the Android device and the website to the Database, further protecting the database from direct access. This allows code, sensitive information and data to be stored in a non-accessible place. The server contains a relational database which holds all the data important for the system: specimens, reserves, records and users. To access this data, the website and the android application must use the API .php script commands which run validation, sanitisation and SQL queries using JSON data structures. 
 
     \subsubsection{Program Structure}
+        The server API is a list of commands that are to be run by the android application and the website to access and manipulate data in the Database. The Design Specification document contains all the information about the program structure.
 
-The server API is a list of commands that are to be run by the android application and the website to access and manipulate data in the Database. 
-The Design Specification document contains all the information about the program structure.
-
-For a list of the commands in use in the system and what they do, please see the document SE-O2-DS-00: Design Specification, section 1.5: Significant Server Components.
-For a detailed list of how the commands work including their required POST requests, their return status codes and required headers, please see the document SE-O2-DS-00: Design Specification, 
-section 4.1.3: Server Interface.
-For an example sequence diagram of the most complex command (addRecord.php), please see document SE-02-DS-00: Design Specification, section 4.1.13. All other commands follow a simpified sequence to this.
-For the Component Diagram of the server, plaese see document SE-02-DS-00: Design Specification, section 4.2.1: Detailed Design: Diagrams. 
+        For a list of the commands in use in the system and what they do, please see the document SE-O2-DS-00: Design Specification, section 1.5: Significant Server Components. For a detailed list of how the commands work including their required POST requests, their return status codes and required headers, please see the document SE-O2-DS-00: Design Specification, section 4.1.3: Server Interface. For an example sequence diagram of the most complex command (addRecord.php), please see document SE-02-DS-00: Design Specification, section 4.1.13. All other commands follow a simpified sequence to this. For the Component Diagram of the server, plaese see document SE-02-DS-00: Design Specification, section 4.2.1: Detailed Design: Diagrams. 
 
     \subsubsection{Significant Algorithms}
 
-Validation and Sanitisation:
+        Validation and Sanitisation:
 
-To validate data inputs we ensure strings are not empty and we ensure latitude and longitudes are valid as true values. 
-Ensuring strings are not empty: 
+        To validate data inputs we ensure strings are not empty and we ensure latitude and longitudes are valid as true values. Ensuring strings are not empty: 
+        
+        \begin{lstlisting}[language=php]
 if(empty($locationName) || empty($locationOS))
 {
-	die();
-	return status code 400;
+    die();
+    return status code 400;
 }
+        \end{lstlisting}
 
-Ensuring latitude and longitude values are true:
+        Ensuring latitude and longitude values are true:
+    
+        \begin{lstlisting}[language=php]
 if($Latitude > 90 || $Latitude < -90 || $Longitude > 180 || $Longitude < -180)
 {
-	die();
-	return status code 400;
+    die();
+    return status code 400;
 }
+        \end{lstlisting}
 
-To sanitise all the data inputs, the command real_escape_string() was used on all POST data received from the website: 
+        To sanitise all the data inputs, the command real\_escape\_string() was used on all POST data received from the website: 
+        
+        \begin{lstlisting}[language=php]
 $SpeciesName = $conn->real_escape_string($specimen->SpeciesName);
+        \end{lstlisting}
+        
+        This prevents any malicious data from touching the database.
 
-This prevents any malicious data from touching the database.
+        SQL Queries were used to retrieve/manipulate data in the database:
 
-SQL Queries were used to retrieve/manipulate data in the database:
+        Add:
+        \begin{lstlisting}[language=sql]
+"INSERT INTO botany_users (user_name, user_phone, user_email) VALUES ('$UserName', '$UserPhone', '$UserEmail')"
+        \end{lstlisting}
 
-Add: "INSERT INTO botany_users (user_name, user_phone, user_email) VALUES ('$UserName', '$UserPhone', '$UserEmail')"
-Update: "UPDATE botany_reserves SET location_name='$LocationName', location_os='$LocationOS', description='$Description' WHERE reserve_id = $ReserveID"
-Get: "SELECT * FROM botany_reserves WHERE reserve_id=$reserveID"
-Remove: "DELETE FROM botany_reserves WHERE reserve_id = $reserveID"
+        Update:
+        \begin{lstlisting}[language=sql]
+"UPDATE botany_reserves SET location_name='$LocationName', location_os='$LocationOS', description='$Description' WHERE reserve_id = $ReserveID"
+        \end{lstlisting}
+            
+        Get:
+        \begin{lstlisting}[language=sql]
+            "SELECT * FROM botany_reserves WHERE reserve_id=$reserveID"
+        \end{lstlisting}
+        
+        Remove:
+        \begin{lstlisting}[language=sql]
+            "DELETE FROM botany_reserves WHERE reserve_id = $reserveID"
+        \end{lstlisting}
 
-We manually manipulate the committing for the SQL queries to ensure no invalid data gets added. All checking is done, and then we tell it to commit. This allows to reverse any affected data if it proves to be wrong.
+        We manually manipulate the committing for the SQL queries to ensure no invalid data gets added. All checking is done, and then we tell it to commit. This allows to reverse any affected data if it proves to be wrong.
 
-We provided the ability to authenticate a password input to ensure the user was authorised to use commands:
-if(!strcmp($password, $CONFIG['adminPassword']))	
+        We provided the ability to authenticate a password input to ensure the user was authorised to use commands:
+        \begin{lstlisting}[language=php]
+if(!strcmp($password, $CONFIG['adminPassword']))    
 {
-	echo "true";
+    echo "true";
 }
 else
 {
-	echo "false";
+    echo "false";
 }
-
-We wrote SQL queries to create the database tables, e.g:
-create table botany_records ( 
-    record_id INT AUTO_INCREMENT , 
-    user_id INT NOT NULL, 
-    time_stamp INT,
-    reserve_id INT,
-    PRIMARY KEY (record_id));
-		
-		alter table botany_records
-    add foreign key (user_id)  
-    references botany_users(user_id)  
-    on delete cascade on update cascade;
+        \end{lstlisting}
+    
+    We wrote SQL queries to create the database tables, e.g:
+    \begin{lstlisting}[language=sql]
+        create table botany_records ( 
+        record_id INT AUTO_INCREMENT , 
+        user_id INT NOT NULL, 
+        time_stamp INT,
+        reserve_id INT,
+        PRIMARY KEY (record_id));
+        
+        alter table botany_records
+        add foreign key (user_id)  
+        references botany_users(user_id)  
+        on delete cascade on update cascade;
+    \end{lstlisting}
 
     \subsubsection{The Main Data Areas}
-
-
-To transfer data from the android application and the website to the database,  the data had to be structured in a JSON file format. JSON was a nice, flexible and easy to use language, allowing us 
-to quickly and easily create data structures to be decoded by the API. To do this, the commands json_encode() and json_decode() are used. For example, if a new specimen was being added by the website, 
-the website will json_encode(specimen array), and the server will json_decode the POST data. If a specimen is being sent to the website, the server will json_encode(specimen array) and the website 
-will json_decode(POST data). To see each specific JSON data structure, please see document SE-02-DS-00: Design Specification, section 4.2.2: Significant Data Structures. This section also details 
-the config file for use when changing resource locations and passwords. 
+        To transfer data from the android application and the website to the database,  the data had to be structured in a JSON file format. JSON was a nice, flexible and easy to use language, allowing us to quickly and easily create data structures to be decoded by the API. To do this, the commands json\_encode() and json\_decode() are used. For example, if a new specimen was being added by the website, the website will json\_encode(specimen array), and the server will json\_decode the POST data. If a specimen is being sent to the website, the server will json\_encode(specimen array) and the website will json\_decode(POST data). To see each specific JSON data structure, please see document SE-02-DS-00: Design Specification, section 4.2.2: Significant Data Structures. This section also details the config file for use when changing resource locations and passwords. 
 
     \subsubsection{Files Accessed}
-
- 	The API accesses the resources directory defined in '/includes/config.php'
-	heavily. One should refrain from manually accessing the contents of that
-	directory, and altering the directory structure. The PHP scripts should
-	be allowed read/write access to said directory.
-	The API does not access files outside of the resources directory.
+        The API accesses the resources directory defined in `/includes/config.php' heavily. One should refrain from manually accessing the contents of that directory, and altering the directory structure. The PHP scripts should be allowed read/write access to said directory. The API does not access files outside of the resources directory.
 
     \subsubsection{Interfaces}
-       The server's PHP scripts that implement the web API functionality use the 
-    JSON standard to receive structured data from and transmit structured data 
-    to its clients. JSON is used in conjunction with the widely accepted HTTP
-    protocol, the JSON being carried in either the POST headers (in client 
-    requests), or the HTTP response body (in server responses).
+        The server's PHP scripts that implement the web API functionality use the JSON standard to receive structured data from and transmit structured data to its clients. JSON is used in conjunction with the widely accepted HTTP protocol, the JSON being carried in either the POST headers (in client requests), or the HTTP response body (in server responses).
     
-    All web API commands need to be called via the HTTP protocol using the POST
-    method, and need to be supplied the required parameters (either plain text,
-    or JSON format, described in detail in the design specification).
-	
-	A common settings interface is used for storing environmental variables 
-	such as database credentials, administrator password, and server root.
-	Those are all stored in /includes/config.php inside the API
-	directory.
+        All web API commands need to be called via the HTTP protocol using the POST method, and need to be supplied the required parameters (either plain text, or JSON format, described in detail in the design specification).
+        
+        A common settings interface is used for storing environmental variables such as database credentials, administrator password, and server root. Those are all stored in /includes/config.php inside the API directory.
 
     \subsubsection{Suggestions for Improvements}
 
-A number of improvements could be made, although the basic functionality of
-	the API is complete up to the specification standard.
-	
-	The choice of platform and programming language for the API was limited to 
-	the available technologies on Central. This does not represent a real-life
-	situation, where the developers would likely have administrative control
-	over the server the API is hosted on, allowing them a more flexible choice
-	of technology and platform. Discarding PHP in favour of a more modern
-	language: 
+        A number of improvements could be made, although the basic functionality of the API is complete up to the specification standard.
+    
+        The choice of platform and programming language for the API was limited to the available technologies on Central. This does not represent a real-life situation, where the developers would likely have administrative control over the server the API is hosted on, allowing them a more flexible choice of technology and platform. Discarding PHP in favour of a more modern
+        language: 
         \begin{itemize}
             \item Would reduce future maintenance issues.
-            \item Would have sped up the development of the product, and will speed up
-	   the development of any future improvements.
+            \item Would have sped up the development of the product, and will speed up the development of any future improvements.
             \item Make quality assurance easier and more efficient.
-            \item Could potentially reduce the hardware requirements of the API,
-	   depending on the selected replacement technology stack (Java EE/ASP.NET).
-
+            \item Could potentially reduce the hardware requirements of the API, depending on the selected replacement technology stack (Java EE/ASP.NET).
         \end{itemize}
 
-	Therefore, a transition from PHP to Ruby on Rails, Python+Django, or even 
-	Node.js would bring long-term benefits to the project, with Java EE and 
-	ASP.NET bringing immediate savings from hardware and electricity costs.
-	
-	Another, more specific improvement, is the inclusion of 'pretty URLs'.
-	An example of that would be the current '/getResouce.php' web method, which 
-	could be rewritten as '/resource/{id}' followed by the desired resource ID.
-	This requires relaxation of the requirement to use POST requests 
-	exclusively, as in many cases GET requests make more sense (a RESTful 
-	approach would suit the use-case perfectly, in fact).
-	Another example: '/reserve/remove/{id}' replacing '/removeReserve.php'.
+        Therefore, a transition from PHP to Ruby on Rails, Python+Django, or even Node.js would bring long-term benefits to the project, with Java EE and ASP.NET bringing immediate savings from hardware and electricity costs.
+    
+        Another, more specific improvement, is the inclusion of `pretty URLs'. An example of that would be the current `/getResouce.php' web method, which could be rewritten as `/resource/{id}' followed by the desired resource ID. This requires relaxation of the requirement to use POST requests exclusively, as in many cases GET requests make more sense (a RESTful approach would suit the use-case perfectly, in fact). Another example: `/reserve/remove/{id}' replacing `/removeReserve.php'.
 
     \subsubsection{Future Improvement Concerns}
 
-	Separate web methods in the web API are reasonably separated. A change
-	in one method should not induce undesired changes in others. However, all
-	methods share a single point of communication, and therefore -- failure:
-	the database. The database structure is rigidly defined, and as of now,
-	the code base does not allow one to easily change table and column names.
-	This means that any changes to the database schema, even trivial ones such
-	as renames, need to be carefully accounted for in the API source code, and
-	thoroughly tested before being released into production.
-	
-	While separate web methods are independent of each other, the same can not
-	be said of the separate routines that constitute the methods. The code was
-	produced in a rush, and little to no time was left for refactoring. Many
-	parts of the source code are therefore in the form of long, function-less
-	scripts, with no modularity whatsoever. Therefore, extra caution should be
-	practised when editing: a change in one variable, or a slight rearrangement
-	of the statement order could generate unexpected behaviour in seemingly 
-	unrelated sections of code in the same file.
+        Separate web methods in the web API are reasonably separated. A change in one method should not induce undesired changes in others. However, all methods share a single point of communication, and therefore -- failure: the database. The database structure is rigidly defined, and as of now, the code base does not allow one to easily change table and column names. This means that any changes to the database schema, even trivial ones such as renames, need to be carefully accounted for in the API source code, and thoroughly tested before being released into production.
+    
+        While separate web methods are independent of each other, the same can not be said of the separate routines that constitute the methods. The code was produced in a rush, and little to no time was left for refactoring. Many parts of the source code are therefore in the form of long, function-less scripts, with no modularity whatsoever. Therefore, extra caution should be practised when editing: a change in one variable, or a slight rearrangement of the statement order could generate unexpected behaviour in seemingly unrelated sections of code in the same file.
 
     \subsubsection{Limitations of the Program}
-	As an interpreted language, PHP is fairly slow compared to compiled and
-	JIT-compiled languages. For low-to-moderate size use cases, it's performance
-	is perfectly reasonable, but it lacks the high scalability offered by some
-	competing technologies. 
-	
-	The technical limitations are, therefore, modest: a mainstream 2006-era CPU
-	such as a Core 2 Duo, and 1GB of RAM, would have little issue running the
-	API provided it is not heavily used. As the incoming requests rise, though,
-	hardware will begin to fail to meet the demand, requiring higher-performance
-	hardware. Eventually, one would not be able to obtain a faster computer, 
-	and load balancing across several machines becomes necessary, which the API 
-	architecture does not allow at the moment (as it uses local file storage
-	to save resources). At this point, resource storage would need to be moved 
-	to a separate server, and the API source code would require change. 
-	
-	Regarding the database: MySQL is a good database engine for all but the
-	highest-performance scenarios. Switching the database engine to InnoDB will
-	bring further performance benefits, but that would remove the support for 
-	referential integrity, currently built into the DB schema, and support for
-	transactions, used by the API. Workarounds can be implemented, however.
-	Considering the project lacks the ability to provide a revenue stream
-	of any sort, purchasing expensive licences for more capable databases such
-	as Oracle Database or Microsoft SQL Server is inconceivable, and according
-	to projections, unlikely to ever become necessary.
+        As an interpreted language, PHP is fairly slow compared to compiled and JIT-compiled languages. For low-to-moderate size use cases, it's performance is perfectly reasonable, but it lacks the high scalability offered by some competing technologies. 
+    
+        The technical limitations are, therefore, modest: a mainstream 2006-era CPU such as a Core 2 Duo, and 1GB of RAM, would have little issue running the API provided it is not heavily used. As the incoming requests rise, though, hardware will begin to fail to meet the demand, requiring higher-performance hardware. Eventually, one would not be able to obtain a faster computer, and load balancing across several machines becomes necessary, which the API architecture does not allow at the moment (as it uses local file storage to save resources). At this point, resource storage would need to be moved to a separate server, and the API source code would require change. 
+    
+        Regarding the database: MySQL is a good database engine for all but the highest-performance scenarios. Switching the database engine to InnoDB will bring further performance benefits, but that would remove the support for referential integrity, currently built into the DB schema, and support for transactions, used by the API. Workarounds can be implemented, however. Considering the project lacks the ability to provide a revenue stream of any sort, purchasing expensive licences for more capable databases such as Oracle Database or Microsoft SQL Server is inconceivable, and according to projections, unlikely to ever become necessary.
 
     \subsubsection{Building from source}
-	The web API requires no rebuilding. Copying the API files inside the Apache
-	'public_html' directory, with PHP installed of course, should suffice.
-	
-	The database can be set up by executing the table creation scripts 
-	(found at 'table_queries.txt) on a blank MySQL database.
-	
-	Once the database is set up, one should edit the '/includes/config.php' file
-	and configure it with the database address, name, username and password,
-	the path to the server root, and the path to the resources storage.
-	An admin password should also be picked at this point. 
-	Ensure all PHP scripts have write access to the resources directory.
+        The web API requires no rebuilding. Copying the API files inside the Apache `public\_html' directory, with PHP installed of course, should suffice.
+    
+        The database can be set up by executing the table creation scripts (found at 'table\_queries.txt) on a blank MySQL database.
+    
+        Once the database is set up, one should edit the `/includes/config.php' file and configure it with the database address, name, username and password, the path to the server root, and the path to the resources storage. An admin password should also be picked at this point. Ensure all PHP scripts have write access to the resources directory.
 
