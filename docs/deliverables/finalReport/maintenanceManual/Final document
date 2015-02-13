@@ -48,5 +48,3 @@ Things To Watch For When Making Changes
 
 	When adding a new page to the site that needs to be part of the session it is important to remember to put the session save path at the top of every page.
 	As the header and footer are included on every page, changes to them will effect the entire website.
-	
-	

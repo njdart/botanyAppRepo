@@ -67,7 +67,9 @@
         \end{itemize}
 
     \subsubsection{Future Improvement Concerns}
+        Future Activities that are made should inherit the class ``BaseActivity'', this contains methods (albeit not currently used) that will allow for consistent menu items and menu icons. 
 
+        If significant future improvements are desired, it may be desirable to structure the app more coherently, foremost a settings or preference menu. 
 
     \subsubsection{Limitations of the Program}
         \begin{itemize}
@@ -79,8 +81,30 @@
         The source contains an ``Android Studio'' project file, this contains all the links to the files needed. It will require JDK (or OpenJDK 8) and the Android API and may need to be told where they reside. Building requires either a physical Android device of version 4.0.3 (API 15) or above, or alternatively a virtual Android device, created in the AVD.
 
 \subsection{Web}
-    \subsubsection{Algorithms}
 
+    \subsubsection{Program Description of Final Product}
+
+        The website is used for viewing a list of site names and being able to view a list of plants that have been found within that site. It communicates with the server using an API. A user will be able to view individual specimens as well as being able to delete and edit them.
+
+        Upon a visit to the website the user will be taken to the Home page of the website. This page contains a brief description of how the website is to be used. The first page also contains a simple search bar which can be used to search for specimens by their name. There will also be an option to enter a password in which an admin user can log into the site to get special privileges for the website.
+
+        The user can then go to the reserves page where a  user will be able to see a list of site names with a OS grid reference and a description. The user will then be able to have the option to view all the specimens under that reserve. When logged in then the user will see option to delete and edit the reserve as well. There will also be an option to add a reserve on this page however you can only use the add reserve functionality if you are logged into the website. The add reserve page requires the user to enter a Location name, OS grid reference and Description using a from to allow the user to enter the information.
+    
+        The user also has the option of viewing the all the species rather then just the reserves. On this page the species are ordered by Specimen Name by default. There are also options for searching and ordering on this page. For the ordering the it can be done through Species Name, Location Name, User, Date and Abundance by ascending or descending order. This page also uses pagination displaying and maximum of 20 specimens per page.
+        
+        If the user wanted to view details about a species then they would would be able to see details about; the name of the user who entered it into the database, the location where it was found,  it's unique specimenID, it's name, where it was found using an OS grid reference, it's abundance, the date it was submitted, the time and any comments about the species. They will also be able to view two photos one of the species and one of the scene. Users will be able edit and delete specimens as well. It is also possible to view the location of the plant on a Google map pop up.    
+
+    \subsubsection{Program Structure}
+
+        To see a detailed component diagram for the website look at SE-02-DS-00: Design Specification section 3.2, fig 2 Web Component Diagram. This shows the function scripts, web interface and the web pages used in the website.
+
+        Within the function scripts are; logout, authentication, the  POST requests, the config. Which communicate to the Web API through JSON For a detailed list of these function scripts and how they work look at SE-02-DS-00: Design Specification, section 3.2.18, 3.2.11 and 3.2.10
+    
+        Within the Web interface are sub-pages of Header, Footer and Filter. For a detailed list of these sub-pages and how they work look at SE-02-DS-00: Design Specification, section 3.2.16, 3.2.14 and 3.2.24
+    
+        The Web Pages are Index and About these two are not dependent on the API ones pages a that are API dependent are; Reserves, Edit Reserve, Add Reserve, Plant Database, Add Specimen, Specimen and Edit Specimen. For a detailed list of these pages and how they work look at SE-02-DS-00: Design Specification, section 3.2.1, 3.2.2, 3.2.3, 3.2.4, 3.2.5, 3.2.6, 3.2.7, 3.2.8 and 3.2.9
+
+    \subsubsection{Significant Algorithms}
         Sending JSON objects to the server:
 
         Once a JSON object has been created it is sent to the server using a curl method, to send the JSON object:
@@ -103,22 +127,26 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $photo=curl_exec($ch);
 curl_close($ch); 
         \end{lstlisting}
-
-    \subsubsection{The main data areas}
+    
+    \subsubsection{The Main Data Areas}
         The website stores data locally and also within sessions. In add\_specimen.php and edit\_specimen.php two arrays to create a new record; the first array is to create a new specimen and the second is to create a new record (including reserve and user details and the specimen array), this second array is then used to create the JSON object which is sent to the server via a curl method. add\_reserve.php and edit\_reserve.php also need to have the data encoded in to a JSON object in order to be sent to the server. These pages also contain an array which collects the data from a html form, the arrays then encoded into a JSON object and is sent to the server. 
 
-    \subsubsection{Files}
-
+    \subsubsection{Significant Files}
         The website uses html and php to gather and present data to and from the server, the site does not access any external files or directories except for `/includes/config.php' which connects the user to the server to allow for editing and deletion.
 
     \subsubsection{Interfaces}
-
         The site has been written to php version 5.5.20 and HTML5 standards and as such is able to be run on most browsers without issue. Data in the form of JSON objects are sent in the form of POST requests to the server. For further detail of the post requests to the server please check the web interface which can be found in document SE\_02\_DS\_00 section 3.1.
 
+    \subsubsection{Suggestions For Improvements}
+        When entering the password in the header to login it can be viewed. To fix this the input type of the for needs to be changed from `text' to `password'. Tidying up the code to make it easier to read and change. CSS improvements over the whole site for example, having the scene and specimen pictures the same size, button layout for buttons such as add reserve and improving the looking of the website on smaller screens.
+    
+    \subsubsection{Future Improvement Problems}
+        When adding a new page to the site that needs to be part of the session it is important to remember to put the session save path at the top of every page. As the header and footer are included on every page, changes to them will effect the entire website.
 
-    \subsubsection{Physical Limitations of the program}
-
+    \subsubsection{Limitations of the program}
         As the site has been written to php version 5.5.20 and HTML5 standards it may have difficulty being used in some older browsers; however, the HTML and css have been kept simple as to avoid causing issues for users of these older browsers. The site is capable of expanding if extra functionality is needed at a later date.
+
+    \subsubsection{Building and Testing}
 
 \subsection{Server}
     \subsubsection{Brief Description of Final Product}
@@ -127,7 +155,7 @@ curl_close($ch);
     \subsubsection{Program Structure}
         The server API is a list of commands that are to be run by the android application and the website to access and manipulate data in the Database. The Design Specification document contains all the information about the program structure.
 
-        For a list of the commands in use in the system and what they do, please see the document SE-O2-DS-00: Design Specification, section 1.5: Significant Server Components. For a detailed list of how the commands work including their required POST requests, their return status codes and required headers, please see the document SE-O2-DS-00: Design Specification, section 4.1.3: Server Interface. For an example sequence diagram of the most complex command (addRecord.php), please see document SE-02-DS-00: Design Specification, section 4.1.13. All other commands follow a simpified sequence to this. For the Component Diagram of the server, plaese see document SE-02-DS-00: Design Specification, section 4.2.1: Detailed Design: Diagrams. 
+        For a list of the commands in use in the system and what they do, please see the document SE\_O2\-DS\_00: Design Specification, section 1.5: Significant Server Components. For a detailed list of how the commands work including their required POST requests, their return status codes and required headers, please see the document SE\_O2\_DS\_00: Design Specification, section 4.1.3: Server Interface. For an example sequence diagram of the most complex command (addRecord.php), please see document SE-02-DS-00: Design Specification, section 4.1.13. All other commands follow a simplified sequence to this. For the Component Diagram of the server, please see document SE\_02\_DS\_00: Design Specification, section 4.2.1: Detailed Design: Diagrams. 
 
     \subsubsection{Significant Algorithms}
 
