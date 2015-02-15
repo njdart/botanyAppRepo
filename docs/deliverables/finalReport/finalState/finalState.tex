@@ -1,1 +1,26 @@
-foobar
+\subsection{Android}
+    The Android app conformed largely with the required specifications; it can be used by an individual who provides the required details: name, phone number and email address. The user will also be prompted for a site name, which must have been created before hand. Once the aforementioned details have been provided, the user can then pass to the specimen adder page, here they are prompted for a Latin specimen name, which may or may not be auto completed for them after four characters. There is also a DAFOR slider, which can be adjusted as required. There is the option for a specimen or scene photo, however neither are required for a specimen. The user can the either add a new record with the ``Add New'' button, or proceed to the upload screen with the ``Finish'' button. Upon clicking the ``Finish'' button, the user is presented with a list of specimens and can ``Longpress'' to get a menu to edit or delete the entry. The edit button will proceed to the specimen adder screen with the specimens details filled out. When the user presses the ``Upload'' button,  the specimens will be uploaded to the server. 
+
+    The app has several missing feature that cause it to not meet the full range of specifications set forth in the original document. They are as follows: 
+    \begin{itemize}
+        \item Latin names will not be updated unless the database does not already exist i.e. An uninstallation and reinstallatrion is required to update.
+        \item No free text/comment is available for a specimen.
+        \item If GPS is not available for a specimen, the location -1,-1 will be used (This can be altered on the website).
+        \item The ``hint image'' for specimen and scene photos are both referencing the same image and do not make the requirement obvious.
+    \end{itemize}
+
+    The app also has several missing features or shortcomings which may be useful but were not included due to time restraints. 
+    \begin{itemize}
+        \item Username is only validated for length, it can contain any amount of whitespace, special characters, numbers or letters within the limits.
+        \item Email is only validated on length and contents of a user domain and ``TLD''. It also does not check that it exists.
+        \item Phone is only validated on length, however user is only presented with a numeric keyboard.
+        \item Latin names that do not appear in the database will not be added.
+        \item The user will not be alerted to the acquisition of GPS, however they will be informed if GPS is not available. 
+        \item The user will not be informed of successful or failed attempts at upload of specimens, however if the app is closed and reopened, successful upload will result in all specimens being removed from the device. 
+        \item The user will not be informed of successful or failed attempts to download the sites list or the Latin names file.
+        \item The app possesses no settings or preferences menu, as such the API and Latin names file resourced locations are hard coded into the app and will require recompiling from source if changed.
+    \end{itemize}
+
+
+
+\subsection{Web/Server}
