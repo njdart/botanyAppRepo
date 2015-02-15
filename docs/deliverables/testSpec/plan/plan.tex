@@ -41,75 +41,76 @@
 		\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
 		\hline
 		Test Ref & Req & Test Content & Input & Output & Pass Criteria \\ \hline
-		SE-F-030 & FR8 & Editing reserve with one value changed & Grid reference change. & Reserve grid reference updated & Reserve data is able to be edited providing valid data.& \\ \hline			
+		SE-F-030 & FR8 & Editing reserve with one value changed & Grid reference change. & Reserve grid reference updated & Reserve data is able to be edited providing valid data. \\ \hline			
 
-SE-F-031 & FR8 & Edit all of the values of a reserve & All data changed to new valid data. & Reserve data updated & Reserve data is able to be editted providing valid data.& \\ \hline			
-SE-F-032 & FR8 & Edit reserve with black field & Remove data for one field and submit. & Reserve was not updated & Reserve data is able to be editted providing valid data and all fields filled.& \\ \hline			
+SE-F-031 & FR8 & Edit all of the values of a reserve & All data changed to new valid data. & Reserve data updated & Reserve data is able to be editted providing valid data. \\ \hline			
+SE-F-032 & FR8 & Edit reserve with black field & Remove data for one field and submit. & Reserve was not updated & Reserve data is able to be editted providing valid data and all fields filled. \\ \hline			
 
-SE-F-033 & FR8 & Add reserve name & Input reserve name for field. & Reserve name added & Reserve data is able to be added providing valid data and all fields filled.& \\ \hline	
+SE-F-033 & FR8 & Add reserve name & Input reserve name for field. & Reserve name added & Reserve data is able to be added providing valid data and all fields filled.\\ \hline	
 	
-SE-F-034 & FR8 & Add OS grid reference  & Input 8 digit OS grid reference. & Grid reference was added & Reserve data is able to be added providing valid data and all fields filled.& \\ \hline	
+SE-F-034 & FR8 & Add OS grid reference  & Input 8 digit OS grid reference. & Grid reference was added & Reserve data is able to be added providing valid data and all fields filled. \\ \hline	
 				
-SE-F-035 & FR8 & Add reserve description  & Input reserve description. & Description was added & Reserve data is able to be added providing valid data and all fields filled.& \\ \hline	
+SE-F-035 & FR8 & Add reserve description  & Input reserve description. & Description was added & Reserve data is able to be added providing valid data and all fields filled. \\ \hline	
 				
-SE-F-036 & FR9 & View reserve specimens & Click on view reserve button. & User is taken to the plant specimens page where only the reserve specimens contained within the reserve are displayed & Specimens that are contained within reserve are displayed.& \\ \hline	
+SE-F-036 & FR9 & View reserve specimens & Click on view reserve button. & User is taken to the plant specimens page where only the reserve specimens contained within the reserve are displayed & Specimens that are contained within reserve are displayed.\\ \hline	
 
-SE-F-037 & EF1 & Authentication & Log in using correct password. & Authentication session is created giving user administrative privileges. A message displays valid password. & Password session is created and a successful login message is displayed.& \\ \hline	
+SE-F-037 & EF1 & Authentication & Log in using correct password. & Authentication session is created giving user administrative privileges. A message displays valid password. & Password session is created and a successful login message is displayed.\\ \hline	
 
-SE-F-038 & EF1 & Authentication  Error & Log in using incorrect password. & A message displays incorrect password. & Password session is not created, and incorrect login message is displayed.& \\ \hline	
+SE-F-038 & EF1 & Authentication  Error & Log in using incorrect password. & A message displays incorrect password. & Password session is not created, and incorrect login message is displayed.\\ \hline	
 		
-SE-F-039 & EF1 & Authentication logout& Logout link is clicked. & Session is destroyed and login message is displayed. & Session is destroyed and login message is displayed.& \\ \hline	
+SE-F-039 & EF1 & Authentication logout& Logout link is clicked. & Session is destroyed and login message is displayed. & Session is destroyed and login message is displayed.\\ \hline	
 
-SE-F-040 & EF1 & Authentication granted privileges & User has successfully logged on & User is given access to delete remove and add specimens and reserves. & User is given access to delete remove and add specimens and reserves. & Session is destroyed and login message is displayed.& \\ \hline	
+SE-F-040 & EF1 & Authentication granted privileges & User has successfully logged on & User is given access to delete remove and add specimens and reserves. & Session is destroyed and login message is displayed. \\ \hline	
 					
-SE-F-041 & EF2 & Add species name & Input species name & Species name is added to the record & Species name is added to the species record.& \\ \hline
+SE-F-041 & EF2 & Add species name & Input species name & Species name is added to the record & Species name is added to the species record.\\ \hline
 	
-SE-F-042 & EF2 & Add species location & User selects a reserve location & Reserve is identified with the species  & Once reserve is selected, the specimen is identified with the reserve .& \\ \hline
+SE-F-042 & EF2 & Add species location & User selects a reserve location & Reserve is identified with the species  & Once reserve is selected, the specimen is identified with the reserve .\\ \hline
 			
-SE-F-043 & EF3 & Add specimen abundance & User selects a abundance according to the DAFOR scale & Abundance is recorded to the specimen & Abundance from the DAFOR scale is recorded to the specimen .& \\ \hline
+SE-F-043 & EF3 & Add specimen abundance & User selects a abundance according to the DAFOR scale & Abundance is recorded to the specimen & Abundance from the DAFOR scale is recorded to the specimen .\\ \hline
 			
-SE-F-044 & EF3 & Add comment & User inputs comment & The comment is recorded & Comment is recorded to the specimen .& \\ \hline
+SE-F-044 & EF3 & Add comment & User inputs comment & The comment is recorded & Comment is recorded to the specimen .\\ \hline
 
-SE-F-045 & EF3 & No comment & No input & Comment is left as NULL & Specimen comment is left null .& \\ \hline
+SE-F-045 & EF3 & No comment & No input & Comment is left as NULL & Specimen comment is left null .\\ \hline
 			
-SE-F-046 & EF3 & No image & No images are inputted & Image is not uploaded for the specimen & Specimen is recorded without an image .& \\ \hline
+SE-F-046 & EF3 & No image & No images are inputted & Image is not uploaded for the specimen & Specimen is recorded without an image .\\ \hline
 
-SE-F-047 & EF3 & PNG image & PNG image is uploaded & PNG image is uploaded & PNG image is recorded to the specimen .& \\ \hline
+SE-F-047 & EF3 & PNG image & PNG image is uploaded & PNG image is uploaded & PNG image is recorded to the specimen .\\ \hline
 
-SE-F-048 & EF3 & GIF image & GIF image is uploaded & GIF image is uploaded & PNG image is recorded to the specimen .& \\ \hline
+SE-F-048 & EF3 & GIF image & GIF image is uploaded & GIF image is uploaded & PNG image is recorded to the specimen .\\ \hline
 
-SE-F-049 & EF3 & JPEG image & JPEG image is uploaded & JPEG image is uploaded & JPEG image is recorded to the specimen .& \\ \hline
+SE-F-049 & EF3 & JPEG image & JPEG image is uploaded & JPEG image is uploaded & JPEG image is recorded to the specimen .\\ \hline
 
-SE-F-050 & EF3 & Non-image type & txt file is uploaded & file is not uploaded & File is not uploaded .& \\ \hline
+SE-F-050 & EF3 & Non-image type & txt file is uploaded & file is not uploaded & File is not uploaded . \\ \hline
 				
-SE-F-051 & EF4 & Delete specimen & Delete specimen button is clicked & Specimen is deleted & Once clicked, the specimen is deleted .& \\ \hline
+SE-F-051 & EF4 & Delete specimen & Delete specimen button is clicked & Specimen is deleted & Once clicked, the specimen is deleted. \\ \hline
 			
-SE-F-052 & EF4 & Edit specimen & Specimen field is edited & Specimen field in question is edited & Specimen field is edited and is recorded to the specimen ID  .& \\ \hline
+SE-F-052 & EF4 & Edit specimen & Specimen field is edited & Specimen field in question is edited & Specimen field is edited and is recorded to the specimen ID  . \\ \hline
 			
-SE-F-053 & Features & Simple search bar & Inputted species name & User is taken to the specimen page with results displayed & Once submitted, user is shown specimens that match the search criteria  .& \\ \hline
+SE-F-053 & Features & Simple search bar & Inputted species name & User is taken to the specimen page with results displayed & Once submitted, user is shown specimens that match the search criteria  . \\ \hline
 		
-SE-F-054 & Features & Advanced search bar with species name option selected& Species name with species selected & Results with specimen name displayed & Search results with matching criteria displayed only.& \\ \hline
+SE-F-054 & Features & Advanced search bar with species name option selected& Species name with species selected & Results with specimen name displayed & Search results with matching criteria displayed only. \\ \hline
 
-SE-F-055 & Features & Advanced search bar with location option selected & The location input with location option selected & Results with inputted location displayed & Search results with matching criteria displayed only.& \\ \hline
+SE-F-055 & Features & Advanced search bar with location option selected & The location input with location option selected & Results with inputted location displayed & Search results with matching criteria displayed only.\\ \hline
 
-SE-F-056 & Features & Advanced search bar with date option selected & Recording date input with date option selected & Results matching input and option displayed & Search results with matching criteria displayed only.& \\ \hline
+SE-F-056 & Features & Advanced search bar with date option selected & Recording date input with date option selected & Results matching input and option displayed & Search results with matching criteria displayed only. \\ \hline
 		
-SE-F-57 & Species sorting & Each sorting option selected & Sorting option is selected with sorting criteria & Table results are displayed and sorted to the matching criteria & Once the sorting method is chosen, the results are sorted.& \\ \hline
+SE-F-57 & Species sorting & Each sorting option selected & Sorting option is selected with sorting criteria & Table results are displayed and sorted to the matching criteria & Once the sorting method is chosen, the results are sorted. \\ \hline
 			
-SE-F-058 & Features & Google Map & Correct latitude and  longitude & Map displays location on a Google maps & Google map should show the location of the specimen.& \\ \hline
+SE-F-058 & Features & Google Map & Correct latitude and  longitude & Map displays location on a Google maps & Google map should show the location of the specimen.\\ \hline
 
-SE-F-059 & Features & Google Map & Incorrect latitude and  longitude & Map displays nothing & Google map should show the location of the specimen.& \\ \hline
+SE-F-059 & Features & Google Map & Incorrect latitude and  longitude & Map displays nothing & Google map should show the location of the specimen. \\ \hline
+\end{longtable}
+
+\begin{longtable}{|r|l|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
+		\hline
+		Test Ref & Browser & Results\\ \hline
+SE-F-060 & Chrome & Displays the website perfectly and all functionality works on it.\\ \hline
 		
-SE-F-060 & Features & Google Map & Incorrect latitude and  longitude & Map displays nothing & Google map should show the location of the specimen.& \\ \hline
+SE-F-061 & Firefox & Displays as it should mostly, apart from the about page due to an incompatibility with columns. Functions as it is supposed to. \\ \hline
 
-SE-F-061 & Features & Google Map & Incorrect latitude and  longitude & Map displays nothing & Google map should show the location of the specimen.& \\ \hline
-
-SE-F-062 & Chrome displays the website perfectly and all functionality works on it.& \\ \hline
-		
-SE-F-062 & Firefox displays as it should mostly, apart from the about page due to an incompatibility with columns. Functions as it is supposed to.& \\ \hline
-
-SE-F-062 & IE displays correctly, apart from that the default images are not displayed. Functionality still correct.& \\ \hline
-		\end{longtable}
+SE-F-062 & IE  & Displays correctly, apart from that the default images are not displayed. Functionality still correct. \\ \hline
+	
+\end{longtable}
 	\end{landscape}
 
 \subsection{Server}
